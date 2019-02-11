@@ -1734,7 +1734,7 @@ a.gradient-btn {
   text-transform: uppercase;
   font-weight: 700;
   /* background: -webkit-linear-gradient(right,#fe998b,#fa768d,#f78ca0); */
-  background: -webkit-linear-gradient(right,#3b5dd2,#002466,#022667);
+  background:#667ca3;
   padding: 10px 20px;
   border-radius: 5px;
   position: relative;
@@ -1749,7 +1749,7 @@ a.gradient-btn:after {
   top: 0;
   content: "";
   /* background: -webkit-linear-gradient(right,#072487,#fa768d,#fe998b); */
-  background: -webkit-linear-gradient(right,#8c9fff,#002466,#022667);
+  background: -webkit-linear-gradient(right,#002466,#667ca3,#8c9cba);
   height: 100%;
   width: 100%;
   z-index: -1;
