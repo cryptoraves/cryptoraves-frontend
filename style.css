@@ -586,6 +586,10 @@ roadmap area css
   font-weight: 700;
 }
 
+.roadmap-text{
+  color: #667ca3;
+}
+
 .single-roadmap.road-right .col-5, .single-roadmap.road-right .col-7 {
   padding: 0;
 }
@@ -605,7 +609,7 @@ roadmap area css
   content: "";
   height: 66.5%;
   width: 1px;
-  background: #004cff;
+  background: #4e6ca3;
   bottom: 10.5%;
   left: 1%;
   z-index: -1;
@@ -616,7 +620,7 @@ roadmap area css
   content: "";
   height: 1px;
   width: 120%;
-  background: #004cff;
+  background: #4e6ca3;
   top: 23%;
   right: -21%;
   z-index: -1;
