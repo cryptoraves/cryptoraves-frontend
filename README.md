@@ -49,8 +49,9 @@ Portfolio page:
 
 	pageType=confirmationPage
 	userName=@bp84392506  (example)
+	earliestDatetime=2019-02-14%2019:23:29  (example.  this is the date of the least recent
 
-	https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=portfolioPage&userName=@bp84392506
+	https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=portfolioPage&userName=@bp84392506&earliestDatetime=2019-02-14%2019:23:29
 
 
 
@@ -58,17 +59,11 @@ Portfolio page:
 
 	{
 		"tableRows": [{
-			"txnId": "bdcb9517-729d-402a-85b3-0ab5528eb088",
+			"txnId": "6294f436-678e-4bf0-a4cc-50ac8a79a259",
 			"from": "@bp84392506",
-			"amount": "-8.112",
+			"amount": "-8.115",
 			"to": "@ShannonPlasters",
-			"date": "2019-02-14 19:21:19"
-		}, {
-			"txnId": "4f472b79-b274-4203-a42a-200221868c00",
-			"from": "@bp84392506",
-			"amount": "-8.113",
-			"to": "@ShannonPlasters",
-			"date": "2019-02-14 19:23:29"
+			"date": "2019-02-14 19:38:53"
 		}, {
 			"txnId": "1b7a89be-6166-4c6e-aed6-d8ee0c0c4c7c",
 			"from": "@bp84392506",
@@ -76,21 +71,24 @@ Portfolio page:
 			"to": "@ShannonPlasters",
 			"date": "2019-02-14 19:35:17"
 		}, {
-			"txnId": "6294f436-678e-4bf0-a4cc-50ac8a79a259",
+			"txnId": "4f472b79-b274-4203-a42a-200221868c00",
 			"from": "@bp84392506",
-			"amount": "-8.115",
+			"amount": "-8.113",
 			"to": "@ShannonPlasters",
-			"date": "2019-02-14 19:38:53"
+			"date": "2019-02-14 19:23:29"
 		}, {
-			"txnId": "fe135c7c-7f6e-4640-8719-2aceb9b692ea",
-			"from": "@cryptoraves",
-			"amount": "1000000",
-			"to": "@bp84392506",
-			"date": "2019-02-14 19:48:37"
+			"txnId": "bdcb9517-729d-402a-85b3-0ab5528eb088",
+			"from": "@bp84392506",
+			"amount": "-8.112",
+			"to": "@ShannonPlasters",
+			"date": "2019-02-14 19:21:19"
 		}],
-		"rowCount": 5,
-		"tokenBalance": "999967.546"
+		"rowCount": 4,
+		"tokenBalance": "999967.546",
+		"earliestDatetime": "2019-02-14 19:21:19"
 	}
 
 	I've de-stringified the body content here for easier readability. It will be a string like the others when testing.
+
+	I would like a pagination feature for this page with a limit of 20 rows per page.  The "Next" page would pass the latestDate variable 
 
