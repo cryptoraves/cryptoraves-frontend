@@ -1,5 +1,8 @@
 # cryptoraves
-cryptoraves(tm) API is designated to service data to and from front-end web applications including the cryptoraves.space website.  The following will provide instruction on how to access that data:
+
+
+cryptoraves API is designated to service data to and from front-end web applications including the cryptoraves.space website.  The following will provide instruction on how to access that data:
+
 
 Each web page can send one or more GET requests to the following endpoints. The response from the endpoints will contain a status code and message body which will contain the relevant data in JSON format.
  
@@ -23,9 +26,13 @@ Search Bar:
 
 Confirmation page:
 
-	The confirmation page table data can be obtained by a GET request to this URL:
 
-	https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=confirmationPage
+	The confirmation page table data can be obtained by a GET request to this URL with params:
+	pageType=confirmationPage
+	txnId=fe135c7c-7f6e-4640-8719-2aceb9b692ea  (example)
+
+	https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=confirmationPage&txnId=fe135c7c-7f6e-4640-8719-2aceb9b692ea
+
 
 
 	Sample Response:
@@ -39,7 +46,12 @@ Portfolio page:
 
 	The confirmation page table data can be obtained by a GET request to this URL:
 
-	https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=portfolioPage
+
+	pageType=confirmationPage
+	userName=@bp84392506  (example)
+
+	https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=portfolioPage&userName=@bp84392506
+
 
 
 	Sample Response:
@@ -81,3 +93,4 @@ Portfolio page:
 	}
 
 	I've de-stringified the body content here for easier readability. It will be a string like the others when testing.
+
