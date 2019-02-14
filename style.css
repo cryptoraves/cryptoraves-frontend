@@ -134,9 +134,9 @@ a.gradient-btn:after,
 .header-area, 
 .main-menu li:hover ul,  
 .main-menu li ul li a:hover, 
-a.single-about:hover, 
+div.single-about:hover, 
 .header-area.header-absolate.skrollable.skrollable-after,
-a.single-about, 
+div.single-about, 
 .main-menu li ul li a
  {
   -webkit-transition: all .3s;
@@ -347,7 +347,7 @@ a.single-about,
   margin: 20px 0;
 }
 
-a.single-about {
+div.single-about {
   color: #002466;
   display: block;
   padding: 50px 25px;
@@ -361,7 +361,7 @@ a.single-about {
   min-height: 300px;
 }
 
-a.single-about:hover {
+div.single-about:hover {
   background: rgba(102, 124, 163, 0.6);
   -webkit-transform: translateY(-5px);
   -ms-transform: translateY(-5px);
