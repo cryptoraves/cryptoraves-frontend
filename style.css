@@ -1837,4 +1837,13 @@ span.gradient-btn{
   justify-content: flex-end;
   display: flex;
 }
+
+.d-flex-end-item{
+  display: flex;
+  align-items: flex-end;
+}
+
+.d-flex-end-item p{
+  margin-bottom: 10px;
+}
 /*===================================== end =================================*/
