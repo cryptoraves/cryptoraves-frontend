@@ -1846,4 +1846,9 @@ span.gradient-btn{
 .d-flex-end-item p{
   margin-bottom: 10px;
 }
+
+table a{
+  color: #002466;
+  font-weight: 900;
+}
 /*===================================== end =================================*/
