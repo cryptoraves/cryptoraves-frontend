@@ -1078,7 +1078,8 @@ footer area css
 ======================*/
 
 .single-footer .logo-area img {
-  width: 200px;
+  width: 140px;
+  height: 100px;
 }
 
 .single-footer li a {
