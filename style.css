@@ -970,7 +970,7 @@ community area css
 .community-area {
   position: relative;
   z-index: 2;
-  background: rgba(0,36,102,0.6);
+  background: rgba(0,36,102,1.0);
   overflow:hidden;
 }
 
@@ -1824,8 +1824,16 @@ span.gradient-btn{
     box-shadow: 0 0 0 15px rgba(0, 36, 102, 0);
   }
 }
-
 .welcome-text{
   text-align: center;
+}
+.community-area h1, .community-area h5, .community-area p{
+  color:white;
+  margin-bottom: 0px;
+}
+
+.d-flex-end{
+  justify-content: flex-end;
+  display: flex;
 }
 /*===================================== end =================================*/

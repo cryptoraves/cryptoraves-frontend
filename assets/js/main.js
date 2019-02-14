@@ -131,9 +131,8 @@
     var vibBtn = setInterval(function(){
       $("#vibBtn").css("top",Math.floor(Math.random() * 2));
       $("#vibBtn").css("left",Math.floor(Math.random() * 2));
-    },80);
-    
-
+    },80);    
+    });
 
 })(jQuery);
 
