@@ -1077,11 +1077,6 @@ community area css
 footer area css
 ======================*/
 
-.single-footer .logo-area img {
-  width: 140px;
-  height: 100px;
-}
-
 .single-footer li a {
   color: #fff;
   display: inline-block;
@@ -1851,4 +1846,6 @@ table a{
   color: #002466;
   font-weight: 900;
 }
+
+
 /*===================================== end =================================*/
