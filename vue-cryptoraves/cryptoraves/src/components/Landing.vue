@@ -29,7 +29,7 @@
                 <div class="container">                   
 
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 mt-2">
                             <div class="single-about">                               
                                 <div class="single-about-text">
                                     <h4>Get Your Tokens!</h4>
@@ -41,7 +41,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 mt-2">
                             <div class="single-about">                               
                                 <div class="single-about-text">
                                     <h4>Share Them!</h4>

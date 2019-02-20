@@ -25,7 +25,7 @@
             </div>
         </div>
     </div>
-    
+
     <router-view/>
 
     <div class="community-area wow fadeInUp section-padding" id="contact">
@@ -42,7 +42,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-6 col-lg">
+                <div class="col-lg-6 col-md-6 col-sm-12">
                     <div class="single-footer">
                         <div class="logo-area footer">
                             <a href="index.html"><img src="./assets/img/cryptoraves_Horozontal Alignment_Full Color_JPG2.png" alt=""></a>
@@ -50,7 +50,7 @@
                         <p class="ml-2 mt-1">It's Crypto You can Tweet!</p>
                     </div>
                 </div>
-                <div class="col-6 col-lg d-flex-end">
+                <div class="col-lg-6 col-md-6 col-sm-12 d-flex-end">
                     <div class="single-community mid-social">
                         <a class="github" href="#"><i class="fa fa-facebook"></i></a>
                     </div> 

@@ -507,12 +507,12 @@
         padding-top: 8%;
         padding-right: 75%;
     }
-    .single-roadmap.road-left::before, 
+    /* .single-roadmap.road-left::before, 
     .single-roadmap.road-left::after, 
     .single-roadmap.road-right::before, 
     .single-roadmap.road-right::after {
-    display: none;
-    }
+        display: none;
+    } */
     .owl-carousel .owl-item .single-roadmap-img img {
         width: 100px;
         height: 100px;
