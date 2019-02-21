@@ -1695,4 +1695,9 @@ table a{
   justify-content: center;
   margin-top: 30px;
 }
+
+.table th, .table td{
+  color: #002466;
+}
+
 /*===================================== end =================================*/

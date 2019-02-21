@@ -8,18 +8,18 @@
                 </div>
                 <div class="col-4 col-lg-2">
                     <div class="logo-area">
-                        <a href="#"><img src="./assets/img/cryptoraves_Horozontal Alignment_Full Color_JPG.png" alt=""></a>
+                      <router-link to="/"><img src="./assets/img/cryptoraves_Horozontal Alignment_Full Color_JPG.png" alt=""></router-link>                       
                     </div>
                 </div>             
                 <div class="col-8 col-lg-10 d-none d-lg-block text-right">
                     <div class="d-flex d-flex-right form-group mt-3">                        
-                        <div class="d-flex">
-                            <form action="#">
-                                <input type="text" class="form-control c-search-input" placeholder="Search for Twitter handle.">                    
-                            </form>
-                            <a href="portfolio.html" class="gradient-btn subscribe c-search"><i class="fa fa-search"></i></a>
+                        <div class="d-flex">                            
+                            <input type="text" class="form-control c-search-input" placeholder="Search for Twitter handle.">
+                            <router-link to="/portfolio" class="gradient-btn subscribe c-search">
+                              <i class="fa fa-search"></i>
+                            </router-link>                            
                         </div>
-                        <a href="#" class="gradient-btn subscribe animated-button ml-2">Get Your Tokens!</a>
+                        <router-link to="/" class="gradient-btn subscribe animated-button ml-2">Get Your Tokens!</router-link>                        
                     </div>
                 </div>
             </div>
@@ -45,7 +45,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-12">
                     <div class="single-footer">
                         <div class="logo-area footer">
-                            <a href="index.html"><img src="./assets/img/cryptoraves_Horozontal Alignment_Full Color_JPG2.png" alt=""></a>
+                          <router-link to="/"><img src="./assets/img/cryptoraves_Horozontal Alignment_Full Color_JPG2.png" alt=""></router-link>                            
                         </div>
                         <p class="ml-2 mt-1">It's Crypto You can Tweet!</p>
                     </div>
