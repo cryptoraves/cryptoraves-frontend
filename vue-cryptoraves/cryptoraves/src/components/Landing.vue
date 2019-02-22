@@ -67,7 +67,7 @@
                                         <span>Total Cryptoraves Token Balance <b class="ml-4">45,000,000.5</b></span>                                        
                                     </h6>                                    
                                     <p>
-                                        <table class="table">
+                                        <table class="table table-responsive">
                                             <thead>
                                                 <tr>
                                                 <th scope="col">#</th>
