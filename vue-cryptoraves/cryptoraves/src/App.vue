@@ -13,13 +13,14 @@
                 </div>             
                 <div class="col-8 col-lg-10 d-none d-lg-block text-right">
                     <div class="d-flex d-flex-right form-group mt-3">                        
-                        <div class="d-flex">                            
-                            <input type="text" class="form-control c-search-input" placeholder="Search for Twitter handle.">
+                        <div class="d-flex">
+                            <input type="text" v-model="postBody" @change="getUserList()" class="form-control c-search-input" placeholder="Search for Twitter handle." />                          
+                            <!-- <input type="text" class="form-control c-search-input" placeholder="Search for Twitter handle."> -->
                             <router-link to="/portfolio" class="gradient-btn subscribe c-search">
                               <i class="fa fa-search"></i>
                             </router-link>                            
                         </div>
-                        <router-link to="/" class="gradient-btn subscribe animated-button ml-2">Get Your Tokens!</router-link>                        
+                        <router-link to="/" class="gradient-btn subscribe animated-button ml-2">Get Your Tokens!</router-link>
                     </div>
                 </div>
             </div>
@@ -71,8 +72,50 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
-  name: 'App'
+  name: 'App',
+  data() {
+    return {
+      postBody: '',
+      errors: []
+    }
+  },
+  methods: {
+    getUserList(){
+      axios.get('https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=searchBar')
+      .then(response => {
+        // JSON responses are automatically parsed.
+        console.log(response);
+      })
+      .catch(e => {
+        this.errors.push(e)
+      })
+    },
+    // Pushes posts to the server when called.
+    postPost() {
+      axios.post('https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=searchBar', {
+        body: this.postBody
+      })
+      .then(response => {
+        console.log(response);
+      })
+      .catch(e => {
+        this.errors.push(e)
+      })
+
+      // async / await version (postPost() becomes async postPost())
+      //
+      // try {
+      //   await axios.post(`http://jsonplaceholder.typicode.com/posts`, {
+      //     body: this.postBody
+      //   })
+      // } catch (e) {
+      //   this.errors.push(e)
+      // }
+    }
+  }
 }
 </script>
 
