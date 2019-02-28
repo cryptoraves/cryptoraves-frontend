@@ -8,7 +8,7 @@
                     <div class="col-12 col-md-12 align-self-center">
                         <div class="welcome-right">                        
                             <div class="welcome-text">
-                                <h1>Transaction Confirmed?</h1>
+                                <h1>It's Crypto You Can Tweet!</h1>
                                 <h4>Get free tokens. Share without fees.
                                 <br>Add value to your online cred.</h4>
                                 <h2>Transaction Confirmed.</h2>
@@ -49,7 +49,7 @@
                                                     <th scope="row">1</th>
                                                     <td><router-link to="/portfolio">@Alice</router-link></td>
                                                     <td>1000</td>
-                                                    <td>@mdo</td>
+                                                    <td><a href="#">@fat</a></td>
                                                     <td>05/01/2019</td>
                                                     </tr>                                                                                          
                                                 </tbody>

@@ -8,7 +8,7 @@
                 <div class="col-12 col-md-12 align-self-center">
                     <div class="welcome-right">                        
                         <div class="welcome-text">
-                            <h1>@Vitalik Boterin's Cryptoraves Token</h1>
+                            <h1>@Vitalik Boterin's Cryptoraves Tokens</h1>
                             <h4>Get free tokens. Share without fees.
                             <br>Add value to your online cred.</h4>
                         </div>                       
@@ -49,14 +49,14 @@
                                                 <th scope="row"><router-link to="/confirmation">1</router-link></th>
                                                 <td><a href="#">@Alice</a></td>
                                                 <td>1000</td>
-                                                <td>@mdo</td>
+                                                <td><a href="#">@fat</a></td>
                                                 <td>05/01/2019</td>
                                                 </tr>
                                                 <tr>
                                                 <th scope="row"><router-link to="/confirmation">2</router-link></th>
                                                 <td><a href="#">@Alice</a></td>
                                                 <td>2000</td>
-                                                <td>@fat</td>
+                                                <td><a href="#">@fat</a></td>
                                                 <td>06/01/2019</td>
                                                 </tr>                                               
                                             </tbody>
