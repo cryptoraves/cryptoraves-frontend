@@ -34,7 +34,6 @@
             <div class="row">
                 <div class="col-12 text-center">
                     <div class="heading">
-                        <h5>Great Community</h5>
                         <div class="space-10"></div>
                         <h1>Our Community </h1>
                         <p>Contact: info@cryptoraves.space</p>
@@ -51,16 +50,16 @@
                         <p class="ml-2 mt-1">It's Crypto You can Tweet!</p>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 d-flex-end">
-                    <div class="single-community mid-social">
-                        <a class="github" href="#"><i class="fa fa-facebook"></i></a>
-                    </div> 
+                <div class="col-lg-6 col-md-6 col-sm-12 d-flex-end">                   
                     <div class="single-community mid-social">
                         <a class="twitter" href="#"><i class="fa fa-twitter"></i></a>
                     </div> 
                     <div class="single-community mid-social">
                         <a class="youtube" href="#"><i class="fa fa-reddit"></i></a>
                     </div>
+                    <div class="single-community mid-social">
+                        <a class="github" href="#"><i class="fa fa-facebook"></i></a>
+                    </div> 
                     <div class="single-community mid-social">
                         <a class="behance" href="#"><i class="fa fa-medium"></i></a>
                     </div>                        

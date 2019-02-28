@@ -50,8 +50,10 @@
                                 <div class="single-about-text">
                                     <h4>Share Them!</h4>
                                     <p>
-                                        This Tweet sends 2000 tokens to @Alices @cryptoraves 2000 @Alice. 
-                                        This Tweet reply sends 2000 tokens to the original poster: @cryptoraves 2000.
+                                        This <b>Tweet</b> sends 2000 tokens to @Alice:
+                                        <br><span>@cryptoraves 2000 @Alice</span>
+                                        <br>This <b>Tweet reply</b> sends 2000 tokens to the original poster: 
+                                        <br><span>@cryptoraves 2000</span>
                                     </p>
                                 </div>
                             </div>
@@ -63,15 +65,14 @@
                                 <div class="single-about-text">
                                     <h4>See Your Balance!</h4>
                                     <p class="d-flex">                                         
-                                        <input type="text" class="form-control c-search-input" placeholder="Get Your Tokens!"> 
+                                        <input type="text" class="form-control c-search-input" placeholder="Get Your Twiter Handle!"> 
                                         <span class="gradient-btn subscribe c-search"><i class="fa fa-search"></i></span>                                
                                     </p>
                                     <h6 class="d-flex d-space">
-                                        <span>Transaction history</span>
                                         <span>Total Cryptoraves Token Balance <b class="ml-4">45,000,000.5</b></span>                                        
                                     </h6>                                    
                                     <p>
-                                        <table class="table table-responsive">
+                                        <table class="table">
                                             <thead>
                                                 <tr>
                                                 <th scope="col">#</th>

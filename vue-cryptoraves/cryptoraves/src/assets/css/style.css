@@ -495,7 +495,7 @@ roadmap area css
   z-index: 2;
 }
 
-.single-roadmap.road-left::before {
+/* .single-roadmap.road-left::before {
   position: absolute;
   content: "";
   height: 100%;
@@ -515,7 +515,7 @@ roadmap area css
   top: 0%;
   left: 0%;
   z-index: -1;
-}
+} */
 
 .single-roadmap.road-right {
   position: relative;
@@ -1700,4 +1700,7 @@ table a{
   color: #002466;
 }
 
+.single-about-text span{
+  font-size: 1.2rem;
+}
 /*===================================== end =================================*/
