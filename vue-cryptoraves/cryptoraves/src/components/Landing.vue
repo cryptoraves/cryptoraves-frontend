@@ -36,9 +36,12 @@
                                     <h4>Get Your Tokens!</h4>
                                     <p>
                                         Tweet: @cryptoraves #makeitrave
-                                        <i class="fa fa-copy"></i>
+                                        <i class="fa fa-copy" v-clipboard="copyTweet"
+                                        v-clipboard:success="clipboardSuccessHandler"
+                                        v-clipboard:error="clipboardErrorHandler"></i>
                                         <i class="fa fa-twitter"></i>
                                     </p>
+                                    <p>{{message}}</p>
                                 </div>
                             </div>
                         </div>
@@ -210,7 +213,18 @@ export default {
   name: 'Landing',
   data () {
     return {
-      title: 'It\'s Crypto You Can Tweet!'
+      title: 'It\'s Crypto You Can Tweet!',
+      copyTweet: '@cryptoraves #makeitrave',
+      message: ''
+    }
+  },
+  methods: {
+    clipboardSuccessHandler ({ value, event }) {      
+      this.message = 'copied successfully'
+    },
+ 
+    clipboardErrorHandler ({ value, event }) {      
+      this.message = 'copy error'
     }
   }
 }
