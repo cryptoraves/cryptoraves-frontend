@@ -16,6 +16,15 @@
                         <div class="d-flex">
                             <input type="text" v-model="postBody" @change="getUserList()" class="form-control c-search-input" placeholder="Search for Twitter handle." />                          
                             <!-- <input type="text" class="form-control c-search-input" placeholder="Search for Twitter handle."> -->
+                            <!-- <input type="text" list="mylist" />
+                                <datalist id="mylist" v-autocomplete="data">
+                                <option value="blue" />
+                                <option value="blue1" />
+                                <option value="blue2" />
+                                <option value="blue3" />
+                            </datalist> -->
+                            
+                            
                             <router-link to="/portfolio" class="gradient-btn subscribe c-search">
                               <i class="fa fa-search"></i>
                             </router-link>                            
@@ -116,15 +125,21 @@ export default {
     }
   }
 }
+
+// Vue.directive('autocomplete', {
+//   bind: function () {
+//     this.input = document.querySelector('input');
+//   },
+//   update: function (newValue, oldValue) {
+//   },
+//   unbind: function () {
+//   }
+// })
 </script>
 
 <style lang="scss">
-@import url('./assets/css/animate.min.css');
 @import url('./assets/css/font-awesome.min.css');
 @import '../node_modules/bootstrap/scss/bootstrap.scss';
-@import url('./assets/css/slicknav.min.css');
-@import url('./assets/css/animation.css');
-@import url('./assets/css/material-design-iconic-font.min.css');
 @import url('./assets/css/style.css');
 @import url('./assets/css/responsive.css');
 </style>

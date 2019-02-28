@@ -4,10 +4,12 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import Clipboard from 'v-clipboard'
+
 import 'bootstrap'
 
 Vue.config.productionTip = false
 Vue.use(Clipboard)
+
 
 /* eslint-disable no-new */
 new Vue({
