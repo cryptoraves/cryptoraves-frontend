@@ -9,7 +9,8 @@
                         <div class="welcome-right">                        
                             <div class="welcome-text">
                                 <h1>Transaction Confirmed?</h1>
-                                <h4>Get free tokens. Share without fees. Add value to your online cred.</h4>
+                                <h4>Get free tokens. Share without fees.</h4>
+                                <h4>Add value to your online cred.</h4>
                                 <h2>Transaction Confirmed.</h2>
                             </div>                       
                         </div>

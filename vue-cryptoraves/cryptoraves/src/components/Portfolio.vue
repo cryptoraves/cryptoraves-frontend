@@ -9,7 +9,8 @@
                     <div class="welcome-right">                        
                         <div class="welcome-text">
                             <h1>@Vitalik Boterin's Cryptoraves Token</h1>
-                            <h4>Get free tokens. Share without fees. Add value to your online cred.</h4>
+                            <h4>Get free tokens. Share without fees.</h4>
+                            <h4>Add value to your online cred.</h4>
                         </div>                       
                     </div>
                 </div>               

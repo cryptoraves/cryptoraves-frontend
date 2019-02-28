@@ -12,7 +12,8 @@
                     <div class="welcome-right">                        
                         <div class="welcome-text">
                             <h1>It's Crypto You Can Tweet!</h1>
-                            <h4>Get free tokens. Share without fees. Add value to your online cred.</h4>
+                            <h4>Get free tokens. Share without fees.</h4>
+                            <h4>Add value to your online cred.</h4>
                         </div>                       
                     </div>
                 </div>              
@@ -34,7 +35,7 @@
                                 <div class="single-about-text">
                                     <h4>Get Your Tokens!</h4>
                                     <p>
-                                        Tweet: @cryptoraves #makeitrage
+                                        Tweet: @cryptoraves #makeitrave
                                         <i class="fa fa-copy"></i>
                                         <i class="fa fa-twitter"></i>
                                     </p>
