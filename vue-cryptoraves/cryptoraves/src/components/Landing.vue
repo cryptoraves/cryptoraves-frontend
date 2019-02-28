@@ -12,8 +12,8 @@
                     <div class="welcome-right">                        
                         <div class="welcome-text">
                             <h1>It's Crypto You Can Tweet!</h1>
-                            <h4>Get free tokens. Share without fees.</h4>
-                            <h4>Add value to your online cred.</h4>
+                            <h4>Get free tokens. Share without fees.
+                            <br>Add value to your online cred.</h4>
                         </div>                       
                     </div>
                 </div>              
@@ -39,7 +39,7 @@
                                         <i class="fa fa-copy" v-clipboard="copyTweet"
                                         v-clipboard:success="clipboardSuccessHandler"
                                         v-clipboard:error="clipboardErrorHandler"></i>
-                                        <i class="fa fa-twitter"></i>
+                                        <i class="fa fa-twitter" v-on:click="goTweeter"></i>
                                     </p>
                                     <p>{{message}}</p>
                                 </div>
@@ -225,6 +225,10 @@ export default {
  
     clipboardErrorHandler ({ value, event }) {      
       this.message = 'copy error'
+    },
+
+    goTweeter(){
+        window.open("https://twitter.com");
     }
   }
 }
