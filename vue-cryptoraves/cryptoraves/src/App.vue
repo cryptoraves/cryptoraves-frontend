@@ -13,21 +13,17 @@
                 </div>             
                 <div class="col-8 col-lg-10 d-none d-lg-block text-right">
                     <div class="d-flex d-flex-right form-group mt-3">                        
-                        <div class="d-flex">
-                            <input type="text" v-model="postBody" @change="getUserList()" class="form-control c-search-input" placeholder="Search for Twitter handle." />                          
-                            <!-- <input type="text" class="form-control c-search-input" placeholder="Search for Twitter handle."> -->
-                            <!-- <input type="text" list="mylist" />
-                                <datalist id="mylist" v-autocomplete="data">
-                                <option value="blue" />
-                                <option value="blue1" />
-                                <option value="blue2" />
-                                <option value="blue3" />
-                            </datalist> -->
+                        <div class="d-flex">                            
+                            <input type="text" v-model="user" list="mylist" class="form-control c-search-input" placeholder="Search for Twitter handle." />
+                            <datalist id="mylist">
+                                <option v-bind:key="item" v-for="item in userList" :value="item">
+                                    {{item}}
+                                </option>
+                            </datalist>                            
                             
-                            
-                            <router-link to="/portfolio" class="gradient-btn subscribe c-search">
+                            <a href="#" v-on:click="goPortfolio" class="gradient-btn subscribe c-search">
                               <i class="fa fa-search"></i>
-                            </router-link>                            
+                            </a>                            
                         </div>
                         <router-link to="/" class="gradient-btn subscribe animated-button ml-2">Get Your Tokens!</router-link>
                     </div>
@@ -87,54 +83,32 @@ export default {
   data() {
     return {
       postBody: '',
-      errors: []
+      errors: [],
+      user: '',
+      userList: ["@bp84392506", "@cartosys", "@cryptoraves", "@ShannonPlasters"]
     }
   },
   methods: {
     getUserList(){
       axios.get('https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=searchBar')
       .then(response => {
-        // JSON responses are automatically parsed.
-        console.log(response);
+        // JSON responses are automatically parsed.        
+        //this.userList = response.userList;
+        //{"userList": ["@bp84392506", "@cartosys", "@cryptoraves", "@ShannonPlasters"]}
       })
       .catch(e => {
         this.errors.push(e)
       })
     },
-    // Pushes posts to the server when called.
-    postPost() {
-      axios.post('https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=searchBar', {
-        body: this.postBody
-      })
-      .then(response => {
-        console.log(response);
-      })
-      .catch(e => {
-        this.errors.push(e)
-      })
-
-      // async / await version (postPost() becomes async postPost())
-      //
-      // try {
-      //   await axios.post(`http://jsonplaceholder.typicode.com/posts`, {
-      //     body: this.postBody
-      //   })
-      // } catch (e) {
-      //   this.errors.push(e)
-      // }
+    goPortfolio: function (event) {
+      // `this` inside methods points to the Vue instance
+      if(this.userList.includes(this.user)){          
+          this.$router.push({ name: 'Portfolio', query: { user: this.user }})
+      }
     }
   }
 }
 
-// Vue.directive('autocomplete', {
-//   bind: function () {
-//     this.input = document.querySelector('input');
-//   },
-//   update: function (newValue, oldValue) {
-//   },
-//   unbind: function () {
-//   }
-// })
 </script>
 
 <style lang="scss">

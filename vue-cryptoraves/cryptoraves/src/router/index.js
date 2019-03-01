@@ -19,7 +19,7 @@ export default new Router({
       component: Confirmation
     },
     {
-      path: '/portfolio',
+      path: '/portfolio/:user?',
       name: 'Portfolio',
       component: Portfolio
     }

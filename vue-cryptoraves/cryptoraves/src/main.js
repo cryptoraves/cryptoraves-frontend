@@ -10,6 +10,15 @@ import 'bootstrap'
 Vue.config.productionTip = false
 Vue.use(Clipboard)
 
+Vue.directive('autocomplete', {
+  bind: function () {
+    this.input = document.querySelector('input');
+  },
+  update: function (newValue, oldValue) {
+  },
+  unbind: function () {
+  }
+})
 
 /* eslint-disable no-new */
 new Vue({
@@ -17,4 +26,4 @@ new Vue({
   router,
   components: { App },
   template: '<App/>'
-})
+}).$mount('#app')
