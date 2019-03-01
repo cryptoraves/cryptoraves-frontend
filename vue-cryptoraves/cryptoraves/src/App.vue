@@ -1,6 +1,6 @@
 <template>  
   <div id="app">
-    <div class="header-area wow fadeInDown header-absolate" id="nav" data-0="position:fixed;" data-top-top="position:fixed;top:0;" data-edge-strategy="set">
+    <div class="header-area header-absolate" id="nav"  v-bind:class="{'fadeIn':(showHeader === true)}">
         <div class="container">
             <div class="row">
                 <div class="col-4 d-block d-lg-none">
@@ -77,36 +77,63 @@
 
 <script>
 import axios from 'axios';
-
 export default {
-  name: 'App',
-  data() {
-    return {
-      postBody: '',
-      errors: [],
-      user: '',
-      userList: ["@bp84392506", "@cartosys", "@cryptoraves", "@ShannonPlasters"]
-    }
-  },
-  methods: {
-    getUserList(){
-      axios.get('https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=searchBar')
-      .then(response => {
-        // JSON responses are automatically parsed.        
-        //this.userList = response.userList;
-        //{"userList": ["@bp84392506", "@cartosys", "@cryptoraves", "@ShannonPlasters"]}
-      })
-      .catch(e => {
-        this.errors.push(e)
-      })
-    },
-    goPortfolio: function (event) {
-      // `this` inside methods points to the Vue instance
-      if(this.userList.includes(this.user)){          
-          this.$router.push({ name: 'Portfolio', query: { user: this.user }})
-      }
-    }
-  }
+	name: 'App',
+	data() {
+		return {
+			postBody: '',
+			errors: [],
+            user: '',
+            userList: ["@bp84392506", "@cartosys", "@cryptoraves", "@ShannonPlasters"],
+            currentScroll: 0,
+            showHeader: false
+		}
+	},
+	created() {
+		window.addEventListener('scroll', this.handleScroll);
+	},
+	destroyed() {
+		window.removeEventListener('scroll', this.handleScroll);
+	},
+	methods: {
+		getUserList() {
+			axios.get('https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=searchBar').then(response => {
+				// JSON responses are automatically parsed.        
+				//this.userList = response.userList;
+				//{"userList": ["@bp84392506", "@cartosys", "@cryptoraves", "@ShannonPlasters"]}
+			}).catch(e => {
+				this.errors.push(e)
+			})
+		},
+		goPortfolio: function(event) {
+			// `this` inside methods points to the Vue instance
+			if (this.userList.includes(this.user)) {
+				this.$router.push({
+					name: 'Portfolio',
+					query: {
+						user: this.user
+					}
+				})
+			}
+		},
+		handleScroll(e) {              
+			// Any code to be executed when the window is scrolled
+            console.log(e.srcElement.scrollingElement.scrollTop);
+            if(this.currentScroll > e.srcElement.scrollingElement.scrollTop){
+                //scroll up
+                if(e.srcElement.scrollingElement.scrollTop <= 100){
+                    this.showHeader = false;
+                }
+            }
+            else{
+                //scroll down
+                if(e.srcElement.scrollingElement.scrollTop > 100){
+                    this.showHeader = true;
+                }
+            }	
+            this.currentScroll = e.srcElement.scrollingElement.scrollTop;		
+		}
+	}
 }
 
 </script>

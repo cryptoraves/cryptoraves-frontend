@@ -1,7 +1,4 @@
-<template>
-  <!-- <div class="hello">
-    <h1>{{ title }}</h1>
-  </div> -->
+<template> 
   <div class="landing">
     <!--welcome area start-->
     <div class="welcome-area wow fadeInUp" id="home">

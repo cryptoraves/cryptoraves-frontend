@@ -97,6 +97,7 @@ div.single-about,
 
 .header-area {
   padding-top: 30px;
+  padding-bottom: 30px;
   z-index: 9999999;
   position: relative;
   width: 100%;
@@ -176,7 +177,7 @@ div.single-about,
 .welcome-area{
 	position: relative;
 	z-index: 999999;
-  padding-top: 80px;
+  padding-top: 150px;
 }
 
 .welcome-text h4 {
@@ -1700,7 +1701,10 @@ table a{
   color: #002466;
 }
 
-.single-about-text span{
-  font-size: 1.2rem;
+.fadeIn{
+  position:fixed;
+  top:0;
+  background-color: rgba(0, 36, 102, 0.6);
 }
+
 /*===================================== end =================================*/
