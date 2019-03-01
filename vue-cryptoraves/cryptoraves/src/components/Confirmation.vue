@@ -36,22 +36,20 @@
                                         <p>
                                             <table class="table">
                                                 <thead>
-                                                    <tr>
-                                                    <th scope="col">#</th>
-                                                    <th scope="col">From</th>
-                                                    <th scope="col">Amount</th>
-                                                    <th scope="col">To</th>
-                                                    <th scope="col">Date</th>
+                                                    <tr>                                                    
+                                                        <th scope="col">From</th>
+                                                        <th scope="col">Amount</th>
+                                                        <th scope="col">To</th>
+                                                        <th scope="col">Date</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
-                                                    <tr>
-                                                    <th scope="row">1</th>
-                                                    <td><router-link to="/portfolio">@Alice</router-link></td>
-                                                    <td>1000</td>
-                                                    <td><a href="#">@fat</a></td>
-                                                    <td>05/01/2019</td>
-                                                    </tr>                                                                                          
+                                                 <tbody>
+                                                    <tr v-for="item in tableRows" :key="item.txnId">                                                       
+                                                        <td v-on:click="goAnother(item.from)"><b>{{item.from}}</b></td>
+                                                        <td>{{item.amount}}</td>
+                                                        <td v-on:click="goAnother(item.to)"><b>{{item.to}}</b></td>
+                                                        <td>{{item.date}}</td>
+                                                    </tr>                                                                                            
                                                 </tbody>
                                             </table>
                                         </p>
@@ -64,7 +62,7 @@
                             <div class="col-12 col-md-12 align-self-center">
                                 <div class="welcome-right">                        
                                     <div class="welcome-text">
-                                        <h4 class="mt-4">Transaction ID# 01Zx...</h4>
+                                        <h4 class="mt-4">Transaction ID# {{txnId}}</h4>
                                     </div>                       
                                 </div>
                             </div>              
@@ -77,3 +75,40 @@
         <!--distibution-bg end-->
     </div>
 </template>
+
+
+<script>
+import axios from 'axios';
+
+export default {
+    name: 'Portfolio',
+    data() {
+        return {            
+          txnId: '',
+          tableRows: [],
+        }
+    },
+    created() {
+        this.txnId = this.$route.query.txnId;
+        this.getTransaction(this.txnId);
+    },
+    methods: {
+        getTransaction(txnId){
+            // axios.get('https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=confirmationPage&txnId='+txnId)
+            // .then(response => {
+            //     // JSON responses are automatically parsed.        
+            //     console.log(response);
+            // })
+            // .catch(e => {
+            //     this.errors.push(e)
+            // })            
+            let response = '{"tableRows": [{"txnId": "ce060dd7-8e9f-4c40-a4c8-b68cd0cf9678", "from": "@bp84392506", "amount": "21", "to": "@ShannonPlasters", "status": "SUCCESS!", "txn_hash": "0xa2b157374bd9cd267174d59c69382528e80f6264e643ed9f632da4ae49f17015", "message": null, "date": "2019-03-01 18:03:22"}]}';
+            let res = JSON.parse(response);
+            this.tableRows = res.tableRows;
+        },
+        goAnother(user){
+            this.$router.push({ name: 'Portfolio', query: { user: user }})
+        }
+    }
+}
+</script>

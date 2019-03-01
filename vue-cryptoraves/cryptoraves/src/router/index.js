@@ -14,7 +14,7 @@ export default new Router({
       component: Landing
     },
     {
-      path: '/confirmation',
+      path: '/confirmation/:txnId',
       name: 'Confirmation',
       component: Confirmation
     },

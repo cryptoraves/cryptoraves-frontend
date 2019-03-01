@@ -116,9 +116,9 @@ export default {
             this.getPortfolio(user);
         },
         goTransaction(txnId){
-
+            this.$router.push({ name: 'Confirmation', query: { txnId: txnId }})
         }
     }
 }
 </script>
->
+
