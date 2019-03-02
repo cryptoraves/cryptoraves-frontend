@@ -90,27 +90,24 @@ export default {
     beforeRouteUpdate (to, from, next) {
     // just use `this`
         this.user = to.query.user;
-        //https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=portfolioPage&userName=@bp84392506
         this.getPortfolio(this.user);
         next()
     },
     methods: {
         getPortfolio(user){
-            // axios.get('https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=portfolioPage&userName='+user)
-            // .then(response => {
-            //     // JSON responses are automatically parsed.        
-            //     console.log(response);
-            // })
-            // .catch(e => {
-            //     this.errors.push(e)
-            // })
-            this.user = user;
-            let response = '{"tableRows": [{"txnId": "ce060dd7-8e9f-4c40-a4c8-b68cd0cf9678", "from": "@bp84392506", "amount": "-21", "to": "@ShannonPlasters", "date": "2019-03-01 18:03:22"},{"txnId": "c0428fcf-a207-47d9-be5a-eb5f1670db3a", "from": "@bp84392506", "amount": "-20", "to": "@shannonplasters", "date": "2019-03-01 16:34:20"}],"rowCount": 2, "tokenBalance": "999959", "earliestDatetime": "2019-03-01 16:34:20"}';
-            let res = JSON.parse(response);
-            this.tableRows = res.tableRows;
-            this.rowCount = res.rowCount;
-            this.tokenBalance = res.tokenBalance;
-            this.earliestDatetime = res.earliestDatetime;
+            axios.get('https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=portfolioPage&userName='+user)
+            .then(response => {
+                // JSON responses are automatically parsed.        
+                this.user = user;
+                let res = JSON.parse(response.data);
+                this.tableRows = res.tableRows;
+                this.rowCount = res.rowCount;
+                this.tokenBalance = res.tokenBalance;
+                this.earliestDatetime = res.earliestDatetime;
+            })
+            .catch(e => {
+                this.errors.push(e)
+            })           
         },
         goAnother(user){
             this.getPortfolio(user);

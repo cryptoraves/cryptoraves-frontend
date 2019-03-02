@@ -84,7 +84,7 @@ export default {
 			postBody: '',
 			errors: [],
             user: '',
-            userList: ["@bp84392506", "@cartosys", "@cryptoraves", "@ShannonPlasters"],
+            userList: [],
             currentScroll: 0,
             showHeader: false
 		}
@@ -99,8 +99,8 @@ export default {
 	methods: {
 		getUserList() {
 			axios.get('https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=searchBar').then(response => {
-				// JSON responses are automatically parsed.        
-				console.log(response);
+				// JSON responses are automatically parsed.
+                this.userList = response.data.userList;
                 //this.userList = response.userList;
 				//{"userList": ["@bp84392506", "@cartosys", "@cryptoraves", "@ShannonPlasters"]}
 			}).catch(e => {

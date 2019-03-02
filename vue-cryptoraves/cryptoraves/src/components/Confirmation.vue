@@ -94,17 +94,15 @@ export default {
     },
     methods: {
         getTransaction(txnId){
-            // axios.get('https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=confirmationPage&txnId='+txnId)
-            // .then(response => {
-            //     // JSON responses are automatically parsed.        
-            //     console.log(response);
-            // })
-            // .catch(e => {
-            //     this.errors.push(e)
-            // })            
-            let response = '{"tableRows": [{"txnId": "ce060dd7-8e9f-4c40-a4c8-b68cd0cf9678", "from": "@bp84392506", "amount": "21", "to": "@ShannonPlasters", "status": "SUCCESS!", "txn_hash": "0xa2b157374bd9cd267174d59c69382528e80f6264e643ed9f632da4ae49f17015", "message": null, "date": "2019-03-01 18:03:22"}]}';
-            let res = JSON.parse(response);
-            this.tableRows = res.tableRows;
+            axios.get('https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=confirmationPage&txnId='+txnId)
+            .then(response => {
+                // JSON responses are automatically parsed.
+                let res = JSON.parse(response.data);
+                this.tableRows = res.tableRows;
+            })
+            .catch(e => {
+                this.errors.push(e)
+            })
         },
         goAnother(user){
             this.$router.push({ name: 'Portfolio', query: { user: user }})
