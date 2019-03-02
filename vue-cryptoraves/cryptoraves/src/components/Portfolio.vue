@@ -99,14 +99,14 @@ export default {
             .then(response => {
                 // JSON responses are automatically parsed.        
                 this.user = user;
-                let res = JSON.parse(response.data);
-                this.tableRows = res.tableRows;
+                let res = response.data;
+                this.tableRows = res.tableRows;                
                 this.rowCount = res.rowCount;
                 this.tokenBalance = res.tokenBalance;
                 this.earliestDatetime = res.earliestDatetime;
             })
             .catch(e => {
-                this.errors.push(e)
+                console.log(e);
             })           
         },
         goAnother(user){

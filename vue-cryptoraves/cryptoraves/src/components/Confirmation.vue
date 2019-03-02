@@ -98,10 +98,11 @@ export default {
             .then(response => {
                 // JSON responses are automatically parsed.
                 let res = JSON.parse(response.data);
+                console.log(res);
                 this.tableRows = res.tableRows;
             })
             .catch(e => {
-                this.errors.push(e)
+                console.log(e);
             })
         },
         goAnother(user){
