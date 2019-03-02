@@ -90,7 +90,8 @@ export default {
 		}
 	},
 	created() {
-		window.addEventListener('scroll', this.handleScroll);
+        window.addEventListener('scroll', this.handleScroll);
+        this.getUserList();
 	},
 	destroyed() {
 		window.removeEventListener('scroll', this.handleScroll);
@@ -99,7 +100,8 @@ export default {
 		getUserList() {
 			axios.get('https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=searchBar').then(response => {
 				// JSON responses are automatically parsed.        
-				//this.userList = response.userList;
+				console.log(response);
+                //this.userList = response.userList;
 				//{"userList": ["@bp84392506", "@cartosys", "@cryptoraves", "@ShannonPlasters"]}
 			}).catch(e => {
 				this.errors.push(e)
@@ -117,8 +119,7 @@ export default {
 			}
 		},
 		handleScroll(e) {              
-			// Any code to be executed when the window is scrolled
-            console.log(e.srcElement.scrollingElement.scrollTop);
+			// Any code to be executed when the window is scrolled            
             if(this.currentScroll > e.srcElement.scrollingElement.scrollTop){
                 //scroll up
                 if(e.srcElement.scrollingElement.scrollTop <= 100){
