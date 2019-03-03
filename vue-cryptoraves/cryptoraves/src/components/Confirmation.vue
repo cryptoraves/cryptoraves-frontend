@@ -33,8 +33,8 @@
                                         <h6 class="d-flex d-space">
                                             <span>Transaction information</span>                                                                            
                                         </h6>                                    
-                                        <p>
-                                            <table class="table table-responsive">
+                                        <p class="table-responsive">
+                                            <table class="table">
                                                 <thead>
                                                     <tr>                                                    
                                                         <th scope="col">From</th>
@@ -62,7 +62,7 @@
                             <div class="col-12 col-md-12 align-self-center">
                                 <div class="welcome-right">                        
                                     <div class="welcome-text">
-                                        <h4 class="mt-4">Transaction ID# {{txnId}}</h4>
+                                        <h4 class="mt-4">Transaction ID# {{txnID}}</h4>
                                     </div>                       
                                 </div>
                             </div>              
@@ -85,6 +85,7 @@ export default {
     data() {
         return {            
           txnId: '',
+          txnID: '',
           tableRows: [],
         }
     },
@@ -99,6 +100,7 @@ export default {
                 // JSON responses are automatically parsed.
                 let res = response.data;
                 this.tableRows = res.tableRows;
+                this.txnID = this.tableRows[0].txnId;
             })
             .catch(e => {
                 console.log(e);

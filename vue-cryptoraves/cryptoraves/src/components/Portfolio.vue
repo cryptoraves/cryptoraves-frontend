@@ -34,8 +34,8 @@
                                         <span>Transaction history</span>
                                         <small>Earliest {{earliestDatetime}}</small>                                                                            
                                     </h6>                                    
-                                    <p>
-                                        <table class="table table-responsive">
+                                    <p class="table-responsive">
+                                        <table class="table">
                                             <thead>
                                                 <tr>
                                                 <th scope="col">#</th>

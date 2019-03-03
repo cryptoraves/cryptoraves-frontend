@@ -68,8 +68,8 @@
                                     <h6 class="d-flex d-space">
                                         <span>Total Cryptoraves Token Balance <b class="ml-4">45,000,000.5</b></span>                                        
                                     </h6>                                    
-                                    <p>
-                                        <table class="table table-responsive">
+                                    <p class="table-responsive">
+                                        <table class="table">
                                             <thead>
                                                 <tr>
                                                 <th scope="col">#</th>
