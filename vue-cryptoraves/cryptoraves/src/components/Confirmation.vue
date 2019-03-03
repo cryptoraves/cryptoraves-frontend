@@ -34,7 +34,7 @@
                                             <span>Transaction information</span>                                                                            
                                         </h6>                                    
                                         <p>
-                                            <table class="table">
+                                            <table class="table table-responsive">
                                                 <thead>
                                                     <tr>                                                    
                                                         <th scope="col">From</th>

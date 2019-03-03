@@ -9,7 +9,7 @@
 */
 
 @media only screen and (min-width: 992px) and (max-width: 1200px) {
-
+    
     .gradient-btn.apps-btn i {
         font-size: 12px;
         padding-right: 5px;
@@ -88,6 +88,9 @@
     .single-blog-social li a {
         margin-bottom: 20px;
     }
+    a.gradient-btn.c-search {
+        font-size: 14px;
+    }
 }
 
 /*
@@ -99,8 +102,7 @@
 @media only screen and (min-width: 768px) and (max-width: 991px) {
     .mid-social{
 
-    }
-
+    }    
     a.single-about {
         width: 400px;
         margin: 0 auto;
@@ -152,7 +154,9 @@
 */
 
 @media only screen and (max-width: 991px) {
-    
+    .welcome-area{
+        padding-top: 0px;
+    }
     .welcome-text h1 {
         font-size: 22px;
         font-weight: 700;
@@ -291,6 +295,9 @@
     .single-blog-area.section-padding{
         padding-bottom: 0;
     }
+    a.gradient-btn.animated-button{
+        display: none;
+    }
 }
 
 
@@ -302,7 +309,9 @@
 */
 
 @media only screen and (min-width: 0px) and (max-width: 767px) {
-
+    .space-90{
+        height: 0px;
+    }
     .heading h1 {
         font-size: 18px;
     }
@@ -690,6 +699,9 @@
         width: 100%;
         margin-bottom: 20px;
     }
+    .form-control{
+        height: calc(1em + 0.75rem + 2px)!important;
+    }
 }
 
 /*
@@ -850,6 +862,14 @@
     }
 }
 
+@media only screen and (max-width: 480px){
+    .form-control{
+        height: calc(0.4em + 0.75rem + 2px)!important;
+    }
+    .c-search, .c-search:after{
+        padding: 3px 15px!important;
+    }
+}
 /*=========================================================================
                                 The end
 ==========================================================================*/

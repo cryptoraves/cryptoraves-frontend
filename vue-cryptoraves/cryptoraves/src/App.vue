@@ -2,16 +2,13 @@
   <div id="app">
     <div class="header-area header-absolate" id="nav"  v-bind:class="{'fadeIn':(showHeader === true)}">
         <div class="container">
-            <div class="row">
-                <div class="col-4 d-block d-lg-none">
-                    <div class="mobile-menu"></div>
-                </div>
+            <div class="row">              
                 <div class="col-4 col-lg-2">
                     <div class="logo-area">
                       <router-link to="/"><img src="./assets/img/cryptoraves_Horozontal Alignment_Full Color_JPG.png" alt=""></router-link>                       
                     </div>
                 </div>             
-                <div class="col-8 col-lg-10 d-none d-lg-block text-right">
+                <div class="col-8 col-lg-10 text-right">
                     <div class="d-flex d-flex-right form-group mt-3">                        
                         <div class="d-flex">                            
                             <input type="text" v-model="user" list="mylist" class="form-control c-search-input" placeholder="Search for Twitter handle." />
