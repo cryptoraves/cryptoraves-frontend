@@ -94,11 +94,10 @@ export default {
     },
     methods: {
         getTransaction(txnId){
-            axios.get('https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=confirmationPage&txnId='+txnId)
+            axios.get('https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=confirmationPage&txnHash='+txnId)
             .then(response => {
                 // JSON responses are automatically parsed.
-                let res = JSON.parse(response.data);
-                console.log(res);
+                let res = response.data;
                 this.tableRows = res.tableRows;
             })
             .catch(e => {

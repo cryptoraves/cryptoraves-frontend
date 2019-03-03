@@ -47,7 +47,7 @@
                                             </thead>
                                             <tbody>
                                                 <tr v-for="(item,index) in tableRows" :index="index" :key="item.txnId">
-                                                    <th v-on:click="goTransaction(item.txnId)" scope="row"><b>{{index+1}}</b></th>
+                                                    <th v-on:click="goTransaction(item.txnHash)" scope="row"><b>{{index+1}}</b></th>
                                                     <td v-on:click="goAnother(item.from)"><b>{{item.from}}</b></td>
                                                     <td>{{item.amount}}</td>
                                                     <td v-on:click="goAnother(item.to)"><b>{{item.to}}</b></td>
@@ -112,8 +112,8 @@ export default {
         goAnother(user){
             this.getPortfolio(user);
         },
-        goTransaction(txnId){
-            this.$router.push({ name: 'Confirmation', query: { txnId: txnId }})
+        goTransaction(txnHash){
+            this.$router.push({ name: 'Confirmation', query: { txnId: txnHash }})
         }
     }
 }
