@@ -11,7 +11,7 @@
                 <div class="col-8 col-lg-10 text-right">
                     <div class="d-flex d-flex-right form-group mt-3">                        
                         <div class="d-flex">                            
-                            <input type="text" v-model="user" list="mylist" class="form-control c-search-input" placeholder="Search for Twitter handle." />
+                            <input type="text" v-model="user" @change="goPortfolio" list="mylist" class="form-control c-search-input" placeholder="Search for Twitter handle." />
                             <datalist id="mylist">
                                 <option v-bind:key="item" v-for="item in userList" :value="item">
                                     {{item}}
@@ -22,7 +22,15 @@
                               <i class="fa fa-search"></i>
                             </a>                            
                         </div>
-                        <router-link to="/" class="gradient-btn subscribe animated-button ml-2">Get Your Tokens!</router-link>
+                        <a href="#" v-scroll-to="{
+                            el: '#getToken',
+                            duration: 500,
+                            easing: 'linear',
+                            offset: -250,
+                            force: true,
+                            onDone: onDone,
+                            cancelable: true,                            
+                        }" class="gradient-btn subscribe animated-button ml-2">Get Your Tokens!</a>
                     </div>
                 </div>
             </div>
@@ -83,8 +91,10 @@ export default {
             user: '',
             userList: [],
             currentScroll: 0,
-            showHeader: false
+            showHeader: false           
 		}
+    },
+    mounted () {				
 	},
 	created() {
         window.addEventListener('scroll', this.handleScroll);
@@ -103,7 +113,11 @@ export default {
 			}).catch(e => {
 				this.errors.push(e)
 			})
-		},
+        },
+        onDone(){
+            document.querySelector("#getToken").style.animation = 'shadow-pulse 1s';
+            document.querySelector("#getToken").style.animationIterationCount = '3';
+        },
 		goPortfolio: function(event) {
 			// `this` inside methods points to the Vue instance
 			if (this.userList.includes(this.user)) {
@@ -114,7 +128,7 @@ export default {
 					}
 				})
 			}
-		},
+        },
 		handleScroll(e) {              
 			// Any code to be executed when the window is scrolled            
             if(this.currentScroll > e.srcElement.scrollingElement.scrollTop){
@@ -130,7 +144,7 @@ export default {
                 }
             }	
             this.currentScroll = e.srcElement.scrollingElement.scrollTop;		
-		}
+        }       
 	}
 }
 

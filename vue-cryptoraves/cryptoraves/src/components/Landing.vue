@@ -25,10 +25,9 @@
         <!---distibution area start-->
         <div class="distibution wow fadeInUp" id="token">
                 <div class="container">                   
-
                     <div class="row">
                         <div class="col-lg-6 mt-2">
-                            <div class="single-about">                               
+                            <div class="single-about" id="getToken">                               
                                 <div class="single-about-text">
                                     <h4>Get Your Tokens!</h4>
                                     <p>
@@ -39,6 +38,7 @@
                                         <i class="fa fa-twitter" v-on:click="goTweeter"></i>
                                     </p>
                                     <p>{{message}}</p>
+                                    <img src="../assets/img/1.png" style="width:90px" alt="">
                                 </div>
                             </div>
                         </div>
@@ -48,7 +48,7 @@
                                     <h4>Share Them!</h4>
                                     <p>
                                         This <b>Tweet</b> sends 2000 tokens to @Alice:
-                                        <br><span>@cryptoraves 2000 @Alice</span>
+                                        <br><span>@cryptoraves 2000 @Alice</span><br>
                                         <br>This <b>Tweet reply</b> sends 2000 tokens to the original poster: 
                                         <br><span>@cryptoraves 2000</span>
                                     </p>
@@ -61,9 +61,16 @@
                             <div class="single-about">                               
                                 <div class="single-about-text">
                                     <h4>See Your Balance!</h4>
-                                    <p class="d-flex">                                         
-                                        <input type="text" class="form-control c-search-input" placeholder="Get Your Twiter Handle!"> 
-                                        <span class="gradient-btn subscribe c-search"><i class="fa fa-search"></i></span>                                
+                                    <p class="d-flex">
+                                        <input type="text" v-model="user" @change="goPortfolio" list="mylist" class="form-control c-search-input" placeholder="Search for Twitter handle." />
+                                        <datalist id="mylist">
+                                            <option v-bind:key="item" v-for="item in userList" :value="item">
+                                                {{item}}
+                                            </option>
+                                        </datalist>
+                                        <span v-on:click="goPortfolio" class="gradient-btn subscribe c-search link">
+                                            <i class="fa fa-search"></i>
+                                        </span>                    
                                     </p>
                                     <h6 class="d-flex d-space">
                                         <span>Total Cryptoraves Token Balance <b class="ml-4">45,000,000.5</b></span>                                        
@@ -152,8 +159,6 @@
             <div class="row">
                 <div class="col-12 text-center">
                     <div class="heading">
-                        <h5>history Timeline</h5>
-                        <div class="space-10"></div>
                         <h1>Development Roadmap</h1>
                     </div>
                     <div class="space-60 d-none d-sm-block"></div>
@@ -207,20 +212,46 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   name: 'Landing',
   data () {
     return {
       title: 'It\'s Crypto You Can Tweet!',
       copyTweet: '@cryptoraves #makeitrave',
-      message: ''
+      message: '',
+      user: '',
+      userList: [],
     }
+  },
+  created() {
+        this.getUserList();
   },
   methods: {
     clipboardSuccessHandler ({ value, event }) {      
       this.message = 'copied successfully'
     },
- 
+    goPortfolio: function(event) {
+        // `this` inside methods points to the Vue instance
+        if (this.userList.includes(this.user)) {
+            this.$router.push({
+                name: 'Portfolio',
+                query: {
+                    user: this.user
+                }
+            })
+        }
+    },
+    getUserList() {
+        axios.get('https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=searchBar').then(response => {
+            // JSON responses are automatically parsed.
+            this.userList = response.data.userList;
+            //this.userList = response.userList;
+            //{"userList": ["@bp84392506", "@cartosys", "@cryptoraves", "@ShannonPlasters"]}
+        }).catch(e => {
+            this.errors.push(e)
+        })
+    },
     clipboardErrorHandler ({ value, event }) {      
       this.message = 'copy error'
     },

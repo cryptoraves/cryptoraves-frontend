@@ -29,11 +29,7 @@
                         <div class="col-lg-12">
                             <div class="single-about">                              
                                 <div class="single-about-text">
-                                    <h4>Total Cryptoraves Token Balance <b class="ml-4">{{tokenBalance}}</b></h4>                                  
-                                    <h6 class="d-flex d-space">
-                                        <span>Transaction history</span>
-                                        <small>Earliest {{earliestDatetime}}</small>                                                                            
-                                    </h6>                                    
+                                    <h4>Total Cryptoraves Token Balance <b class="ml-4">{{tokenBalance}}</b></h4>
                                     <p class="table-responsive">
                                         <table class="table">
                                             <thead>
@@ -47,10 +43,10 @@
                                             </thead>
                                             <tbody>
                                                 <tr v-for="(item,index) in tableRows" :index="index" :key="item.txnId">
-                                                    <th v-on:click="goTransaction(item.txnHash)" scope="row"><b>{{index+1}}</b></th>
-                                                    <td v-on:click="goAnother(item.from)"><b>{{item.from}}</b></td>
+                                                    <th class="link" v-on:click="goTransaction(item.txnHash)" scope="row"><b>{{item.txnHash | truncate}}</b></th>
+                                                    <td class="link" v-on:click="goAnother(item.from)"><b>{{item.from}}</b></td>
                                                     <td>{{item.amount}}</td>
-                                                    <td v-on:click="goAnother(item.to)"><b>{{item.to}}</b></td>
+                                                    <td class="link" v-on:click="goAnother(item.to)"><b>{{item.to}}</b></td>
                                                     <td>{{item.date}}</td>
                                                 </tr>                                                                                            
                                             </tbody>
