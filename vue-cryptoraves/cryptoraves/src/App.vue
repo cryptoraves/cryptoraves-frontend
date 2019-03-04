@@ -107,9 +107,7 @@ export default {
 		getUserList() {
 			axios.get('https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=searchBar').then(response => {
 				// JSON responses are automatically parsed.
-                this.userList = response.data.userList;
-                //this.userList = response.userList;
-				//{"userList": ["@bp84392506", "@cartosys", "@cryptoraves", "@ShannonPlasters"]}
+                this.userList = response.data.userList;                
 			}).catch(e => {
 				this.errors.push(e)
 			})

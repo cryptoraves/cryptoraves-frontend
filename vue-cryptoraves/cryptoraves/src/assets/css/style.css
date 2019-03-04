@@ -1653,7 +1653,7 @@ span.gradient-btn{
 .animated-button
 {
   animation: shadow-pulse 1s infinite;
-  background-color: #10ce45!important;
+  background-color: rgba(16, 206, 69, 0.5)!important;
   color: #002466!important;
 }
 @keyframes shadow-pulse
@@ -1715,6 +1715,6 @@ input::-webkit-calendar-picker-indicator {
 th.link, td.link, span.link { cursor: pointer; }
 
 #getToken{
-  background-color: #10ce45;
+  background-color: rgba(16, 206, 69, 0.5);
 }
 /*===================================== end =================================*/
