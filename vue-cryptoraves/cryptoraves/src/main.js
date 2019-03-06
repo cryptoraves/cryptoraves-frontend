@@ -11,16 +11,6 @@ Vue.config.productionTip = false
 Vue.use(Clipboard)
 Vue.use(VueScrollTo)
 
-Vue.directive('autocomplete', {
-  bind: function () {
-    this.input = document.querySelector('input');
-  },
-  update: function (newValue, oldValue) {
-  },
-  unbind: function () {
-  }
-})
-
 /* eslint-disable no-new */
 
 Vue.filter('truncate', function (value) {

@@ -11,6 +11,8 @@
                             <h1>It's Crypto You Can Tweet!</h1>
                             <h4>Get free tokens. Share without fees.
                             <br>Add value to your online cred.</h4>
+                            <br>
+                            <h3 v-on:click="goComingSoon" class="link">Coming soon...</h3>
                         </div>                       
                     </div>
                 </div>              
@@ -32,10 +34,10 @@
                                     <h4>Get Your Tokens!</h4>
                                     <p>
                                         Tweet: @cryptoraves #makeitrave
-                                        <i class="fa fa-copy" v-clipboard="copyTweet"
+                                        <i class="fa fa-copy link" v-clipboard="copyTweet"
                                         v-clipboard:success="clipboardSuccessHandler"
                                         v-clipboard:error="clipboardErrorHandler"></i>
-                                        <i class="fa fa-twitter" v-on:click="goTweeter"></i>
+                                        <i class="fa fa-twitter link" v-on:click="goTweeter"></i>
                                     </p>
                                     <p>{{message}}</p>
                                     <img src="../assets/img/1.png" style="width:90px" alt="">
@@ -113,11 +115,12 @@
                             <div class="single-about">                             
                                 <div class="single-about-text">
                                     <h4>What are cryptoraves Tokens?</h4>
-                                    <p>
-                                        Cryptoraves are Ethereum based tokens that you can share on Twitter.
-                                        Social media users like you will have more control over your online voice.
-                                        You can give and receive cryptoraves tokens as recognition for important ideas.
-                                        You now become empowered to build a new kind of social value system.
+                                    <p>                                        
+                                        Cryptoraves are Ethereum-based tokens that you can Tweet for free to grow your online cred. <br> 
+                                        Social media users like you spend a lot of time online, <br>
+                                        but you don’t have a way to capitalize on the value you are creating. <br> 
+                                        Sharing cryptoraves tokens empowers you to increase your social credibility, and allows you to<br>
+                                        <u v-on:click="goCryptoToken" class="link">reap the benefits of a tokenized economy.</u>                    
                                     </p>
                                 </div>
                             </div>
@@ -129,8 +132,8 @@
                                 <div class="single-about-text">
                                     <h4>Learn More!</h4>
                                     <p>
-                                        See our Reddit Alpha-Lounch Announcement. (link)
-                                        Read our blog series. (Medium icon, link to our page)
+                                        Visit our social media pages for recent announcements, 
+                                        and read our <u v-on:click="goBlog" class="link">Medium blog series</u> for more info on cryptoraves.
                                     </p>
                                 </div>
                             </div>
@@ -139,9 +142,9 @@
                             <div class="single-about">                              
                                 <div class="single-about-text">
                                     <h4>Donate Here</h4>
-                                    <p>                                         
-                                        Click here for a link to our wallet.                                
-                                    </p>
+                                    <p> Wallet Address : <br> 0xE1A3435B683d863bCB6c8aA093De08ED0557eE99 </p>
+                                    <img src="../assets/img/ethereum.png" style="width:45px" alt="">                               
+                                    
                                 </div>
                             </div>
                         </div>
@@ -176,7 +179,7 @@
                         <div class="roadmap-text">
                             <p>Q1 2019</p>
                             <div class="space-10"></div>
-                            <h5>Alpha-Launch (link to M blog)</h5>
+                            <h5>Alpha Launch</h5>
                         </div>
                     </div>
                 </div>  
@@ -188,7 +191,7 @@
                         <div class="roadmap-text">
                             <p>Q2 ~ Q4 2019</p>
                             <div class="space-10"></div>
-                            <h5>Building the cryptoraves Vision (link to M blog)</h5>
+                            <h5>Building Beta Product</h5>
                         </div>
                     </div>
                 </div>               
@@ -200,7 +203,7 @@
                         <div class="roadmap-text">
                             <p>Q1 2020</p>
                             <div class="space-10"></div>
-                            <h5>Beta-Launch (link to M blog)</h5>
+                            <h5>Beta Launch</h5>
                         </div>
                     </div>
                 </div>             
@@ -245,9 +248,7 @@ export default {
     getUserList() {
         axios.get('https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=searchBar').then(response => {
             // JSON responses are automatically parsed.
-            this.userList = response.data.userList;
-            //this.userList = response.userList;
-            //{"userList": ["@bp84392506", "@cartosys", "@cryptoraves", "@ShannonPlasters"]}
+            this.userList = response.data.userList;           
         }).catch(e => {
             this.errors.push(e)
         })
@@ -255,15 +256,20 @@ export default {
     clipboardErrorHandler ({ value, event }) {      
       this.message = 'copy error'
     },
-
     goTweeter(){
         window.open("https://twitter.com");
+    },
+    goComingSoon(){
+        window.open('https://medium.com/@cryptoraves/announcing-the-cryptoraves-roadmap-launch-plans-part-4-cb3879264368');        
+    },
+    goCryptoToken(){
+        window.open("https://medium.com/@cryptoraves/cryptoraves-is-a-way-to-inspire-new-use-cases-for-a-tokenized-economy-part-3-e7eaeccf25be");
+    },
+    goBlog(){
+        window.open("https://medium.com/@cryptoraves");
     }
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-/* @import './../node_modules/foo/bar.css'; */
-</style>

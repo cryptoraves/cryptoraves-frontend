@@ -13,7 +13,7 @@
                             <br>Add value to your online cred.</h4>
                         </div>                       
                     </div>
-                </div>               
+                </div>
             </div>
             <div class="space-90"></div>
         </div>
@@ -50,9 +50,20 @@
                                                     <td>{{item.date}}</td>
                                                 </tr>                                                                                            
                                             </tbody>
-                                        </table>
+                                            <tfoot>
+                                                <td colspan="5">
+                                                    <span v-on:click="goPrev" class="btn btnpagination"  v-bind:class="[validated==1 ? 'disabledbtn' : '']">
+                                                        <i class="fa fa-angle-left"></i>
+                                                    </span>
+                                                    {{initialPagePtr + 1}} Page of {{totalPage + 1}}
+                                                    <span href="#" v-on:click="goNext" class="btn btnpagination" v-bind:class="[validated==2 ? 'disabledbtn' : '']">
+                                                        <i class="fa fa-angle-right"></i>
+                                                    </span> 
+                                                </td>
+                                            </tfoot>
+                                        </table>                                       
                                     </p>
-                                </div>
+                                </div>                               
                             </div>
                         </div>
                     </div>                  
@@ -67,6 +78,9 @@
 
 <script>
 import axios from 'axios';
+import _ from 'lodash';
+
+const Record = 5;
 
 export default {
     name: 'Portfolio',
@@ -74,9 +88,13 @@ export default {
         return {
             user: '',
             tableRows: [],
+            initialTableRows: [],
             rowCount: 0,
             tokenBalance: "0",
-            earliestDatetime: ''
+            earliestDatetime: '',
+            initialPagePtr: 0,
+            totalPage: 0,
+            validated: 0
         }
     },
     created() {
@@ -90,16 +108,34 @@ export default {
         next()
     },
     methods: {
+        goNext(){
+            this.initialPagePtr ++;
+            this.initialPagePtr = this.initialPagePtr>this.totalPage?this.totalPage:this.initialPagePtr;            
+            let testArray = _.cloneDeep(this.initialTableRows);           
+            this.tableRows = _.slice(testArray, this.initialPagePtr * Record, (this.initialPagePtr + 1) * Record);
+            this.validated = this.initialPagePtr == this.totalPage? 2: 0;
+        },
+        goPrev(){
+            this.initialPagePtr --;
+            this.initialPagePtr = this.initialPagePtr<0?0:this.initialPagePtr;
+            let testArray = _.cloneDeep(this.initialTableRows);           
+            this.tableRows = _.slice(testArray, this.initialPagePtr * Record, (this.initialPagePtr + 1) * Record);
+            this.validated = this.initialPagePtr == 0? 1: 0;
+        },
         getPortfolio(user){
             axios.get('https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=portfolioPage&userName='+user)
             .then(response => {
                 // JSON responses are automatically parsed.        
                 this.user = user;
                 let res = response.data;
-                this.tableRows = res.tableRows;                
+                this.initialTableRows = res.tableRows;                
                 this.rowCount = res.rowCount;
+                this.totalPage = Math.floor(this.rowCount/Record);
                 this.tokenBalance = res.tokenBalance;
                 this.earliestDatetime = res.earliestDatetime;
+                var testArray = _.cloneDeep(this.initialTableRows);
+                this.tableRows = testArray.slice(0, Record);
+                this.validated = 1;
             })
             .catch(e => {
                 console.log(e);
@@ -110,8 +146,8 @@ export default {
         },
         goTransaction(txnHash){
             this.$router.push({ name: 'Confirmation', query: { txnId: txnHash }})
-        }
-    }
+        }       
+    } 
 }
 </script>
 
