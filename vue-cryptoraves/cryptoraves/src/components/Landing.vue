@@ -11,6 +11,8 @@
                             <h1>It's Crypto You Can Tweet!</h1>
                             <h4>Get free tokens. Share without fees.
                             <br>Add value to your online cred.</h4>
+                            <br>
+                            <h3 v-on:click="goComingSoon" class="link">Coming soon...</h3>
                         </div>                       
                     </div>
                 </div>              
@@ -25,20 +27,20 @@
         <!---distibution area start-->
         <div class="distibution wow fadeInUp" id="token">
                 <div class="container">                   
-
                     <div class="row">
                         <div class="col-lg-6 mt-2">
-                            <div class="single-about">                               
+                            <div class="single-about" id="getToken">                               
                                 <div class="single-about-text">
                                     <h4>Get Your Tokens!</h4>
                                     <p>
                                         Tweet: @cryptoraves #makeitrave
-                                        <i class="fa fa-copy" v-clipboard="copyTweet"
+                                        <i class="fa fa-copy link" v-clipboard="copyTweet"
                                         v-clipboard:success="clipboardSuccessHandler"
                                         v-clipboard:error="clipboardErrorHandler"></i>
-                                        <i class="fa fa-twitter" v-on:click="goTweeter"></i>
+                                        <i class="fa fa-twitter link" v-on:click="goTweeter"></i>
                                     </p>
                                     <p>{{message}}</p>
+                                    <img src="../assets/img/1.png" style="width:90px" alt="">
                                 </div>
                             </div>
                         </div>
@@ -48,7 +50,7 @@
                                     <h4>Share Them!</h4>
                                     <p>
                                         This <b>Tweet</b> sends 2000 tokens to @Alice:
-                                        <br><span>@cryptoraves 2000 @Alice</span>
+                                        <br><span>@cryptoraves 2000 @Alice</span><br>
                                         <br>This <b>Tweet reply</b> sends 2000 tokens to the original poster: 
                                         <br><span>@cryptoraves 2000</span>
                                     </p>
@@ -61,9 +63,16 @@
                             <div class="single-about">                               
                                 <div class="single-about-text">
                                     <h4>See Your Balance!</h4>
-                                    <p class="d-flex">                                         
-                                        <input type="text" class="form-control c-search-input" placeholder="Get Your Twiter Handle!"> 
-                                        <span class="gradient-btn subscribe c-search"><i class="fa fa-search"></i></span>                                
+                                    <p class="d-flex">
+                                        <input type="text" v-model="user" @change="goPortfolio" list="mylist" class="form-control c-search-input" placeholder="Search for Twitter handle." />
+                                        <datalist id="mylist">
+                                            <option v-bind:key="item" v-for="item in userList" :value="item">
+                                                {{item}}
+                                            </option>
+                                        </datalist>
+                                        <span v-on:click="goPortfolio" class="gradient-btn subscribe c-search link">
+                                            <i class="fa fa-search"></i>
+                                        </span>                    
                                     </p>
                                     <h6 class="d-flex d-space">
                                         <span>Total Cryptoraves Token Balance <b class="ml-4">45,000,000.5</b></span>                                        
@@ -106,11 +115,12 @@
                             <div class="single-about">                             
                                 <div class="single-about-text">
                                     <h4>What are cryptoraves Tokens?</h4>
-                                    <p>
-                                        Cryptoraves are Ethereum based tokens that you can share on Twitter.
-                                        Social media users like you will have more control over your online voice.
-                                        You can give and receive cryptoraves tokens as recognition for important ideas.
-                                        You now become empowered to build a new kind of social value system.
+                                    <p>                                        
+                                        Cryptoraves are Ethereum-based tokens that you can Tweet for free to grow your online cred. <br> 
+                                        Social media users like you spend a lot of time online, <br>
+                                        but you don’t have a way to capitalize on the value you are creating. <br> 
+                                        Sharing cryptoraves tokens empowers you to increase your social credibility, and allows you to<br>
+                                        <u v-on:click="goCryptoToken" class="link">reap the benefits of a tokenized economy.</u>                    
                                     </p>
                                 </div>
                             </div>
@@ -122,8 +132,8 @@
                                 <div class="single-about-text">
                                     <h4>Learn More!</h4>
                                     <p>
-                                        See our Reddit Alpha-Lounch Announcement. (link)
-                                        Read our blog series. (Medium icon, link to our page)
+                                        Visit our social media pages for recent announcements, 
+                                        and read our <u v-on:click="goBlog" class="link">Medium blog series</u> for more info on cryptoraves.
                                     </p>
                                 </div>
                             </div>
@@ -132,9 +142,9 @@
                             <div class="single-about">                              
                                 <div class="single-about-text">
                                     <h4>Donate Here</h4>
-                                    <p>                                         
-                                        Click here for a link to our wallet.                                
-                                    </p>
+                                    <p> Wallet Address : <br> 0xE1A3435B683d863bCB6c8aA093De08ED0557eE99 </p>
+                                    <img src="../assets/img/ethereum.png" style="width:45px" alt="">                               
+                                    
                                 </div>
                             </div>
                         </div>
@@ -152,8 +162,6 @@
             <div class="row">
                 <div class="col-12 text-center">
                     <div class="heading">
-                        <h5>history Timeline</h5>
-                        <div class="space-10"></div>
                         <h1>Development Roadmap</h1>
                     </div>
                     <div class="space-60 d-none d-sm-block"></div>
@@ -171,7 +179,7 @@
                         <div class="roadmap-text">
                             <p>Q1 2019</p>
                             <div class="space-10"></div>
-                            <h5>Alpha-Launch (link to M blog)</h5>
+                            <h5>Alpha Launch</h5>
                         </div>
                     </div>
                 </div>  
@@ -183,7 +191,7 @@
                         <div class="roadmap-text">
                             <p>Q2 ~ Q4 2019</p>
                             <div class="space-10"></div>
-                            <h5>Building the cryptoraves Vision (link to M blog)</h5>
+                            <h5>Building Beta Product</h5>
                         </div>
                     </div>
                 </div>               
@@ -195,7 +203,7 @@
                         <div class="roadmap-text">
                             <p>Q1 2020</p>
                             <div class="space-10"></div>
-                            <h5>Beta-Launch (link to M blog)</h5>
+                            <h5>Beta Launch</h5>
                         </div>
                     </div>
                 </div>             
@@ -207,32 +215,61 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   name: 'Landing',
   data () {
     return {
       title: 'It\'s Crypto You Can Tweet!',
       copyTweet: '@cryptoraves #makeitrave',
-      message: ''
+      message: '',
+      user: '',
+      userList: [],
     }
+  },
+  created() {
+        this.getUserList();
   },
   methods: {
     clipboardSuccessHandler ({ value, event }) {      
       this.message = 'copied successfully'
     },
- 
+    goPortfolio: function(event) {
+        // `this` inside methods points to the Vue instance
+        if (this.userList.includes(this.user)) {
+            this.$router.push({
+                name: 'Portfolio',
+                query: {
+                    user: this.user
+                }
+            })
+        }
+    },
+    getUserList() {
+        axios.get('https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=searchBar').then(response => {
+            // JSON responses are automatically parsed.
+            this.userList = response.data.userList;           
+        }).catch(e => {
+            this.errors.push(e)
+        })
+    },
     clipboardErrorHandler ({ value, event }) {      
       this.message = 'copy error'
     },
-
     goTweeter(){
         window.open("https://twitter.com");
+    },
+    goComingSoon(){
+        window.open('https://medium.com/@cryptoraves/announcing-the-cryptoraves-roadmap-launch-plans-part-4-cb3879264368');        
+    },
+    goCryptoToken(){
+        window.open("https://medium.com/@cryptoraves/cryptoraves-is-a-way-to-inspire-new-use-cases-for-a-tokenized-economy-part-3-e7eaeccf25be");
+    },
+    goBlog(){
+        window.open("https://medium.com/@cryptoraves");
     }
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-/* @import './../node_modules/foo/bar.css'; */
-</style>

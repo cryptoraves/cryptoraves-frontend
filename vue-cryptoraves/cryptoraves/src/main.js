@@ -4,23 +4,21 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import Clipboard from 'v-clipboard'
-
+import VueScrollTo from 'vue-scrollto'
 import 'bootstrap'
 
 Vue.config.productionTip = false
 Vue.use(Clipboard)
-
-Vue.directive('autocomplete', {
-  bind: function () {
-    this.input = document.querySelector('input');
-  },
-  update: function (newValue, oldValue) {
-  },
-  unbind: function () {
-  }
-})
+Vue.use(VueScrollTo)
 
 /* eslint-disable no-new */
+
+Vue.filter('truncate', function (value) {
+  if (!value) return ''
+  value = value.substring(0, 6);
+  return value
+})
+
 new Vue({
   el: '#app',
   router,

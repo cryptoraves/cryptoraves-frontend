@@ -12,6 +12,7 @@
                                 <h4>Get free tokens. Share without fees.
                                 <br>Add value to your online cred.</h4>
                                 <h2>Transaction Confirmed.</h2>
+                                <h4>{{txnID}}</h4>
                             </div>                       
                         </div>
                     </div>              
@@ -29,10 +30,7 @@
                         <div class="row">                       
                             <div class="col-lg-12">
                                 <div class="single-about">                              
-                                    <div class="single-about-text">                                                                      
-                                        <h6 class="d-flex d-space">
-                                            <span>Transaction information</span>                                                                            
-                                        </h6>                                    
+                                    <div class="single-about-text">       
                                         <p class="table-responsive">
                                             <table class="table">
                                                 <thead>
@@ -45,9 +43,9 @@
                                                 </thead>
                                                  <tbody>
                                                     <tr v-for="item in tableRows" :key="item.txnId">                                                       
-                                                        <td v-on:click="goAnother(item.from)"><b>{{item.from}}</b></td>
+                                                        <td class="link" v-on:click="goAnother(item.from)"><b>{{item.from}}</b></td>
                                                         <td>{{item.amount}}</td>
-                                                        <td v-on:click="goAnother(item.to)"><b>{{item.to}}</b></td>
+                                                        <td class="link" v-on:click="goAnother(item.to)"><b>{{item.to}}</b></td>
                                                         <td>{{item.date}}</td>
                                                     </tr>                                                                                            
                                                 </tbody>
@@ -57,16 +55,6 @@
                                 </div>
                             </div>
                         </div> 
-                        
-                        <div class="row">
-                            <div class="col-12 col-md-12 align-self-center">
-                                <div class="welcome-right">                        
-                                    <div class="welcome-text">
-                                        <h4 class="mt-4">Transaction ID# {{txnID}}</h4>
-                                    </div>                       
-                                </div>
-                            </div>              
-                        </div>                 
                     </div>
                     <div class="space-90"></div>
             </div>
@@ -100,7 +88,7 @@ export default {
                 // JSON responses are automatically parsed.
                 let res = response.data;
                 this.tableRows = res.tableRows;
-                this.txnID = this.tableRows[0].txnId;
+                this.txnID = this.tableRows[0].txn_hash;
             })
             .catch(e => {
                 console.log(e);

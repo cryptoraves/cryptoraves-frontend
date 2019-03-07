@@ -278,11 +278,10 @@ div.single-about {
   transform: translateY(0px);
   border: 1px solid #667ca3;
   border-radius: 5px;
-  min-height: 300px;
+  min-height: 305px;
 }
 
 div.single-about:hover {
-  background: rgba(102, 124, 163, 0.6);
   -webkit-transform: translateY(-5px);
   -ms-transform: translateY(-5px);
   transform: translateY(-5px);
@@ -1654,14 +1653,16 @@ span.gradient-btn{
 .animated-button
 {
   animation: shadow-pulse 1s infinite;
+  background-color: rgba(16, 206, 69, 0.7)!important;
+  color: #002466!important;
 }
 @keyframes shadow-pulse
 {
   0% {
-    box-shadow: 0 0 0 0px rgba(0, 36, 102, 0.5);
+    box-shadow: 0 0 0 0px rgba(16, 206, 69, 0.5);
   }
   100% {
-    box-shadow: 0 0 0 15px rgba(0, 36, 102, 0);
+    box-shadow: 0 0 0 15px rgba(16, 206, 69, 0);
   }
 }
 .welcome-text{
@@ -1707,4 +1708,22 @@ table a{
   background-color: rgba(0, 36, 102, 0.6);
 }
 
+input::-webkit-calendar-picker-indicator {
+  display: none;
+} 
+
+th.link, td.link, span.link, i.link, h3.link, u.link { cursor: pointer; }
+
+#getToken{
+  background-color: rgba(16, 206, 69, 0.7);
+}
+
+.btn.btnpagination{
+  background-color: #002466;
+  color: white;
+}
+
+.btn.btnpagination.disabledbtn{
+  background-color: #ddd;
+}
 /*===================================== end =================================*/

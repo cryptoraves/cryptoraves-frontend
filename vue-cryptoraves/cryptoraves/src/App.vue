@@ -11,7 +11,7 @@
                 <div class="col-8 col-lg-10 text-right">
                     <div class="d-flex d-flex-right form-group mt-3">                        
                         <div class="d-flex">                            
-                            <input type="text" v-model="user" list="mylist" class="form-control c-search-input" placeholder="Search for Twitter handle." />
+                            <input type="text" v-model="user" @change="goPortfolio" list="mylist" class="form-control c-search-input" placeholder="Search for Twitter handle." />
                             <datalist id="mylist">
                                 <option v-bind:key="item" v-for="item in userList" :value="item">
                                     {{item}}
@@ -22,7 +22,15 @@
                               <i class="fa fa-search"></i>
                             </a>                            
                         </div>
-                        <router-link to="/" class="gradient-btn subscribe animated-button ml-2">Get Your Tokens!</router-link>
+                        <a href="#" v-scroll-to="{
+                            el: '#getToken',
+                            duration: 500,
+                            easing: 'linear',
+                            offset: -250,
+                            force: true,
+                            onDone: onDone,
+                            cancelable: true,                            
+                        }" class="gradient-btn subscribe animated-button ml-2">Get Your Tokens!</a>
                     </div>
                 </div>
             </div>
@@ -54,16 +62,16 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12 d-flex-end">                   
                     <div class="single-community mid-social">
-                        <a class="twitter" href="#"><i class="fa fa-twitter"></i></a>
+                        <a class="twitter" href="https://twitter.com/cryptoraves"><i class="fa fa-twitter"></i></a>
                     </div> 
                     <div class="single-community mid-social">
-                        <a class="youtube" href="#"><i class="fa fa-reddit"></i></a>
+                        <a class="youtube" href="https://www.reddit.com/user/cryptoraves"><i class="fa fa-reddit"></i></a>
                     </div>
                     <div class="single-community mid-social">
-                        <a class="github" href="#"><i class="fa fa-facebook"></i></a>
+                        <a class="github" href="https://www.facebook.com/CryptoRaves/"><i class="fa fa-facebook"></i></a>
                     </div> 
                     <div class="single-community mid-social">
-                        <a class="behance" href="#"><i class="fa fa-medium"></i></a>
+                        <a class="behance" href="https://medium.com/@cryptoraves"><i class="fa fa-medium"></i></a>
                     </div>                        
                 </div>               
             </div>
@@ -83,8 +91,10 @@ export default {
             user: '',
             userList: [],
             currentScroll: 0,
-            showHeader: false
+            showHeader: false           
 		}
+    },
+    mounted () {				
 	},
 	created() {
         window.addEventListener('scroll', this.handleScroll);
@@ -97,13 +107,15 @@ export default {
 		getUserList() {
 			axios.get('https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=searchBar').then(response => {
 				// JSON responses are automatically parsed.
-                this.userList = response.data.userList;
-                //this.userList = response.userList;
-				//{"userList": ["@bp84392506", "@cartosys", "@cryptoraves", "@ShannonPlasters"]}
+                this.userList = response.data.userList;                
 			}).catch(e => {
 				this.errors.push(e)
 			})
-		},
+        },
+        onDone(){
+            document.querySelector("#getToken").style.animation = 'shadow-pulse 1s';
+            document.querySelector("#getToken").style.animationIterationCount = '3';
+        },
 		goPortfolio: function(event) {
 			// `this` inside methods points to the Vue instance
 			if (this.userList.includes(this.user)) {
@@ -114,7 +126,7 @@ export default {
 					}
 				})
 			}
-		},
+        },
 		handleScroll(e) {              
 			// Any code to be executed when the window is scrolled            
             if(this.currentScroll > e.srcElement.scrollingElement.scrollTop){
@@ -130,7 +142,7 @@ export default {
                 }
             }	
             this.currentScroll = e.srcElement.scrollingElement.scrollTop;		
-		}
+        }       
 	}
 }
 
