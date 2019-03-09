@@ -93,14 +93,14 @@
                                                 <th scope="row">1</th>
                                                 <td>@Alice</td>
                                                 <td>1000</td>
-                                                <td>@mdo</td>
+                                                <td>@Bob</td>
                                                 <td>05/01/2019</td>
                                                 </tr>
                                                 <tr>
                                                 <th scope="row">2</th>
                                                 <td>@Alice</td>
                                                 <td>2000</td>
-                                                <td>@fat</td>
+                                                <td>@Friedrick</td>
                                                 <td>06/01/2019</td>
                                                 </tr>                                               
                                             </tbody>
@@ -142,7 +142,7 @@
                             <div class="single-about">                              
                                 <div class="single-about-text">
                                     <h4>Donate Here</h4>
-                                    <p> Wallet Address : <br> 0xE1A3435B683d863bCB6c8aA093De08ED0557eE99 </p>
+                                    <p> Wallet Address : <br> <b>0xE1A3435B683d863bCB6c8aA093De08ED0557eE99</b> </p>
                                     <img src="../assets/img/ethereum.png" style="width:45px" alt="">                               
                                     
                                 </div>
@@ -177,7 +177,7 @@
                             <img src="./../assets/img/OLVCJG9.png" alt="">
                         </div>                        
                         <div class="roadmap-text">
-                            <p>Q1 2019</p>
+                            <p>Q2 2019</p>
                             <div class="space-10"></div>
                             <h5>Alpha Launch</h5>
                         </div>
@@ -263,7 +263,7 @@ export default {
         window.open('https://medium.com/@cryptoraves/announcing-the-cryptoraves-roadmap-launch-plans-part-4-cb3879264368');        
     },
     goCryptoToken(){
-        window.open("https://medium.com/@cryptoraves/cryptoraves-is-a-way-to-inspire-new-use-cases-for-a-tokenized-economy-part-3-e7eaeccf25be");
+        window.open("https://medium.com/@cryptoraves/the-compelling-value-of-blockchain-technology-is-tokenization-part-1-1e421d3ef1df");
     },
     goBlog(){
         window.open("https://medium.com/@cryptoraves");

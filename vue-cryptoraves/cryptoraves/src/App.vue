@@ -22,7 +22,7 @@
                               <i class="fa fa-search"></i>
                             </a>                            
                         </div>
-                        <a href="#" v-scroll-to="{
+                        <router-link to="/" v-scroll-to="{
                             el: '#getToken',
                             duration: 500,
                             easing: 'linear',
@@ -30,7 +30,7 @@
                             force: true,
                             onDone: onDone,
                             cancelable: true,                            
-                        }" class="gradient-btn subscribe animated-button ml-2">Get Your Tokens!</a>
+                        }" class="gradient-btn subscribe animated-button ml-2">Get Your Tokens!</router-link>
                     </div>
                 </div>
             </div>

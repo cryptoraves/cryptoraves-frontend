@@ -55,7 +55,7 @@
                                                     <span v-on:click="goPrev" class="btn btnpagination"  v-bind:class="[validated==1 ? 'disabledbtn' : '']">
                                                         <i class="fa fa-angle-left"></i>
                                                     </span>
-                                                    {{initialPagePtr + 1}} Page of {{totalPage + 1}}
+                                                    {{initialPagePtr + 1}} Page
                                                     <span href="#" v-on:click="goNext" class="btn btnpagination" v-bind:class="[validated==2 ? 'disabledbtn' : '']">
                                                         <i class="fa fa-angle-right"></i>
                                                     </span> 
@@ -80,66 +80,97 @@
 import axios from 'axios';
 import _ from 'lodash';
 
-const Record = 5;
+const Record = 20;
 
 export default {
     name: 'Portfolio',
     data() {
         return {
             user: '',
-            tableRows: [],
-            initialTableRows: [],
+            tableRows: [],           
             rowCount: 0,
             tokenBalance: "0",
             earliestDatetime: '',
-            initialPagePtr: 0,
-            totalPage: 0,
+            latestDatetime: '',
+            initialPagePtr: 0,           
             validated: 0
         }
     },
     created() {
         this.user = this.$route.query.user;
-        this.getPortfolio(this.user);
+        this.getPortfolio(this.user, 0);
     },
     beforeRouteUpdate (to, from, next) {
     // just use `this`
         this.user = to.query.user;
-        this.getPortfolio(this.user);
+        this.getPortfolio(this.user, 0);
         next()
     },
     methods: {
-        goNext(){
-            this.initialPagePtr ++;
-            this.initialPagePtr = this.initialPagePtr>this.totalPage?this.totalPage:this.initialPagePtr;            
-            let testArray = _.cloneDeep(this.initialTableRows);           
-            this.tableRows = _.slice(testArray, this.initialPagePtr * Record, (this.initialPagePtr + 1) * Record);
-            this.validated = this.initialPagePtr == this.totalPage? 2: 0;
+        goNext(){            
+            this.getPortfolio(this.user, 1);
         },
-        goPrev(){
-            this.initialPagePtr --;
-            this.initialPagePtr = this.initialPagePtr<0?0:this.initialPagePtr;
-            let testArray = _.cloneDeep(this.initialTableRows);           
-            this.tableRows = _.slice(testArray, this.initialPagePtr * Record, (this.initialPagePtr + 1) * Record);
-            this.validated = this.initialPagePtr == 0? 1: 0;
+        goPrev(){            
+            this.getPortfolio(this.user, 2);
         },
-        getPortfolio(user){
-            axios.get('https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=portfolioPage&userName='+user)
-            .then(response => {
-                // JSON responses are automatically parsed.        
-                this.user = user;
-                let res = response.data;
-                this.initialTableRows = res.tableRows;                
-                this.rowCount = res.rowCount;
-                this.totalPage = Math.floor(this.rowCount/Record);
-                this.tokenBalance = res.tokenBalance;
-                this.earliestDatetime = res.earliestDatetime;
-                var testArray = _.cloneDeep(this.initialTableRows);
-                this.tableRows = testArray.slice(0, Record);
-                this.validated = 1;
-            })
-            .catch(e => {
-                console.log(e);
-            })           
+        getPortfolio(user, initFlag){
+            if(initFlag == 0){
+                axios.get('https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=portfolioPage&userName='+user)
+                .then(response => {
+                    // JSON responses are automatically parsed.        
+                    this.user = user;
+                    let res = response.data;
+                    this.tableRows = _.cloneDeep(res.tableRows);
+                    this.rowCount = res.rowCount;                   
+                    this.tokenBalance = res.tokenBalance;
+                    this.earliestDatetime = res.earliestDatetime;
+                    this.latestDatetime = res.latestDatetime;
+                    this.initialPagePtr = 0; 
+                    this.validated = 1;                  
+                })
+                .catch(e => {
+                    console.log(e);
+                })  
+            }
+            else if(initFlag == 1){
+                axios.get('https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=portfolioPage&userName='+user+"&earliestDatetime="+this.earliestDatetime)
+                .then(response => {
+                    // JSON responses are automatically parsed.        
+                    this.user = user;
+                    let res = response.data;
+                    this.tableRows = _.cloneDeep(res.tableRows);
+                    this.rowCount = res.rowCount;                   
+                    this.tokenBalance = res.tokenBalance;
+                    this.latestDatetime = res.latestDatetime;
+                    this.earliestDatetime = res.earliestDatetime;
+                    this.initialPagePtr ++;
+                    this.validated = res.next?0:2;                                           
+                })
+                .catch(e => {
+                    console.log(e);
+                })  
+            }
+            else{                
+                
+                axios.get('https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=portfolioPage&userName='+user+"&latestDatetime="+this.latestDatetime)
+                .then(response => {
+                    // JSON responses are automatically parsed.        
+                    this.user = user;
+                    let res = response.data;
+                    this.tableRows = _.cloneDeep(res.tableRows);
+                    this.rowCount = res.rowCount;          
+                    this.tokenBalance = res.tokenBalance;
+                    this.latestDatetime = res.latestDatetime;
+                    this.earliestDatetime = res.earliestDatetime;
+                    this.initialPagePtr --;
+                    this.validated = res.prev?0:1;                    
+                })
+                .catch(e => {
+                    console.log(e);
+                })  
+                              
+            }
+                     
         },
         goAnother(user){
             this.getPortfolio(user);
