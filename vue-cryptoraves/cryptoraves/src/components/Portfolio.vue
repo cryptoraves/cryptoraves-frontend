@@ -52,11 +52,11 @@
                                             </tbody>
                                             <tfoot>
                                                 <td colspan="5">
-                                                    <span v-on:click="goPrev" class="btn btnpagination"  v-bind:class="[validated==1 ? 'disabledbtn' : '']">
+                                                    <span v-on:click="goPrev" class="btn btnpagination"  v-bind:class="[visiblePrev ? '' : 'disabledbtn']">
                                                         <i class="fa fa-angle-left"></i>
                                                     </span>
                                                     {{initialPagePtr + 1}} Page
-                                                    <span href="#" v-on:click="goNext" class="btn btnpagination" v-bind:class="[validated==2 ? 'disabledbtn' : '']">
+                                                    <span href="#" v-on:click="goNext" class="btn btnpagination" v-bind:class="[visibleNext ? '' : 'disabledbtn']">
                                                         <i class="fa fa-angle-right"></i>
                                                     </span> 
                                                 </td>
@@ -93,7 +93,8 @@ export default {
             earliestDatetime: '',
             latestDatetime: '',
             initialPagePtr: 0,           
-            validated: 0
+            visibleNext: true,
+            visiblePrev: true
         }
     },
     created() {
@@ -126,7 +127,8 @@ export default {
                     this.earliestDatetime = res.earliestDatetime;
                     this.latestDatetime = res.latestDatetime;
                     this.initialPagePtr = 0; 
-                    this.validated = 1;                  
+                    this.visiblePrev = false;
+                    this.visibleNext = res.next?true:false;  
                 })
                 .catch(e => {
                     console.log(e);
@@ -144,7 +146,8 @@ export default {
                     this.latestDatetime = res.latestDatetime;
                     this.earliestDatetime = res.earliestDatetime;
                     this.initialPagePtr ++;
-                    this.validated = res.next?0:2;                                           
+                    this.visiblePrev = true;
+                    this.visibleNext = res.next?true:false;                                 
                 })
                 .catch(e => {
                     console.log(e);
@@ -163,7 +166,8 @@ export default {
                     this.latestDatetime = res.latestDatetime;
                     this.earliestDatetime = res.earliestDatetime;
                     this.initialPagePtr --;
-                    this.validated = res.prev?0:1;                    
+                    this.visiblePrev = res.prev?true:false;
+                    this.visibleNext = true;
                 })
                 .catch(e => {
                     console.log(e);
