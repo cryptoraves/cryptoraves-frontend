@@ -55,7 +55,7 @@
                                                     <span v-on:click="goPrev" class="btn btnpagination"  v-bind:class="[visiblePrev ? '' : 'disabledbtn']">
                                                         <i class="fa fa-angle-left"></i>
                                                     </span>
-                                                    {{initialPagePtr + 1}} Page
+                                                    Page {{initialPagePtr + 1}}
                                                     <span href="#" v-on:click="goNext" class="btn btnpagination" v-bind:class="[visibleNext ? '' : 'disabledbtn']">
                                                         <i class="fa fa-angle-right"></i>
                                                     </span> 
