@@ -45,7 +45,7 @@
                                                 <tr v-for="(item,index) in tableRows" :index="index" :key="item.txnId">
                                                     <th class="link" v-on:click="goTransaction(item.txnHash)" scope="row"><b>{{item.txnHash | truncate}}</b></th>
                                                     <td class="link" v-on:click="goAnother(item.from)"><b>{{item.from}}</b></td>
-                                                    <td>{{item.amount}}</td>
+                                                    <td>{{item.amount | comma}}</td>
                                                     <td class="link" v-on:click="goAnother(item.to)"><b>{{item.to}}</b></td>
                                                     <td>{{item.date}}</td>
                                                 </tr>                                                                                            
@@ -166,7 +166,7 @@ export default {
                     this.latestDatetime = res.latestDatetime;
                     this.earliestDatetime = res.earliestDatetime;
                     this.initialPagePtr --;
-                    this.visiblePrev = res.prev?true:false;
+                    this.visiblePrev = (res.prev&&this.initialPagePtr>0)?true:false;
                     this.visibleNext = true;
                 })
                 .catch(e => {

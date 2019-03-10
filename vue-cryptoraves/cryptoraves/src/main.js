@@ -19,6 +19,12 @@ Vue.filter('truncate', function (value) {
   return value
 })
 
+Vue.filter('comma', function (value) {
+  if (!value) return ''
+  value = value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+  return value
+})
+
 new Vue({
   el: '#app',
   router,
