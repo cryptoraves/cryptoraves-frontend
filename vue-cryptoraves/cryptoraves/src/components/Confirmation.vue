@@ -44,7 +44,7 @@
                                                  <tbody>
                                                     <tr v-for="item in tableRows" :key="item.txnId">                                                       
                                                         <td class="link" v-on:click="goAnother(item.from)"><b>{{item.from}}</b></td>
-                                                        <td>{{item.amount}}</td>
+                                                        <td>{{item.amount | comma}}</td>
                                                         <td class="link" v-on:click="goAnother(item.to)"><b>{{item.to}}</b></td>
                                                         <td>{{item.date}}</td>
                                                     </tr>                                                                                            

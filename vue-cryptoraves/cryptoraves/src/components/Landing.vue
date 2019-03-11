@@ -92,14 +92,14 @@
                                                 <tr>
                                                 <th scope="row">1</th>
                                                 <td>@Alice</td>
-                                                <td>1000</td>
+                                                <td>1,000</td>
                                                 <td>@Bob</td>
                                                 <td>05/01/2019</td>
                                                 </tr>
                                                 <tr>
                                                 <th scope="row">2</th>
                                                 <td>@Alice</td>
-                                                <td>2000</td>
+                                                <td>2,000</td>
                                                 <td>@Friedrick</td>
                                                 <td>06/01/2019</td>
                                                 </tr>                                               
