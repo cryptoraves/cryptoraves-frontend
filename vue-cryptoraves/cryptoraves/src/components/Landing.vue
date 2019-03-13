@@ -9,8 +9,7 @@
                     <div class="welcome-right">                        
                         <div class="welcome-text">
                             <h1>It's Crypto You Can Tweet!</h1>
-                            <h4>Get free tokens. Share without fees.
-                            <br>Add value to your online cred.</h4>
+                            <h2><blink>Live On Testnet Only!!!</blink></h2>
                             <br>
                             <h3 v-on:click="goComingSoon" class="link"><blink>Live on Testnet Only!!!<blink></h3>
                         </div>                       

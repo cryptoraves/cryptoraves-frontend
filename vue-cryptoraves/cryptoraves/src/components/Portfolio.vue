@@ -9,8 +9,7 @@
                     <div class="welcome-right">                        
                         <div class="welcome-text">
                             <h1>{{user}}'s Cryptoraves Tokens</h1>
-                            <h4>Get free tokens. Share without fees.
-                            <br>Add value to your online cred.</h4>
+                            <h2><blink>Live On Testnet Only!!!</blink></h2>
                         </div>                       
                     </div>
                 </div>
