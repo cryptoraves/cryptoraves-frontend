@@ -22,6 +22,17 @@ h6
 	text-transform: capitalize;
 }
 
+.blinking{
+    animation:blinkingText 0.8s infinite;
+}
+@keyframes blinkingText{
+    0%{     color: #FF8C00;    }
+    49%{    color: transparent; }
+    50%{    color: #FF8C00; }
+    99%{    color: #FF8C00;  }
+    100%{   color: #FF8C00;    }
+}
+
 ul{
   margin: 0;
   padding: 0;

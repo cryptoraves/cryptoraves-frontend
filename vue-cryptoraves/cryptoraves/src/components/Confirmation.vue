@@ -9,7 +9,7 @@
                         <div class="welcome-right">                        
                             <div class="welcome-text">
                                 <h1>It's Crypto You Can Tweet!</h1>
-                                <h2><blink>Live On Testnet Only!!!</blink></h2>
+                                <h2 class="blinking">Live On Testnet Only!!! Tokens Will Be Deleted Before Alpha Launch!</h2>
                                 <h2>Transaction Confirmed.</h2>
                                 <h4>{{txnID}}</h4>
                             </div>                       
