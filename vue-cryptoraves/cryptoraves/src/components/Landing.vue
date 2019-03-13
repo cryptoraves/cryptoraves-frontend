@@ -12,7 +12,7 @@
                             <h4>Get free tokens. Share without fees.
                             <br>Add value to your online cred.</h4>
                             <br>
-                            <h3 v-on:click="goComingSoon" class="link">Coming soon...</h3>
+                            <h3 v-on:click="goComingSoon" class="link"><blink>Live on Testnet Only!!!<blink></h3>
                         </div>                       
                     </div>
                 </div>              
