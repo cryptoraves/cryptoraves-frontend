@@ -21,8 +21,10 @@ Vue.filter('truncate', function (value) {
 
 Vue.filter('comma', function (value) {
   if (!value) return ''
-  value = value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
-  return value
+  //value = value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+  //value = value.toLocaleString();
+  //return value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+  return parseFloat(value).toLocaleString(undefined, { maximumFractionDigits: 10 });
 })
 
 new Vue({

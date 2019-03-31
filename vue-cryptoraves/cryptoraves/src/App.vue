@@ -11,8 +11,9 @@
                 <div class="col-8 col-lg-10 text-right">
                     <div class="d-flex d-flex-right form-group mt-3">                        
                         <div class="d-flex">                            
-                            <input type="text" v-model="user" @change="goPortfolio" list="mylist" class="form-control c-search-input" placeholder="Search for Twitter handle." />
-                            <datalist id="mylist">
+                            <!-- <input type="text" v-model="user" @change="goPortfolio" list="mylist" id="autoSelect" class="form-control c-search-input" placeholder="Search for Twitter handle." /> -->
+                            <input type="text" v-model="user" @change="goPortfolio" list="mylist" id="autoSelect" class="form-control c-search-input" placeholder="Search for Twitter handle." />
+                            <datalist id="mylist" v-if="user.length>2">
                                 <option v-bind:key="item" v-for="item in userList" :value="item">
                                     {{item}}
                                 </option>
@@ -29,7 +30,7 @@
                             offset: -250,
                             force: true,
                             onDone: onDone,
-                            cancelable: true,                            
+                            cancelable: true,
                         }" class="gradient-btn subscribe animated-button ml-2">Get Your Tokens!</router-link>
                     </div>
                 </div>
@@ -82,6 +83,7 @@
 
 <script>
 import axios from 'axios';
+
 export default {
 	name: 'App',
 	data() {
@@ -91,34 +93,34 @@ export default {
             user: '',
             userList: [],
             currentScroll: 0,
-            showHeader: false           
+            showHeader: false
 		}
     },
-    mounted () {				
-	},
 	created() {
         window.addEventListener('scroll', this.handleScroll);
         this.getUserList();
-	},
+    },
 	destroyed() {
 		window.removeEventListener('scroll', this.handleScroll);
 	},
-	methods: {
+	methods: {     
 		getUserList() {
 			axios.get('https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=searchBar').then(response => {
 				// JSON responses are automatically parsed.
-                this.userList = response.data.userList;                
+                this.userList = response.data.userList;
+                console.log(this.userList);            
 			}).catch(e => {
 				this.errors.push(e)
 			})
-        },
+        },       
         onDone(){
             document.querySelector("#getToken").style.animation = 'shadow-pulse 1s';
             document.querySelector("#getToken").style.animationIterationCount = '3';
         },
 		goPortfolio: function(event) {
-			// `this` inside methods points to the Vue instance
+            // `this` inside methods points to the Vue instance                
 			if (this.userList.includes(this.user)) {
+                document.getElementById('autoSelect').blur();
 				this.$router.push({
 					name: 'Portfolio',
 					query: {

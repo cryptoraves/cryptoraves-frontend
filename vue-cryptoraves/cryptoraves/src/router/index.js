@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Landing from '@/components/Landing'
 import Confirmation from '@/components/Confirmation'
 import Portfolio from '@/components/Portfolio'
+import Faq from '@/components/Faq'
 
 Vue.use(Router)
 
@@ -12,6 +13,11 @@ export default new Router({
       path: '/',
       name: 'Landing',
       component: Landing
+    },
+    {
+      path: '/faq',
+      name: 'Faq',
+      component: Faq
     },
     {
       path: '/confirmation/:txnId?',

@@ -1598,7 +1598,7 @@ a.gradient-btn:after {
   top: 0;
   content: "";
   /* background: -webkit-linear-gradient(right,#072487,#fa768d,#fe998b); */
-  background: -webkit-linear-gradient(right,#002466,#667ca3,#8c9cba);
+  background: -webkit-linear-gradient(right,#667ca3,#667ca3,#667ca3);
   height: 100%;
   width: 100%;
   z-index: -1;
@@ -1645,6 +1645,7 @@ a.gradient-btn:hover:after{
 .c-search-input{
   border-top-right-radius: 0px!important;
   border-bottom-right-radius: 0px!important;
+  min-width: 230px!important;
 }
 
 span.gradient-btn{
@@ -1737,4 +1738,9 @@ th.link, td.link, span.link, i.link, h3.link, u.link { cursor: pointer; }
 .btn.btnpagination.disabledbtn{
   background-color: #ddd;
 }
+
+.search, .c-search-input{
+  text-transform: none;
+}
+
 /*===================================== end =================================*/

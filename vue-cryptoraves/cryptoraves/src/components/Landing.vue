@@ -38,6 +38,9 @@
                                         v-clipboard:success="clipboardSuccessHandler"
                                         v-clipboard:error="clipboardErrorHandler"></i>
                                         <i class="fa fa-twitter link" v-on:click="goTweeter"></i>
+                                        <br/>
+                                        By Tweeting @cryptoraves, you agree to our <br/>
+                                        <u v-on:click="goFaq" class="link">Terms of Service & Privacy Policy</u>.
                                     </p>
                                     <p>{{message}}</p>
                                     <img src="../assets/img/1.png" style="width:90px" alt="">
@@ -133,7 +136,9 @@
                                     <h4>Learn More!</h4>
                                     <p>
                                         Visit our social media pages for recent announcements, 
-                                        and read our <u v-on:click="goBlog" class="link">Medium blog series</u> for more info on cryptoraves.
+                                        and read our <u v-on:click="goBlog" class="link">Medium blog series</u> for more info on cryptoraves.<br />
+                                        For our FAQ, including instructions on how to verify your token transactions on the blockchain, 
+                                        <u v-on:click="goFaq" class="link">click here.</u>
                                     </p>
                                 </div>
                             </div>
@@ -244,6 +249,11 @@ export default {
                 }
             })
         }
+    },
+    goFaq: function(event){
+        this.$router.push({
+                name: 'Faq'
+            })
     },
     getUserList() {
         axios.get('https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=searchBar').then(response => {

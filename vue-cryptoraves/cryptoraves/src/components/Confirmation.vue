@@ -37,6 +37,7 @@
                                                         <th scope="col">From</th>
                                                         <th scope="col">Amount</th>
                                                         <th scope="col">To</th>
+                                                        <th scope="col">BlockNumber</th>
                                                         <th scope="col">Date</th>
                                                     </tr>
                                                 </thead>
@@ -45,6 +46,7 @@
                                                         <td class="link" v-on:click="goAnother(item.from)"><b>{{item.from}}</b></td>
                                                         <td>{{item.amount | comma}}</td>
                                                         <td class="link" v-on:click="goAnother(item.to)"><b>{{item.to}}</b></td>
+                                                        <td class="link" v-on:click="goBlock()"><b>{{item.blockNumber}}</b></td>
                                                         <td>{{item.date}}</td>
                                                     </tr>                                                                                            
                                                 </tbody>
@@ -86,6 +88,7 @@ export default {
             .then(response => {
                 // JSON responses are automatically parsed.
                 let res = response.data;
+                console.log(res);
                 this.tableRows = res.tableRows;
                 this.txnID = this.tableRows[0].txn_hash;
             })
@@ -95,6 +98,9 @@ export default {
         },
         goAnother(user){
             this.$router.push({ name: 'Portfolio', query: { user: user }})
+        },
+        goBlock(){
+            window.open("https://blockexplorer.loomx.io/?rpc=https://extdev-plasma-us1.dappchains.com");
         }
     }
 }
