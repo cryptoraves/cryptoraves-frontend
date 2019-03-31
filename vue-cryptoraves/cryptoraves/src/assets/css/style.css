@@ -1,10 +1,14 @@
 /*===================
      base css
 =====================*/
+@font-face {
+  font-family: Lato;
+  src: url('../fonts/Metrophobic.ttf') format('ttf');
+}
 
 body{
   background: #fff;
-	font-family: 'Montserrat', sans-serif;
+	font-family: Lato;
 	font-size: 14px;
 	color: #cbe5ff;
   overflow-x: hidden;
@@ -18,8 +22,12 @@ h5,
 h6
 {
 	color: #052869;
-	font-family: 'Montserrat', sans-serif;
+	font-family: Lato;
 	text-transform: capitalize;
+}
+
+p{
+  font-family: Lato;
 }
 
 .blinking{
