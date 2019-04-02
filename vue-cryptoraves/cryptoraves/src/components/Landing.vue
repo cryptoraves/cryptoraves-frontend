@@ -39,11 +39,12 @@
                                         v-clipboard:error="clipboardErrorHandler"></i>
                                         <i class="fa fa-twitter link" v-on:click="goTweeter"></i>
                                         <br/>
-                                        By Tweeting @cryptoraves, you agree to our <br/>
-                                        <u v-on:click="goFaq" class="link">Terms of Service & Privacy Policy</u>.
+                                        {{message}}                                        
                                     </p>
-                                    <p>{{message}}</p>
-                                    <img src="../assets/img/1.png" style="width:90px" alt="">
+                                    <img src="../assets/img/1.png" style="width:90px" alt=""><br />
+                                    <small>By Tweeting @cryptoraves, you agree to our <br/>
+                                    <u v-on:click="goFaq" class="link">Terms of Service & Privacy Policy</u>.</small>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -136,7 +137,7 @@
                                     <h4>Learn More!</h4>
                                     <p>
                                         Visit our social media pages for recent announcements, 
-                                        and read our <u v-on:click="goBlog" class="link">Medium blog series</u> for more info on cryptoraves.<br />
+                                        and read our <u v-on:click="goBlog" class="link">Medium blog series</u> for more info on cryptoraves.<br /><br />
                                         For our FAQ, including instructions on how to verify your token transactions on the blockchain, 
                                         <u v-on:click="goFaq" class="link">click here.</u>
                                     </p>

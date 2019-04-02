@@ -1,14 +1,10 @@
 /*===================
      base css
 =====================*/
-@font-face {
-  font-family: Lato;
-  src: url('../fonts/Metrophobic.ttf') format('ttf');
-}
 
 body{
   background: #fff;
-	font-family: Lato;
+	font-family: 'Montserrat', sans-serif;
 	font-size: 14px;
 	color: #cbe5ff;
   overflow-x: hidden;
@@ -22,12 +18,8 @@ h5,
 h6
 {
 	color: #052869;
-	font-family: Lato;
+	font-family: 'Montserrat', sans-serif;
 	text-transform: capitalize;
-}
-
-p{
-  font-family: Lato;
 }
 
 .blinking{
@@ -1673,7 +1665,7 @@ span.gradient-btn{
 .animated-button
 {
   animation: shadow-pulse 1s infinite;
-  background-color: rgba(16, 206, 69, 0.7)!important;
+  background-color: #75ce64!important;
   color: #002466!important;
 }
 @keyframes shadow-pulse
@@ -1735,7 +1727,7 @@ input::-webkit-calendar-picker-indicator {
 th.link, td.link, span.link, i.link, h3.link, u.link { cursor: pointer; }
 
 #getToken{
-  background-color: rgba(16, 206, 69, 0.7);
+  background-color: #75ce64;
 }
 
 .btn.btnpagination{

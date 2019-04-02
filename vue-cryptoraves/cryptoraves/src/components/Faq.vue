@@ -29,13 +29,13 @@
                             <div class="single-about-text">
                                 <h4>How do I check my cryptoraves transactions on the blockchain?</h4>
                                 <p class="text-left">
-                                    Cryptoraves uses Loom PlasmaChain, a Layer 2 solution built on the Ethereum blockchain.
+                                    Cryptoraves uses Loom PlasmaChain, a Layer 2 solution built on the Ethereum blockchain.<br />
                                     The Loom Block Explorer does allow verification of your transactions, but it takes multiple steps.<br/>
-                                    <b>1.</b>	Go to the transaction confirmation page on the <u v-on:click="goHome" class="link">cryptoraves website.</u><br/> 
-                                    <b>2.</b>	Copy the Block Number displayed on the confirmation page to your clipboard.<br/>
-                                    <b>3.</b>	Click the block number hyperlink to the Loom Block Explorer, and paste the block number into the Loom Block Explorer search field.<br/>  
-                                    <b>4.</b>	In the pop-up window, click on the Hash (please note, this does not match the Hash on cryptoraves website).<br/>
-                                    <b>5.</b>	Ctrl-F search for the Transaction Hash displayed on the cryptoraves confirmation page within those results.
+                                    &nbsp;&nbsp;<b>1.</b>	Go to the transaction confirmation page on the <u v-on:click="goHome" class="link">cryptoraves website.</u><br/> 
+                                    &nbsp;&nbsp;<b>2.</b>	Copy the Block Number displayed on the confirmation page to your clipboard.<br/>
+                                    &nbsp;&nbsp;<b>3.</b>	Click the block number hyperlink to the Loom Block Explorer, and paste the block number into the Loom Block Explorer search field.<br/>  
+                                    &nbsp;&nbsp;<b>4.</b>	In the pop-up window, click on the Hash (please note, this does not match the Hash on cryptoraves website).<br/>
+                                    &nbsp;&nbsp;<b>5.</b>	Ctrl-F search for the Transaction Hash displayed on the cryptoraves confirmation page within those results.
                                 </p>                                
                             </div>
                         </div>
@@ -49,16 +49,16 @@
                                 <p class="text-left">                                        
                                     By Tweeting:  @cryptoraves #makeitrave, or by Tweeting any command request tagging @cryptoraves, <br/>
                                     you agree to our Privacy Policy, as follows:<br/>
-                                    ●	The cryptoraves platform public,
+                                    &nbsp;&nbsp;●	The cryptoraves platform public,
                                     and token transactions requested by our users are immediately viewable and searchable on our website.<br/>
-                                    ●	Cryptoraves collects information contained in Tweets when @cryptoraves is tagged.
+                                    &nbsp;&nbsp;●	Cryptoraves collects information contained in Tweets when @cryptoraves is tagged.
                                     We collect the Tweeter’s @userhandle, the token amounts specified for transfer,
                                     the @userhandle of the token recipient, and number of followers for both users.<br/>
                                     We use this information to execute the request, either by sending cryptoraves tokens directly to you,
                                     or by sending your cryptoraves tokens to the indicated recipient.<br/>
                                     We display the information derived from these Tweets on our website in the form of transaction-level details,
                                     user-level details (including token portfolios), and Leaderboard statistics.<br/>
-                                    ●	If you have any questions about how your data is being used, please email us at <b>info@cryptoraves.space.</b> 
+                                    &nbsp;&nbsp;●	If you have any questions about how your data is being used, please email us at <b>info@cryptoraves.space.</b> 
                                     It may take us 3-5 days to respond to requests. 
 
                                 </p>
@@ -73,9 +73,9 @@
                                 <h4>What are the cryptoraves Terms of Service?</h4>
                                 <p class="text-left">                                        
                                     By Tweeting:  @cryptoraves #makeitrave, or by Tweeting any command request tagging @cryptoraves, you agree to our Terms of Service, as follows:<br/>
-                                    ●	You must comply with Twitter policies at all times.<br/>
-                                    ●	Tweet commands can not be reversed once they are requested.<br/>
-                                    ●	Please follow common sense, courtesy, and respect for others.<br/> 
+                                    &nbsp;&nbsp;●	You must comply with Twitter policies at all times.<br/>
+                                    &nbsp;&nbsp;●	Tweet commands can not be reversed once they are requested.<br/>
+                                    &nbsp;&nbsp;●	Please follow common sense, courtesy, and respect for others.<br/> 
                                     If your intentions seem to be of ill will or to cause harm, we will suspend your account.<br/>  
                                     This is at the discretion of cryptoraves, LLC.
                                 </p>
@@ -89,7 +89,7 @@
                             <div class="single-about-text">
                                 <h4>How do I opt out of Auto-Replies?</h4>
                                 <p class="text-left">                                        
-                                    Please email your Twitter handle to <b>info@cryptoraves.space</b>.
+                                    Please email your Twitter handle to <b>info@cryptoraves.space</b>.<br />
                                     Send us an email entitled:  
                                     Opt Out of Auto Replies.<br/>
                                     It may take 3-5 days to respond to your request.
@@ -104,7 +104,7 @@
                             <div class="single-about-text">
                                 <h4>What if I have additional questions?</h4>
                                 <p class="text-left">                                        
-                                    You can email us at <b>info@cryptoraves.space</b>.
+                                    You can email us at <b>info@cryptoraves.space</b>.<br />
                                     It may take us 3-5 days to respond to requests.  
                                 </p>
                             </div>
