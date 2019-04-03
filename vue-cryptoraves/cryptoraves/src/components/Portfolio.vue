@@ -28,7 +28,7 @@
                         <div class="col-lg-12">
                             <div class="single-about">                              
                                 <div class="single-about-text">
-                                    <h4>Total Cryptoraves Token Balance <b class="ml-4">{{tokenBalance}}</b></h4>
+                                    <h4>Total Cryptoraves Token Balance <b class="ml-4">{{tokenBalance | comma}}</b></h4>
                                     <p class="table-responsive">
                                         <table class="table">
                                             <thead>
