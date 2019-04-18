@@ -10,7 +10,7 @@
                         <div class="welcome-text">
                             <h1>{{user}}'s Cryptoraves Tokens</h1>
                             <h2 class="blinking">Live On Testnet Only!!! Tokens Will Be Deleted Before Alpha Launch!</h2>
-                        </div>                       
+                        </div>              
                     </div>
                 </div>
             </div>
@@ -107,11 +107,15 @@ export default {
         next()
     },
     methods: {
-        goNext(){            
-            this.getPortfolio(this.user, 1);
+        goNext(){
+            if(this.visibleNext){
+                this.getPortfolio(this.user, 1);
+            }
         },
-        goPrev(){            
-            this.getPortfolio(this.user, 2);
+        goPrev(){
+            if(this.visiblePrev){
+                this.getPortfolio(this.user, 2);
+            }
         },
         getPortfolio(user, initFlag){
             if(initFlag == 0){
@@ -131,7 +135,7 @@ export default {
                 })
                 .catch(e => {
                     console.log(e);
-                })  
+                })
             }
             else if(initFlag == 1){
                 axios.get('https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=portfolioPage&userName='+user+"&earliestDatetime="+this.earliestDatetime)
@@ -175,12 +179,19 @@ export default {
             }
                      
         },
-        goAnother(user){
-            this.getPortfolio(user);
+        goAnother(user){            
+            this.$parent.$emit('changeUser', user);
+            this.$router.push({
+                name: 'Portfolio',
+                query: {
+                    user: user
+                }
+            })
         },
         goTransaction(txnHash){
+            this.$parent.$emit('changeUser', txnHash);
             this.$router.push({ name: 'Confirmation', query: { txnId: txnHash }})
-        }       
+        }
     } 
 }
 </script>

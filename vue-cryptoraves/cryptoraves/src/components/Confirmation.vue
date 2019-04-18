@@ -97,6 +97,7 @@ export default {
             })
         },
         goAnother(user){
+            this.$parent.$emit('changeUser', user);
             this.$router.push({ name: 'Portfolio', query: { user: user }})
         },
         goBlock(){

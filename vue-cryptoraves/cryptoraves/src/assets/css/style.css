@@ -272,6 +272,10 @@ div.single-about,
   height: 120px;
 }
 
+.single-about-text{
+  overflow-x: hidden;
+}
+
 .single-about-text h4 {
   font-size: 22px;
   text-transform: capitalize;
@@ -1630,8 +1634,6 @@ a.gradient-btn:hover:after{
 ::placeholder{color:#acbad6}
 
 .d-flex-right{
-  /* align-items: flex-end;
-  flex-direction: column; */
   align-items: center;
   justify-content: flex-end;
 }
@@ -1741,6 +1743,11 @@ th.link, td.link, span.link, i.link, h3.link, u.link { cursor: pointer; }
 
 .search, .c-search-input{
   text-transform: none;
+}
+
+small .small{
+  font-size: 70%;
+  font-weight: 100;
 }
 
 /*===================================== end =================================*/

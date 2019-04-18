@@ -12,7 +12,17 @@
                             <h4>Get free tokens. Share without fees.
                             <br>Add value to your online cred.</h4>
                             <br>
-                            <h3 v-on:click="goComingSoon" class="link blinking">Live On Testnet Only!!! Tokens Will Be Deleted Before Alpha Launch!</h3>
+                            <h3 v-on:click="goComingSoon"
+                            v-scroll-to="{
+                                            el: '#getToken',
+                                            duration: 500,
+                                            easing: 'linear',
+                                            offset: -250,
+                                            force: true,
+                                            onDone: onDone,
+                                            cancelable: true,
+                                        }"
+                            class="link blinking">Live On Testnet Only!!! Tokens Will Be Deleted Before Alpha Launch!</h3>
                         </div>                       
                     </div>
                 </div>              
@@ -74,7 +84,17 @@
                                                 {{item}}
                                             </option>
                                         </datalist>
-                                        <span v-on:click="goPortfolio" class="gradient-btn subscribe c-search link">
+                                        <span v-on:click="goPortfolio"
+                                        v-scroll-to="{
+                                            el: '#getToken',
+                                            duration: 500,
+                                            easing: 'linear',
+                                            offset: -250,
+                                            force: true,
+                                            onDone: onDone,
+                                            cancelable: true,
+                                        }"
+                                         class="gradient-btn subscribe c-search link">
                                             <i class="fa fa-search"></i>
                                         </span>                    
                                     </p>
@@ -124,7 +144,17 @@
                                         Social media users like you spend a lot of time online, <br>
                                         but you don’t have a way to capitalize on the value you are creating. <br> 
                                         Sharing cryptoraves tokens empowers you to increase your social credibility, and allows you to<br>
-                                        <u v-on:click="goCryptoToken" class="link">reap the benefits of a tokenized economy.</u>                    
+                                        <u v-on:click="goCryptoToken"
+                                        v-scroll-to="{
+                                            el: '#getToken',
+                                            duration: 500,
+                                            easing: 'linear',
+                                            offset: -250,
+                                            force: true,
+                                            onDone: onDone,
+                                            cancelable: true,
+                                        }"
+                                         class="link">reap the benefits of a tokenized economy.</u>                    
                                     </p>
                                 </div>
                             </div>
@@ -137,9 +167,27 @@
                                     <h4>Learn More!</h4>
                                     <p>
                                         Visit our social media pages for recent announcements, 
-                                        and read our <u v-on:click="goBlog" class="link">Medium blog series</u> for more info on cryptoraves.<br /><br />
+                                        and read our <u v-on:click="goBlog"
+                                        v-scroll-to="{
+                                            el: '#getToken',
+                                            duration: 500,
+                                            easing: 'linear',
+                                            offset: -250,
+                                            force: true,
+                                            onDone: onDone,
+                                            cancelable: true,
+                                        }"
+                                        class="link">Medium blog series</u> for more info on cryptoraves.<br /><br />
                                         For our FAQ, including instructions on how to verify your token transactions on the blockchain, 
-                                        <u v-on:click="goFaq" class="link">click here.</u>
+                                        <u v-on:click="goFaq" v-scroll-to="{
+                                            el: '#getToken',
+                                            duration: 500,
+                                            easing: 'linear',
+                                            offset: -250,
+                                            force: true,
+                                            onDone: onDone,
+                                            cancelable: true,
+                                        }" class="link">click here.</u>
                                     </p>
                                 </div>
                             </div>

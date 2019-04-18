@@ -3,12 +3,12 @@
     <div class="header-area header-absolate" id="nav"  v-bind:class="{'fadeIn':(showHeader === true)}">
         <div class="container">
             <div class="row">              
-                <div class="col-4 col-lg-2">
+                <div class="col-sm-12 col-lg-2">
                     <div class="logo-area">
                       <router-link to="/"><img src="./assets/img/cryptoraves_Horozontal Alignment_Full Color_JPG.png" alt=""></router-link>                       
                     </div>
                 </div>             
-                <div class="col-8 col-lg-10 text-right">
+                <div class="col-sm-12 col-lg-10 text-right">
                     <div class="d-flex d-flex-right form-group mt-3">                        
                         <div class="d-flex">                            
                             <!-- <input type="text" v-model="user" @change="goPortfolio" list="mylist" id="autoSelect" class="form-control c-search-input" placeholder="Search for Twitter handle." /> -->
@@ -99,16 +99,18 @@ export default {
 	created() {
         window.addEventListener('scroll', this.handleScroll);
         this.getUserList();
+        this.$on('changeUser', user => {
+            this.user = '';
+        });
     },
 	destroyed() {
 		window.removeEventListener('scroll', this.handleScroll);
 	},
-	methods: {     
+	methods: {        
 		getUserList() {
 			axios.get('https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=searchBar').then(response => {
 				// JSON responses are automatically parsed.
-                this.userList = response.data.userList;
-                console.log(this.userList);            
+                this.userList = response.data.userList;                          
 			}).catch(e => {
 				this.errors.push(e)
 			})
@@ -126,10 +128,10 @@ export default {
 					query: {
 						user: this.user
 					}
-				})
+                });
 			}
         },
-		handleScroll(e) {              
+		handleScroll(e) {
 			// Any code to be executed when the window is scrolled            
             if(this.currentScroll > e.srcElement.scrollingElement.scrollTop){
                 //scroll up
@@ -144,7 +146,13 @@ export default {
                 }
             }	
             this.currentScroll = e.srcElement.scrollingElement.scrollTop;		
-        }       
+        },
+        goAnother(user){
+            this.user = '';
+        },
+        goTransaction(txnHash){
+            this.user = '';
+        }      
 	}
 }
 
