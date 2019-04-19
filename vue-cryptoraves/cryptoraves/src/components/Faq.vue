@@ -2,7 +2,7 @@
 <div>
 <!--welcome area start-->
     <div class="welcome-area wow fadeInUp" id="home">
-        <div class="container" id="faq">
+        <div class="container">
             <div class="space-90"></div>
             <div class="row">
                 <div class="col-12 col-md-12 align-self-center">
@@ -67,7 +67,7 @@
                 </div>
                 <div class="row">                       
                     <div class="col-lg-12 mt-4">
-                        <div class="single-about">                               
+                        <div class="single-about" id="faq">                               
                             <div class="single-about-text">
                                 <h4>What is the cryptoraves Privacy Policy?</h4>
                                 <p class="text-left">
@@ -148,9 +148,6 @@
 
 export default {
     name: 'Faq', 
-    created() {
-        window.scrollTo(0, 0);
-    },   
     methods: {        
         goHome(){
             window.open("https://cryptoraves.space");            
