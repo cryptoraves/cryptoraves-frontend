@@ -145,13 +145,27 @@
 </template>
 
 <script>
-
 export default {
-    name: 'Faq', 
+    name: 'Faq',
+    mounted: function () {
+        this.$nextTick(function () {
+            window.scrollTo(0, this.getOffsetLeft(document.getElementById("faq"))-150);
+        })
+    },
     methods: {        
         goHome(){
             window.open("https://cryptoraves.space");            
-        }     
+        },
+        getOffsetLeft( elem ){
+            var offsetLeft = 0;
+            do {
+            if ( !isNaN( elem.offsetTop ) )
+            {
+                offsetLeft += elem.offsetTop;
+            }
+            } while( elem = elem.offsetParent );
+            return offsetLeft;
+        }   
     } 
 }
 </script>

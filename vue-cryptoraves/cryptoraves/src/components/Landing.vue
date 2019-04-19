@@ -188,15 +188,7 @@
                                         }"
                                         class="link">Medium blog series</u> for more info on cryptoraves.<br /><br />
                                         For our FAQ, including instructions on how to verify your token transactions on the blockchain, 
-                                        <u v-on:click="goFaq" v-scroll-to="{
-                                            el: '#faq',
-                                            duration: 500,
-                                            easing: 'linear',
-                                            offset: -250,
-                                            force: true,
-                                            onDone: false,                                          
-                                            cancelable: true,
-                                        }" class="link">click here.</u>
+                                        <u v-on:click="goFaq" class="link">click here.</u>
                                     </p>
                                 </div>
                             </div>
