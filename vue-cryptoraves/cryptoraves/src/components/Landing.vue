@@ -19,8 +19,8 @@
                                             easing: 'linear',
                                             offset: -250,
                                             force: true,
-                                            onDone: onDone,
-                                            cancelable: true,
+                                            onDone: false,                                         
+                                            cancelable: true
                                         }"
                             class="link blinking">Live On Testnet Only!!! Tokens Will Be Deleted Before Alpha Launch!</h3>
                         </div>                       
@@ -53,7 +53,16 @@
                                     </p>
                                     <img src="../assets/img/1.png" style="width:90px" alt=""><br />
                                     <small>By Tweeting @cryptoraves, you agree to our <br/>
-                                    <u v-on:click="goFaq" class="link">Terms of Service & Privacy Policy</u>.</small>
+                                    <u v-on:click="goFaq"
+                                    v-scroll-to="{
+                                            el: '#getToken',
+                                            duration: 500,
+                                            easing: 'linear',
+                                            offset: -250,
+                                            force: true,
+                                            onDone: false,
+                                            cancelable: true,
+                                        }" class="link">Terms of Service & Privacy Policy</u>.</small>
                                     
                                 </div>
                             </div>
@@ -91,7 +100,7 @@
                                             easing: 'linear',
                                             offset: -250,
                                             force: true,
-                                            onDone: onDone,
+                                            onDone: false,
                                             cancelable: true,
                                         }"
                                          class="gradient-btn subscribe c-search link">
@@ -99,7 +108,7 @@
                                         </span>                    
                                     </p>
                                     <h6 class="d-flex d-space">
-                                        <span>Total Cryptoraves Token Balance <b class="ml-4">45,000,000.5</b></span>                                        
+                                        <span>&nbsp;Total Cryptoraves Token Balance <b class="ml-4">45,000,000.5</b></span>                                        
                                     </h6>                                    
                                     <p class="table-responsive">
                                         <table class="table">
@@ -151,7 +160,7 @@
                                             easing: 'linear',
                                             offset: -250,
                                             force: true,
-                                            onDone: onDone,
+                                            onDone: false,
                                             cancelable: true,
                                         }"
                                          class="link">reap the benefits of a tokenized economy.</u>                    
@@ -174,18 +183,18 @@
                                             easing: 'linear',
                                             offset: -250,
                                             force: true,
-                                            onDone: onDone,
+                                            onDone: false,
                                             cancelable: true,
                                         }"
                                         class="link">Medium blog series</u> for more info on cryptoraves.<br /><br />
                                         For our FAQ, including instructions on how to verify your token transactions on the blockchain, 
                                         <u v-on:click="goFaq" v-scroll-to="{
-                                            el: '#getToken',
+                                            el: '#faq',
                                             duration: 500,
                                             easing: 'linear',
                                             offset: -250,
                                             force: true,
-                                            onDone: onDone,
+                                            onDone: false,                                          
                                             cancelable: true,
                                         }" class="link">click here.</u>
                                     </p>

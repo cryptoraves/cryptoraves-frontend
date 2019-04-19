@@ -274,6 +274,7 @@ div.single-about,
 
 .single-about-text{
   overflow-x: hidden;
+  text-indent: -3px;
 }
 
 .single-about-text h4 {
