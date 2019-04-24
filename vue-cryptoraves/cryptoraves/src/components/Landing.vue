@@ -12,7 +12,7 @@
                             <h4>Get free tokens. Share without fees.
                             <br>Add value to your online cred.</h4>
                             <br>
-                            <h3 v-on:click="goComingSoon"
+                            <!-- <h3 v-on:click="goComingSoon"
                             v-scroll-to="{
                                             el: '#getToken',
                                             duration: 500,
@@ -22,7 +22,7 @@
                                             onDone: false,                                         
                                             cancelable: true
                                         }"
-                            class="link blinking">Live On Testnet Only!!! Tokens Will Be Deleted Before Alpha Launch!</h3>
+                            class="link blinking">Live On Testnet Only!!! Tokens Will Be Deleted Before Alpha Launch!</h3> -->
                         </div>                       
                     </div>
                 </div>              

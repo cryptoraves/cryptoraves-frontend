@@ -9,7 +9,7 @@
                     <div class="welcome-right">                        
                         <div class="welcome-text">
                             <h1>{{user}}'s Cryptoraves Tokens</h1>
-                            <h2 class="blinking">Live On Testnet Only!!! Tokens Will Be Deleted Before Alpha Launch!</h2>
+                            <!-- <h2 class="blinking">Live On Testnet Only!!! Tokens Will Be Deleted Before Alpha Launch!</h2> -->
                         </div>              
                     </div>
                 </div>
