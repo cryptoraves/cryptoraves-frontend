@@ -101,7 +101,7 @@ export default {
             this.$router.push({ name: 'Portfolio', query: { user: user }})
         },
         goBlock(){
-            window.open("https://blockexplorer.loomx.io/?rpc=https://extdev-plasma-us1.dappchains.com");
+            window.open("https://blockexplorer.loomx.io/?rpc=https://plasma.dappchains.com");
         }
     }
 }
