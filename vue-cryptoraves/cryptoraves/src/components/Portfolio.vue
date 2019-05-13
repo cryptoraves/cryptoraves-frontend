@@ -35,6 +35,7 @@
                                                 <tr>
                                                 <th scope="col">#</th>
                                                 <th scope="col">From</th>
+                                                <th scope="col">Tweet</th>
                                                 <th scope="col">Amount</th>
                                                 <th scope="col">To</th>
                                                 <th scope="col">Date</th>
@@ -44,6 +45,7 @@
                                                 <tr v-for="(item,index) in tableRows" :index="index" :key="item.txnId">
                                                     <th class="link" v-on:click="goTransaction(item.txnHash)" scope="row"><b>{{item.txnHash | truncate}}</b></th>
                                                     <td class="link" v-on:click="goAnother(item.from)"><b>{{item.from}}</b></td>
+                                                    <td class="link"><a>{{item.linkToContent}}</a></td>
                                                     <td>{{item.amount | comma}}</td>
                                                     <td class="link" v-on:click="goAnother(item.to)"><b>{{item.to}}</b></td>
                                                     <td>{{item.date}}</td>
