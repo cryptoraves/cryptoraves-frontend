@@ -45,7 +45,7 @@
                                                 <tr v-for="(item,index) in tableRows" :index="index" :key="item.txnId">
                                                     <th class="link" v-on:click="goTransaction(item.txnHash)" scope="row"><b>{{item.txnHash | truncate}}</b></th>
                                                     <td class="link" v-on:click="goAnother(item.from)"><b>{{item.from}}</b></td>
-                                                    <td class="link"><a>{{item.linkToContent}}</a></td>
+                                                    <td class="link"><a href="{{item.linkToContent}}">T</a></td>
                                                     <td>{{item.amount | comma}}</td>
                                                     <td class="link" v-on:click="goAnother(item.to)"><b>{{item.to}}</b></td>
                                                     <td>{{item.date}}</td>
