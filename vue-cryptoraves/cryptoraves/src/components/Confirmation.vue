@@ -35,6 +35,7 @@
                                                 <thead>
                                                     <tr>                                                    
                                                         <th scope="col">From</th>
+                                                        <th scope="col">Link To Tweet</th>
                                                         <th scope="col">Amount</th>
                                                         <th scope="col">To</th>
                                                         <th scope="col">BlockNumber</th>
@@ -44,6 +45,7 @@
                                                  <tbody>
                                                     <tr v-for="item in tableRows" :key="item.txnId">                                                       
                                                         <td class="link" v-on:click="goAnother(item.from)"><b>{{item.from}}</b></td>
+                                                        <td class="link" v-on:click="goTweet(item.linkToContent)"><img v-bind:src="'/static/img/twittersmall.png'" /> </td>
                                                         <td>{{item.amount | comma}}</td>
                                                         <td class="link" v-on:click="goAnother(item.to)"><b>{{item.to}}</b></td>
                                                         <td class="link" v-on:click="goBlock()"><b>{{item.blockNumber}}</b></td>
@@ -102,6 +104,9 @@ export default {
         },
         goBlock(){
             window.open("https://blockexplorer.loomx.io/?rpc=https://plasma.dappchains.com");
+        },
+        goTweet(link){
+            window.open(link);
         }
     }
 }
