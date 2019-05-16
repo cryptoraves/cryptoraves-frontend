@@ -8,12 +8,7 @@
                       <router-link to="/"><img src="./assets/img/cryptoraves_Horozontal Alignment_Full Color_JPG.png" alt=""></router-link>                     
                     </div>
                 </div> 
-                <div class="col-sm-12 col-lg-1">
-                    <div class="logo-area">
-                      
-                      <img src="./assets/img/built-on-ethereum.png" alt="">                     
-                    </div>
-                </div>             
+                         
                 <div class="col-sm-12 col-lg-9 text-right">
                     <div class="d-flex d-flex-right form-group mt-3">                        
                         <div class="d-flex">                            
