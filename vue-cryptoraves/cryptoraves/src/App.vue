@@ -6,7 +6,7 @@
                 <div class="col-sm-12 col-lg-2">
                     <div class="logo-area">
                       <router-link to="/"><img src="./assets/img/cryptoraves_Horozontal Alignment_Full Color_JPG.png" alt=""></router-link>  
-                      <img src="./assets/img/built-on-ethereum.png" alt="">                     
+                                           
                     </div>
                 </div>             
                 <div class="col-sm-12 col-lg-10 text-right">
