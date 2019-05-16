@@ -15,7 +15,7 @@ export default new Router({
       component: Landing
     },
     {
-      path: '/faq',
+      path: '/faq/:top?',
       name: 'Faq',
       component: Faq
     },

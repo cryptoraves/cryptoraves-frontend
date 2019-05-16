@@ -188,7 +188,7 @@
                                         }"
                                         class="link">Medium blog series</u> for more info on cryptoraves.<br /><br />
                                         For our FAQ, including instructions on how to verify your token transactions on the blockchain, 
-                                        <u v-on:click="goFaq" class="link">click here.</u>
+                                        <u v-on:click="goFaqTop" class="link">click here.</u>
                                     </p>
                                 </div>
                             </div>
@@ -302,7 +302,18 @@ export default {
     },
     goFaq: function(event){
         this.$router.push({
-                name: 'Faq'
+                name: 'Faq',
+                query: {
+                    top: false
+                }
+            })
+    },
+    goFaqTop: function(event){
+        this.$router.push({
+                name: 'Faq',
+                query: {
+                    top: true
+                }
             })
     },
     getUserList() {

@@ -149,7 +149,10 @@ export default {
     name: 'Faq',
     mounted: function () {
         this.$nextTick(function () {
-            window.scrollTo(0, this.getOffsetLeft(document.getElementById("faq"))-150);
+            if(!this.$route.query.top)
+                window.scrollTo(0, this.getOffsetLeft(document.getElementById("faq"))-150);
+            else
+                window.scrollTo(0, 0);
         })
     },
     methods: {        
