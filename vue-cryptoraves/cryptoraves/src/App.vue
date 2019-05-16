@@ -15,7 +15,7 @@
                       <img src="./assets/img/built-on-ethereum.png" alt="">                     
                     </div>
                 </div>             
-                <div class="col-sm-12 col-lg-10 text-right">
+                <div class="col-sm-12 col-lg-9 text-right">
                     <div class="d-flex d-flex-right form-group mt-3">                        
                         <div class="d-flex">                            
                             <!-- <input type="text" v-model="user" @change="goPortfolio" list="mylist" id="autoSelect" class="form-control c-search-input" placeholder="Search for Twitter handle." /> -->
