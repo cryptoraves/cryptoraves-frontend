@@ -284,7 +284,7 @@
         margin: 0;
     }
     .logo-area.footer {
-        text-align: unset;
+        /* //text-align: unset; */
     }
     .apps-area.section-padding{
         padding-top: 0;
@@ -693,6 +693,16 @@
         width: 100%;
         margin-bottom: 20px;
     }
+    .single-footer-area{
+        flex-direction: column;
+    }
+    .social-area{
+        margin-top: 60px;
+        margin-bottom: 60px;
+    }
+    .ethereum img {
+        width: 150px;       
+    }
     /* .form-control{
         height: calc(1em + 0.75rem + 2px)!important;
     } */
@@ -746,7 +756,7 @@
     .logo-area img {
         width: 150px;
         height: 50px;
-    }
+    }    
     .slicknav_menu {
         padding-top: 8px;
     }

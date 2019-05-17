@@ -1751,4 +1751,28 @@ small .small{
   font-weight: 100;
 }
 
+.spot{
+  display: flex;
+  justify-content: start;
+  align-items: baseline;  
+}
+
+.text-left{
+  text-indent: 0px;
+}
+
+.single-footer-area{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ethereum img{
+  width: 200px;
+  margin-left: 10px;
+}
+
+.social-area{
+  display: flex;
+}
 /*===================================== end =================================*/
