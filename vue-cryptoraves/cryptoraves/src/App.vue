@@ -53,29 +53,7 @@
                 <div class="space-60"></div>
                 </div>
             </div>
-            <div class="row">
-                <!-- <div class="col-lg-6 col-md-6 col-sm-12">
-                    <div class="single-footer">
-                        <div class="logo-area footer">
-                          <router-link to="/"><img src="./assets/img/cryptoraves_Horozontal Alignment_Full Color_JPG2.png" alt=""></router-link>                            
-                        </div>
-                        <p class="ml-2 mt-1">It's Crypto You can Tweet!</p>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 d-flex-end">                   
-                    <div class="single-community mid-social">
-                        <a class="twitter" href="https://twitter.com/cryptoraves"><i class="fa fa-twitter"></i></a>
-                    </div> 
-                    <div class="single-community mid-social">
-                        <a class="youtube" href="https://www.reddit.com/user/cryptoraves"><i class="fa fa-reddit"></i></a>
-                    </div>
-                    <div class="single-community mid-social">
-                        <a class="github" href="https://www.facebook.com/CryptoRaves/"><i class="fa fa-facebook"></i></a>
-                    </div> 
-                    <div class="single-community mid-social">
-                        <a class="behance" href="https://medium.com/@cryptoraves"><i class="fa fa-medium"></i></a>
-                    </div>                        
-                </div>                -->
+            <div class="row">               
                 <div class="col-12 single-footer-area">
                     <div class="single-footer">
                         <div class="logo-area footer">

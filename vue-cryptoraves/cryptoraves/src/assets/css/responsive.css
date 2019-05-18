@@ -283,9 +283,9 @@
     .community-area.v2 .offset-2{
         margin: 0;
     }
-    .logo-area.footer {
-        /* //text-align: unset; */
-    }
+    /* .logo-area.footer {
+        text-align: unset;
+    } */
     .apps-area.section-padding{
         padding-top: 0;
     }
