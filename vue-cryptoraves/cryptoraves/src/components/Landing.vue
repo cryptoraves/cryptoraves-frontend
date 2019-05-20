@@ -234,7 +234,7 @@
                         <div class="roadmap-text">
                             <p>Q2 2019</p>
                             <div class="space-10"></div>
-                            <h5>Alpha Launch</h5>
+                            <h5>Alpha Launch (Completed, Now Live!)</h5>
                         </div>
                     </div>
                 </div>  
