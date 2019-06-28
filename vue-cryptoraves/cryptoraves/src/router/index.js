@@ -5,6 +5,13 @@ import Confirmation from '@/components/Confirmation'
 import Portfolio from '@/components/Portfolio'
 import Faq from '@/components/Faq'
 
+
+import VueAnalytics from 'vue-analytics'
+
+Vue.use(VueAnalytics, {
+  id: ['UA-142913413-1']
+})
+
 Vue.use(Router)
 
 export default new Router({
