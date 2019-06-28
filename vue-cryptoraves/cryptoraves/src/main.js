@@ -11,6 +11,11 @@ Vue.config.productionTip = false
 Vue.use(Clipboard)
 Vue.use(VueScrollTo)
 
+import VueAnalytics from 'vue-analytics'
+
+Vue.use(VueAnalytics, {
+  id: ['UA-142913413-1']
+})
 /* eslint-disable no-new */
 
 Vue.filter('truncate', function (value) {
