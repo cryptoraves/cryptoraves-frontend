@@ -14,7 +14,8 @@ Vue.use(VueScrollTo)
 import VueAnalytics from 'vue-analytics'
 
 Vue.use(VueAnalytics, {
-  id: ['UA-142913413-1']
+  id: ['UA-142913413-1'],
+  router
 })
 /* eslint-disable no-new */
 
