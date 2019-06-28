@@ -283,6 +283,9 @@ export default {
     }
   },
   created() {
+
+        this.$ga.page('/')
+        
         this.getUserList();
   },
   methods: {

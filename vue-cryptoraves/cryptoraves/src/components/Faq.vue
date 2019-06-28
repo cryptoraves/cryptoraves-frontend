@@ -172,6 +172,9 @@
                     window.scrollTo(0, 0);
             })
         },
+        created() {
+            this.$ga.page('/')
+        },
         methods: {
             goHome() {
                 window.open("https://cryptoraves.space");

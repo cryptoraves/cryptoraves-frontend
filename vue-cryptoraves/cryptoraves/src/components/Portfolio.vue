@@ -100,6 +100,9 @@ export default {
     },
     created() {
         this.user = this.$route.query.user;
+
+        this.$ga.page('/')
+        
         this.getPortfolio(this.user, 0);
     },
     beforeRouteUpdate (to, from, next) {
