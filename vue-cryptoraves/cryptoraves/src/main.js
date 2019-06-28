@@ -7,11 +7,11 @@ import Clipboard from 'v-clipboard'
 import VueScrollTo from 'vue-scrollto'
 import 'bootstrap'
 
+import VueAnalytics from 'vue-analytics'
+
 Vue.config.productionTip = false
 Vue.use(Clipboard)
 Vue.use(VueScrollTo)
-
-import VueAnalytics from 'vue-analytics'
 
 Vue.use(VueAnalytics, {
   id: ['UA-142913413-1'],

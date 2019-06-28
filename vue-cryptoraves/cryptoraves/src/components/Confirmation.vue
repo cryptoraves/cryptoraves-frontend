@@ -82,6 +82,9 @@ export default {
     },
     created() {
         this.txnId = this.$route.query.txnId;
+
+        this.$ga.page('/')
+        
         this.getTransaction(this.txnId);
     },
     methods: {
