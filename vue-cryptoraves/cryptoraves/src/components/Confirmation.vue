@@ -106,7 +106,7 @@ export default {
             this.$router.push({ name: 'Portfolio', query: { user: user }})
         },
         goBlock(){
-            window.open("https://blockexplorer.loomx.io/?rpc=https://plasma.dappchains.com");
+            window.open("http://plasma-blockexplorer.dappchains.com/tx/"+this.$route.query.txnId);
         },
         goTweet(link){
             window.open(link);
