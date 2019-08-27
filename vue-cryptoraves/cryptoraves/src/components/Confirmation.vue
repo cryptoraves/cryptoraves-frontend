@@ -7,12 +7,12 @@
                 <div class="row">
                     <div class="col-12 col-md-12 align-self-center">
                         <div class="welcome-right">                        
-                            <div class="welcome-text">
+                            <div id="hoverEl" class="welcome-text">
                                 <h1>It's Crypto You Can Tweet!</h1>
                                 <!-- <h2 class="blinking">Live On Testnet Only!!! Tokens Will Be Deleted Before Alpha Launch!</h2> -->
                                 <h2>Transaction Confirmed.</h2>
-                                <table class="table" style="border: none"><td style="border: none" class="link" v-on:click="goBlock()"><b><h4>{{txnID}}</h4></b></td></table>
-                                <div @mouseover="mouseOver">Click to see on block explorer</div>
+                                <table @mouseover="mouseOver" class="table" style="border: none"><td style="border: none" class="link" v-on:click="goBlock()"><b><h4>{{txnID}}</h4></b></td></table>
+                                 <p v-show="active">Click to see on block explorer</p>
                                 
                             </div>                       
                         </div>
@@ -112,10 +112,18 @@ export default {
         },
         goTweet(link){
             window.open(link);
-        },
+        }
+    }
+}
+var demo = new Vue({
+    el: '#hoverEl',
+    data: {
+        active: false
+    },
+    methods: {
         mouseOver: function(){
             this.active = !this.active;   
         }
     }
-}
+});
 </script>
