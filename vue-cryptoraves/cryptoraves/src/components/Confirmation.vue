@@ -11,7 +11,7 @@
                                 <h1>It's Crypto You Can Tweet!</h1>
                                 <!-- <h2 class="blinking">Live On Testnet Only!!! Tokens Will Be Deleted Before Alpha Launch!</h2> -->
                                 <h2>Transaction Confirmed.</h2>
-                                <div class="link" v-on:click="goBlock()"><b><h4>{{txnID}}</h4></b></td>
+                                <table class="table" style="border: none"><td style="border: none" class="link" v-on:click="goBlock()"><b><h4>{{txnID}}</h4></b></td></table>
                                 
                             </div>                       
                         </div>
