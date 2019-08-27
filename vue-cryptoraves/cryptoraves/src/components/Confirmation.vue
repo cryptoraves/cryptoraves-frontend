@@ -11,7 +11,8 @@
                                 <h1>It's Crypto You Can Tweet!</h1>
                                 <!-- <h2 class="blinking">Live On Testnet Only!!! Tokens Will Be Deleted Before Alpha Launch!</h2> -->
                                 <h2>Transaction Confirmed.</h2>
-                                <h4>{{txnID}}</h4>
+                                <div class="link" v-on:click="goBlock()"><b><h4>{{txnID}}</h4></b></td>
+                                
                             </div>                       
                         </div>
                     </div>              
@@ -38,7 +39,7 @@
                                                         <th scope="col">Link To Tweet</th>
                                                         <th scope="col">Amount</th>
                                                         <th scope="col">To</th>
-                                                        <th scope="col">BlockNumber</th>
+                                                        
                                                         <th scope="col">Date</th>
                                                     </tr>
                                                 </thead>
@@ -48,7 +49,7 @@
                                                         <td class="link" v-on:click="goTweet(item.linkToContent)"><img v-bind:src="'/static/img/twittersmall.png'" /> </td>
                                                         <td>{{item.amount | comma}}</td>
                                                         <td class="link" v-on:click="goAnother(item.to)"><b>{{item.to}}</b></td>
-                                                        <td class="link" v-on:click="goBlock()"><b>{{item.blockNumber}}</b></td>
+                                                        
                                                         <td>{{item.date}}</td>
                                                     </tr>                                                                                            
                                                 </tbody>
@@ -106,7 +107,7 @@ export default {
             this.$router.push({ name: 'Portfolio', query: { user: user }})
         },
         goBlock(){
-            window.open("http://plasma-blockexplorer.dappchains.com/tx/"+this.$route.query.txnId);
+            window.open("https://loom-blockexplorer.dappchains.com/tx/"+this.$route.query.txnId);
         },
         goTweet(link){
             window.open(link);
