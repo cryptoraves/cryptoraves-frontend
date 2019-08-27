@@ -12,6 +12,7 @@
                                 <!-- <h2 class="blinking">Live On Testnet Only!!! Tokens Will Be Deleted Before Alpha Launch!</h2> -->
                                 <h2>Transaction Confirmed.</h2>
                                 <table class="table" style="border: none"><td style="border: none" class="link" v-on:click="goBlock()"><b><h4>{{txnID}}</h4></b></td></table>
+                                <div @mouseover="mouseOver">Click to see on block explorer</div>
                                 
                             </div>                       
                         </div>
@@ -111,6 +112,9 @@ export default {
         },
         goTweet(link){
             window.open(link);
+        },
+        mouseOver: function(){
+            this.active = !this.active;   
         }
     }
 }
