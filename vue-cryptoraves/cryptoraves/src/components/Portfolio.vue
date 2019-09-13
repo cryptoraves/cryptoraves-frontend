@@ -41,9 +41,9 @@
                                             </thead>
                                             <tbody>
                                                 <tr v-for="(item,index) in tableRows" :index="index" :key="item.txnId">
-                                                    <td class="link" v-on:click="goAnother(item.from)"><b>{{item.from}}</b></td>
-                                                    <td>{{item.amount | comma}}</td>
-                                                    <td class="link" v-on:click="goAnother(item.to)"><b>{{item.to}}</b></td>
+                                                    <td class="link" v-on:click="goAnother(item.from)"><b>{{item.token_brand}}</b></td>
+                                                    <td>{{item.ravity | comma}}</td>
+                                                    <td class="link" v-on:click="goAnother(item.to)"><b>{{item.balance}}</b></td>
                                                    
                                                 </tr>                                                                                            
                                             </tbody>
@@ -131,7 +131,7 @@ export default {
                     this.tokenBalance = res.tokenBalance;
                     this.latestDatetime = res.latestDatetime;
                     this.earliestDatetime = res.earliestDatetime;
-                    
+
                     this.initialPagePtr = 0; 
                     this.visiblePrev = false;
                     this.visibleNext = res.next?true:false;  
