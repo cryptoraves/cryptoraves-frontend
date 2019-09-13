@@ -116,7 +116,7 @@ export default {
             // cache management
             axios.get('https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=userListLastUpdated').then(response => {
                 // JSON responses are automatically parsed.  
-                localStorage.setItem("lastUpdated", response.data.lastUpdated)
+                localStorage.setItem("lastUpdated", JSON.stringify(response.data.lastUpdated))
                      
             }).catch(e => {
                 this.errors.push(e)
