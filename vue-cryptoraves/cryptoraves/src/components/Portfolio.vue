@@ -8,7 +8,7 @@
                 <div class="col-12 col-md-12 align-self-center">
                     <div class="welcome-right">                        
                         <div class="welcome-text">
-                            <h1>{{user}}'s Cryptoraves Tokens</h1>
+                            <h1>{{user}}'s Portfolio</h1>
                             <!-- <h2 class="blinking">Live On Testnet Only!!! Tokens Will Be Deleted Before Alpha Launch!</h2> -->
                         </div>              
                     </div>
@@ -28,27 +28,23 @@
                         <div class="col-lg-12">
                             <div class="single-about">                              
                                 <div class="single-about-text">
-                                    <h4>Total Cryptoraves Token Balance <b class="ml-4">{{tokenBalance | comma}}</b></h4>
+                                    <h4>{{user}}'s Personalized Token Balance <b class="ml-4">{{tokenBalance | comma}}</b></h4>
                                     <p class="table-responsive">
                                         <table class="table">
                                             <thead>
                                                 <tr>
                                                 <th scope="col">#</th>
-                                                <th scope="col">From</th>
-                                                <th scope="col">Link To Tweet</th>
-                                                <th scope="col">Amount</th>
-                                                <th scope="col">To</th>
-                                                <th scope="col">Date</th>
+                                                <th scope="col">Token</th>
+                                                <th scope="col">Ravity Score</th>
+                                                <th scope="col">Total Held</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr v-for="(item,index) in tableRows" :index="index" :key="item.txnId">
-                                                    <th class="link" v-on:click="goTransaction(item.txnHash)" scope="row"><b>{{item.txnHash | truncate}}</b></th>
                                                     <td class="link" v-on:click="goAnother(item.from)"><b>{{item.from}}</b></td>
-                                                    <td class="link" v-on:click="goTweet(item.linkToContent)"><img v-bind:src="'/static/img/twittersmall.png'" /> </td>
                                                     <td>{{item.amount | comma}}</td>
                                                     <td class="link" v-on:click="goAnother(item.to)"><b>{{item.to}}</b></td>
-                                                    <td>{{item.date}}</td>
+                                                   
                                                 </tr>                                                                                            
                                             </tbody>
                                             <tfoot>
@@ -127,13 +123,15 @@ export default {
                 axios.get('https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=portfolioPage&userName='+user)
                 .then(response => {
                     // JSON responses are automatically parsed.        
-                    this.user = user;
+                    this.user = response.platformHandle;
                     let res = response.data;
                     this.tableRows = _.cloneDeep(res.tableRows);
+                    this.ravity = res.ravity;  
                     this.rowCount = res.rowCount;                   
                     this.tokenBalance = res.tokenBalance;
-                    this.earliestDatetime = res.earliestDatetime;
                     this.latestDatetime = res.latestDatetime;
+                    this.earliestDatetime = res.earliestDatetime;
+                    
                     this.initialPagePtr = 0; 
                     this.visiblePrev = false;
                     this.visibleNext = res.next?true:false;  
@@ -146,13 +144,15 @@ export default {
                 axios.get('https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=portfolioPage&userName='+user+"&earliestDatetime="+this.earliestDatetime)
                 .then(response => {
                     // JSON responses are automatically parsed.        
-                    this.user = user;
+                    this.user = response.platformHandle;
                     let res = response.data;
                     this.tableRows = _.cloneDeep(res.tableRows);
+                    this.ravity = res.ravity;  
                     this.rowCount = res.rowCount;                   
                     this.tokenBalance = res.tokenBalance;
                     this.latestDatetime = res.latestDatetime;
                     this.earliestDatetime = res.earliestDatetime;
+
                     this.initialPagePtr ++;
                     this.visiblePrev = true;
                     this.visibleNext = res.next?true:false;                                 
@@ -166,13 +166,15 @@ export default {
                 axios.get('https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=portfolioPage&userName='+user+"&latestDatetime="+this.latestDatetime)
                 .then(response => {
                     // JSON responses are automatically parsed.        
-                    this.user = user;
+                    this.user = response.platformHandle;
                     let res = response.data;
                     this.tableRows = _.cloneDeep(res.tableRows);
-                    this.rowCount = res.rowCount;          
+                    this.ravity = res.ravity;  
+                    this.rowCount = res.rowCount;                   
                     this.tokenBalance = res.tokenBalance;
                     this.latestDatetime = res.latestDatetime;
                     this.earliestDatetime = res.earliestDatetime;
+
                     this.initialPagePtr --;
                     this.visiblePrev = (res.prev&&this.initialPagePtr>0)?true:false;
                     this.visibleNext = true;
