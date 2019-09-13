@@ -33,7 +33,6 @@
                                         <table class="table">
                                             <thead>
                                                 <tr>
-                                                <th scope="col">#</th>
                                                 <th scope="col">Token</th>
                                                 <th scope="col">Ravity Score</th>
                                                 <th scope="col">Total Held</th>
@@ -42,7 +41,7 @@
                                             <tbody>
                                                 <tr v-for="(item,index) in tableRows" :index="index" :key="item.txnId">
                                                     <td class="link" v-on:click="goAnother(item.from)"><b>{{item.token_brand}}</b></td>
-                                                    <td>{{item.ravity | comma}}</td>
+                                                    <td><b>{{item.ravity | comma}}</b></td>
                                                     <td class="link" v-on:click="goAnother(item.to)"><b>{{item.balance}}</b></td>
                                                    
                                                 </tr>                                                                                            
