@@ -335,18 +335,18 @@ export default {
                 this.update = false
             }
         }
-        
+
         if (this.update){
-            localStorage.userListLastUpdated = this.userListLastUpdated            
+            localStorage.setItem("userListLastUpdated", this.userListLastUpdated);            
             axios.get('https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=searchBar').then(response => {
                 // JSON responses are automatically parsed.
-                localStorage.userList = response.data.userList;                          
+                localStorage.setItem("userList", JSON.stringify(response.data.userList));                       
             }).catch(e => {
                 this.errors.push(e)
             })
         }
 
-        this.userList=localStorage.userList
+        this.userList=JSON.parse(localStorage.getItem("userList"));
 
         
     },
