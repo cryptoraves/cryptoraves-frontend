@@ -122,7 +122,7 @@ export default {
                 axios.get('https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=portfolioPage&userName='+user)
                 .then(response => {
                     // JSON responses are automatically parsed.        
-                    let res = res.data;
+                    let res = response.data;
                     this.user = res.platformHandle;
                     this.tableRows = _.cloneDeep(res.tableRows);
                     this.ravity = res.ravity;  
@@ -143,7 +143,7 @@ export default {
                 axios.get('https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=portfolioPage&userName='+user+"&earliestDatetime="+this.earliestDatetime)
                 .then(response => {
                     // JSON responses are automatically parsed.        
-                    let res = res.data;
+                    let res = response.data;
                     this.user = res.platformHandle;
                     this.tableRows = _.cloneDeep(res.tableRows);
                     this.ravity = res.ravity;  
@@ -165,7 +165,7 @@ export default {
                 axios.get('https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=portfolioPage&userName='+user+"&latestDatetime="+this.latestDatetime)
                 .then(response => {
                     // JSON responses are automatically parsed.        
-                    let res = res.data;
+                    let res = response.data;
                     this.user = res.platformHandle;
                     this.tableRows = _.cloneDeep(res.tableRows);
                     this.ravity = res.ravity;  
