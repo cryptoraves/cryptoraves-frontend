@@ -286,7 +286,7 @@ export default {
 
         this.$ga.page('/')
         
-        this.getUserList();
+       
   },
   methods: {
     clipboardSuccessHandler ({ value, event }) {      
