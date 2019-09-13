@@ -121,7 +121,7 @@ export default {
             }).catch(e => {
                 this.errors.push(e)
             })
-console.log(JSON.parse(localStorage.getItem("lastUpdated")))
+console.log(localStorage.getItem("lastUpdated"))
 console.log(localStorage.lastUpdated)
             this.update = true
             if (localStorage.userListLastUpdated) {
