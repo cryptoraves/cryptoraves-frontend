@@ -28,7 +28,7 @@
                         <div class="col-lg-12">
                             <div class="single-about">                              
                                 <div class="single-about-text">
-                                    <h4>{{user}}'s Personalized Token Balance <b class="ml-4">{{tokenBalance | comma}}</b></h4>
+                                    <h4>{{user}} Personalized Token Balance <b class="ml-4">{{tokenBalance | comma}}</b></h4>
                                     <p class="table-responsive">
                                         <table class="table">
                                             <thead>
@@ -122,8 +122,8 @@ export default {
                 axios.get('https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=portfolioPage&userName='+user)
                 .then(response => {
                     // JSON responses are automatically parsed.        
-                    this.user = response.platformHandle;
-                    let res = response.data;
+                    this.user = res.platformHandle;
+                    let res = res.data;
                     this.tableRows = _.cloneDeep(res.tableRows);
                     this.ravity = res.ravity;  
                     this.rowCount = res.rowCount;                   
@@ -143,8 +143,8 @@ export default {
                 axios.get('https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=portfolioPage&userName='+user+"&earliestDatetime="+this.earliestDatetime)
                 .then(response => {
                     // JSON responses are automatically parsed.        
-                    this.user = response.platformHandle;
-                    let res = response.data;
+                    this.user = res.platformHandle;
+                    let res = res.data;
                     this.tableRows = _.cloneDeep(res.tableRows);
                     this.ravity = res.ravity;  
                     this.rowCount = res.rowCount;                   
@@ -165,8 +165,8 @@ export default {
                 axios.get('https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=portfolioPage&userName='+user+"&latestDatetime="+this.latestDatetime)
                 .then(response => {
                     // JSON responses are automatically parsed.        
-                    this.user = response.platformHandle;
-                    let res = response.data;
+                    this.user = res.platformHandle;
+                    let res = res.data;
                     this.tableRows = _.cloneDeep(res.tableRows);
                     this.ravity = res.ravity;  
                     this.rowCount = res.rowCount;                   
