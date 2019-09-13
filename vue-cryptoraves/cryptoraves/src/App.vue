@@ -115,22 +115,22 @@ export default {
 
             // cache management
             axios.get('https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=userListLastUpdated').then(response => {
-                // JSON responses are automatically parsed.
-                this.userListLastUpdated = String(response.data.lastUpdated); 
-console.log(response.data.lastUpdated)                         
+                // JSON responses are automatically parsed.  
+                let userListLastUpdated = response.data.lastUpdated; 
+                     
             }).catch(e => {
                 this.errors.push(e)
             })
-console.log(this.userListLastUpdated)
+console.log(userListLastUpdated)
             this.update = true
             if (localStorage.userListLastUpdated) {
-                if(this.userListLastUpdated == localStorage.userListLastUpdated){
+                if(userListLastUpdated == localStorage.userListLastUpdated){
                     this.update = false
                 }
             }
 
             if (this.update){
-                localStorage.setItem("userListLastUpdated", this.userListLastUpdated);            
+                localStorage.setItem("userListLastUpdated", userListLastUpdated);            
                 axios.get('https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=searchBar').then(response => {
                     // JSON responses are automatically parsed.
                     localStorage.setItem("userList", JSON.stringify(response.data.userList));                       
@@ -140,7 +140,7 @@ console.log(this.userListLastUpdated)
             }
 
             this.userList=JSON.parse(localStorage.getItem("userList"));
-console.log(this.userList)
+
 			
         },       
         onDone(){
