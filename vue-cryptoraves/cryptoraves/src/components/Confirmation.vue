@@ -109,7 +109,7 @@ export default {
             this.$router.push({ name: 'Portfolio', query: { user: user }})
         },
         goBlock(){
-            window.open("https://loom-blockexplorer.dappchains.com/tx/"+this.$route.query.txnId);
+            window.open("https://basechain-blockexplorer.dappchains.com/tx/"+this.$route.query.txnId);
         },
         goTweet(link){
             window.open(link);
