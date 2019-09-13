@@ -120,14 +120,14 @@ export default {
             }).catch(e => {
                 this.errors.push(e)
             })
-console.log(response.data.lastUpdated)
+console.log(this.userListLastUpdated)
             this.update = true
             if (localStorage.userListLastUpdated) {
                 if(this.userListLastUpdated == localStorage.userListLastUpdated){
                     this.update = false
                 }
             }
-console.log(this.userListLastUpdated)
+
             if (this.update){
                 localStorage.setItem("userListLastUpdated", this.userListLastUpdated);            
                 axios.get('https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=searchBar').then(response => {
@@ -137,7 +137,7 @@ console.log(this.userListLastUpdated)
                     this.errors.push(e)
                 })
             }
-
+console.log(localStorage.userListLastUpdated)
             this.userList=JSON.parse(localStorage.getItem("userList"));
 
 			
