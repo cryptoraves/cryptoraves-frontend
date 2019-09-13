@@ -33,7 +33,7 @@
                                         <table class="table">
                                             <thead>
                                                 <tr>
-                                                <th scope="col">Token</th>
+                                                <th scope="col">Token Brand</th>
                                                 <th scope="col">Ravity Score</th>
                                                 <th scope="col">Total Held</th>
                                                 </tr>
