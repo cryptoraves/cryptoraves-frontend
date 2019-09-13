@@ -319,37 +319,7 @@ export default {
                 }
             })
     },
-    getUserList() {
-
-        // cache management
-        axios.get('https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=userListLastUpdated').then(response => {
-            // JSON responses are automatically parsed.
-            this.userListLastUpdated = response.data.lastUpdated;                          
-        }).catch(e => {
-            this.errors.push(e)
-        })
-
-        this.update = true
-        if (localStorage.userListLastUpdated) {
-            if(this.userListLastUpdated == localStorage.userListLastUpdated){
-                this.update = false
-            }
-        }
-
-        if (this.update){
-            localStorage.setItem("userListLastUpdated", this.userListLastUpdated);            
-            axios.get('https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=searchBar').then(response => {
-                // JSON responses are automatically parsed.
-                localStorage.setItem("userList", JSON.stringify(response.data.userList));                       
-            }).catch(e => {
-                this.errors.push(e)
-            })
-        }
-
-        this.userList=JSON.parse(localStorage.getItem("userList"));
-
-        
-    },
+    
     clipboardErrorHandler ({ value, event }) {      
       this.message = 'copy error'
     },
