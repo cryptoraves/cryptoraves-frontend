@@ -29,6 +29,9 @@
                             <div class="single-about">                              
                                 <div class="single-about-text">
                                     <h4>{{user}} Personalized Token Balance <b class="ml-4">{{tokenBalance | comma}}</b></h4>
+                                    <p>
+                                        <div class="link" v-on:click="goHistory(item.token_brand)"> Click Here For Transaction History<b>{{item.token_brand}}</b></td></div>
+                                    </p>    
                                     <p class="table-responsive">
                                         <table class="table">
                                             <thead>
@@ -189,6 +192,15 @@ export default {
             this.$parent.$emit('changeUser', user);
             this.$router.push({
                 name: 'Portfolio',
+                query: {
+                    user: user
+                }
+            })
+        },
+        goHistory(user){            
+            this.$parent.$emit('changeUser', user);
+            this.$router.push({
+                name: 'transactionHistory',
                 query: {
                     user: user
                 }
