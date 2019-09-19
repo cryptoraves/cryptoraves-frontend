@@ -30,7 +30,7 @@
                                 <div class="single-about-text">
                                     <h4>{{user}} Personalized Token Balance <b class="ml-4">{{tokenBalance | comma}}</b></h4>
                                     <p>
-                                        <div class="link" v-on:click="goHistory(item.token_brand)"> Click Here For Transaction History<b>{{item.token_brand}}</b></td></div>
+                                        <div class="link" v-on:click="goHistory(item.token_brand)"> Click Here For Transaction History<b>{{user}}</b></td></div>
                                     </p>    
                                     <p class="table-responsive">
                                         <table class="table">
