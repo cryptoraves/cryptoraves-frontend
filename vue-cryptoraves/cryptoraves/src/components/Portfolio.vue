@@ -40,9 +40,9 @@
                                             </thead>
                                             <tbody>
                                                 <tr v-for="(item,index) in tableRows" :index="index" :key="item.txnId">
-                                                    <td class="link" v-on:click="goAnother(item.from)"><b>{{item.token_brand}}</b></td>
+                                                    <td class="link" v-on:click="goAnother(item.token_brand)"><b>{{item.token_brand}}</b></td>
                                                     <td><b>{{item.ravity | comma}}</b></td>
-                                                    <td class="link" v-on:click="goAnother(item.to)"><b>{{item.balance}}</b></td>
+                                                    <td><b>{{item.balance}}</b></td>
                                                    
                                                 </tr>                                                                                            
                                             </tbody>
@@ -194,12 +194,15 @@ export default {
                 }
             })
         },
-        goTweet(link){
-            window.open(link);
-        },
+
         goTransaction(txnHash){
-            this.$parent.$emit('changeUser', txnHash);
-            this.$router.push({ name: 'Confirmation', query: { txnId: txnHash }})
+            this.$parent.$emit('changeUser', user);
+            this.$router.push({
+                name: 'transactionHistory',
+                query: {
+                    user: user
+                }
+            })
         }
     } 
 }
