@@ -1,0 +1,113 @@
+<template>
+  <div class="land-hero">
+    <div class="land-hero-cover">
+      <div class="land-hero-cover-title">
+        You + ( Being Awesome ) = ( Token Value )
+        <sup>2</sup>
+      </div>
+      <div class="land-hero-cover-content">
+        They’re Personalized Tokens You Can Tweet, For FUN!
+        <br />Test Drive Your Own Token Economy. Right On Twitter.
+      </div>
+      <AppButton>Get Your tokens</AppButton>
+      <AppButton>learn more</AppButton>
+    </div>
+  </div>
+</template>
+
+<script>
+import AppButton from "../../components/ui/AppButton";
+export default {
+  name: "HeroSection",
+  components: {
+    AppButton
+  }
+};
+</script>
+
+<style scoped>
+.land-hero {
+  width: 100%;
+  height: 750px;
+  background-image: url("../../assets/img/herosectionimg.png");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #464646;
+  display: flex;
+  -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: fadein 2s; /* Firefox < 16 */
+  -ms-animation: fadein 2s; /* Internet Explorer */
+  -o-animation: fadein 2s; /* Opera < 12.1 */
+  animation: fadein 2s;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.land-hero-cover {
+  margin: auto;
+  text-align: center;
+}
+.land-hero-cover-title {
+  font-size: 50px;
+  font-family: "Roboto Condensed";
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+  line-height: 1.6;
+}
+.land-hero-cover-content {
+  font-size: 30px;
+  font-family: "Montserrat";
+  color: rgb(255, 255, 255);
+  line-height: 1.5;
+  padding-bottom: 30px;
+}
+</style>
