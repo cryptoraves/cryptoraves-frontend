@@ -36,16 +36,20 @@
                                         <table class="table">
                                             <thead>
                                                 <tr>
+                                                <th scope="col">Tokens Held</th>
                                                 <th scope="col">Token Brand</th>
-                                                <th scope="col">Ravity Score</th>
-                                                <th scope="col">Total Held</th>
+                                                <th scope="col">Bond Strength</th>
+                                                <th scope="col">Points</th>
+                                                
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr v-for="(item,index) in tableRows" :index="index" :key="item.txnId">
+                                                    <td><b>{{item.balance | comma }}</b></td>
                                                     <td class="link" v-on:click="goAnother(item.token_brand)"><b>{{item.token_brand}}</b></td>
+                                                    <td><b>{{item.rs | comma}}</b></td>
                                                     <td><b>{{item.ravity | comma}}</b></td>
-                                                    <td><b>{{item.balance}}</b></td>
+                                                    
                                                    
                                                 </tr>                                                                                            
                                             </tbody>
