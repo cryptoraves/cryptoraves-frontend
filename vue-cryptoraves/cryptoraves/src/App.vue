@@ -2,9 +2,10 @@
   <div id="app">
     <AppHeader></AppHeader>
     <LandingPage></LandingPage>
-    <router-view />
+    <AppFooter></AppFooter>
+    <!-- <router-view /> -->
 
-    <div class="community-area wow fadeInUp section-padding" id="contact">
+    <!-- <div class="community-area wow fadeInUp section-padding" id="contact">
       <div class="container">
         <div class="row">
           <div class="col-12 text-center">
@@ -54,7 +55,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div>-->
   </div>
 </template>
 
@@ -62,12 +63,14 @@
 import axios from "axios";
 import AppHeader from "./components/layout/AppHeader";
 import LandingPage from "./pages/LandingPage/LandingPage";
+import AppFooter from "./components/layout/AppFooter";
 
 export default {
   name: "App",
   components: {
     AppHeader,
-    LandingPage
+    LandingPage,
+    AppFooter
   },
   data() {
     return {

@@ -3,7 +3,9 @@
     <div class="tweetbutton-shape">
       <i class="fa fa-twitter"></i>
     </div>
-    <div class="tweetbutton-text">@cryptoraves #DropMyCrypto</div>
+    <div class="tweetbutton-text">
+      <slot></slot>
+    </div>
   </div>
 </template>
 
@@ -23,7 +25,20 @@ export default {
   background-color: rgb(255, 255, 255);
   box-shadow: 0px 5px 29px 0px rgba(0, 0, 1, 0.11);
   display: flex;
+  transition: all 200ms ease-out;
 }
+.tweetbutton:hover {
+  -webkit-box-shadow: 0px 5px 29px 0px rgba(106, 219, 252, 1);
+  -moz-box-shadow: 0px 5px 29px 0px rgba(106, 219, 252, 1);
+  box-shadow: 0px 5px 29px 0px rgba(106, 219, 252, 1);
+  transition: all 200ms ease-in;
+  cursor: pointer;
+}
+
+.tweetbutton:active {
+  transform: translateY(0.25em);
+}
+
 .tweetbutton-shape {
   border-radius: 5px 0px 0px 5px;
   width: 110px;
@@ -55,7 +70,7 @@ export default {
   font-family: "Montserrat";
   color: rgb(42, 192, 236);
   font-weight: bold;
-  text-align: center;
-  margin: auto;
+  text-align: left;
+  margin: auto auto auto 3%;
 }
 </style>

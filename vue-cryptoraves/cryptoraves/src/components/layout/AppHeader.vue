@@ -9,9 +9,9 @@
             </router-link>
           </div>
         </div>
-
-        <div class="col-sm-12 col-lg-10 text-right">
+        <div class="col-lg-10 col-sm-12 text-right">
           <div class="d-flex d-flex-right form-group mt-3">
+            <div class="col-lg-2 col-sm-12 app-header-leaderboard">LEADERBOARD</div>
             <div class="d-flex app-header-searchbar">
               <!-- <input type="text" v-model="user" @change="goPortfolio" list="mylist" id="autoSelect" class="form-control c-search-input" placeholder="Search for Twitter handle." /> -->
               <input type="text" class="app-header-input" placeholder="Lookup Twitter @username." />
@@ -32,7 +32,7 @@
                             cancelable: true,
                         }"
             >
-              <AppButton>GET YOUR TOKENS</AppButton>
+              <AppButton name="GET YOUR TOKENS" type1="true"></AppButton>
             </router-link>
           </div>
         </div>
@@ -70,10 +70,28 @@ img {
   height: 70px;
   margin: auto;
 }
+.app-header-leaderboard {
+  font-size: 14px;
+  font-family: "Montserrat";
+  color: rgba(40, 40, 40, 0.8);
+  text-align: center;
+  margin-right: 20px;
+  cursor: pointer;
+}
+.app-header-leaderboard:hover {
+  color: blue;
+}
 .app-header-searchbar {
   border: 1px solid #d7d7d7;
   border-radius: 50px;
   padding: 5px 15px;
+  transition: all 200ms ease-out;
+}
+.app-header-searchbar:hover {
+  -webkit-box-shadow: 0px 1px 8px -1px rgba(17, 71, 235, 1);
+  -moz-box-shadow: 0px 1px 8px -1px rgba(17, 71, 235, 1);
+  box-shadow: 0px 1px 8px -1px rgba(17, 71, 235, 1);
+  transition: all 200ms ease-out;
 }
 .app-header-input {
   min-width: 230px !important;
@@ -95,6 +113,9 @@ img {
   .app-header-logoarea {
     text-align: center;
   }
+  .app-header-leaderboard {
+    display: none;
+  }
 }
 
 @media only screen and (max-width: 991px) {
@@ -103,6 +124,9 @@ img {
   }
   .app-header {
     height: 200px;
+  }
+  .app-header-leaderboard {
+    display: none;
   }
 }
 </style>

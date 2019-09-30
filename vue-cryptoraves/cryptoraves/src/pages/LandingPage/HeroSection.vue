@@ -9,8 +9,8 @@
         They’re Personalized Tokens You Can Tweet, For FUN!
         <br />Test Drive Your Own Token Economy. Right On Twitter.
       </div>
-      <AppButton>Get Your tokens</AppButton>
-      <AppButton>learn more</AppButton>
+      <AppButton name="Get Your tokens" type2="true"></AppButton>
+      <AppButton name="Learn More" type3="true"></AppButton>
     </div>
   </div>
 </template>
