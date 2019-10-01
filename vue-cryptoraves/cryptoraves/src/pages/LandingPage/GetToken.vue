@@ -2,16 +2,20 @@
   <div class="container">
     <SectionHeader>Get Your Tokens</SectionHeader>
     <div class="row gettoken-content">
-      <div class="col-lg-6 mt-2 d-flex">
-        <img src="../../assets/img/twitter.png" />
+      <div id="getToken" class="col-lg-6 mt-2 d-flex">
+        <a href="http://twitter.com" target="_blank">
+          <img src="../../assets/img/twitter.png" />
+        </a>
       </div>
       <div class="col-lg-6 mt-2">
         <div class="gettoken-content-1">I'M READY! HOW DO I DO THIS?</div>
         <div class="gettoken-content-under"></div>
         <div class="gettoken-content-2">No account. No fees. Just Tweet this now:</div>
         <TweetButton>@cryptoraves #DropMyCrypto</TweetButton>
+
         <div
           class="gettoken-content-3"
+          v-on:click="goFaq"
         >By Tweeting @cryptoraves, you agree to our Privacy Policy & Terms of Service</div>
         <AppButton name="Show me a tweet demo" type4="true"></AppButton>
         <div class="gettoken-content-4">
@@ -35,6 +39,16 @@ export default {
     SectionHeader,
     TweetButton,
     AppButton
+  },
+  methods: {
+    goFaq: function(event) {
+      this.$router.push({
+        name: "Faq",
+        query: {
+          top: false
+        }
+      });
+    }
   }
 };
 </script>
@@ -75,6 +89,10 @@ img {
   color: rgba(0, 0, 0, 0.502);
   line-height: 4.583;
   text-align: center;
+  cursor: pointer;
+}
+.gettoken-content-3:hover {
+  text-decoration: underline;
 }
 .gettoken-content-4 {
   margin-top: 50px;

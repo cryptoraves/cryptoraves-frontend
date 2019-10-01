@@ -7,34 +7,61 @@
         </div>
         <div class="col-lg-8 d-flex">
           <div class="d-flex social-group">
-            <div class="d-flex tweet-gradient">
-              <i class="fa fa-twitter"></i>
-            </div>
-            <div class="d-flex reddit-gradient">
-              <i class="fa fa-reddit-alien"></i>
-            </div>
-            <div class="d-flex facebook-gradient">
-              <i class="fa fa-facebook"></i>
-            </div>
-            <div class="d-flex medium-gradient">
-              <i class="fa fa-medium"></i>
-            </div>
-            <div class="d-flex linkedin-gradient">
-              <i class="fa fa-linkedin"></i>
-            </div>
-            <div class="d-flex telegram-gradient">
-              <i class="fa fa-telegram"></i>
-            </div>
-            <div class="d-flex slideshare-gradient">
-              <i class="fa fa-slideshare"></i>
-            </div>
+            <a href="https://twitter.com/cryptoraves" target="_blank">
+              <div class="d-flex tweet-gradient">
+                <i class="fa fa-twitter"></i>
+              </div>
+            </a>
+
+            <a href="https://www.reddit.com/user/cryptoraves" target="_blank">
+              <div class="d-flex reddit-gradient">
+                <i class="fa fa-reddit-alien"></i>
+              </div>
+            </a>
+
+            <a
+              href="https://www.facebook.com/CryptoRaves/?eid=ARDdk7Ij9wXb3-Ja0CYQY0yve9ORWH8zG_c-JmXmnE4gWqzav9h0q2-2DqyOs-pSGoMS7B4GPtfLvlGH"
+              target="_blank"
+            >
+              <div class="d-flex facebook-gradient">
+                <i class="fa fa-facebook"></i>
+              </div>
+            </a>
+
+            <a href="https://medium.com/@cryptoraves" target="_blank">
+              <div class="d-flex medium-gradient">
+                <i class="fa fa-medium"></i>
+              </div>
+            </a>
+
+            <a href="https://www.linkedin.com/company/cryptoraves" target="_blank">
+              <div class="d-flex linkedin-gradient">
+                <i class="fa fa-linkedin"></i>
+              </div>
+            </a>
+
+            <a href="/" target="_blank">
+              <div class="d-flex telegram-gradient">
+                <i class="fa fa-telegram"></i>
+              </div>
+            </a>
+
+            <a href="/" target="_blank">
+              <div class="d-flex slideshare-gradient">
+                <i class="fa fa-slideshare"></i>
+              </div>
+            </a>
           </div>
         </div>
         <div class="d-flex col-lg-2 col-sm-12">
-          <img src="../../assets/img/whitelogo.png" />
+          <a href="/">
+            <img src="../../assets/img/whitelogo.png" />
+          </a>
         </div>
       </div>
-      <div class="app-footer-email">Email us at info@Cryptoraves.space | FAQs</div>
+      <a href="mailto:info@cryptoraves.space">
+        <div class="app-footer-email">Email us at info@Cryptoraves.space | FAQs</div>
+      </a>
     </div>
   </div>
 </template>
@@ -51,6 +78,10 @@ export default {
 </script>
 
 <style scoped>
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
 .app-footer {
   background-color: rgb(7, 55, 99);
   width: 100%;
@@ -83,7 +114,22 @@ img {
     linear-gradient(to right, #47d71b, #33c343);
   background-origin: border-box;
   background-clip: content-box, border-box;
+  transition: all 0.5s ease;
 }
+
+.tweet-gradient:hover {
+  box-shadow: 0 0 20px #00acee;
+  transition: all 0.5s ease;
+  transform: translateY(-0.25em);
+}
+.tweet-gradient:active {
+  transform: translateY(0.25em);
+}
+.tweet-gradient i:hover {
+  text-shadow: 0 0 20px #00acee;
+  transition: all 0.5s ease;
+}
+
 .tweet-gradient i {
   font-size: 25px;
   color: #9c47fc;
@@ -104,6 +150,19 @@ img {
     linear-gradient(to right, #31c749, #1bb57a);
   background-origin: border-box;
   background-clip: content-box, border-box;
+  transition: all 0.5s ease;
+}
+.reddit-gradient:hover {
+  box-shadow: 0 0 20px #c6c6c6;
+  transition: all 0.5s ease;
+  transform: translateY(-0.25em);
+}
+.reddit-gradient:active {
+  transform: translateY(0.25em);
+}
+.reddit-gradient i:hover {
+  text-shadow: 0 0 20px #c6c6c6;
+  transition: all 0.5s ease;
 }
 .reddit-gradient i {
   font-size: 25px;
@@ -126,6 +185,19 @@ img {
     linear-gradient(to right, #17b184, #059db0);
   background-origin: border-box;
   background-clip: content-box, border-box;
+  transition: all 0.5s ease;
+}
+.facebook-gradient:hover {
+  box-shadow: 0 0 20px #3b5998;
+  transition: all 0.5s ease;
+  transform: translateY(-0.25em);
+}
+.facebook-gradient:active {
+  transform: translateY(0.25em);
+}
+.facebook-gradient i:hover {
+  text-shadow: 0 0 20px #3b5998;
+  transition: all 0.5s ease;
 }
 .facebook-gradient i {
   font-size: 25px;
@@ -147,6 +219,20 @@ img {
     linear-gradient(to right, #0399b8, #0284cb);
   background-origin: border-box;
   background-clip: content-box, border-box;
+  transition: all 0.5s ease;
+}
+
+.medium-gradient:hover {
+  box-shadow: 0 0 20px #0000cd;
+  transition: all 0.5s ease;
+  transform: translateY(-0.25em);
+}
+.medium-gradient:active {
+  transform: translateY(0.25em);
+}
+.medium-gradient i:hover {
+  text-shadow: 0 0 20px #0000cd;
+  transition: all 0.5s ease;
 }
 .medium-gradient i {
   font-size: 25px;
@@ -168,6 +254,20 @@ img {
     linear-gradient(to right, #047fcb, #1c62cb);
   background-origin: border-box;
   background-clip: content-box, border-box;
+  transition: all 0.5s ease;
+}
+
+.linkedin-gradient:hover {
+  box-shadow: 0 0 20px #0e76a8;
+  transition: all 0.5s ease;
+  transform: translateY(-0.25em);
+}
+.linkedin-gradient:active {
+  transform: translateY(0.25em);
+}
+.linkedin-gradient i:hover {
+  text-shadow: 0 0 20px #0e76a8;
+  transition: all 0.5s ease;
 }
 .linkedin-gradient i {
   font-size: 25px;
@@ -189,6 +289,20 @@ img {
     linear-gradient(to right, #225dc9, #4b3ab4);
   background-origin: border-box;
   background-clip: content-box, border-box;
+  transition: all 0.5s ease;
+}
+
+.telegram-gradient:hover {
+  box-shadow: 0 0 20px #0088cc;
+  transition: all 0.5s ease;
+  transform: translateY(-0.25em);
+}
+.telegram-gradient:active {
+  transform: translateY(0.25em);
+}
+.telegram-gradient i:hover {
+  text-shadow: 0 0 20px #0088cc;
+  transition: all 0.5s ease;
 }
 .telegram-gradient i {
   font-size: 25px;
@@ -210,6 +324,20 @@ img {
     linear-gradient(to right, #4b3ab4, #6126a1);
   background-origin: border-box;
   background-clip: content-box, border-box;
+  transition: all 0.5s ease;
+}
+
+.slideshare-gradient:hover {
+  box-shadow: 0 0 20px #0077b5;
+  transition: all 0.5s ease;
+  transform: translateY(-0.25em);
+}
+.slideshare-gradient:active {
+  transform: translateY(0.25em);
+}
+.slideshare-gradient i:hover {
+  text-shadow: 0 0 20px #0077b5;
+  transition: all 0.5s ease;
 }
 .slideshare-gradient i {
   font-size: 25px;
@@ -221,12 +349,6 @@ img {
   -webkit-text-fill-color: transparent;
   margin: auto;
 }
-/* @media only screen and (min-width: 0px) and (max-width: 767px) {
-  .app-header-logoarea {
-    text-align: center;
-  }
-} */
-
 @media only screen and (max-width: 991px) {
   .app-footer {
     height: 450px;
@@ -246,139 +368,6 @@ img {
     justify-content: center;
     display: flex;
     flex-wrap: wrap;
-  }
-}
-
-.icon {
-  background: none;
-  width: 76px;
-  height: 76px;
-  top: -200px;
-  margin: 0 auto;
-  position: relative;
-}
-.icon:hover {
-  animation: rotatecircle 4s infinite linear;
-  -moz-animation: rotatecircle 4s infinite linear;
-  -webkit-animation: rotatecircle 4s linear;
-}
-.outerCircle {
-  background-color: transparent;
-  border: 8px solid rgba(97, 82, 72, 0.9);
-  opacity: 0.9;
-  border-right: 5px solid transparent;
-  border-left: 5px solid transparent;
-  border-radius: 100px;
-  width: 103px;
-  height: 103px;
-  margin: 0 auto;
-  animation: spinPulse 3s infinite ease-in-out;
-  -moz-animation: spinPulse 3s infinite ease-in-out;
-  -webkit-animation: spinPulse 3s infinite ease-in-out;
-}
-.innerCircle {
-  background-color: transparent;
-  border: 5px solid rgba(189, 215, 60, 0.6);
-  opacity: 0.9;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-radius: 100px;
-  top: -110px;
-  width: 92px;
-  height: 92px;
-  margin: 0 auto;
-  position: relative;
-  animation: spinoffPulse 1s infinite linear;
-  -moz-animation: spinoffPulse 1s infinite linear;
-  -webkit-animation: spinoffPulse 1s infinite linear;
-}
-
-@keyframes spinPulse {
-  0% {
-    -moz-transform: rotate(160deg);
-    opacity: 0;
-    box-shadow: 0 0 1px #bdd73c;
-  }
-  50% {
-    -moz-transform: rotate(145deg);
-    opacity: 1;
-  }
-  100% {
-    -moz-transform: rotate(-320deg);
-    opacity: 0;
-  }
-}
-@-moz-keyframes spinPulse {
-  0% {
-    -moz-transform: rotate(160deg);
-    opacity: 0;
-    box-shadow: 0 0 1px #bdd73c;
-  }
-  50% {
-    -moz-transform: rotate(145deg);
-    opacity: 1;
-  }
-  100% {
-    -moz-transform: rotate(-320deg);
-    opacity: 0;
-  }
-}
-@keyframes spinoffPulse {
-  0% {
-    -moz-transform: rotate(0deg);
-  }
-  100% {
-    -moz-transform: rotate(360deg);
-  }
-}
-@-moz-keyframes spinoffPulse {
-  0% {
-    -moz-transform: rotate(0deg);
-  }
-  100% {
-    -moz-transform: rotate(360deg);
-  }
-}
-@-webkit-keyframes spinPulse {
-  0% {
-    -webkit-transform: rotate(160deg);
-    opacity: 0;
-    box-shadow: 0 0 1px #bdd73c;
-  }
-  50% {
-    -webkit-transform: rotate(145deg);
-    opacity: 1;
-  }
-  100% {
-    -webkit-transform: rotate(-320deg);
-    opacity: 0;
-  }
-}
-@-webkit-keyframes spinoffPulse {
-  0% {
-    -webkit-transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-  }
-}
-@keyframes rotatecircle {
-}
-@-moz-keyframes rotatecircle {
-  0% {
-    -moz-transform: rotate(0deg);
-  }
-  100% {
-    -moz-transform: rotate(-360deg);
-  }
-}
-
-@-webkit-keyframes rotatecircle {
-  0% {
-    -webkit-transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(-360deg);
   }
 }
 </style>

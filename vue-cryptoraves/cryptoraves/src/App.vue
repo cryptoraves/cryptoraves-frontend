@@ -1,9 +1,8 @@
 <template>
   <div id="app">
     <AppHeader></AppHeader>
-    <LandingPage></LandingPage>
+    <router-view />
     <AppFooter></AppFooter>
-    <!-- <router-view /> -->
 
     <!-- <div class="community-area wow fadeInUp section-padding" id="contact">
       <div class="container">

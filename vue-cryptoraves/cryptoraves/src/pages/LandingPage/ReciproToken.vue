@@ -12,8 +12,14 @@
         </div>
         <div class="space-40"></div>
         <div class="reciprotoken-content-2">
-          And we want to help. In fact, we'll match you! Up to 1
-          <br />Million tokens right now.
+          And we want to help. In fact,
+          <a
+            href="https://medium.com/p/2bd4715d9af6/edit"
+          >we'll match you!</a> Up to
+          <b>
+            1
+            <br />Million tokens
+          </b> right now.
           <div class="space-40"></div>You give, we give back.
           <div class="space-40"></div>Like So :
         </div>
@@ -61,6 +67,10 @@ img {
   font-family: "Montserrat";
   color: rgb(0, 38, 101);
   line-height: 1.5;
+}
+
+.reciprotoken-content-2 b {
+  color: rgb(18, 220, 66);
 }
 
 .reciprotoken-content-3 {

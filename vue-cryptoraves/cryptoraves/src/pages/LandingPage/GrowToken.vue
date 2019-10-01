@@ -8,9 +8,10 @@
         </div>
         <div class="col-lg-6 mt-2">
           <div class="growtoken-content-1">
-            You have control over your token's
+            <a href="https://medium.com/p/84bc6b18554f/edit" target="_blank">You have control</a> over your token's
             <br />value
           </div>
+
           <div class="space-10"></div>
           <div class="growtoken-content-2">
             You get points just for giving! Share more often, & more
@@ -54,6 +55,10 @@ img {
   font-weight: bold;
   line-height: 1.333;
   text-align: left;
+}
+a {
+  color: rgb(18, 220, 66);
+  text-decoration-color: rgb(18, 220, 66);
 }
 .growtoken-content-2 {
   font-size: 20px;

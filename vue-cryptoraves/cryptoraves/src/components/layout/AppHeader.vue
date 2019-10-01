@@ -4,9 +4,9 @@
       <div class="row">
         <div class="d-flex col-sm-12 col-lg-2">
           <div class="app-header-logoarea">
-            <router-link to="/">
+            <a href="/">
               <img src="../../assets/img/cryptoraves_Horozontal Alignment_Full Color_JPG.png" alt />
-            </router-link>
+            </a>
           </div>
         </div>
         <div class="col-lg-10 col-sm-12 text-right">
@@ -15,10 +15,11 @@
             <div class="d-flex app-header-searchbar">
               <!-- <input type="text" v-model="user" @change="goPortfolio" list="mylist" id="autoSelect" class="form-control c-search-input" placeholder="Search for Twitter handle." /> -->
               <input type="text" class="app-header-input" placeholder="Lookup Twitter @username." />
-
-              <a href="#" class="app-header-icon">
-                <i class="fa fa-search"></i>
-              </a>
+              <router-link to="/portfolio">
+                <a class="app-header-icon">
+                  <i class="fa fa-search"></i>
+                </a>
+              </router-link>
             </div>
 
             <router-link
@@ -59,6 +60,7 @@ export default {
   height: 100px;
   display: flex;
   box-shadow: 2.5px 4.33px 24px rgba(0, 0, 1, 0.11);
+  z-index: 9999999;
 }
 .app-header-container {
   margin: auto;

@@ -9,8 +9,22 @@
         They’re Personalized Tokens You Can Tweet, For FUN!
         <br />Test Drive Your Own Token Economy. Right On Twitter.
       </div>
-      <AppButton name="Get Your tokens" type2="true"></AppButton>
-      <AppButton name="Learn More" type3="true"></AppButton>
+      <router-link
+        to="/"
+        v-scroll-to="{
+                            el: '#getToken',
+                            duration: 500,
+                            easing: 'linear',
+                            offset: -250,
+                            force: true,
+                            cancelable: true,
+                        }"
+      >
+        <AppButton name="Get Your tokens" type2="true"></AppButton>
+      </router-link>
+      <span v-on:click="goFaqTop">
+        <AppButton name="Learn More" type3="true"></AppButton>
+      </span>
     </div>
   </div>
 </template>
@@ -21,6 +35,16 @@ export default {
   name: "HeroSection",
   components: {
     AppButton
+  },
+  methods: {
+    goFaqTop: function(event) {
+      this.$router.push({
+        name: "Faq",
+        query: {
+          top: true
+        }
+      });
+    }
   }
 };
 </script>

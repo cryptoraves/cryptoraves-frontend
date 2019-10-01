@@ -27,7 +27,11 @@
             </div>
           </div>
           <div class="sharetoken-content-4">
-            <a href="/">More "How To" on Sharing here</a>
+            More "How To" on Sharing
+            <a
+              href="https://medium.com/p/2710f70e8d38/edit"
+              target="_blank"
+            >here</a>
           </div>
           <div class="sharetoken-content-5">This is fun! What else?</div>
         </div>
@@ -110,7 +114,6 @@ img {
   font-size: 15px;
   font-family: "Montserrat";
   color: rgb(40, 40, 40);
-  text-decoration: underline;
 }
 .sharetoken-content-5 {
   font-size: 15px;

@@ -12,7 +12,11 @@
           <div class="tooltoken-content-2">
             Your token is your own Customized & self-designed TOOL
             <br />Create unique value for yourself.
-            <br />Dream up your own case. Get ideas here
+            <br />Dream up your own case. Get ideas
+            <a
+              href="https://medium.com/p/adbf47f7f786/edit"
+              target="_blank"
+            >here</a>
           </div>
           <div class="space-30"></div>
           <div class="tooltoken-content-3">How will you use YOUR token?</div>

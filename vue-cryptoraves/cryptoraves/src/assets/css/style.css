@@ -1699,6 +1699,7 @@ span.gradient-btn {
     box-shadow: 0 0 0 15px rgba(16, 206, 69, 0);
   }
 }
+
 .welcome-text {
   text-align: center;
 }
@@ -1756,10 +1757,6 @@ i.link,
 h3.link,
 u.link {
   cursor: pointer;
-}
-
-#getToken {
-  background-color: #75ce64;
 }
 
 .btn.btnpagination {

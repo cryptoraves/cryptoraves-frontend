@@ -49,6 +49,15 @@ export default {
   background: white;
   border-radius: 50px;
   box-shadow: 0px 5px 29px 0px rgba(0, 0, 1, 0.11);
+  animation: method-pulse 1.5s infinite;
+}
+@keyframes method-pulse {
+  0% {
+    box-shadow: 0 0 0 0px rgb(0, 38, 101, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 0 15px rgb(0, 38, 101, 0);
+  }
 }
 .method-button-circle-txt {
   font-size: 20px;
