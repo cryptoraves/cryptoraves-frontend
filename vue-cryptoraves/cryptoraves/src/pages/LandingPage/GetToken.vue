@@ -11,7 +11,7 @@
         <div class="gettoken-content-1">I'M READY! HOW DO I DO THIS?</div>
         <div class="gettoken-content-under"></div>
         <div class="gettoken-content-2">No account. No fees. Just Tweet this now:</div>
-        <TweetButton>@cryptoraves #DropMyCrypto</TweetButton>
+        <TweetButton type1="true">@cryptoraves #DropMyCrypto</TweetButton>
 
         <div
           class="gettoken-content-3"
@@ -74,13 +74,14 @@ img {
   background-color: rgb(17, 206, 69);
   width: 51px;
   height: 5px;
+  margin-bottom: 15px;
 }
 .gettoken-content-2 {
-  font-size: 25px;
+  font-size: 24px;
   font-family: "Montserrat";
   color: rgb(0, 38, 101);
   font-weight: bold;
-  line-height: 2.75;
+  line-height: 1.2;
   text-align: left;
 }
 .gettoken-content-3 {

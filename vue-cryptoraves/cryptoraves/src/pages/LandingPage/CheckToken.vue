@@ -11,7 +11,7 @@
           <ul>
             <li>
               <img src="../../assets/img/checkitemimg.png" />
-              Your token portfolio (tokens others have shared with you
+              Your token portfolio (tokens others have shared with you)
             </li>
             <li>
               <img src="../../assets/img/checkitemimg.png" />

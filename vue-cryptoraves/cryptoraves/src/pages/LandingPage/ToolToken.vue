@@ -56,7 +56,7 @@ img {
   text-align: left;
 }
 .tooltoken-content-2 {
-  font-size: 20px;
+  font-size: 18px;
   font-family: "Montserrat";
   color: rgb(0, 38, 101);
   line-height: 2;

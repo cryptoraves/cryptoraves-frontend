@@ -12,17 +12,19 @@
             Amplify your hearts. Give appreciation with a personal crypto
             <br />touch. It feels good!
           </div>
+          <div class="space-20"></div>
           <div class="sharetoken-content-3">To share, just Tweet. Two ways.</div>
+          <div class="space-10"></div>
           <div>
             <div class="sharetoken-method-connect"></div>
             <MethodButton number="1">Tag & Tweet</MethodButton>
             <div class="sharetoken-tweet-button">
-              <TweetButton>@cryptoraves 1,000 @username</TweetButton>
+              <TweetButton type2="true">@cryptoraves 1,000 @username</TweetButton>
               <AppButton name="Show me a Tweet Demo" type4="true"></AppButton>
             </div>
             <MethodButton number="2">Reply with Tokens</MethodButton>
             <div class="sharetoken-tweet-button">
-              <TweetButton>@cryptoraves 1,000</TweetButton>
+              <TweetButton type2="true">@cryptoraves 1,000</TweetButton>
               <AppButton name="Show me a Tweet Demo" type4="true"></AppButton>
             </div>
           </div>
@@ -64,7 +66,7 @@ export default {
   border: 2px solid rgb(0, 38, 101);
   border-right: none;
   width: 27px;
-  height: 250px;
+  height: 270px;
 }
 .sharetoken-tweet-button {
   margin-top: 10px;
@@ -107,7 +109,7 @@ img {
   color: rgb(0, 36, 102);
   font-weight: bold;
   text-transform: uppercase;
-  line-height: 4;
+  line-height: 3.235;
   text-align: left;
 }
 .sharetoken-content-4 {
@@ -126,7 +128,7 @@ img {
   .sharetoken-method-connect {
     margin-left: -10px;
     width: 10px;
-    height: 250px;
+    height: 270px;
   }
 }
 
@@ -134,7 +136,7 @@ img {
   .sharetoken-method-connect {
     margin-left: -27px;
     width: 27px;
-    height: 250px;
+    height: 270px;
   }
 }
 </style>

@@ -23,9 +23,7 @@
           <div class="space-40"></div>You give, we give back.
           <div class="space-40"></div>Like So :
         </div>
-        <div class="space-10"></div>
-        <TweetButton>@cryptoraves 1,000 @cryptoraves</TweetButton>
-        <div class="space-20"></div>
+        <TweetButton type2="true">@cryptoraves 1,000 @cryptoraves</TweetButton>
         <AppButton name="Show me a tweet demo" type4="true"></AppButton>
         <div class="reciprotoken-content-3">So what else can I do with this token?</div>
       </div>

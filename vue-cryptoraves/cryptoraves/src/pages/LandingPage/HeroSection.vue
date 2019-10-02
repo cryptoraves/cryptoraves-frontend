@@ -128,10 +128,10 @@ export default {
   line-height: 1.6;
 }
 .land-hero-cover-content {
-  font-size: 30px;
+  font-size: 25px;
   font-family: "Montserrat";
   color: rgb(255, 255, 255);
-  line-height: 1.5;
+  line-height: 1.6;
   padding-bottom: 30px;
 }
 </style>

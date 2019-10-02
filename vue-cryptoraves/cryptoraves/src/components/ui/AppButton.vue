@@ -2,6 +2,7 @@
   <button
     class="app-button"
     :class="{'app-button-gettoken':type1, 'app-button-gettoken1':type2, 'app-button-learnmore':type3, 'app-button-demo':type4}"
+    @click="buttonclick"
   >{{name}}</button>
 </template>
 
@@ -14,6 +15,15 @@ export default {
     type2: String,
     type3: String,
     type4: String
+  },
+  methods: {
+    buttonclick: function(event) {
+      if (this.type4 === "true" && this.name !== "See who is trending") {
+        this.$router.push({
+          name: "TweetDemo"
+        });
+      }
+    }
   }
 };
 </script>

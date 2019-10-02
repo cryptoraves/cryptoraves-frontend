@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Landing from "@/pages/LandingPage/LandingPage";
+import TweetDemo from "@/pages/TweetDemoPage/TweetDemoPage";
 import Confirmation from "@/components/Confirmation";
 import Portfolio from "@/components/Portfolio";
 import Faq from "@/components/Faq";
@@ -14,6 +15,11 @@ export default new Router({
       path: "/",
       name: "Landing",
       component: Landing
+    },
+    {
+      path: "/tweetdemo",
+      name: "TweetDemo",
+      component: TweetDemo
     },
     {
       path: "/faq/:top?",

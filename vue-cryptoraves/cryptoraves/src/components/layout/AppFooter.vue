@@ -53,15 +53,16 @@
             </a>
           </div>
         </div>
-        <div class="d-flex col-lg-2 col-sm-12">
+        <div class="whitelogo d-flex col-lg-2 col-sm-12">
           <a href="/">
             <img src="../../assets/img/whitelogo.png" />
           </a>
         </div>
       </div>
-      <a href="mailto:info@cryptoraves.space">
-        <div class="app-footer-email">Email us at info@Cryptoraves.space | FAQs</div>
-      </a>
+      <div class="app-footer-email">
+        <a href="mailto:info@cryptoraves.space">info@cryptoraves.space</a>|
+        <a href="/faq?top=true">FAQs</a>
+      </div>
     </div>
   </div>
 </template>
@@ -98,12 +99,16 @@ img {
   width: 150px;
 }
 .app-footer-email {
-  margin-top: 20px;
   font-size: 14px;
   font-family: "Montserrat";
   color: rgb(255, 255, 255);
   line-height: 2.857;
   text-align: center;
+}
+.app-footer-email a {
+  margin-left: 15px;
+  margin-right: 15px;
+  color: rgb(255, 255, 255);
 }
 .tweet-gradient {
   width: 50px;
@@ -352,6 +357,9 @@ img {
 @media only screen and (max-width: 991px) {
   .app-footer {
     height: 450px;
+  }
+  .whitelogo a {
+    margin: auto;
   }
   img {
     margin-bottom: 30px;

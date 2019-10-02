@@ -11,7 +11,7 @@
     <div class="space-100"></div>
     <div class="space-100"></div>
     <div class="space-100"></div>
-    <h2 id="faq">Pricy and Term</h2>
+    <h2 id="faq">Policy and Terms</h2>
   </div>
 </template>
 

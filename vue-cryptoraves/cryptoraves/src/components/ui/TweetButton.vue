@@ -3,7 +3,7 @@
     <div class="tweetbutton-shape">
       <i class="fa fa-twitter"></i>
     </div>
-    <div class="tweetbutton-text">
+    <div :class="{'tweetbutton-text1':type1, 'tweetbutton-text2':type2}">
       <slot></slot>
     </div>
   </div>
@@ -11,7 +11,11 @@
 
 <script>
 export default {
-  name: "TweetButton"
+  name: "TweetButton",
+  props: {
+    type1: String,
+    type2: String
+  }
 };
 </script>
 
@@ -22,6 +26,8 @@ export default {
   border-color: rgb(235, 235, 235);
   border-style: solid;
   border-radius: 5px;
+  margin-top: 15px;
+  margin-bottom: 15px;
   background-color: rgb(255, 255, 255);
   box-shadow: 0px 5px 29px 0px rgba(0, 0, 1, 0.11);
   display: flex;
@@ -65,7 +71,7 @@ export default {
   margin: auto auto auto 30px;
 }
 
-.tweetbutton-text {
+.tweetbutton-text1 {
   font-size: 25px;
   font-family: "Montserrat";
   color: rgb(42, 192, 236);
@@ -73,4 +79,15 @@ export default {
   text-align: left;
   margin: auto auto auto 3%;
 }
+
+.tweetbutton-text2 {
+  font-size: 20px;
+  font-family: "Montserrat";
+  color: rgb(42, 192, 236);
+  font-weight: bold;
+  text-align: left;
+  margin: auto auto auto 3%;
+}
 </style>
+
+

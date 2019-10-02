@@ -6,7 +6,11 @@
     <div class="tokensearch-input">
       <input type="text" placeholder="Type in your @username here" />
     </div>
-    <i class="fa fa-search"></i>
+    <div class="tokensearch-icon">
+      <router-link to="/portfolio">
+        <i class="fa fa-search"></i>
+      </router-link>
+    </div>
   </div>
 </template>
 
@@ -75,7 +79,7 @@ export default {
   text-align: center;
   border: none;
 }
-i {
+.tokensearch-icon {
   font-size: 20px;
   color: rgb(0, 38, 101);
   margin: auto;

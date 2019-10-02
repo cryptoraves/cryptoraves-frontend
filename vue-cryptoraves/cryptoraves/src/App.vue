@@ -61,14 +61,12 @@
 <script>
 import axios from "axios";
 import AppHeader from "./components/layout/AppHeader";
-import LandingPage from "./pages/LandingPage/LandingPage";
 import AppFooter from "./components/layout/AppFooter";
 
 export default {
   name: "App",
   components: {
     AppHeader,
-    LandingPage,
     AppFooter
   },
   data() {
@@ -178,6 +176,10 @@ export default {
 </script>
 
 <style lang="scss">
+@import url("https://fonts.googleapis.com/css?family=Roboto+Condensed");
+@import url("https://fonts.googleapis.com/css?family=Roboto+Condensed:Bold");
+@import url("https://fonts.googleapis.com/css?family=Montserrat");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:Bold");
 @import url("./assets/css/font-awesome.min.css");
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
 @import url("./assets/css/style.css");

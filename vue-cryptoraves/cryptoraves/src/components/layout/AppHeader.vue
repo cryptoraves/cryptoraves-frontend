@@ -60,7 +60,6 @@ export default {
   height: 100px;
   display: flex;
   box-shadow: 2.5px 4.33px 24px rgba(0, 0, 1, 0.11);
-  z-index: 9999999;
 }
 .app-header-container {
   margin: auto;
@@ -75,6 +74,7 @@ img {
 .app-header-leaderboard {
   font-size: 14px;
   font-family: "Montserrat";
+  font-weight: bold;
   color: rgba(40, 40, 40, 0.8);
   text-align: center;
   margin-right: 20px;
@@ -100,10 +100,9 @@ img {
   height: 38px;
   border: none;
   font-size: 14px;
-  line-height: 3.929;
+  line-height: 1.929;
   color: rgba(40, 40, 40, 0.702);
   font-family: "Montserrat";
-  font-weight: 300;
 }
 .app-header-icon {
   color: black;
