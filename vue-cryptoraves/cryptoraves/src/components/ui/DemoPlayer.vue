@@ -19,11 +19,14 @@ export default {
 </script>
 <style scoped>
 .demoplayer {
-  padding: 20px;
+  /* padding: 20px;
   border: 1px solid lightgrey;
   -webkit-box-shadow: 0px 0px 20px -1px rgba(106, 219, 252, 1);
   -moz-box-shadow: 0px 0px 20px -1px rgba(106, 219, 252, 1);
-  box-shadow: 0px 0px 20px -1px rgba(106, 219, 252, 1);
+  box-shadow: 0px 0px 20px -1px rgba(106, 219, 252, 1); */
+  background-color: #ffe;
+  box-shadow: 0 0 1em 1px rgba(0, 0, 0, 0.25);
+  padding: 2em;
 }
 .demoplayer img {
   border: 1px solid grey;
@@ -46,5 +49,18 @@ export default {
   color: rgb(0, 38, 101);
   line-height: 1.4;
   text-align: left;
+}
+@media only screen and (max-width: 375px) {
+  .demoplayer {
+    padding: 1em;
+  }
+  .demoplayer-content .demoplayer-title {
+    font-size: 20px;
+    line-height: 1.4;
+  }
+  .demoplayer-content .demoplayer-text {
+    font-size: 15px;
+    line-height: 1.4;
+  }
 }
 </style>

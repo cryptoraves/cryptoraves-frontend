@@ -17,7 +17,7 @@
           class="gettoken-content-3"
           v-on:click="goFaq"
         >By Tweeting @cryptoraves, you agree to our Privacy Policy & Terms of Service</div>
-        <AppButton name="Show me a tweet demo" type4="true"></AppButton>
+        <AppButton name="Show me a tweet demo" type4="true" target="drop"></AppButton>
         <div class="gettoken-content-4">
           That's it! You did it. You have your own,
           <br />personalized crypto!!!
@@ -58,7 +58,7 @@ export default {
   padding-top: 40px;
   padding-bottom: 40px;
 }
-img {
+a {
   margin: auto;
 }
 .gettoken-content-1 {
@@ -119,7 +119,16 @@ img {
 
 @media only screen and (max-width: 375px) {
   img {
-    width: 300px;
+    width: 200px;
+  }
+  .gettoken-content-3 {
+    line-height: 2.583;
+  }
+  .gettoken-content-4 {
+    margin-top: 25px;
+  }
+  .gettoken-content-5 {
+    line-height: 2;
   }
 }
 </style>

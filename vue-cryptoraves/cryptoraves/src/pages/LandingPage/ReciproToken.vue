@@ -15,16 +15,15 @@
           And we want to help. In fact,
           <a
             href="https://medium.com/p/2bd4715d9af6/edit"
+            target="_blank"
           >we'll match you!</a> Up to
-          <b>
-            1
-            <br />Million tokens
-          </b> right now.
+          <br />
+          <b>1 Million tokens</b> right now.
           <div class="space-40"></div>You give, we give back.
           <div class="space-40"></div>Like So :
         </div>
         <TweetButton type2="true">@cryptoraves 1,000 @cryptoraves</TweetButton>
-        <AppButton name="Show me a tweet demo" type4="true"></AppButton>
+        <AppButton name="Show me a tweet demo" type4="true" target="recipro"></AppButton>
         <div class="reciprotoken-content-3">So what else can I do with this token?</div>
       </div>
     </div>
@@ -81,7 +80,13 @@ img {
 }
 @media only screen and (max-width: 375px) {
   img {
-    width: 300px;
+    width: 200px;
+  }
+  .reciprotoken-content-1 {
+    text-align: center;
+  }
+  .space-40 {
+    height: 20px;
   }
 }
 </style>

@@ -87,7 +87,10 @@ img {
 }
 @media only screen and (max-width: 375px) {
   .checktoken-img {
-    width: 300px;
+    width: 200px;
+  }
+  .checktoken-content-1 {
+    text-align: center;
   }
 }
 </style>

@@ -17,7 +17,7 @@ export default new Router({
       component: Landing
     },
     {
-      path: "/tweetdemo",
+      path: "/tweetdemo/:target?",
       name: "TweetDemo",
       component: TweetDemo
     },

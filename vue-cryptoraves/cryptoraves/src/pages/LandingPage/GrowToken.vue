@@ -18,6 +18,10 @@
             generously
             <div class="space-30"></div>AND, if you GET tokens, give some right back! Reciprocate
             -it's the most powerful way to increase your token's value
+            <div class="space-30"></div>Learn more
+            <a href="https://medium.com/p/84bc6b18554f/edit" target="_blank">
+              <b>here</b>
+            </a>
           </div>
           <div class="space-90"></div>
           <div class="growtoken-content-3">Reciprocation raises your value? Tell me more</div>
@@ -72,5 +76,10 @@ a {
   color: rgba(0, 38, 101, 0.702);
   line-height: 2.333;
   text-align: right;
+}
+@media only screen and (max-width: 375px) {
+  img {
+    width: 200px;
+  }
 }
 </style>

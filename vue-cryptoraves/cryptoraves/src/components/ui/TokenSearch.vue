@@ -84,4 +84,22 @@ export default {
   color: rgb(0, 38, 101);
   margin: auto;
 }
+@media only screen and (max-width: 375px) {
+  .tokensearch-shape {
+    width: 66px;
+    height: 66px;
+  }
+  .tokensearch-shape:before {
+    border-left: 21px solid rgb(2, 49, 124);
+    border-bottom: 66px solid transparent;
+  }
+  .tokensearch-shape img {
+    width: 50px;
+    height: 50px;
+    margin: auto auto auto 10px;
+  }
+  .tokensearch-input input {
+    font-size: 13px;
+  }
+}
 </style>

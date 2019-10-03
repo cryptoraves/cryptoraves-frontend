@@ -14,13 +14,17 @@ export default {
     type1: String,
     type2: String,
     type3: String,
-    type4: String
+    type4: String,
+    target: String
   },
   methods: {
     buttonclick: function(event) {
       if (this.type4 === "true" && this.name !== "See who is trending") {
         this.$router.push({
-          name: "TweetDemo"
+          name: "TweetDemo",
+          query: {
+            target: this.target
+          }
         });
       }
     }

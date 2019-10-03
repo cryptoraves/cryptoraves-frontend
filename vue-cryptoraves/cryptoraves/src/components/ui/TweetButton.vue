@@ -72,12 +72,12 @@ export default {
 }
 
 .tweetbutton-text1 {
-  font-size: 25px;
+  font-size: 22px;
   font-family: "Montserrat";
   color: rgb(42, 192, 236);
   font-weight: bold;
   text-align: left;
-  margin: auto auto auto 3%;
+  margin: auto auto auto 8%;
 }
 
 .tweetbutton-text2 {
@@ -86,7 +86,36 @@ export default {
   color: rgb(42, 192, 236);
   font-weight: bold;
   text-align: left;
-  margin: auto auto auto 3%;
+  margin: auto auto auto 8%;
+}
+@media only screen and (max-width: 375px) {
+  .tweetbutton-shape {
+    width: 66px;
+    height: 66px;
+  }
+  .tweetbutton-shape:before {
+    border-bottom: 66px solid transparent;
+    border-left: 21px solid rgb(106, 219, 252);
+  }
+  .tweetbutton-shape i {
+    margin: auto auto auto 20px;
+    font-size: 40px;
+  }
+  .tweetbutton-text1 {
+    font-size: 15px;
+  }
+  .tweetbutton-text2 {
+    font-size: 15px;
+  }
+  .gettoken-content-3 {
+    line-height: 2.583;
+  }
+  .gettoken-content-4 {
+    margin-top: 15px;
+  }
+  .gettoken-content-5 {
+    line-height: 2;
+  }
 }
 </style>
 

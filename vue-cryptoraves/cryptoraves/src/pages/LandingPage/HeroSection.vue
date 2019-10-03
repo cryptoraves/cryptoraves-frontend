@@ -134,4 +134,12 @@ export default {
   line-height: 1.6;
   padding-bottom: 30px;
 }
+@media only screen and (max-width: 375px) {
+  .land-hero-cover-title {
+    font-size: 30px;
+  }
+  .land-hero-cover-content {
+    font-size: 18px;
+  }
+}
 </style>

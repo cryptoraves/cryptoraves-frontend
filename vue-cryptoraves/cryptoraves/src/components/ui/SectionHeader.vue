@@ -24,4 +24,13 @@ export default {
   height: 100%;
   margin-top: 50px;
 }
+@media only screen and (max-width: 375px) {
+  .section-header {
+    font-size: 20px;
+  }
+  .section-header img {
+    width: 70px;
+    margin-top: 25px;
+  }
+}
 </style>

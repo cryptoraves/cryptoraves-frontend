@@ -20,12 +20,12 @@
             <MethodButton number="1">Tag & Tweet</MethodButton>
             <div class="sharetoken-tweet-button">
               <TweetButton type2="true">@cryptoraves 1,000 @username</TweetButton>
-              <AppButton name="Show me a Tweet Demo" type4="true"></AppButton>
+              <AppButton name="Show me a Tweet Demo" type4="true" target="tag"></AppButton>
             </div>
             <MethodButton number="2">Reply with Tokens</MethodButton>
             <div class="sharetoken-tweet-button">
               <TweetButton type2="true">@cryptoraves 1,000</TweetButton>
-              <AppButton name="Show me a Tweet Demo" type4="true"></AppButton>
+              <AppButton name="Show me a Tweet Demo" type4="true" target="reply"></AppButton>
             </div>
           </div>
           <div class="sharetoken-content-4">
@@ -137,6 +137,15 @@ img {
     margin-left: -27px;
     width: 27px;
     height: 270px;
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  img {
+    width: 200px;
+  }
+  .sharetoken-method-connect {
+    height: 241px;
   }
 }
 </style>

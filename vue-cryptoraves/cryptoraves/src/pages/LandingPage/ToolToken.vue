@@ -69,4 +69,9 @@ img {
   line-height: 1.333;
   text-align: left;
 }
+@media only screen and (max-width: 375px) {
+  img {
+    width: 200px;
+  }
+}
 </style>
