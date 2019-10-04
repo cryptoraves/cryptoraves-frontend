@@ -1,12 +1,11 @@
 <template>
   <div class="faq-section">
-    <div class="faq-section-rectangle d-flex">
-      <div class="faq-section-circle d-flex">
-        <div class="faq-section-circle-txt">
-          <slot name="number"></slot>
-        </div>
+    <div class="faq-section-title">
+      <div class="faq-section-img">
+        <img src="../../assets/img/checkitemimg.png" />
       </div>
-      <div class="faq-section-rectangle-txt">
+
+      <div class="faq-section-text">
         <slot name="title"></slot>
       </div>
     </div>
@@ -25,9 +24,30 @@ export default {
 .faq-section {
   margin: 2em 0 2em 0;
 }
-.faq-section-content {
-  margin: 10px 50px 10px 50px;
+.faq-section-title {
+  display: flex;
+}
+
+.faq-section-img {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+.faq-section-img img {
+  width: 30px;
+  height: 30px;
+}
+.faq-section-text {
   font-size: 25px;
+  font-family: "Montserrat";
+  color: rgb(0, 38, 101);
+  font-weight: bold;
+  text-align: left;
+}
+
+.faq-section-content {
+  margin: 10px 0px 10px 100px;
+  font-size: 20px;
   font-family: "Montserrat";
   color: rgb(0, 38, 101);
   line-height: 1.4;
@@ -37,56 +57,24 @@ export default {
   text-decoration: underline;
 }
 
-.faq-section-rectangle {
-  background-color: rgb(0, 38, 101);
-  margin-left: 20px;
-  border-radius: 30px;
-  position: relative;
-}
-.faq-section-rectangle::before {
-  content: "";
-  position: absolute;
-  right: 0px;
-  bottom: 0;
-  width: 0;
-  height: 0;
-  border-right: 30px solid #ffe;
-  border-top: 30px solid transparent;
-}
-.faq-section-circle {
-  position: absolute;
-  height: 40px;
-  width: 40px;
-  margin-left: -20px;
-  margin-top: -8px;
-  background: white;
-  border-radius: 50px;
-  box-shadow: 0px 5px 29px 0px rgba(0, 0, 1, 0.11);
-}
-
-.faq-section-circle-txt {
-  font-size: 30px;
-  font-family: "Montserrat";
-  color: rgb(0, 38, 101);
-  font-weight: bold;
-  text-align: center;
-  margin: auto;
-}
-.faq-section-rectangle-txt {
-  font-size: 25px;
-  font-family: "Montserrat";
-  color: white;
-  font-weight: bold;
-  text-align: left;
-  margin: auto auto auto 30px;
-}
-
 @media only screen and (max-width: 375px) {
   .faq-section-rectangle-txt {
     font-size: 15px;
   }
-  .faq-section-content {
+
+  .faq-section-img img {
+    width: 15px;
+    height: 15px;
+  }
+  .faq-section-text {
     font-size: 15px;
+  }
+  .faq-section-content {
+    font-size: 10px;
+    margin-left: 50px;
+  }
+  .faq-section-text {
+    text-align: justify;
   }
 }
 </style>

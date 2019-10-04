@@ -10,16 +10,28 @@
         <div class="checktoken-list">
           <ul>
             <li>
-              <img src="../../assets/img/checkitemimg.png" />
-              Your token portfolio (tokens others have shared with you)
+              <div class="d-flex">
+                <div>
+                  <img src="../../assets/img/checkitemimg.png" />
+                </div>
+                <div>Your token portfolio (tokens others have shared with you)</div>
+              </div>
             </li>
             <li>
-              <img src="../../assets/img/checkitemimg.png" />
-              Your token's ranking
+              <div class="d-flex">
+                <div>
+                  <img src="../../assets/img/checkitemimg.png" />
+                </div>
+                <div>Your token's ranking</div>
+              </div>
             </li>
             <li>
-              <img src="../../assets/img/checkitemimg.png" />
-              Your balance of remaining tokens
+              <div class="d-flex">
+                <div>
+                  <img src="../../assets/img/checkitemimg.png" />
+                </div>
+                <div>Your balance of remaining tokens</div>
+              </div>
             </li>
           </ul>
         </div>
@@ -90,7 +102,7 @@ img {
     width: 200px;
   }
   .checktoken-content-1 {
-    text-align: center;
+    font-size: 20px;
   }
 }
 </style>

@@ -1,14 +1,12 @@
 <template>
-  <div class id="replytoken">
-    <div class="container">
-      <SectionHeader>Reply with Tokens</SectionHeader>
-      <div class="replytoken-content">
-        <DemoPlayer
-          :image="require('../../assets/gif/replytoken.gif')"
-          demotitle="Reply with Tokens"
-          demotext="Explain about Reply with Tokens"
-        ></DemoPlayer>
-      </div>
+  <div class="container">
+    <SectionHeader>Reply with Tokens</SectionHeader>
+    <div class="replytoken-content">
+      <DemoPlayer
+        :image="require('../../assets/gif/replytoken.gif')"
+        demotitle="Reply with Tokens"
+        demotext="Make your reply count! Amplify your hearts. Give them some of your tokens!"
+      ></DemoPlayer>
     </div>
   </div>
 </template>

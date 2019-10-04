@@ -24,7 +24,7 @@ export default {
   -webkit-box-shadow: 0px 0px 20px -1px rgba(106, 219, 252, 1);
   -moz-box-shadow: 0px 0px 20px -1px rgba(106, 219, 252, 1);
   box-shadow: 0px 0px 20px -1px rgba(106, 219, 252, 1); */
-  background-color: #ffe;
+  background-color: white;
   box-shadow: 0 0 1em 1px rgba(0, 0, 0, 0.25);
   padding: 2em;
 }

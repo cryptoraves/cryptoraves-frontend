@@ -10,7 +10,7 @@
           <div class="sharetoken-content-1">Find a Rad Human & Share!</div>
           <div class="sharetoken-content-2">
             Amplify your hearts. Give appreciation with a personal crypto
-            <br />touch. It feels good!
+            touch. It feels good!
           </div>
           <div class="space-20"></div>
           <div class="sharetoken-content-3">To share, just Tweet. Two ways.</div>
@@ -146,6 +146,16 @@ img {
   }
   .sharetoken-method-connect {
     height: 241px;
+  }
+  .sharetoken-content-1 {
+    font-size: 20px;
+  }
+  .sharetoken-content-2 {
+    margin-top: 10px;
+  }
+  .sharetoken-content-4 {
+    margin-top: -30px;
+    margin-bottom: 20px;
   }
 }
 </style>

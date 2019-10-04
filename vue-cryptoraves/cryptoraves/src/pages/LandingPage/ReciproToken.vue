@@ -16,7 +16,8 @@
           <a
             href="https://medium.com/p/2bd4715d9af6/edit"
             target="_blank"
-          >we'll match you!</a> Up to
+          >we'll match you!</a>
+          Up to
           <br />
           <b>1 Million tokens</b> right now.
           <div class="space-40"></div>You give, we give back.
@@ -83,10 +84,16 @@ img {
     width: 200px;
   }
   .reciprotoken-content-1 {
-    text-align: center;
+    font-size: 20px;
   }
   .space-40 {
-    height: 20px;
+    height: 10px;
+  }
+  br {
+    display: none;
+  }
+  .reciprotoken-content-3 {
+    margin-top: 20px;
   }
 }
 </style>

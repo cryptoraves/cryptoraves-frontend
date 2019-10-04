@@ -81,5 +81,9 @@ a {
   img {
     width: 200px;
   }
+  .growtoken-content-1 {
+    font-size: 20px;
+    text-align: center;
+  }
 }
 </style>

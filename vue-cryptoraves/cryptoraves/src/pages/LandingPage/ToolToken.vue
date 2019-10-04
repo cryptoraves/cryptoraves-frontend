@@ -73,5 +73,17 @@ img {
   img {
     width: 200px;
   }
+  .tooltoken-content-1 {
+    font-size: 20px;
+  }
+  .space-30 {
+    height: 10px;
+  }
+  .tooltoken-content-3 {
+    font-size: 20px;
+  }
+  .tooltoken-content {
+    padding-bottom: 50px;
+  }
 }
 </style>

@@ -18,10 +18,9 @@
           v-on:click="goFaq"
         >By Tweeting @cryptoraves, you agree to our Privacy Policy & Terms of Service</div>
         <AppButton name="Show me a tweet demo" type4="true" target="drop"></AppButton>
-        <div class="gettoken-content-4">
-          That's it! You did it. You have your own,
-          <br />personalized crypto!!!
-        </div>
+        <div
+          class="gettoken-content-4"
+        >That's it! You did it. You have your own, personalized crypto!!!</div>
         <div class="gettoken-content-5">Please allow 4-5 minutes for the transaction to finalize.</div>
         <div class="gettoken-content-6">Cool! But now what..?</div>
       </div>
@@ -128,7 +127,9 @@ a {
     margin-top: 25px;
   }
   .gettoken-content-5 {
-    line-height: 2;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    line-height: 1.5;
   }
 }
 </style>

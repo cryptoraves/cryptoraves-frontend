@@ -1,9 +1,17 @@
 <template>
   <div>
-    <DropToken id="drop"></DropToken>
-    <TagToken id="tag"></TagToken>
-    <ReplyToken id="reply"></ReplyToken>
-    <ReciprocationToken id="recipro"></ReciprocationToken>
+    <div id="drop">
+      <DropToken></DropToken>
+    </div>
+    <div id="tag">
+      <TagToken></TagToken>
+    </div>
+    <div id="reply">
+      <ReplyToken></ReplyToken>
+    </div>
+    <div id="recipro">
+      <ReciprocationToken></ReciprocationToken>
+    </div>
   </div>
 </template>
 
@@ -24,18 +32,24 @@ export default {
   mounted: function() {
     this.$nextTick(function() {
       if (this.$route.query.target == "drop") {
-        window.scrollTo(0, this.getOffsetLeft(document.getElementById("drop")));
+        window.scrollTo(
+          0,
+          this.getOffsetLeft(document.getElementById("drop")) + 200
+        );
       } else if (this.$route.query.target == "tag") {
-        window.scrollTo(0, this.getOffsetLeft(document.getElementById("tag")));
+        window.scrollTo(
+          0,
+          this.getOffsetLeft(document.getElementById("tag")) + 200
+        );
       } else if (this.$route.query.target == "reply") {
         window.scrollTo(
           0,
-          this.getOffsetLeft(document.getElementById("reply"))
+          this.getOffsetLeft(document.getElementById("reply")) + 200
         );
       } else if (this.$route.query.target == "recipro") {
         window.scrollTo(
           0,
-          this.getOffsetLeft(document.getElementById("recipro"))
+          this.getOffsetLeft(document.getElementById("recipro")) + 200
         );
       } else window.scrollTo(0, 0);
     });
@@ -56,3 +70,11 @@ export default {
   }
 };
 </script>
+<style scoped>
+#tag {
+  background-color: rgb(246, 250, 251);
+}
+#recipro {
+  background-color: rgb(246, 250, 251);
+}
+</style>

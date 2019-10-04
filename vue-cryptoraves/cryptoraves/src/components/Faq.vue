@@ -3,7 +3,6 @@
     <div class="faq-page-template">
       <SectionHeader>FAQ</SectionHeader>
       <FaqSection>
-        <div slot="number">1</div>
         <div slot="title">What are Cryptoraves Tokens & Why Should I Use Them?</div>
         <div slot="answer">
           Request 1 Billion of your own
@@ -24,14 +23,12 @@
         </div>
       </FaqSection>
       <FaqSection>
-        <div slot="number">2</div>
         <div slot="title">How do I create an account?</div>
         <div
           slot="answer"
         >You don’t need to create an account. You heard that right!!! We’re trying to make our platform as easy to use as possible. Just search for your Twitter @username in the header search bar. You’ll see all your tokens and transactions listed there. And since we have a public database, you’ll be able to see other users’ transactions, too.</div>
       </FaqSection>
       <FaqSection>
-        <div slot="number">3</div>
         <div
           slot="title"
         >I need more details on how to do this... How do I share tokens & check my balance? How do I confirm transactions on the blockchain? How do I know if my transaction went through?</div>
@@ -44,7 +41,6 @@
         </div>
       </FaqSection>
       <FaqSection>
-        <div slot="number">4</div>
         <div
           slot="title"
         >I’m a blockchain geek. Give the scoop. What platform are you using? Is the project open source? Can I export tokens to mainnet?</div>
@@ -63,7 +59,6 @@
         </div>
       </FaqSection>
       <FaqSection>
-        <div slot="number">5</div>
         <div
           slot="title"
         >I’m working on a Dapp, and I’m interested in partnering with Cryptoraves. Who do I contact?</div>
@@ -72,9 +67,8 @@
         >Cool! Yes, we’re totally interested in partnering up. Our platform can serve as a way to demonstrate or promote your token, right on Twitter. Email shannon@cryptoraves.space for more details.</div>
       </FaqSection>
       <FaqSection>
-        <div id="faq" slot="number">6</div>
         <div slot="title">What is the Cryptoraves Privacy Policy?</div>
-        <div slot="answer">
+        <div id="faq" slot="answer">
           By Tweeting: @cryptoraves #DropMyCrypto, or by Tweeting any command request tagging @cryptoraves, you agree to our Privacy Policy, as follows:
           <br />
           <br />The Cryptoraves platform is public, and token transactions requested by our users are immediately viewable and searchable on our website.
@@ -88,7 +82,6 @@
         </div>
       </FaqSection>
       <FaqSection>
-        <div slot="number">7</div>
         <div slot="title">What are the Cryptoraves Terms of Service?</div>
         <div slot="answer">
           By Tweeting: @cryptoraves #DropMyCrypto, or by Tweeting any command request tagging @cryptoraves, you agree to our Privacy Policy, as follows:
@@ -101,7 +94,6 @@
         </div>
       </FaqSection>
       <FaqSection>
-        <div slot="number">8</div>
         <div slot="title">How do I opt out of Auto Replies?</div>
         <div slot="answer">
           Please email your Twitter @username to
@@ -111,7 +103,6 @@
         </div>
       </FaqSection>
       <FaqSection>
-        <div slot="number">9</div>
         <div slot="title">What if I have additional questions?</div>
         <div slot="answer">
           You can email us at
@@ -162,7 +153,7 @@ export default {
 </script>
 <style scoped>
 .faq-page-template {
-  background-color: #ffe;
+  background-color: white;
   box-shadow: 0 0 1em 1px rgba(0, 0, 0, 0.25);
   width: 100%;
   padding: 0 2em 2em 2em;

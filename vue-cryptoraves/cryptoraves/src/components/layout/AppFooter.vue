@@ -40,13 +40,13 @@
               </div>
             </a>
 
-            <a href="/" target="_blank">
+            <a href="https://t.me/cryptoraves1" target="_blank">
               <div class="d-flex telegram-gradient">
                 <i class="fa fa-telegram"></i>
               </div>
             </a>
 
-            <a href="/" target="_blank">
+            <a href="https://discordapp.com/" target="_blank">
               <div class="d-flex slideshare-gradient">
                 <i class="fa fa-slideshare"></i>
               </div>
@@ -61,7 +61,7 @@
       </div>
       <div class="app-footer-email">
         <a href="mailto:info@cryptoraves.space">info@cryptoraves.space</a>|
-        <a href="/faq?top=true">FAQs</a>
+        <span v-on:click="goFaqTop">FAQs</span>
       </div>
     </div>
   </div>
@@ -74,6 +74,16 @@ export default {
   name: "AppFooter",
   components: {
     AppButton
+  },
+  methods: {
+    goFaqTop: function(event) {
+      this.$router.push({
+        name: "Faq",
+        query: {
+          top: true
+        }
+      });
+    }
   }
 };
 </script>
@@ -106,9 +116,13 @@ img {
   text-align: center;
 }
 .app-footer-email a {
-  margin-left: 15px;
   margin-right: 15px;
   color: rgb(255, 255, 255);
+}
+.app-footer-email span {
+  margin-left: 15px;
+  color: white;
+  cursor: pointer;
 }
 .tweet-gradient {
   width: 50px;
@@ -376,6 +390,19 @@ img {
     justify-content: center;
     display: flex;
     flex-wrap: wrap;
+  }
+  .app-footer {
+    height: 450px;
+  }
+  .whitelogo a {
+    margin: auto;
+  }
+  img {
+    margin-bottom: 30px;
+    margin-top: 30px;
+  }
+  .app-footer-email {
+    margin-top: 10px;
   }
 }
 </style>
