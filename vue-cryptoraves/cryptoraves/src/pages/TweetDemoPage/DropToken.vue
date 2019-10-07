@@ -1,10 +1,10 @@
 <template>
   <div class="container">
-    <SectionHeader>#DROP My Crypto</SectionHeader>
+    <SectionHeader>#DropMyCrypto</SectionHeader>
     <div class="droptoken-content">
       <DemoPlayer
         :image="require('../../assets/gif/droptoken.gif')"
-        demotitle="#DROP My Crypto"
+        demotitle="#DropMyCrypto"
         demotext="Would you like 1 Billion Personalized ERC-20 Tokens for Twitter? Sweet! All you have to do is Tweet!"
       ></DemoPlayer>
     </div>

@@ -9,9 +9,11 @@
             </a>
           </div>
         </div>
-        <div class="col-lg-10 col-sm-12 text-right">
+        <div class="d-flex d-flex-right col-lg-4 col-sm-12">
+          <div class="app-header-leaderboard">LEADERBOARD</div>
+        </div>
+        <div class="col-lg-6 col-sm-12 text-right">
           <div class="d-flex d-flex-right form-group mt-3">
-            <div class="col-lg-2 col-sm-12 app-header-leaderboard">LEADERBOARD</div>
             <div class="d-flex app-header-searchbar">
               <!-- <input type="text" v-model="user" @change="goPortfolio" list="mylist" id="autoSelect" class="form-control c-search-input" placeholder="Search for Twitter handle." /> -->
               <input type="text" class="app-header-input" placeholder="Lookup Twitter @username." />
@@ -77,7 +79,7 @@ img {
   font-weight: bold;
   color: rgba(40, 40, 40, 0.8);
   text-align: center;
-  margin-right: 20px;
+  margin-left: auto;
   cursor: pointer;
 }
 .app-header-leaderboard:hover {
@@ -101,7 +103,7 @@ img {
   border: none;
   font-size: 14px;
   line-height: 1.929;
-  color: rgba(40, 40, 40, 0.702);
+  color: black;
   font-family: "Montserrat";
 }
 .app-header-icon {
@@ -109,16 +111,11 @@ img {
   font-size: 20px;
   margin: auto;
 }
-
-@media only screen and (min-width: 0px) and (max-width: 767px) {
-  .app-header-logoarea {
-    text-align: center;
-  }
+@media only screen and (max-width: 1200px) {
   .app-header-leaderboard {
-    display: none;
+    margin-right: 50px;
   }
 }
-
 @media only screen and (max-width: 991px) {
   .app-header-logoarea {
     text-align: center;
@@ -127,7 +124,14 @@ img {
     height: 200px;
   }
   .app-header-leaderboard {
-    display: none;
+    margin-top: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+@media only screen and (min-width: 0px) and (max-width: 767px) {
+  .app-header-logoarea {
+    text-align: center;
   }
 }
 </style>

@@ -140,9 +140,9 @@ img {
   }
 }
 
-@media only screen and (max-width: 375px) {
+@media only screen and (max-width: 500px) {
   img {
-    width: 200px;
+    width: 300px;
   }
   .sharetoken-method-connect {
     height: 241px;
@@ -156,6 +156,18 @@ img {
   .sharetoken-content-4 {
     margin-top: -30px;
     margin-bottom: 20px;
+  }
+  .sharetoken-method-connect {
+    margin-left: -10px;
+    width: 10px;
+    height: 270px;
+  }
+}
+@media only screen and (max-width: 375px) {
+  .sharetoken-method-connect {
+    margin-left: -10px;
+    width: 10px;
+    height: 245px;
   }
 }
 </style>

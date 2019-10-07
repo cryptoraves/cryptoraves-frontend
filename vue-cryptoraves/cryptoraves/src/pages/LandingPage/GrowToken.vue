@@ -77,9 +77,9 @@ a {
   line-height: 2.333;
   text-align: right;
 }
-@media only screen and (max-width: 375px) {
+@media only screen and (max-width: 500px) {
   img {
-    width: 200px;
+    width: 300px;
   }
   .growtoken-content-1 {
     font-size: 20px;

@@ -19,7 +19,9 @@
             >here</a>
           </div>
           <div class="space-30"></div>
-          <div class="tooltoken-content-3">How will you use YOUR token?</div>
+          <div class="tooltoken-content-3">
+            <i>How will you use YOUR token?</i>
+          </div>
         </div>
       </div>
     </div>
@@ -62,16 +64,16 @@ img {
   line-height: 2;
 }
 .tooltoken-content-3 {
-  font-size: 30px;
+  font-size: 25px;
   font-family: "Montserrat";
   color: rgb(18, 220, 66);
   font-weight: bold;
   line-height: 1.333;
   text-align: left;
 }
-@media only screen and (max-width: 375px) {
+@media only screen and (max-width: 500px) {
   img {
-    width: 200px;
+    width: 300px;
   }
   .tooltoken-content-1 {
     font-size: 20px;

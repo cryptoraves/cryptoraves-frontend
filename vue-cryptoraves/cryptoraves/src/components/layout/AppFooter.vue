@@ -54,7 +54,7 @@
           </div>
         </div>
         <div class="whitelogo d-flex col-lg-2 col-sm-12">
-          <a href="/">
+          <a class="d-flex" href="/">
             <img src="../../assets/img/whitelogo.png" />
           </a>
         </div>
@@ -383,7 +383,7 @@ img {
     margin-top: 10px;
   }
 }
-@media only screen and (max-width: 375px) {
+@media only screen and (max-width: 430px) {
   .social-group {
     width: 256px;
     margin: auto;

@@ -4,7 +4,7 @@
       <img src="../../assets/img/searchicon.png" />
     </div>
     <div class="tokensearch-input">
-      <input type="text" placeholder="Type in your @username here" />
+      <input type="text" placeholder="Lookup Twitter @username" />
     </div>
     <div class="tokensearch-icon">
       <router-link to="/portfolio">
@@ -75,15 +75,49 @@ export default {
   height: 100%;
   font-size: 20px;
   font-family: "Montserrat";
-  color: rgba(40, 40, 40, 0.502);
-  text-align: center;
+  color: black;
+  text-align: left;
   border: none;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
 }
+
 .tokensearch-icon {
   font-size: 20px;
   color: rgb(0, 38, 101);
   margin: auto;
 }
+@media only screen and (max-width: 500px) {
+  ::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    white-space: pre-line;
+    position: relative;
+    top: -10px;
+  }
+  ::-moz-placeholder {
+    /* Firefox 19+ */
+    white-space: pre-line;
+    position: relative;
+    top: -10px;
+  }
+  :-ms-input-placeholder {
+    /* IE 10+ */
+    white-space: pre-line;
+    position: relative;
+    top: -10px;
+  }
+  :-moz-placeholder {
+    /* Firefox 18- */
+    white-space: pre-line;
+    position: relative;
+    top: -10px;
+  }
+  .tokensearch-input {
+    width: 55%;
+  }
+}
+
 @media only screen and (max-width: 375px) {
   .tokensearch-shape {
     width: 66px;
@@ -100,6 +134,30 @@ export default {
   }
   .tokensearch-input input {
     font-size: 13px;
+  }
+  ::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    white-space: pre-line;
+    position: relative;
+    top: 0px;
+  }
+  ::-moz-placeholder {
+    /* Firefox 19+ */
+    white-space: pre-line;
+    position: relative;
+    top: 0px;
+  }
+  :-ms-input-placeholder {
+    /* IE 10+ */
+    white-space: pre-line;
+    position: relative;
+    top: 0px;
+  }
+  :-moz-placeholder {
+    /* Firefox 18- */
+    white-space: pre-line;
+    position: relative;
+    top: 0px;
   }
 }
 </style>

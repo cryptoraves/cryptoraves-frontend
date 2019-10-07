@@ -1,17 +1,23 @@
 <template>
   <div class="land-hero">
-    <div class="land-hero-cover">
-      <div class="land-hero-cover-title">
-        You + ( Being Awesome ) = ( Token Value )
-        <sup>2</sup>
+    <div class="land-hero-cover container">
+      <div class="row">
+        <div class="land-hero-cover">
+          <div class="land-hero-cover-title">
+            You + (Being Awesome) = (Token Value)
+            <sup>2</sup>
+          </div>
+          <div class="land-hero-cover-content">
+            They’re Personalized Tokens You Can Tweet, For FUN!
+            <br />Test Drive Your Own Token Economy. Right On Twitter.
+          </div>
+        </div>
       </div>
-      <div class="land-hero-cover-content">
-        They’re Personalized Tokens You Can Tweet, For FUN!
-        <br />Test Drive Your Own Token Economy. Right On Twitter.
-      </div>
-      <router-link
-        to="/"
-        v-scroll-to="{
+      <div class="row">
+        <div class="land-hero-cover">
+          <router-link
+            to="/"
+            v-scroll-to="{
                             el: '#getToken',
                             duration: 500,
                             easing: 'linear',
@@ -19,12 +25,14 @@
                             force: true,
                             cancelable: true,
                         }"
-      >
-        <AppButton name="Get Your tokens" type2="true"></AppButton>
-      </router-link>
-      <span v-on:click="goFaqTop">
-        <AppButton name="Learn More" type3="true"></AppButton>
-      </span>
+          >
+            <AppButton name="Get Your tokens" type2="true"></AppButton>
+          </router-link>
+          <span v-on:click="goFaqTop">
+            <AppButton name="Learn More" type3="true"></AppButton>
+          </span>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -121,25 +129,50 @@ export default {
   text-align: center;
 }
 .land-hero-cover-title {
-  font-size: 50px;
+  font-size: 3.5rem;
   font-family: "Roboto Condensed";
   color: rgb(255, 255, 255);
   font-weight: bold;
   line-height: 1.6;
 }
 .land-hero-cover-content {
-  font-size: 25px;
+  font-size: 2rem;
   font-family: "Montserrat";
   color: rgb(255, 255, 255);
   line-height: 1.6;
   padding-bottom: 30px;
 }
-@media only screen and (max-width: 375px) {
+@media only screen and (max-width: 991px) {
   .land-hero-cover-title {
-    font-size: 30px;
+    font-size: 2.7rem;
   }
   .land-hero-cover-content {
-    font-size: 18px;
+    font-size: 1.5rem;
+  }
+}
+
+@media only screen and (max-width: 770px) {
+  .land-hero-cover-title {
+    font-size: 2rem;
+  }
+  .land-hero-cover-content {
+    font-size: 1rem;
+  }
+}
+@media only screen and (max-width: 545px) {
+  .land-hero-cover-title {
+    font-size: 1.8rem;
+  }
+  .land-hero-cover-content {
+    font-size: 1rem;
+  }
+}
+@media only screen and (max-width: 430px) {
+  .land-hero-cover-title {
+    font-size: 1.5rem;
+  }
+  .land-hero-cover-content {
+    font-size: 0.8rem;
   }
 }
 </style>

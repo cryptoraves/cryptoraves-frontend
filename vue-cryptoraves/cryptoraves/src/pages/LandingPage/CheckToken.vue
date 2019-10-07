@@ -97,9 +97,9 @@ img {
   text-align: right;
   margin-top: 40px;
 }
-@media only screen and (max-width: 375px) {
+@media only screen and (max-width: 500px) {
   .checktoken-img {
-    width: 200px;
+    width: 300px;
   }
   .checktoken-content-1 {
     font-size: 20px;

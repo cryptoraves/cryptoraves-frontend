@@ -24,7 +24,7 @@ export default {
   height: 100%;
   margin-top: 50px;
 }
-@media only screen and (max-width: 375px) {
+@media only screen and (max-width: 500px) {
   .section-header {
     font-size: 20px;
   }

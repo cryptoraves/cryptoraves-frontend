@@ -115,11 +115,13 @@ a {
   line-height: 2.333;
   text-align: right;
 }
-
-@media only screen and (max-width: 375px) {
+@media only screen and (max-width: 580px) {
   img {
-    width: 200px;
+    width: 300px;
   }
+}
+
+@media only screen and (max-width: 500px) {
   .gettoken-content-3 {
     line-height: 2.583;
   }
