@@ -46,10 +46,10 @@
                                                 </thead>
                                                  <tbody>
                                                     <tr v-for="item in tableRows" :key="item.txnId">                                                       
-                                                        <td class="link" v-on:click="goAnother(item.from)"><b>{{item.from}}</b></td>
+                                                        <td class="link" v-on:click="goAnother(item.userFrom)"><b>{{item.userFrom}}</b></td>
                                                         <td class="link" v-on:click="goTweet(item.linkToContent)"><img v-bind:src="'/static/img/twittersmall.png'" /> </td>
                                                         <td>{{item.amount | comma}}</td>
-                                                        <td class="link" v-on:click="goAnother(item.to)"><b>{{item.to}}</b></td>
+                                                        <td class="link" v-on:click="goAnother(item.userTo)"><b>{{item.userTo}}</b></td>
                                                         
                                                         <td>{{item.date}}</td>
                                                     </tr>                                                                                            
@@ -98,7 +98,7 @@ export default {
                 let res = response.data;
                 console.log(res);
                 this.tableRows = res.tableRows;
-                this.txnID = this.tableRows[0].txn_hash;
+                this.txnID = this.tableRows[0].txnHash;
             })
             .catch(e => {
                 console.log(e);
@@ -109,7 +109,7 @@ export default {
             this.$router.push({ name: 'Portfolio', query: { user: user }})
         },
         goBlock(){
-            window.open("https://basechain-blockexplorer.dappchains.com/tx/"+this.$route.query.txnId);
+            window.open(this.tableRows[0].blockexplorerUrl+this.$route.query.txnId);
         },
         goTweet(link){
             window.open(link);
