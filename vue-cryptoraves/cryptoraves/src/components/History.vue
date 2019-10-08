@@ -37,7 +37,7 @@
                                                 <th scope="col">From</th>
                                                 <th scope="col">Link To Tweet</th>
                                                 <th scope="col">Amount</th>
-                                                <th scope="col">io</th>
+                                                <th scope="col">IO</th>
                                                 <th scope="col">To</th>
                                                 <th scope="col">Date</th>
                                                 </tr>
