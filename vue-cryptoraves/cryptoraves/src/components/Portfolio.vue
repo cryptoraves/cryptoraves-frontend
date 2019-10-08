@@ -37,6 +37,7 @@
                                                 <th scope="col">From</th>
                                                 <th scope="col">Link To Tweet</th>
                                                 <th scope="col">Amount</th>
+                                                 <th scope="col"></th>
                                                 <th scope="col">To</th>
                                                 <th scope="col">Date</th>
                                                 </tr>
@@ -47,7 +48,7 @@
                                                     <td class="link" v-on:click="goAnother(item.userFrom)"><b>{{item.userFrom}}</b></td>
                                                     <td class="link" v-on:click="goTweet(item.linkToContent)"><img v-bind:src="'/static/img/twittersmall.png'" /> </td>
                                                     <td>{{item.amount | comma}}</td>
-                                                    <td class="link" v-on:click="goAnother(item.userTo)"><b>{{item.uerTo}}</b></td>
+                                                    <td class="link" v-on:click="goAnother(item.userTo)"><b>{{item.userTo}}</b></td>
                                                     <td>{{item.date}}</td>
                                                 </tr>                                                                                            
                                             </tbody>
