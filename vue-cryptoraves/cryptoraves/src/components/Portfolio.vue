@@ -33,26 +33,17 @@
                                         <table class="table">
                                              <thead>
                                                 <tr>
-                                                <th scope="col">#</th>
-                                                <th scope="col">From</th>
-                                                <th scope="col">Link To Tweet</th>
-                                                <th scope="col">Token Brand</th>
-                                                <th scope="col">Amount</th>
-                                                <th scope="col">IO</th>
-                                                <th scope="col">To</th>
-                                                <th scope="col">Date</th>
+                                                
+                                                <th scope="col">Token Brand Held</th>
+                                                <th scope="col">Token Amount</th>
+                                               
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr v-for="(item,index) in tableRows" :index="index" :key="item.txnId">
-                                                    <th class="link" v-on:click="goTransaction(item.txnHash)" scope="row"><b>{{item.txnHash | truncate}}</b></th>
-                                                    <td class="link" v-on:click="goAnother(item.userFrom)"><b>{{item.userFrom}}</b></td>
-                                                    <td class="link" v-on:click="goTweet(item.linkToContent)"><img v-bind:src="'/static/img/twittersmall.png'" /> </td>
-                                                    <td>{{item.tokenBrand}}</td>
-                                                    <td>{{item.amount | comma}}</td>
-                                                    <td>{{item.inOut}}</td>
-                                                    <td class="link" v-on:click="goAnother(item.userTo)"><b>{{item.userTo}}</b></td>
-                                                    <td>{{item.date}}</td>
+                                                   <td class="link" v-on:click="goAnother(item.tokenBrand)"><b>{{item.tokenBrand}}</b></td>
+                                                    <td>{{item.balance | comma}}</td>
+                                                    
                                                 </tr>                                                                                            
                                             </tbody>
                                             <tfoot>
