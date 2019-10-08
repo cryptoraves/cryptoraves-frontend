@@ -31,13 +31,14 @@
                                     <h4>Total Cryptoraves Token Balance <b class="ml-4">{{tokenBalance | comma}}</b></h4>
                                     <p class="table-responsive">
                                         <table class="table">
-                                            <thead>
+                                             <thead>
                                                 <tr>
                                                 <th scope="col">#</th>
                                                 <th scope="col">From</th>
                                                 <th scope="col">Link To Tweet</th>
+                                                <th scope="col">Token Brand</th>
                                                 <th scope="col">Amount</th>
-                                                <th scope="col">In/Out</th>
+                                                <th scope="col">IO</th>
                                                 <th scope="col">To</th>
                                                 <th scope="col">Date</th>
                                                 </tr>
@@ -47,6 +48,7 @@
                                                     <th class="link" v-on:click="goTransaction(item.txnHash)" scope="row"><b>{{item.txnHash | truncate}}</b></th>
                                                     <td class="link" v-on:click="goAnother(item.userFrom)"><b>{{item.userFrom}}</b></td>
                                                     <td class="link" v-on:click="goTweet(item.linkToContent)"><img v-bind:src="'/static/img/twittersmall.png'" /> </td>
+                                                    <td>{{item.tokenBrand}}</td>
                                                     <td>{{item.amount | comma}}</td>
                                                     <td>{{item.inOut}}</td>
                                                     <td class="link" v-on:click="goAnother(item.userTo)"><b>{{item.userTo}}</b></td>

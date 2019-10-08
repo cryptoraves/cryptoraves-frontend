@@ -36,6 +36,7 @@
                                                 <th scope="col">#</th>
                                                 <th scope="col">From</th>
                                                 <th scope="col">Link To Tweet</th>
+                                                <th scope="col">Token Brand</th>
                                                 <th scope="col">Amount</th>
                                                 <th scope="col">IO</th>
                                                 <th scope="col">To</th>
@@ -47,6 +48,7 @@
                                                     <th class="link" v-on:click="goTransaction(item.txnHash)" scope="row"><b>{{item.txnHash | truncate}}</b></th>
                                                     <td class="link" v-on:click="goAnother(item.userFrom)"><b>{{item.userFrom}}</b></td>
                                                     <td class="link" v-on:click="goTweet(item.linkToContent)"><img v-bind:src="'/static/img/twittersmall.png'" /> </td>
+                                                    <td>{{item.tokenBrand}}</td>
                                                     <td>{{item.amount | comma}}</td>
                                                     <td>{{item.inOut}}</td>
                                                     <td class="link" v-on:click="goAnother(item.userTo)"><b>{{item.userTo}}</b></td>
