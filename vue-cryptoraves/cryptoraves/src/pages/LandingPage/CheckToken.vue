@@ -36,8 +36,11 @@
           </ul>
         </div>
         <TokenSearch></TokenSearch>
-        <div class="space-40"></div>
-        <AppButton name="See who is trending" type4="true"></AppButton>
+        <!-- ---------------------------------------------------------------------------- -->
+        <!-- need to do in future -->
+        <!-- <div class="space-40"></div>
+        <AppButton name="See who is trending" type4="true"></AppButton>-->
+        <!-- ---------------------------------------------------------------------------- -->
         <div class="checktoken-content-2">How do I raise my score?</div>
       </div>
     </div>

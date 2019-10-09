@@ -44,10 +44,10 @@
                                             <tbody>
                                                 <tr v-for="(item,index) in tableRows" :index="index" :key="item.txnId">
                                                     <th class="link" v-on:click="goTransaction(item.txnHash)" scope="row"><b>{{item.txnHash | truncate}}</b></th>
-                                                    <td class="link" v-on:click="goAnother(item.from)"><b>{{item.from}}</b></td>
+                                                    <td class="link" v-on:click="goAnother(item.userFrom)"><b>{{item.userFrom}}</b></td>
                                                     <td class="link" v-on:click="goTweet(item.linkToContent)"><img v-bind:src="'/static/img/twittersmall.png'" /> </td>
                                                     <td>{{item.amount | comma}}</td>
-                                                    <td class="link" v-on:click="goAnother(item.to)"><b>{{item.to}}</b></td>
+                                                    <td class="link" v-on:click="goAnother(item.userTo)"><b>{{item.userTo}}</b></td>
                                                     <td>{{item.date}}</td>
                                                 </tr>                                                                                            
                                             </tbody>
@@ -80,9 +80,7 @@
 <script>
 import axios from 'axios';
 import _ from 'lodash';
-
 const Record = 20;
-
 export default {
     name: 'History',
     data() {
@@ -100,7 +98,6 @@ export default {
     },
     created() {
         this.user = this.$route.query.user;
-
         this.$ga.page('/')
         
         this.getHistory(this.user, 0);
@@ -203,4 +200,3 @@ export default {
     } 
 }
 </script>
-

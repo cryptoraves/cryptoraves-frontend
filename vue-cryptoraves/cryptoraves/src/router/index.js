@@ -2,7 +2,8 @@ import Vue from "vue";
 import Router from "vue-router";
 import Landing from "@/pages/LandingPage/LandingPage";
 import TweetDemo from "@/pages/TweetDemoPage/TweetDemoPage";
-import Confirmation from "@/components/Confirmation";
+import ConfirmationPage from "@/pages/ConfirmationPage";
+import HistoryPage from "@/pages/HistoryPage";
 import Portfolio from "@/components/Portfolio";
 import Faq from "@/components/Faq";
 
@@ -28,13 +29,18 @@ export default new Router({
     },
     {
       path: "/confirmation/:txnId?",
-      name: "Confirmation",
-      component: Confirmation
+      name: "ConfirmationPage",
+      component: ConfirmationPage
     },
     {
       path: "/portfolio",
       name: "Portfolio",
       component: Portfolio
+    },
+    {
+      path: "/history",
+      name: "HistoryPage",
+      component: HistoryPage
     }
   ]
 });

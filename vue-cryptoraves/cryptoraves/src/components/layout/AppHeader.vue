@@ -10,18 +10,19 @@
           </div>
         </div>
         <div class="d-flex d-flex-right col-lg-4 col-sm-12">
-          <div class="app-header-leaderboard">LEADERBOARD</div>
+          <!-- ---------------------------------------------------------------------------------------- -->
+          <!-- LeaderBoard after Date Ready -->
+          <!-- <div class="app-header-leaderboard">LEADERBOARD</div> -->
+          <!-- ---------------------------------------------------------------------------------------- -->
         </div>
         <div class="col-lg-6 col-sm-12 text-right">
           <div class="d-flex d-flex-right form-group mt-3">
             <div class="d-flex app-header-searchbar">
               <!-- <input type="text" v-model="user" @change="goPortfolio" list="mylist" id="autoSelect" class="form-control c-search-input" placeholder="Search for Twitter handle." /> -->
               <input type="text" class="app-header-input" placeholder="Lookup Twitter @username." />
-              <router-link to="/portfolio">
-                <a class="app-header-icon">
-                  <i class="fa fa-search"></i>
-                </a>
-              </router-link>
+              <a class="app-header-icon">
+                <i class="fa fa-search"></i>
+              </a>
             </div>
 
             <router-link
