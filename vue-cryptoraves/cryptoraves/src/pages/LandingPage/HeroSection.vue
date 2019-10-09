@@ -33,9 +33,7 @@
           </span>
           <div>
             <!-- for Confirmation, History Page Test -->
-            <router-link to="/confirmation">
-              <AppButton name="Confirmation" type2="true"></AppButton>
-            </router-link>
+
             <router-link to="/history">
               <AppButton name="History" type2="true"></AppButton>
             </router-link>
