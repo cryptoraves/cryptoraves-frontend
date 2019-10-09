@@ -31,6 +31,15 @@
           <span v-on:click="goFaqTop">
             <AppButton name="Learn More" type3="true"></AppButton>
           </span>
+          <div>
+            <!-- for Confirmation, History Page Test -->
+
+            <router-link to="/history">
+              <AppButton name="History" type2="true"></AppButton>
+            </router-link>
+
+            <!-- -------------------------------- -->
+          </div>
         </div>
       </div>
     </div>

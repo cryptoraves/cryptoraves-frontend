@@ -1,0 +1,382 @@
+<template>
+  <div class="confirmation-page">
+    <div class="container">
+      <SectionHeader></SectionHeader>
+      <div class="row">
+        <div class="confirmation-title">Transaction Confirmed!</div>
+      </div>
+      <div class="row">
+        <div class="confirmation-fromsection col-lg-4 col-md-4 col-sm-4">
+          <div class="confirmation-userfromimage">
+            <img :src="this.item.userFromImageUrl" v-on:click="goAnother(item.userFrom)" />
+          </div>
+          <div
+            class="confirmation-userFromTo"
+            v-on:click="goAnother(item.userFrom)"
+          >{{this.item.userFrom}}</div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+          <div class="d-flex">
+            <div class="confirmation-amount">{{this.item.amount | comma}}</div>
+          </div>
+
+          <div class="d-flex">
+            <AnimatedArrow></AnimatedArrow>
+          </div>
+          <div>
+            <div class="confirmation-tokenbrandimage">
+              <img :src="this.item.tokenBrandImageUrl" v-on:click="goAnother(item.tokenBrand)" />
+            </div>
+          </div>
+        </div>
+        <div class="confirmation-tosection col-lg-4 col-md-4 col-sm-4">
+          <div class="confirmation-tosection-show1">
+            <div
+              class="confirmation-userFromTo"
+              v-on:click="goAnother(item.userTo)"
+            >{{this.item.userTo}}</div>
+            <div class="confirmation-usertoimage">
+              <img :src="this.item.userToImageUrl" v-on:click="goAnother(item.userTo)" />
+            </div>
+          </div>
+          <div class="confirmation-tosection-show2">
+            <div class="confirmation-usertoimage">
+              <img :src="this.item.userToImageUrl" v-on:click="goAnother(item.userTo)" />
+            </div>
+            <div
+              class="confirmation-userFromTo"
+              v-on:click="goAnother(item.userTo)"
+            >{{this.item.userTo}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="confirmation-tokenbrand">
+          <div
+            class="confirmation-tokenbrand-header"
+            v-on:click="goAnother(item.tokenBrand)"
+          >{{this.item.tokenBrand}}</div>
+          <div class="confirmation-tokenbrand-text">Tokens</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="confirmation-link col-lg-12 col-md-12 col-sm-12">
+          <div
+            class="confirmation-blockurl"
+            v-on:click="goBlock(item.blockexplorerUrl + item.txnHash)"
+            title="Link to Loom's Block Explorer"
+          >{{this.item.txnHash}}</div>
+          <div class="d-flex">
+            <img
+              src="../assets/img/twitter.png"
+              v-on:click="goTweet(item.linkToContent) "
+              title="Link to Tweet"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="confirmation-bottom">
+          You + (Being Awesome) = (Token Value)
+          <sup>2</sup>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+
+<script>
+import axios from "axios";
+import SectionHeader from "../components/ui/SectionHeader";
+import AnimatedArrow from "../components/ui/AnimatedArrow";
+
+export default {
+  name: "ComfirmationPage",
+  components: {
+    SectionHeader,
+    AnimatedArrow
+  },
+  data() {
+    return {
+      txnId: "",
+      txnID: "",
+      tableRows: [],
+      item: Object,
+      upHere: false
+    };
+  },
+  created() {
+    this.txnId = this.$route.query.txnId;
+
+    this.$ga.page("/");
+
+    this.getTransaction(this.txnId);
+  },
+  methods: {
+    getTransaction(txnId) {
+      axios
+        .get(
+          "https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=confirmationPage&txnHash=" +
+            txnId
+        )
+        .then(response => {
+          // JSON responses are automatically parsed.
+          let res = response.data;
+          this.tableRows = res.tableRows;
+          this.txnID = this.tableRows[0].txnHash;
+          this.item = this.tableRows[0];
+          console.log(this.item);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
+    goAnother(user) {
+      this.$parent.$emit("changeUser", user);
+      this.$router.push({ name: "Portfolio", query: { user: user } });
+    },
+    goBlock(link) {
+      window.open(link);
+    },
+    goTweet(link) {
+      window.open(link);
+    }
+  }
+};
+</script>
+<style scoped>
+.confirmation-page {
+  margin-bottom: 50px;
+}
+.confirmation-title {
+  font-size: 4em;
+  font-family: "Montserrat";
+  color: rgb(0, 38, 101);
+  font-weight: bold;
+  text-align: center;
+  margin: auto;
+}
+.confirmation-amount {
+  margin: 50px auto 50px auto;
+  font-size: 2em;
+  font-family: "Montserrat";
+  color: rgb(0, 38, 101);
+  text-align: center;
+}
+.confirmation-userfromimage {
+  display: flex;
+  margin: auto;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 1px solid lightgrey;
+  -webkit-box-shadow: 0px 0px 15px 5px rgba(0, 0, 1, 0.3);
+  -moz-box-shadow: 0px 0px 15px 5px rgba(0, 0, 1, 0.3);
+  box-shadow: 0px 0px 15px 5px rgba(0, 0, 1, 0.3);
+  animation: avatar-from-effect 2s infinite;
+}
+@keyframes avatar-from-effect {
+  0% {
+    box-shadow: 0 0 0 0px rgb(0, 38, 101, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 0 15px rgb(0, 38, 101, 0);
+  }
+}
+.confirmation-userfromimage img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: auto;
+}
+.confirmation-userfromimage img:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+.confirmation-userFromTo {
+  margin: auto 0.5em auto 0.5em;
+  font-size: 2em;
+  font-family: "Montserrat";
+  text-align: center;
+  color: #06a8ff;
+  font-weight: 520;
+}
+.confirmation-userFromTo:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+.confirmation-tokenbrandimage {
+  display: flex;
+  margin: 50px auto 50px auto;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  border: 1px solid lightgrey;
+  -webkit-box-shadow: 0px 0px 15px 5px rgba(8, 169, 255, 0.3);
+  -moz-box-shadow: 0px 0px 15px 5px rgba(8, 169, 255, 0.3);
+  box-shadow: 0px 0px 15px 5px rgba(8, 169, 255, 0.3);
+}
+.confirmation-tokenbrandimage img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin: auto;
+}
+.confirmation-tokenbrandimage img:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+.confirmation-usertoimage {
+  display: flex;
+  margin: auto;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 1px solid lightgrey;
+  -webkit-box-shadow: 0px 0px 15px 5px rgba(0, 0, 1, 0.3);
+  -moz-box-shadow: 0px 0px 15px 5px rgba(0, 0, 1, 0.3);
+  box-shadow: 0px 0px 15px 5px rgba(0, 0, 1, 0.3);
+  animation: avatar-to-effect 2s infinite;
+}
+@keyframes avatar-to-effect {
+  0% {
+    box-shadow: 0 0 0 15px rgb(17, 206, 69, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0px rgb(17, 206, 69, 0.5);
+  }
+}
+.confirmation-usertoimage img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: auto;
+}
+.confirmation-usertoimage img:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+.confirmation-tokenbrand {
+  margin: -40px auto auto auto;
+}
+.confirmation-tokenbrand-header {
+  font-size: 2em;
+  font-family: "Montserrat";
+  text-align: center;
+  color: rgb(0, 38, 101);
+}
+.confirmation-tokenbrand-header:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+.confirmation-tokenbrand-text {
+  font-size: 1.5em;
+  font-family: "Montserrat";
+  color: rgb(0, 38, 101);
+  text-align: center;
+}
+.confirmation-link {
+  font-size: 1.5em;
+  font-family: "Roboto Condensed";
+  color: rgb(0, 38, 101);
+  font-weight: bold;
+  text-align: center;
+  margin: 100px auto auto auto;
+}
+.confirmation-link img {
+  width: 40px;
+  height: 30px;
+  margin: 20px auto 50px auto;
+}
+.confirmation-link img:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+.confirmation-blockurl {
+  word-break: break-all;
+}
+.confirmation-blockurl:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+.confirmation-bottom {
+  font-size: 2em;
+  font-family: "Roboto Condensed";
+  color: rgb(0, 38, 101);
+  font-weight: bold;
+  text-align: center;
+  margin: auto;
+}
+.confirmation-fromsection,
+.confirmation-tosection {
+  display: flex;
+}
+.confirmation-tosection-show1 {
+  display: flex;
+}
+.confirmation-tosection-show2 {
+  display: none;
+}
+@media only screen and (max-width: 991px) {
+  .confirmation-title {
+    font-size: 3em;
+  }
+  .confirmation-fromsection,
+  .confirmation-tosection {
+    display: block;
+    margin: auto;
+  }
+  .confirmation-tosection-show1 {
+    display: none;
+  }
+  .confirmation-tosection-show2 {
+    display: block;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .confirmation-title {
+    font-size: 2.5em;
+  }
+  .confirmation-userFromTo {
+    font-size: 1.5em;
+  }
+  .col-sm-4 {
+    width: 33.3%;
+  }
+}
+@media only screen and (max-width: 530px) {
+  .confirmation-title {
+    font-size: 2em;
+  }
+  .confirmation-userFromTo {
+    font-size: 1em;
+  }
+  .confirmation-link {
+    font-size: 1em;
+  }
+  .confirmation-bottom {
+    font-size: 1.5em;
+  }
+}
+@media only screen and (max-width: 410px) {
+  .confirmation-title {
+    font-size: 1.5em;
+  }
+  .confirmation-userFromTo {
+    font-size: 1em;
+  }
+  .confirmation-blockurl {
+    font-size: 1em;
+  }
+  .confirmation-bottom {
+    font-size: 1.3em;
+  }
+  .confirmation-amount {
+    font-size: 1.5em;
+  }
+  .confirmation-userFromTo {
+    font-size: 0.9em;
+  }
+}
+</style>
