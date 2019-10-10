@@ -1,65 +1,31 @@
 <template>
-  <div class="history-page">
+  <div class="portfolio-page">
     <div class="container">
-      <div v-if="showLoading" class="history-loading-img">
+      <div v-if="showLoading" class="portfolio-loading-img">
         <img src="../assets/gif/loading.gif" alt />
       </div>
       <div v-else>
-        <div class="history-title">
-          <SectionHeader>{{this.platformHandle}}'s Transaction History</SectionHeader>
-          <div class="history-userimg">
-            <img :src="this.userImageUrl" :title="this.user" @click="goPortfolio(user)" />
+        <div class="portfolio-title">
+          <SectionHeader>{{this.user}}'s Transaction History</SectionHeader>
+          <div class="portfolio-subtitle">
+            Token Balance: {{ this.tokenBalance | comma }}
+            <br />
+            Tokens Left to Share: {{ this.tokenBalancePercentage }}%
           </div>
-          <div class="elastic-arrow">
-            <img src="../assets/gif/elasticrightarrow.gif" alt />
+          <div class="porfolio-userimg">
+            <img :src="this.userImageUrl" :title="this.user" @click="goPortfolio(user)" />
           </div>
         </div>
         <div class="table-section row">
           <table>
             <thead>
               <tr>
-                <th scope="col">#</th>
-                <th scope="col">From</th>
-                <th scope="col">Sent/Received</th>
-                <th scope="col">Tweet</th>
-                <th scope="col">Token Brand</th>
-                <th scope="col">Amount</th>
-                <th scope="col">To</th>
-                <th scope="col">Date</th>
+                <th scope="col">Token Brand Held</th>
+                <th scope="col">Token Amount</th>
               </tr>
             </thead>
             <tbody>
-              <tr
-                v-for="(item,index) in tableRows"
-                :index="index"
-                :key="item.txnId"
-                :class="[platformHandle === item.userFrom? 'tr-orange-color' : 'tr-green-color']"
-              >
-                <td>
-                  <div
-                    class="link"
-                    @click="goTransaction(item.txnHash)"
-                  >{{ item.txnHash.substring(0,3)+"..." }}</div>
-                </td>
-                <td>
-                  <img
-                    class="table-img"
-                    :src="item.userFromImageUrl"
-                    :title="item.userFrom"
-                    @click="goPortfolio(item.userFrom)"
-                  />
-                </td>
-                <td>
-                  <div v-if="platformHandle === item.userFrom">Sent</div>
-                  <div v-else>Received</div>
-                </td>
-                <td>
-                  <img
-                    class="link"
-                    src="../assets/img/twittersmall.png"
-                    @click="goTweet(item.linkToContent)"
-                  />
-                </td>
+              <tr v-for="(item,index) in tableRows" :index="index" :key="item.txnId">
                 <td>
                   <img
                     class="table-img"
@@ -69,28 +35,14 @@
                   />
                 </td>
                 <td>
-                  <div>{{item.amount | comma}}</div>
-                </td>
-                <td>
-                  <img
-                    class="table-img"
-                    :src="item.userToImageUrl"
-                    :title="item.userTo"
-                    @click="goPortfolio(item.uesrTo)"
-                  />
-                </td>
-                <td>
-                  <div
-                    class="link"
-                    @click="goTransaction(item.txnHash)"
-                  >{{ item.date.substring(0,item.date.length-3) }}</div>
+                  <div>{{item.balance | comma}}</div>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
         <div class="row">
-          <div class="history-pagination">
+          <div class="portfolio-pagination">
             <span
               v-on:click="goPrev"
               class="btn btnpagination"
@@ -111,9 +63,9 @@
         </div>
         <div class="row">
           <div
-            class="portfolio-link"
-            @click="goPortfolio(user)"
-          >Link to {{this.platformHandle}}'s Portfolio Page.</div>
+            class="history-link"
+            @click="goHistory(user)"
+          >Link to {{this.platformHandle}}'s Transaction History Page.</div>
         </div>
       </div>
     </div>
@@ -124,13 +76,13 @@
 import axios from "axios";
 import _ from "lodash";
 import SectionHeader from "../components/ui/SectionHeader";
-import AnimatedArrow from "../components/ui/AnimatedArrow";
+
 const Record = 20;
+
 export default {
-  name: "HistoryPage",
+  name: "PortfolioPage",
   components: {
-    SectionHeader,
-    AnimatedArrow
+    SectionHeader
   },
   data() {
     return {
@@ -138,64 +90,61 @@ export default {
       tableRows: [],
       rowCount: 0,
       tokenBalance: "0",
+      tokenBalancePercentage: 0,
       earliestDatetime: "",
       latestDatetime: "",
       initialPagePtr: 0,
       visibleNext: true,
       visiblePrev: true,
-      platformHandle: "",
-      userImageUrl: "",
-      blockexplorerUrl: "",
-      showLoading: true
+      showLoading: true,
+      userImageUrl: ""
     };
   },
   created() {
     this.user = this.$route.query.user;
     this.$ga.page("/");
-
-    this.getHistory(this.user, 0);
+    this.getPortfolio(this.user, 0);
   },
   beforeRouteUpdate(to, from, next) {
     // just use `this`
     this.user = to.query.user;
-    this.getHistory(this.user, 0);
+    this.getPortfolio(this.user, 0);
     next();
   },
   methods: {
     goNext() {
       if (this.visibleNext) {
-        this.showLoading = true;
-        this.getHistory(this.user, 1);
+        this.getPortfolio(this.user, 1);
       }
     },
     goPrev() {
       if (this.visiblePrev) {
-        this.showLoading = true;
-        this.getHistory(this.user, 2);
+        this.getPortfolio(this.user, 2);
       }
     },
-    getHistory(user, initFlag) {
+    getPortfolio(user, initFlag) {
       if (initFlag == 0) {
         axios
           .get(
-            "https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=transactionHistory&userName=" +
+            "https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=portfolioPage&userName=" +
               user
           )
           .then(response => {
             // JSON responses are automatically parsed.
-            this.user = user;
             let res = response.data;
+            this.user = res.platformHandle;
             this.tableRows = _.cloneDeep(res.tableRows);
+            this.ravity = res.ravity;
             this.rowCount = res.rowCount;
             this.tokenBalance = res.tokenBalance;
-            this.earliestDatetime = res.earliestDatetime;
+            this.tokenBalancePercentage = res.tokenBalancePercentage;
             this.latestDatetime = res.latestDatetime;
+            this.earliestDatetime = res.earliestDatetime;
             this.initialPagePtr = 0;
             this.visiblePrev = false;
             this.visibleNext = res.next ? true : false;
-            this.platformHandle = res.platformHandle;
             this.userImageUrl = res.userImageUrl;
-            this.blockexplorerUrl = res.blockexplorerUrl;
+
             this.showLoading = false;
           })
           .catch(e => {
@@ -204,23 +153,27 @@ export default {
       } else if (initFlag == 1) {
         axios
           .get(
-            "https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=transactionHistory&userName=" +
+            "https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=portfolioPage&userName=" +
               user +
               "&earliestDatetime=" +
               this.earliestDatetime
           )
           .then(response => {
             // JSON responses are automatically parsed.
-            this.user = user;
             let res = response.data;
+            this.user = res.platformHandle;
             this.tableRows = _.cloneDeep(res.tableRows);
+            this.ravity = res.ravity;
             this.rowCount = res.rowCount;
             this.tokenBalance = res.tokenBalance;
             this.latestDatetime = res.latestDatetime;
             this.earliestDatetime = res.earliestDatetime;
+
             this.initialPagePtr++;
             this.visiblePrev = true;
             this.visibleNext = res.next ? true : false;
+            this.userImageUrl = res.userImageUrl;
+
             this.showLoading = false;
           })
           .catch(e => {
@@ -229,24 +182,28 @@ export default {
       } else {
         axios
           .get(
-            "https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=transactionHistory&userName=" +
+            "https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=portfolioPage&userName=" +
               user +
               "&latestDatetime=" +
               this.latestDatetime
           )
           .then(response => {
             // JSON responses are automatically parsed.
-            this.user = user;
             let res = response.data;
+            this.user = res.platformHandle;
             this.tableRows = _.cloneDeep(res.tableRows);
+            this.ravity = res.ravity;
             this.rowCount = res.rowCount;
             this.tokenBalance = res.tokenBalance;
             this.latestDatetime = res.latestDatetime;
             this.earliestDatetime = res.earliestDatetime;
+
             this.initialPagePtr--;
             this.visiblePrev =
               res.prev && this.initialPagePtr > 0 ? true : false;
             this.visibleNext = true;
+            this.userImageUrl = res.userImageUrl;
+
             this.showLoading = false;
           })
           .catch(e => {
@@ -257,48 +214,55 @@ export default {
     goAnother(user) {
       this.$parent.$emit("changeUser", user);
       this.$router.push({
-        name: "History",
+        name: "PortfolioPage",
         query: {
           user: user
         }
       });
     },
-    goPortfolio(user) {
+    goHistory(user) {
       this.$parent.$emit("changeUser", user);
-      this.$router.push({ name: "PortfolioPage", query: { user: user } });
-    },
-    goBlock(link) {
-      window.open(link);
-    },
-    goTweet(link) {
-      window.open(link);
-    },
-    goTransaction(txnHash) {
-      this.$parent.$emit("changeUser", txnHash);
       this.$router.push({
-        name: "ConfirmationPage",
-        query: { txnId: txnHash }
+        name: "HistoryPage",
+        query: {
+          user: user
+        }
+      });
+    },
+
+    goTransaction(txnHash) {
+      this.$parent.$emit("changeUser", user);
+      this.$router.push({
+        name: "HistoryPage",
+        query: {
+          user: user
+        }
       });
     }
   }
 };
 </script>
 <style scoped>
-.history-page {
+.portfolio-title {
+  position: relative;
+}
+.portfolio-subtitle {
+  color: rgb(0, 38, 101);
+  font-family: "Montserrat";
+  text-align: center;
+  line-height: 2em;
+}
+.portfolio-page {
   margin-bottom: 50px;
 }
-.history-loading-img {
+.portfolio-loading-img {
   display: flex;
   height: calc(100vh - 370px);
 }
-.history-loading-img img {
+.portfolio-loading-img img {
   margin: auto;
 }
-.history-title {
-  position: relative;
-}
-
-.history-userimg {
+.porfolio-userimg {
   position: absolute;
   background: white;
   top: 50%;
@@ -322,21 +286,15 @@ export default {
     box-shadow: 0 0 0 15px rgb(0, 38, 101, 0);
   }
 }
-.history-userimg img {
+.porfolio-userimg img {
   width: 110px;
   height: 110px;
   border-radius: 50%;
   margin: auto;
 }
-.history-userimg img:hover {
+.porfolio-userimg img:hover {
   opacity: 0.7;
   cursor: pointer;
-}
-.history-pagination {
-  margin: 10px auto 50px auto;
-  font-weight: bold;
-  font-size: 20px;
-  color: rgb(0, 38, 101);
 }
 .table-section {
   margin: 100px auto 0px auto;
@@ -370,8 +328,8 @@ table thead tr {
 
 table tbody tr {
   height: 80px;
-  color: black;
-  font-size: 15px;
+  color: royalblue;
+  font-size: 20px;
 }
 table td,
 table th {
@@ -407,7 +365,7 @@ tr:nth-child(even) {
   animation: avatar-from-effect 1s infinite;
 }
 
-.portfolio-link {
+.history-link {
   font-size: 1.5em;
   font-family: "Montserrat";
   color: rgb(0, 38, 101);
@@ -415,67 +373,10 @@ tr:nth-child(even) {
   margin: auto;
   cursor: pointer;
 }
-.tr-green-color {
-  color: royalblue;
-}
-.tr-orange-color {
-  color: peru;
-}
-.elastic-arrow {
-  display: none;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  z-index: 2;
-}
-.elastic-arrow img {
-  width: 40px;
-  height: 20px;
-}
-@media only screen and (max-width: 767px) {
-  table {
-    min-width: 1000px;
-  }
-  .history-userimg {
-    position: relative;
-    margin-top: 50px;
-    margin-bottom: -110px;
-    z-index: 2;
-  }
-  .elastic-arrow {
-    display: block;
-  }
-}
-@media only screen and (max-width: 410px) {
-  .history-userimg {
-    width: 80px;
-    height: 80px;
-  }
-  .history-userimg img {
-    width: 70px;
-    height: 70px;
-  }
-  table thead tr {
-    height: 40px;
-    color: rgb(0, 38, 101);
-    background: lightgrey;
-    font-weight: bold;
-    font-size: 15px;
-  }
-  table tbody tr {
-    height: 55px;
-    color: black;
-    font-size: 12px;
-  }
-  .history-pagination {
-    font-size: 15px;
-  }
-  .table-img {
-    height: 50px;
-    width: 50px;
-  }
-  .portfolio-link {
-    font-size: 1em;
-  }
+.portfolio-pagination {
+  margin: 10px auto 50px auto;
+  font-weight: bold;
+  font-size: 20px;
+  color: rgb(0, 38, 101);
 }
 </style>

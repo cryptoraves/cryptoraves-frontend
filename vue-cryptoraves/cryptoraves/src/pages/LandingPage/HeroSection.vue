@@ -34,9 +34,9 @@
           <div>
             <!-- for Confirmation, History Page Test -->
 
-            <router-link to="/history">
+            <span @click="goForTest">
               <AppButton name="History" type2="true"></AppButton>
-            </router-link>
+            </span>
 
             <!-- -------------------------------- -->
           </div>
@@ -59,6 +59,15 @@ export default {
         name: "Faq",
         query: {
           top: true
+        }
+      });
+    },
+    goForTest: function(event) {
+      this.$parent.$emit("changeUser", "@cypher");
+      this.$router.push({
+        name: "HistoryPage",
+        query: {
+          user: "@cypher"
         }
       });
     }

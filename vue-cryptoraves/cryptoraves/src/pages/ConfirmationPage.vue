@@ -1,84 +1,106 @@
 <template>
   <div class="confirmation-page">
     <div class="container">
-      <SectionHeader></SectionHeader>
-      <div class="row">
-        <div class="confirmation-title">Transaction Confirmed!</div>
+      <div v-if="showLoading" class="confirmation-loading-img">
+        <img src="../assets/gif/loading.gif" alt />
       </div>
-      <div class="row">
-        <div class="confirmation-fromsection col-lg-4 col-md-4 col-sm-4">
-          <div class="confirmation-userfromimage">
-            <img :src="this.item.userFromImageUrl" v-on:click="goAnother(item.userFrom)" />
+      <div v-else>
+        <SectionHeader>Transaction Confirmed!</SectionHeader>
+        <div class="row">
+          <div class="confirmation-fromsection col-lg-4 col-md-4 col-sm-4">
+            <div class="confirmation-userfromimage">
+              <img
+                :src="this.item.userFromImageUrl"
+                v-on:click="goAnother(item.userFrom)"
+                :title="item.userFrom"
+              />
+            </div>
+            <div
+              class="confirmation-userFromTo"
+              v-on:click="goAnother(item.userFrom)"
+              :title="item.userFrom"
+            >{{this.item.userFrom}}</div>
           </div>
-          <div
-            class="confirmation-userFromTo"
-            v-on:click="goAnother(item.userFrom)"
-          >{{this.item.userFrom}}</div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-4">
-          <div class="d-flex">
-            <div class="confirmation-amount">{{this.item.amount | comma}}</div>
-          </div>
+          <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="d-flex">
+              <div class="confirmation-amount">{{this.item.amount | comma}}</div>
+            </div>
 
-          <div class="d-flex">
-            <AnimatedArrow></AnimatedArrow>
+            <div class="d-flex">
+              <AnimatedArrow></AnimatedArrow>
+            </div>
+            <div>
+              <div class="confirmation-tokenbrandimage">
+                <img
+                  :src="this.item.tokenBrandImageUrl"
+                  v-on:click="goAnother(item.tokenBrand)"
+                  :title="item.tokenBrand"
+                />
+              </div>
+            </div>
           </div>
-          <div>
-            <div class="confirmation-tokenbrandimage">
-              <img :src="this.item.tokenBrandImageUrl" v-on:click="goAnother(item.tokenBrand)" />
+          <div class="confirmation-tosection col-lg-4 col-md-4 col-sm-4">
+            <div class="confirmation-tosection-show1">
+              <div
+                class="confirmation-userFromTo"
+                v-on:click="goAnother(item.userTo)"
+                :title="item.userTo"
+              >{{this.item.userTo}}</div>
+              <div class="confirmation-usertoimage">
+                <img
+                  :src="this.item.userToImageUrl"
+                  v-on:click="goAnother(item.userTo)"
+                  :title="item.userTo"
+                />
+              </div>
+            </div>
+            <div class="confirmation-tosection-show2">
+              <div class="confirmation-usertoimage">
+                <img
+                  :src="this.item.userToImageUrl"
+                  v-on:click="goAnother(item.userTo)"
+                  :title="item.userTo"
+                />
+              </div>
+              <div
+                class="confirmation-userFromTo"
+                v-on:click="goAnother(item.userTo)"
+                :title="item.userTo"
+              >{{this.item.userTo}}</div>
             </div>
           </div>
         </div>
-        <div class="confirmation-tosection col-lg-4 col-md-4 col-sm-4">
-          <div class="confirmation-tosection-show1">
+        <div class="row">
+          <div class="confirmation-tokenbrand">
             <div
-              class="confirmation-userFromTo"
-              v-on:click="goAnother(item.userTo)"
-            >{{this.item.userTo}}</div>
-            <div class="confirmation-usertoimage">
-              <img :src="this.item.userToImageUrl" v-on:click="goAnother(item.userTo)" />
-            </div>
+              class="confirmation-tokenbrand-header"
+              v-on:click="goAnother(item.tokenBrand)"
+              :title="item.tokenBrand"
+            >{{this.item.tokenBrand}}</div>
+            <div class="confirmation-tokenbrand-text">Tokens</div>
           </div>
-          <div class="confirmation-tosection-show2">
-            <div class="confirmation-usertoimage">
-              <img :src="this.item.userToImageUrl" v-on:click="goAnother(item.userTo)" />
-            </div>
+        </div>
+        <div class="row">
+          <div class="confirmation-link col-lg-12 col-md-12 col-sm-12">
             <div
-              class="confirmation-userFromTo"
-              v-on:click="goAnother(item.userTo)"
-            >{{this.item.userTo}}</div>
+              class="confirmation-blockurl"
+              v-on:click="goBlock(item.blockexplorerUrl + item.txnHash)"
+              title="Link to Loom's Block Explorer"
+            >{{this.item.txnHash}}</div>
+            <div class="d-flex">
+              <img
+                src="../assets/img/twitter.png"
+                v-on:click="goTweet(item.linkToContent) "
+                title="Link to Tweet"
+              />
+            </div>
           </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="confirmation-tokenbrand">
-          <div
-            class="confirmation-tokenbrand-header"
-            v-on:click="goAnother(item.tokenBrand)"
-          >{{this.item.tokenBrand}}</div>
-          <div class="confirmation-tokenbrand-text">Tokens</div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="confirmation-link col-lg-12 col-md-12 col-sm-12">
-          <div
-            class="confirmation-blockurl"
-            v-on:click="goBlock(item.blockexplorerUrl + item.txnHash)"
-            title="Link to Loom's Block Explorer"
-          >{{this.item.txnHash}}</div>
-          <div class="d-flex">
-            <img
-              src="../assets/img/twitter.png"
-              v-on:click="goTweet(item.linkToContent) "
-              title="Link to Tweet"
-            />
+        <div class="row">
+          <div class="confirmation-bottom">
+            You + (Being Awesome) = (Token Value)
+            <sup>2</sup>
           </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="confirmation-bottom">
-          You + (Being Awesome) = (Token Value)
-          <sup>2</sup>
         </div>
       </div>
     </div>
@@ -103,14 +125,13 @@ export default {
       txnID: "",
       tableRows: [],
       item: Object,
-      upHere: false
+      upHere: false,
+      showLoading: true
     };
   },
   created() {
     this.txnId = this.$route.query.txnId;
-
     this.$ga.page("/");
-
     this.getTransaction(this.txnId);
   },
   methods: {
@@ -126,7 +147,7 @@ export default {
           this.tableRows = res.tableRows;
           this.txnID = this.tableRows[0].txnHash;
           this.item = this.tableRows[0];
-          console.log(this.item);
+          this.showLoading = false;
         })
         .catch(e => {
           console.log(e);
@@ -134,7 +155,7 @@ export default {
     },
     goAnother(user) {
       this.$parent.$emit("changeUser", user);
-      this.$router.push({ name: "Portfolio", query: { user: user } });
+      this.$router.push({ name: "PortfolioPage", query: { user: user } });
     },
     goBlock(link) {
       window.open(link);
@@ -146,16 +167,15 @@ export default {
 };
 </script>
 <style scoped>
+.confirmation-loading-img {
+  display: flex;
+  height: calc(100vh - 370px);
+}
+.confirmation-loading-img img {
+  margin: auto;
+}
 .confirmation-page {
   margin-bottom: 50px;
-}
-.confirmation-title {
-  font-size: 4em;
-  font-family: "Montserrat";
-  color: rgb(0, 38, 101);
-  font-weight: bold;
-  text-align: center;
-  margin: auto;
 }
 .confirmation-amount {
   margin: 50px auto 50px auto;
@@ -319,9 +339,6 @@ export default {
   display: none;
 }
 @media only screen and (max-width: 991px) {
-  .confirmation-title {
-    font-size: 3em;
-  }
   .confirmation-fromsection,
   .confirmation-tosection {
     display: block;
@@ -335,9 +352,6 @@ export default {
   }
 }
 @media only screen and (max-width: 767px) {
-  .confirmation-title {
-    font-size: 2.5em;
-  }
   .confirmation-userFromTo {
     font-size: 1.5em;
   }
@@ -346,9 +360,6 @@ export default {
   }
 }
 @media only screen and (max-width: 530px) {
-  .confirmation-title {
-    font-size: 2em;
-  }
   .confirmation-userFromTo {
     font-size: 1em;
   }
@@ -360,9 +371,6 @@ export default {
   }
 }
 @media only screen and (max-width: 410px) {
-  .confirmation-title {
-    font-size: 1.5em;
-  }
   .confirmation-userFromTo {
     font-size: 1em;
   }

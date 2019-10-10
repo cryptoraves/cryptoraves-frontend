@@ -4,7 +4,7 @@ import Landing from "@/pages/LandingPage/LandingPage";
 import TweetDemo from "@/pages/TweetDemoPage/TweetDemoPage";
 import ConfirmationPage from "@/pages/ConfirmationPage";
 import HistoryPage from "@/pages/HistoryPage";
-import Portfolio from "@/components/Portfolio";
+import PortfolioPage from "@/pages/PortfolioPage";
 import Faq from "@/components/Faq";
 
 Vue.use(Router);
@@ -33,12 +33,12 @@ export default new Router({
       component: ConfirmationPage
     },
     {
-      path: "/portfolio",
-      name: "Portfolio",
-      component: Portfolio
+      path: "/portfolio/:user?",
+      name: "PortfolioPage",
+      component: PortfolioPage
     },
     {
-      path: "/history",
+      path: "/history/:user?",
       name: "HistoryPage",
       component: HistoryPage
     }
