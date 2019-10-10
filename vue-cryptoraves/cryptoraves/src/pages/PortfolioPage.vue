@@ -65,7 +65,7 @@
           <div
             class="history-link"
             @click="goHistory(user)"
-          >Link to {{this.platformHandle}}'s Transaction History Page.</div>
+          >Link to {{this.user}}'s Transaction History Page.</div>
         </div>
       </div>
     </div>
