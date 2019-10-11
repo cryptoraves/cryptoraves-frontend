@@ -1,5 +1,6 @@
 #!/bin/bash
-
+cd ~/www/cryptoraves
+git pull
 cd ~/www/cryptoraves/vue-cryptoraves/cryptoraves/build
 npm run build
 cp -r ~/www/cryptoraves/vue-cryptoraves/cryptoraves/dist/* ~/www/cryptoraves/
