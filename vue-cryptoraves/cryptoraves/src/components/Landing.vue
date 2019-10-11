@@ -42,7 +42,7 @@
         <div class="container">
           <div class="row">
             <div class="col-lg-6 mt-2">
-              <div class="single-about" id="getToken">
+              <div class="single-about">
                 <div class="single-about-text">
                   <h4>Get Your Tokens!</h4>
                   <p>

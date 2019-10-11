@@ -1,18 +1,20 @@
 <template>
-  <div>
-    <div id="drop">
-      <DropToken></DropToken>
+  <transition name="fade" mode="out-in">
+    <div>
+      <div id="drop">
+        <DropToken></DropToken>
+      </div>
+      <div id="tag">
+        <TagToken></TagToken>
+      </div>
+      <div id="reply">
+        <ReplyToken></ReplyToken>
+      </div>
+      <div id="recipro">
+        <ReciprocationToken></ReciprocationToken>
+      </div>
     </div>
-    <div id="tag">
-      <TagToken></TagToken>
-    </div>
-    <div id="reply">
-      <ReplyToken></ReplyToken>
-    </div>
-    <div id="recipro">
-      <ReciprocationToken></ReciprocationToken>
-    </div>
-  </div>
+  </transition>
 </template>
 
 <script>

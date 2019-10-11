@@ -59,6 +59,7 @@
                     class="link"
                     src="../assets/img/twittersmall.png"
                     @click="goTweet(item.linkToContent)"
+                    title="Link to Tweet"
                   />
                 </td>
                 <td>

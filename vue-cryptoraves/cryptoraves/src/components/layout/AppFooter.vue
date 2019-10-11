@@ -3,7 +3,9 @@
     <div class="container">
       <div class="row app-footer-content">
         <div class="d-flex col-lg-2 col-sm-12">
-          <img src="../../assets/img/ethereum1.png" />
+          <a class="ethereum-link" href="http://ethereum.org/beginners/" target="_blank">
+            <img src="../../assets/img/ethereum1.png" />
+          </a>
         </div>
         <div class="col-lg-8 d-flex">
           <div class="d-flex social-group">
@@ -46,7 +48,7 @@
               </div>
             </a>
 
-            <a href="https://discordapp.com/" target="_blank">
+            <a href="https://discord.gg/xTgrxh3" target="_blank">
               <div class="d-flex slideshare-gradient">
                 <i class="fa fa-slideshare"></i>
               </div>
@@ -100,6 +102,9 @@ a {
 }
 .app-footer-content {
   padding-top: 50px;
+}
+.ethereum-link {
+  margin: auto;
 }
 .social-group {
   margin: auto;

@@ -1,9 +1,7 @@
 <template>
   <div id="app">
     <AppHeader></AppHeader>
-    <transition name="fade" mode="out-in">
-      <router-view />
-    </transition>
+    <router-view />
     <AppFooter></AppFooter>
   </div>
 </template>
@@ -58,20 +56,20 @@ export default {
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
 @import url("./assets/css/style.css");
 @import url("./assets/css/responsive.css");
-.fade-enter {
-  opacity: 0;
-}
+// .fade-enter {
+//   opacity: 0;
+// }
 
-.fade-enter-to {
-  transition: opacity 0.5s ease-in;
-}
+// .fade-enter-to {
+//   transition: opacity 0.5s ease-in;
+// }
 
-.fade-leave {
-  opacity: 0;
-}
+// .fade-leave {
+//   opacity: 0;
+// }
 
-.fade-leave-to {
-  transition: opacity 0.5s ease-in;
-  opacity: 0;
-}
+// .fade-leave-to {
+//   transition: opacity 0.5s ease-in;
+//   opacity: 0;
+// }
 </style>
