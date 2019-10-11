@@ -6,14 +6,14 @@
       </div>
       <div v-else>
         <div class="portfolio-title">
-          <SectionHeader>{{this.user}}'s Transaction History</SectionHeader>
+          <SectionHeader>{{this.user}}'s Portfolio Page</SectionHeader>
           <div class="portfolio-subtitle">
             Token Balance: {{ this.tokenBalance | comma }}
             <br />
             Tokens Left to Share: {{ this.tokenBalancePercentage }}%
           </div>
-          <div class="porfolio-userimg">
-            <img :src="this.userImageUrl" :title="this.user" @click="goPortfolio(user)" />
+          <div class="portfolio-userimg">
+            <img :src="this.userImageUrl" :title="this.user" @click="goAnother(user)" />
           </div>
         </div>
         <div class="table-section row">
@@ -31,7 +31,7 @@
                     class="table-img"
                     :src="item.tokenBrandImageUrl"
                     :title="item.tokenBrand"
-                    @click="goPortfolio(item.tokenBrand)"
+                    @click="goAnother(item.tokenBrand)"
                   />
                 </td>
                 <td>
@@ -114,11 +114,13 @@ export default {
   methods: {
     goNext() {
       if (this.visibleNext) {
+        this.showLoading = true;
         this.getPortfolio(this.user, 1);
       }
     },
     goPrev() {
       if (this.visiblePrev) {
+        this.showLoading = true;
         this.getPortfolio(this.user, 2);
       }
     },
@@ -144,7 +146,6 @@ export default {
             this.visiblePrev = false;
             this.visibleNext = res.next ? true : false;
             this.userImageUrl = res.userImageUrl;
-
             this.showLoading = false;
           })
           .catch(e => {
@@ -212,16 +213,19 @@ export default {
       }
     },
     goAnother(user) {
-      this.$parent.$emit("changeUser", user);
-      this.$router.push({
-        name: "PortfolioPage",
-        query: {
-          user: user
-        }
-      });
+      if (this.user !== user) {
+        this.showLoading = true;
+        this.$root.$emit("changeUser", user);
+        this.$router.push({
+          name: "PortfolioPage",
+          query: {
+            user: user
+          }
+        });
+      }
     },
     goHistory(user) {
-      this.$parent.$emit("changeUser", user);
+      this.$root.$emit("changeUser", user);
       this.$router.push({
         name: "HistoryPage",
         query: {
@@ -231,7 +235,7 @@ export default {
     },
 
     goTransaction(txnHash) {
-      this.$parent.$emit("changeUser", user);
+      this.$root.$emit("changeUser", user);
       this.$router.push({
         name: "HistoryPage",
         query: {
@@ -262,7 +266,7 @@ export default {
 .portfolio-loading-img img {
   margin: auto;
 }
-.porfolio-userimg {
+.portfolio-userimg {
   position: absolute;
   background: white;
   top: 50%;
@@ -286,16 +290,17 @@ export default {
     box-shadow: 0 0 0 15px rgb(0, 38, 101, 0);
   }
 }
-.porfolio-userimg img {
+.portfolio-userimg img {
   width: 110px;
   height: 110px;
   border-radius: 50%;
   margin: auto;
 }
-.porfolio-userimg img:hover {
+.portfolio-userimg img:hover {
   opacity: 0.7;
   cursor: pointer;
 }
+
 .table-section {
   margin: 100px auto 0px auto;
   box-shadow: 0 0 1em 1px rgba(0, 0, 0, 0.25);
@@ -309,7 +314,6 @@ table {
   background: white;
   width: 100%;
   position: relative;
-  box-shadow: 0 0 1em 1px rgba(0, 0, 0, 0.25);
 }
 
 table td,
@@ -328,7 +332,7 @@ table thead tr {
 
 table tbody tr {
   height: 80px;
-  color: royalblue;
+  color: rgb(0, 38, 101);
   font-size: 20px;
 }
 table td,
@@ -378,5 +382,41 @@ tr:nth-child(even) {
   font-weight: bold;
   font-size: 20px;
   color: rgb(0, 38, 101);
+}
+@media only screen and (max-width: 767px) {
+  .portfolio-userimg {
+    position: relative;
+    margin-top: 50px;
+    margin-bottom: -110px;
+    z-index: 2;
+  }
+}
+@media only screen and (max-width: 410px) {
+  .history-link {
+    font-size: 1em;
+  }
+  .portfolio-userimg {
+    width: 80px;
+    height: 80px;
+  }
+  .portfolio-userimg img {
+    width: 70px;
+    height: 70px;
+  }
+  table thead tr {
+    height: 40px;
+    font-size: 15px;
+  }
+  table tbody tr {
+    height: 55px;
+    font-size: 12px;
+  }
+  .portfolio-pagination {
+    font-size: 15px;
+  }
+  .table-img {
+    height: 50px;
+    width: 50px;
+  }
 }
 </style>

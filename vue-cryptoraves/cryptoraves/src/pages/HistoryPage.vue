@@ -39,6 +39,7 @@
                   <div
                     class="link"
                     @click="goTransaction(item.txnHash)"
+                    title="Link to Confirmation"
                   >{{ item.txnHash.substring(0,3)+"..." }}</div>
                 </td>
                 <td>
@@ -76,13 +77,14 @@
                     class="table-img"
                     :src="item.userToImageUrl"
                     :title="item.userTo"
-                    @click="goPortfolio(item.uesrTo)"
+                    @click="goPortfolio(item.userTo)"
                   />
                 </td>
                 <td>
                   <div
                     class="link"
                     @click="goTransaction(item.txnHash)"
+                    title="Link to Confirmation"
                   >{{ item.date.substring(0,item.date.length-3) }}</div>
                 </td>
               </tr>
@@ -255,7 +257,7 @@ export default {
       }
     },
     goAnother(user) {
-      this.$parent.$emit("changeUser", user);
+      this.$root.$emit("changeUser", user);
       this.$router.push({
         name: "History",
         query: {
@@ -264,7 +266,7 @@ export default {
       });
     },
     goPortfolio(user) {
-      this.$parent.$emit("changeUser", user);
+      this.$root.$emit("changeUser", user);
       this.$router.push({ name: "PortfolioPage", query: { user: user } });
     },
     goBlock(link) {
@@ -274,7 +276,7 @@ export default {
       window.open(link);
     },
     goTransaction(txnHash) {
-      this.$parent.$emit("changeUser", txnHash);
+      this.$root.$emit("changeUser", txnHash);
       this.$router.push({
         name: "ConfirmationPage",
         query: { txnId: txnHash }
@@ -351,7 +353,6 @@ table {
   background: white;
   width: 100%;
   position: relative;
-  box-shadow: 0 0 1em 1px rgba(0, 0, 0, 0.25);
 }
 
 table td,
@@ -370,7 +371,6 @@ table thead tr {
 
 table tbody tr {
   height: 80px;
-  color: black;
   font-size: 15px;
 }
 table td,
@@ -457,14 +457,10 @@ tr:nth-child(even) {
   }
   table thead tr {
     height: 40px;
-    color: rgb(0, 38, 101);
-    background: lightgrey;
-    font-weight: bold;
     font-size: 15px;
   }
   table tbody tr {
     height: 55px;
-    color: black;
     font-size: 12px;
   }
   .history-pagination {

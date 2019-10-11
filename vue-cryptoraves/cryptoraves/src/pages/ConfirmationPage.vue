@@ -154,7 +154,7 @@ export default {
         });
     },
     goAnother(user) {
-      this.$parent.$emit("changeUser", user);
+      this.$root.$emit("changeUser", user);
       this.$router.push({ name: "PortfolioPage", query: { user: user } });
     },
     goBlock(link) {
@@ -302,12 +302,12 @@ export default {
   color: rgb(0, 38, 101);
   font-weight: bold;
   text-align: center;
-  margin: 100px auto auto auto;
+  margin: 50px auto auto auto;
 }
 .confirmation-link img {
   width: 40px;
   height: 30px;
-  margin: 20px auto 50px auto;
+  margin: 20px auto 20px auto;
 }
 .confirmation-link img:hover {
   cursor: pointer;

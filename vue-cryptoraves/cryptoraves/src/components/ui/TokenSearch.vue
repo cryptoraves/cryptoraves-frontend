@@ -4,19 +4,98 @@
       <img src="../../assets/img/searchicon.png" />
     </div>
     <div class="tokensearch-input">
-      <input type="text" placeholder="Lookup Twitter @username" />
+      <input
+        id="autoTokenSelect1"
+        type="text"
+        v-model="user"
+        list="tokenlist"
+        @change="goPortfolio"
+        placeholder="Lookup Twitter @username"
+      />
+      <datalist id="tokenlist" v-if="user.length>1">
+        <option v-bind:key="item" v-for="item in userList" :value="item">{{item}}</option>
+      </datalist>
     </div>
-    <div class="tokensearch-icon">
-      <router-link to="/portfolio">
-        <i class="fa fa-search"></i>
-      </router-link>
+    <div class="tokensearch-icon" @click="goPortfolio">
+      <i class="fa fa-search"></i>
     </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
-  name: "TokenSearch"
+  name: "TokenSearch",
+  data() {
+    return {
+      user: "",
+      userList: []
+    };
+  },
+  created() {
+    this.getUserList();
+    this.$root.$on("changeUser", user => {
+      this.user = "";
+    });
+  },
+  methods: {
+    getUserList() {
+      // cache management
+      axios
+        .get(
+          "https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=userListLastUpdated"
+        )
+        .then(response => {
+          // JSON responses are automatically parsed.
+          localStorage.setItem(
+            "lastUpdated",
+            JSON.stringify(response.data.lastUpdated)
+          );
+        })
+        .catch(e => {
+          this.errors.push(e);
+        });
+
+      this.update = true;
+      if (localStorage.userListLastUpdated) {
+        if (localStorage.lastUpdated == localStorage.userListLastUpdated) {
+          this.update = false;
+        }
+      }
+
+      if (this.update) {
+        localStorage.setItem("userListLastUpdated", localStorage.lastUpdated);
+        axios
+          .get(
+            "https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=searchBar"
+          )
+          .then(response => {
+            // JSON responses are automatically parsed.
+            localStorage.setItem(
+              "userList",
+              JSON.stringify(response.data.userList)
+            );
+          })
+          .catch(e => {
+            this.errors.push(e);
+          });
+      }
+      this.userList = JSON.parse(localStorage.getItem("userList"));
+    },
+    goPortfolio: function(event) {
+      // `this` inside methods points to the Vue instance
+      if (this.userList.includes(this.user)) {
+        document.getElementById("autoTokenSelect1").blur();
+        this.$router.push({
+          name: "PortfolioPage",
+          query: {
+            user: this.user
+          }
+        });
+      }
+    }
+  }
 };
 </script>
 
@@ -34,7 +113,7 @@ export default {
 }
 
 .tokensearch:hover,
-.tokensearch:focus {
+.tokensearch:focus-within {
   -webkit-box-shadow: 0px 5px 29px 0px rgba(106, 219, 252, 1);
   -moz-box-shadow: 0px 5px 29px 0px rgba(106, 219, 252, 1);
   box-shadow: 0px 5px 29px 0px rgba(106, 219, 252, 1);
@@ -85,8 +164,12 @@ export default {
 
 .tokensearch-icon {
   font-size: 20px;
-  color: rgb(0, 38, 101);
+  color: rgb(0, 123, 255);
   margin: auto;
+}
+.tokensearch-icon:hover {
+  cursor: pointer;
+  color: rgb(0, 38, 101);
 }
 @media only screen and (max-width: 500px) {
   ::-webkit-input-placeholder {

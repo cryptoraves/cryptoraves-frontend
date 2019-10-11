@@ -7,11 +7,11 @@
           <img src="../../assets/img/toolimg.png" />
         </div>
         <div class="col-lg-6 mt-2">
-          <div class="tooltoken-content-1">You can actually USE your token for THINGS.</div>
+          <div class="tooltoken-content-1">You can actually USE your token to do THINGS.</div>
           <div class="space-30"></div>
           <div class="tooltoken-content-2">
             Your token is your own Customized & self-designed TOOL
-            <br />Create unique value for yourself.
+            <br />Create new & unique value for yourself.
             <br />Dream up your own case. Get ideas
             <a
               href="https://medium.com/p/adbf47f7f786/edit"

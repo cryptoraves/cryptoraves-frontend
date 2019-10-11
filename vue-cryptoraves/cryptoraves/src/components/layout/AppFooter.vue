@@ -370,7 +370,7 @@ img {
 }
 @media only screen and (max-width: 991px) {
   .app-footer {
-    height: 450px;
+    height: 500px;
   }
   .whitelogo a {
     margin: auto;
@@ -392,7 +392,7 @@ img {
     flex-wrap: wrap;
   }
   .app-footer {
-    height: 450px;
+    height: 500px;
   }
   .whitelogo a {
     margin: auto;

@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <SectionHeader>Check Your Stats</SectionHeader>
+    <SectionHeader>Check Your Portfolio</SectionHeader>
     <div class="row checktoken-content">
       <div class="col-lg-6 mt-2 d-flex">
         <img class="checktoken-img" src="../../assets/img/checkimg.png" />
@@ -14,7 +14,7 @@
                 <div>
                   <img src="../../assets/img/checkitemimg.png" />
                 </div>
-                <div>Your token portfolio (tokens others have shared with you)</div>
+                <div class="text-margin">Tokens you’ve given & received</div>
               </div>
             </li>
             <li>
@@ -22,7 +22,7 @@
                 <div>
                   <img src="../../assets/img/checkitemimg.png" />
                 </div>
-                <div>Your token's ranking</div>
+                <div class="text-margin">Your balance of remaining tokens</div>
               </div>
             </li>
             <li>
@@ -30,7 +30,7 @@
                 <div>
                   <img src="../../assets/img/checkitemimg.png" />
                 </div>
-                <div>Your balance of remaining tokens</div>
+                <div class="text-margin">Any other user’s portfolio!</div>
               </div>
             </li>
           </ul>
@@ -41,7 +41,7 @@
         <!-- <div class="space-40"></div>
         <AppButton name="See who is trending" type4="true"></AppButton>-->
         <!-- ---------------------------------------------------------------------------- -->
-        <div class="checktoken-content-2">How do I raise my score?</div>
+        <div class="checktoken-content-2">But what is the meaning (or value) behind these tokens?</div>
       </div>
     </div>
   </div>
@@ -67,6 +67,9 @@ export default {
 </script>
 
 <style scoped>
+.text-margin {
+  margin-left: 10px;
+}
 .checktoken-list {
   font-size: 17px;
   font-family: "Montserrat";

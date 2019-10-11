@@ -6,7 +6,7 @@
         <div class="col-lg-6 mt-2 d-flex">
           <img src="../../assets/img/shareimg.png" />
         </div>
-        <div class="col-lg-6 mt-2">
+        <div class="col-lg-6 mt-5">
           <div class="sharetoken-content-1">Find a Rad Human & Share!</div>
           <div class="sharetoken-content-2">
             Amplify your hearts. Give appreciation with a personal crypto

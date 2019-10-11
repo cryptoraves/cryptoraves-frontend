@@ -10,11 +10,7 @@
           <br />
           <br />Sharing your tokens is FUN! Amplify your hearts. Give appreciation with a personal, crypto touch. It’s easy -- share your tokens with a Tweet (& no fees).
           <br />
-          <br />You have control. You can grow & influence your token's value. Your token’s value is
-          <a
-            href="https://medium.com/@cryptoraves/measuring-personalized-token-sharing-to-establish-both-network-value-and-token-value-in-social-15caa2f676d5"
-            target="_blank"
-          >tied</a> to your social media network. You can run your own token economy, right on Twitter.
+          <br />Tokenize yourself! Reimagine the value of your online presence & the social media networks you’ve built in token form. You can run your own token economy, right on Twitter.
           <br />
           <br />Your token = Your tool. Experiment with your tokens. Dream up your own use case. Put blockchain tech to work for YOU.
           <br />
