@@ -7,7 +7,11 @@
           <div slot="title">What are Cryptoraves Tokens & Why Should I Use Them?</div>
           <div slot="answer">
             Request 1 Billion of your own
-            <i>personalized</i> crypto tokens, directly on Twitter! No Account, No Fees. Just Tweet this: @cryptoraves #DropMyCrypto
+            <i>personalized</i> crypto tokens, directly on Twitter! No Account, No Fees. Just Tweet this:
+            <a
+              href="https://ctt.ac/9FQa1"
+              target="_blank"
+            >@cryptoraves #DropMyCrypto</a>
             <br />
             <br />Sharing your tokens is FUN! Amplify your hearts. Give appreciation with a personal, crypto touch. It’s easy -- share your tokens with a Tweet (& no fees).
             <br />
@@ -16,7 +20,10 @@
             <br />Your token = Your tool. Experiment with your tokens. Dream up your own use case. Put blockchain tech to work for YOU.
             <br />
             <br />Click
-            <a href="https://medium.com/p/42d9d6226ca0/edit" target="_blank">here</a> for more info.
+            <a
+              href="https://medium.com/@cryptoraves/beta-launch-announcement-cryptoraves-personalized-tokens-have-launched-42d9d6226ca0"
+              target="_blank"
+            >here</a> for more info.
           </div>
         </FaqSection>
         <FaqSection>
@@ -66,7 +73,8 @@
         <FaqSection>
           <div slot="title">What is the Cryptoraves Privacy Policy?</div>
           <div id="faq" slot="answer">
-            By Tweeting: @cryptoraves #DropMyCrypto, or by Tweeting any command request tagging @cryptoraves, you agree to our Privacy Policy, as follows:
+            By Tweeting:
+            <a href="https://ctt.ac/9FQa1" target="_blank">@cryptoraves #DropMyCrypto</a>, or by Tweeting any command request tagging @cryptoraves, you agree to our Privacy Policy, as follows:
             <br />
             <br />The Cryptoraves platform is public, and token transactions requested by our users are immediately viewable and searchable on our website.
             <br />
@@ -81,7 +89,8 @@
         <FaqSection>
           <div slot="title">What are the Cryptoraves Terms of Service?</div>
           <div slot="answer">
-            By Tweeting: @cryptoraves #DropMyCrypto, or by Tweeting any command request tagging @cryptoraves, you agree to our Privacy Policy, as follows:
+            By Tweeting:
+            <a href="https://ctt.ac/9FQa1" target="_blank">@cryptoraves #DropMyCrypto</a>, or by Tweeting any command request tagging @cryptoraves, you agree to our Privacy Policy, as follows:
             <br />
             <br />You must comply with Twitter policies at all times.
             <br />

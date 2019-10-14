@@ -2,7 +2,14 @@
   <div class="demoplayer">
     <img v-bind:src="image" @click="showmodal" />
     <div class="demoplayer-content">
-      <div class="demoplayer-title">{{demotitle}}</div>
+      <template v-if="droptoken">
+        <a href="https://ctt.ac/9FQa1" target="_balnk">
+          <div class="demoplayer-title">{{demotitle}}</div>
+        </a>
+      </template>
+      <template v-else>
+        <div class="demoplayer-title">{{demotitle}}</div>
+      </template>
       <div class="demoplayer-text">{{demotext}}</div>
     </div>
     <div class="demoplayer-modal" :style="{display:showModal}">
@@ -23,7 +30,8 @@ export default {
   props: {
     image: String,
     demotitle: String,
-    demotext: String
+    demotext: String,
+    droptoken: String
   },
   methods: {
     showmodal: function(event) {
@@ -36,6 +44,9 @@ export default {
 };
 </script>
 <style scoped>
+a {
+  text-decoration: none;
+}
 .demoplayer {
   background-color: white;
   box-shadow: 0 0 1em 1px rgba(0, 0, 0, 0.25);
@@ -148,8 +159,7 @@ export default {
   text-decoration: none;
   cursor: pointer;
 }
-
-@media only screen and (max-width: 375px) {
+@media only screen and (max-width: 410px) {
   .demoplayer {
     padding: 1em;
   }

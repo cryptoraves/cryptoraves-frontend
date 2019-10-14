@@ -16,7 +16,7 @@
             Your tokens represent (awesome) you! They’re a piece of your online reputation.
             <div class="space-30"></div>Reimagine your social media value in token form,
             <a
-              href="https://medium.com/p/84bc6b18554f/edit"
+              href="https://medium.com/@cryptoraves/your-social-network-is-an-asset-that-can-be-tokenized-meaningfully-c4709b20c3e7"
               target="_blank"
             >
               <b>& see where it leads you.</b>

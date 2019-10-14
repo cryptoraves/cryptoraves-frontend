@@ -9,19 +9,26 @@
           <SectionHeader>{{this.user}}'s Portfolio Page</SectionHeader>
           <div class="portfolio-subtitle">
             Token Balance: {{ this.tokenBalance | comma }}
-            <br />
-            Tokens Left to Share: {{ this.tokenBalancePercentage }}%
+            <div class="portfolio-subtitle-details">
+              Tokens Distributed: {{ this.totalDistributed | comma }}
+              <br />
+              Tokens Left to Share: {{ this.tokenBalancePercentage }}%
+            </div>
+            <div class="portfolio-subtitle-holding">
+              <span>TOTAL Token Holdings: {{ this.totalHoldings | comma }}</span>
+            </div>
           </div>
           <div class="portfolio-userimg">
             <img :src="this.userImageUrl" :title="this.user" @click="goAnother(user)" />
           </div>
         </div>
+
         <div class="table-section row">
           <table>
             <thead>
               <tr>
-                <th scope="col">Token Brand Held</th>
-                <th scope="col">Token Amount</th>
+                <th scope="col">Token Brand</th>
+                <th scope="col">Token Holdings</th>
               </tr>
             </thead>
             <tbody>
@@ -91,6 +98,8 @@ export default {
       rowCount: 0,
       tokenBalance: "0",
       tokenBalancePercentage: 0,
+      totalDistributed: 0,
+      totalHoldings: 0,
       earliestDatetime: "",
       latestDatetime: "",
       initialPagePtr: 0,
@@ -139,7 +148,9 @@ export default {
             this.ravity = res.ravity;
             this.rowCount = res.rowCount;
             this.tokenBalance = res.tokenBalance;
+            this.totalDistributed = res.totalDistributed;
             this.tokenBalancePercentage = res.tokenBalancePercentage;
+            this.totalHoldings = res.totalHoldings;
             this.latestDatetime = res.latestDatetime;
             this.earliestDatetime = res.earliestDatetime;
             this.initialPagePtr = 0;
@@ -167,14 +178,15 @@ export default {
             this.ravity = res.ravity;
             this.rowCount = res.rowCount;
             this.tokenBalance = res.tokenBalance;
+            this.totalDistributed = res.totalDistributed;
+            this.tokenBalancePercentage = res.tokenBalancePercentage;
+            this.totalHoldings = res.totalHoldings;
             this.latestDatetime = res.latestDatetime;
             this.earliestDatetime = res.earliestDatetime;
-
             this.initialPagePtr++;
             this.visiblePrev = true;
             this.visibleNext = res.next ? true : false;
             this.userImageUrl = res.userImageUrl;
-
             this.showLoading = false;
           })
           .catch(e => {
@@ -196,15 +208,16 @@ export default {
             this.ravity = res.ravity;
             this.rowCount = res.rowCount;
             this.tokenBalance = res.tokenBalance;
+            this.totalDistributed = res.totalDistributed;
+            this.tokenBalancePercentage = res.tokenBalancePercentage;
+            this.totalHoldings = res.totalHoldings;
             this.latestDatetime = res.latestDatetime;
             this.earliestDatetime = res.earliestDatetime;
-
             this.initialPagePtr--;
             this.visiblePrev =
               res.prev && this.initialPagePtr > 0 ? true : false;
             this.visibleNext = true;
             this.userImageUrl = res.userImageUrl;
-
             this.showLoading = false;
           })
           .catch(e => {
@@ -226,6 +239,8 @@ export default {
     },
     goHistory(user) {
       this.$root.$emit("changeUser", user);
+      // localStorage.setItem("transactionPageNum", 0);
+      // localStorage.setItem("transactionFlag", 0);
       this.$router.push({
         name: "HistoryPage",
         query: {
@@ -255,6 +270,26 @@ export default {
   font-family: "Montserrat";
   text-align: center;
   line-height: 2em;
+}
+.portfolio-subtitle-details {
+  margin-top: 20px;
+  color: rgb(0, 38, 101);
+  font-family: "Montserrat";
+  text-align: center;
+  line-height: 1.2em;
+}
+.portfolio-subtitle-holding {
+  display: flex;
+  margin-top: 100px;
+  margin-bottom: -90px;
+  color: rgb(0, 38, 101);
+  font-family: "Montserrat";
+  text-align: center;
+  line-height: 1.2em;
+  justify-content: center;
+}
+.portfolio-subtitle-holding span {
+  transform: translate(70%, 0);
 }
 .portfolio-page {
   margin-bottom: 50px;
@@ -389,6 +424,13 @@ tr:nth-child(even) {
     margin-top: 50px;
     margin-bottom: -110px;
     z-index: 2;
+  }
+  .portfolio-subtitle-holding {
+    margin-top: 30px;
+    margin-bottom: 0px;
+  }
+  .portfolio-subtitle-holding span {
+    transform: none;
   }
 }
 @media only screen and (max-width: 410px) {

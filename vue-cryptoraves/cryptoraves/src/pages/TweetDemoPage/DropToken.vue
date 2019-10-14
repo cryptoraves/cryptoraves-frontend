@@ -1,12 +1,16 @@
 <template>
   <div class="container">
-    <SectionHeader>#DropMyCrypto</SectionHeader>
+    <SectionHeader>@cryptoraves #DropMyCrypto</SectionHeader>
     <div class="droptoken-content">
       <DemoPlayer
+        droptoken="true"
         :image="require('../../assets/gif/droptoken.gif')"
-        demotitle="#DropMyCrypto"
+        demotitle="@cryptoraves #DropMyCrypto"
         demotext="Would you like 1 Billion Personalized ERC-20 Tokens for Twitter? Sweet! All you have to do is Tweet!"
       ></DemoPlayer>
+      <a href="https://ctt.ac/9FQa1" target="_blank">
+        <AppButton name="Tweet" type5="true"></AppButton>
+      </a>
     </div>
   </div>
 </template>
@@ -14,11 +18,13 @@
 <script>
 import SectionHeader from "../../components/ui/SectionHeader";
 import DemoPlayer from "../../components/ui/DemoPlayer";
+import AppButton from "../../components/ui/AppButton";
 export default {
   name: "GetToken",
   components: {
     SectionHeader,
-    DemoPlayer
+    DemoPlayer,
+    AppButton
   }
 };
 </script>

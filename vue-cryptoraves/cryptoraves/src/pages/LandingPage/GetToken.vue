@@ -11,8 +11,9 @@
         <div class="gettoken-content-1">I'M READY! HOW DO I DO THIS?</div>
         <div class="gettoken-content-under"></div>
         <div class="gettoken-content-2">No account. No fees. Just Tweet this now:</div>
-        <TweetButton type1="true">@cryptoraves #DropMyCrypto</TweetButton>
-
+        <a href="https://ctt.ac/9FQa1" target="_blank">
+          <TweetButton type1="true">@cryptoraves #DropMyCrypto</TweetButton>
+        </a>
         <div
           class="gettoken-content-3"
           v-on:click="goFaq"
@@ -21,8 +22,8 @@
         <div
           class="gettoken-content-4"
         >That's it! You did it. You have your own, personalized crypto!!!</div>
-        <div class="gettoken-content-5">Please allow 4-5 minutes for the transaction to finalize.</div>
-        <div class="gettoken-content-6">Cool! But now what..?</div>
+        <div class="space-20"></div>
+        <div class="gettoken-content-5">Cool! But now what..?</div>
       </div>
     </div>
   </div>
@@ -58,6 +59,7 @@ export default {
   padding-bottom: 40px;
 }
 a {
+  text-decoration: none;
   margin: auto;
 }
 .gettoken-content-1 {
@@ -103,12 +105,6 @@ a {
   text-align: left;
 }
 .gettoken-content-5 {
-  font-size: 17px;
-  font-family: "Montserrat";
-  color: rgb(0, 38, 101);
-  line-height: 3;
-}
-.gettoken-content-6 {
   font-size: 15px;
   font-family: "Montserrat";
   color: rgba(0, 37, 102, 0.702);
@@ -127,11 +123,6 @@ a {
   }
   .gettoken-content-4 {
     margin-top: 25px;
-  }
-  .gettoken-content-5 {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    line-height: 1.5;
   }
 }
 </style>

@@ -22,9 +22,7 @@ export default {
 <style scoped>
 .tweetbutton {
   width: 100%;
-  border-width: 1px;
-  border-color: rgb(235, 235, 235);
-  border-style: solid;
+  border: none;
   border-radius: 5px;
   margin-top: 15px;
   margin-bottom: 15px;
@@ -86,7 +84,12 @@ export default {
   color: rgb(42, 192, 236);
   font-weight: bold;
   text-align: left;
-  margin: auto auto auto 8%;
+  margin: auto auto auto 5%;
+}
+@media only screen and (max-width: 410px) {
+  .tweetbutton-text2 {
+    margin: auto auto auto 6%;
+  }
 }
 @media only screen and (max-width: 375px) {
   .tweetbutton-shape {

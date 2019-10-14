@@ -44,11 +44,13 @@
                 </td>
                 <td>
                   <img
+                    v-if="!item.userFrom.includes('Official Launch')"
                     class="table-img"
                     :src="item.userFromImageUrl"
                     :title="item.userFrom"
                     @click="goPortfolio(item.userFrom)"
                   />
+                  <img v-else class="launch-img" :src="item.userFromImageUrl" title="LAUNCH" />
                 </td>
                 <td>
                   <div v-if="platformHandle === item.userFrom">Sent</div>
@@ -155,13 +157,15 @@ export default {
   created() {
     this.user = this.$route.query.user;
     this.$ga.page("/");
-
+    // this.initialPagePtr = localStorage.getItem("transactionPageNum") || 0;
+    // this.initFlag = localStorage.getItem("transactionFlag") || 0;
+    // this.earliestDatetime = localStorage.getItem("earliestDatetime");
+    // this.latestDatetime = localStorage.getItem("latestDatetime");
     this.getHistory(this.user, 0);
   },
   beforeRouteUpdate(to, from, next) {
     // just use `this`
     this.user = to.query.user;
-    this.getHistory(this.user, 0);
     next();
   },
   methods: {
@@ -200,11 +204,17 @@ export default {
             this.userImageUrl = res.userImageUrl;
             this.blockexplorerUrl = res.blockexplorerUrl;
             this.showLoading = false;
+            // localStorage.setItem("earlistData", this.earliestDatetime);
+            // localStorage.setItem("latestDatetime", this.latestDatetime);
+            // localStorage.setItem("transactionFlag", initFlag);
+            // localStorage.setItem("transactionPageNum", this.initialPagePtr);
           })
           .catch(e => {
             console.log(e);
           });
       } else if (initFlag == 1) {
+        // localStorage.setItem("earlistData", this.earliestDatetime);
+        // localStorage.setItem("transactionPageNum", this.initialPagePtr);
         axios
           .get(
             "https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=transactionHistory&userName=" +
@@ -225,11 +235,15 @@ export default {
             this.visiblePrev = true;
             this.visibleNext = res.next ? true : false;
             this.showLoading = false;
+            // localStorage.setItem("latestDatetime", this.latestDatetime);
+            // localStorage.setItem("transactionFlag", initFlag);
           })
           .catch(e => {
             console.log(e);
           });
       } else {
+        // localStorage.setItem("latestDatetime", this.latestDatetime);
+        // localStorage.setItem("transactionPageNum", this.initialPagePtr);
         axios
           .get(
             "https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=transactionHistory&userName=" +
@@ -251,6 +265,8 @@ export default {
               res.prev && this.initialPagePtr > 0 ? true : false;
             this.visibleNext = true;
             this.showLoading = false;
+            // localStorage.setItem("earlistData", this.earliestDatetime);
+            // localStorage.setItem("transactionFlag", initFlag);
           })
           .catch(e => {
             console.log(e);
@@ -393,6 +409,15 @@ table th.r {
 tr:nth-child(even) {
   background-color: rgb(246, 250, 251);
 }
+.launch-img {
+  border: 2px solid white;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  -webkit-box-shadow: 0px 0px 15px 5px rgba(8, 169, 255, 0.3);
+  -moz-box-shadow: 0px 0px 15px 5px rgba(8, 169, 255, 0.3);
+  box-shadow: 0px 0px 15px 5px rgba(8, 169, 255, 0.3);
+}
 .table-img {
   border: 2px solid white;
   width: 70px;
@@ -468,6 +493,10 @@ tr:nth-child(even) {
     font-size: 15px;
   }
   .table-img {
+    height: 50px;
+    width: 50px;
+  }
+  .launch-img {
     height: 50px;
     width: 50px;
   }

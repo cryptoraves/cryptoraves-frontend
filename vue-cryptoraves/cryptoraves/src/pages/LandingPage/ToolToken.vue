@@ -14,7 +14,7 @@
             <br />Create new & unique value for yourself.
             <br />Dream up your own case. Get ideas
             <a
-              href="https://medium.com/p/adbf47f7f786/edit"
+              href="https://medium.com/@cryptoraves/how-do-i-use-these-things-inspiration-for-creating-your-own-cryptoraves-token-use-case-adbf47f7f786"
               target="_blank"
             >here</a>
           </div>

@@ -24,7 +24,7 @@
                 v-model="user"
                 @change="goPortfolio"
                 class="app-header-input"
-                placeholder="Lookup Twitter @username."
+                placeholder="Lookup Twitter @username"
                 list="mylist"
               />
               <datalist id="mylist" v-if="user.length>1">
@@ -41,7 +41,7 @@
                             el: '#getToken',
                             duration: 500,
                             easing: 'linear',
-                            offset: -250,
+                            offset: -200,
                             force: true,
                             cancelable: true,
                         }"

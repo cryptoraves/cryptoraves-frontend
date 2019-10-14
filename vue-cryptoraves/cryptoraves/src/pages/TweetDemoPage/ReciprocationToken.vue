@@ -5,9 +5,13 @@
       <DemoPlayer
         :image="require('../../assets/gif/matchtoken.gif')"
         demotitle="Token Match"
-        demotext="Want to boost your score, & get some official Cryptoraves tokens? Participate in our token match program!"
+        demotext="Want your own Official Cryptoraves Tokens? Participate in our token match program!"
       ></DemoPlayer>
+      <a href="https://ctt.ac/3CdLf" target="_blank">
+        <AppButton name="Tweet" type5="true"></AppButton>
+      </a>
     </div>
+
     <div class="medium-demo-link">
       More "How To"
       <a href="https://medium.com/p/2710f70e8d38/edit" target="_blank">here</a>
@@ -18,11 +22,13 @@
 <script>
 import SectionHeader from "../../components/ui/SectionHeader";
 import DemoPlayer from "../../components/ui/DemoPlayer";
+import AppButton from "../../components/ui/AppButton";
 export default {
   name: "ReciprocationToken",
   components: {
     SectionHeader,
-    DemoPlayer
+    DemoPlayer,
+    AppButton
   }
 };
 </script>

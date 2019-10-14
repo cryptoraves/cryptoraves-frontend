@@ -31,7 +31,7 @@
           <div class="sharetoken-content-4">
             More "How To" on Sharing
             <a
-              href="https://medium.com/p/2710f70e8d38/edit"
+              href="https://medium.com/@cryptoraves/cryptoraves-usage-guidelines-the-complete-how-to-2710f70e8d38"
               target="_blank"
             >here</a>
           </div>

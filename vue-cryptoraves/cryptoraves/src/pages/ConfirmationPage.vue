@@ -6,8 +6,14 @@
       </div>
       <div v-else>
         <SectionHeader>Transaction Confirmed!</SectionHeader>
+        <div class="d-flex">
+          <div class="res-confirmation-amount">{{this.item.amount | comma}}</div>
+        </div>
         <div class="row">
-          <div class="confirmation-fromsection col-lg-4 col-md-4 col-sm-4">
+          <div
+            v-if="!item.userFrom.includes('Token Launch')"
+            class="confirmation-fromsection col-lg-4 col-md-4 col-sm-4"
+          >
             <div class="confirmation-userfromimage">
               <img
                 :src="this.item.userFromImageUrl"
@@ -20,6 +26,12 @@
               v-on:click="goAnother(item.userFrom)"
               :title="item.userFrom"
             >{{this.item.userFrom}}</div>
+          </div>
+          <div v-else class="confirmation-fromsection col-lg-4 col-md-4 col-sm-4">
+            <div class="launch-userfromimage">
+              <img :src="this.item.userFromImageUrl" :title="item.userFrom" />
+            </div>
+            <div class="launch-userFromTo" :title="item.userFrom">Token Launch!</div>
           </div>
           <div class="col-lg-4 col-md-4 col-sm-4">
             <div class="d-flex">
@@ -184,6 +196,32 @@ export default {
   color: rgb(0, 38, 101);
   text-align: center;
 }
+.res-confirmation-amount {
+  margin: 50px auto 50px auto;
+  font-size: 2em;
+  font-family: "Montserrat";
+  color: rgb(0, 38, 101);
+  text-align: center;
+  display: none;
+}
+.launch-userfromimage {
+  display: flex;
+  margin: auto;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 1px solid lightgrey;
+  -webkit-box-shadow: 0px 0px 15px 5px rgba(0, 0, 1, 0.3);
+  -moz-box-shadow: 0px 0px 15px 5px rgba(0, 0, 1, 0.3);
+  box-shadow: 0px 0px 15px 5px rgba(0, 0, 1, 0.3);
+  animation: avatar-from-effect 2s infinite;
+}
+.launch-userfromimage img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: auto;
+}
 .confirmation-userfromimage {
   display: flex;
   margin: auto;
@@ -213,6 +251,14 @@ export default {
 .confirmation-userfromimage img:hover {
   opacity: 0.7;
   cursor: pointer;
+}
+.launch-userFromTo {
+  margin: auto -0.5em auto 0em;
+  font-size: 2em;
+  font-family: "Montserrat";
+  text-align: center;
+  color: #06a8ff;
+  font-weight: 520;
 }
 .confirmation-userFromTo {
   margin: auto 0.5em auto 0.5em;
@@ -350,17 +396,29 @@ export default {
   .confirmation-tosection-show2 {
     display: block;
   }
+  .launch-userFromTo {
+    margin: auto 0.5em auto 0.5em;
+  }
 }
 @media only screen and (max-width: 767px) {
-  .confirmation-userFromTo {
+  .confirmation-userFromTo,
+  .launch-userFromTo {
     font-size: 1.5em;
   }
   .col-sm-4 {
     width: 33.3%;
   }
+  .confirmation-amount {
+    visibility: hidden;
+  }
+  .res-confirmation-amount {
+    display: block;
+    margin-bottom: -100px;
+  }
 }
 @media only screen and (max-width: 530px) {
-  .confirmation-userFromTo {
+  .confirmation-userFromTo,
+  .launch-userFromTo {
     font-size: 1em;
   }
   .confirmation-link {
@@ -371,8 +429,9 @@ export default {
   }
 }
 @media only screen and (max-width: 410px) {
-  .confirmation-userFromTo {
-    font-size: 1em;
+  .confirmation-userFromTo,
+  .launch-userFromTo {
+    font-size: 0.9em;
   }
   .confirmation-blockurl {
     font-size: 1em;
@@ -380,11 +439,8 @@ export default {
   .confirmation-bottom {
     font-size: 1.3em;
   }
-  .confirmation-amount {
+  .res-confirmation-amount {
     font-size: 1.5em;
-  }
-  .confirmation-userFromTo {
-    font-size: 0.9em;
   }
 }
 </style>

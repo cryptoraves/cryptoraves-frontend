@@ -1,7 +1,7 @@
 <template>
   <button
     class="app-button"
-    :class="{'app-button-gettoken':type1, 'app-button-gettoken1':type2, 'app-button-learnmore':type3, 'app-button-demo':type4}"
+    :class="{'app-button-gettoken':type1, 'app-button-gettoken1':type2, 'app-button-learnmore':type3, 'app-button-demo':type4, 'app-button-tweet':type5, 'app-button-return':type6}"
     @click="buttonclick"
   >{{name}}</button>
 </template>
@@ -15,6 +15,8 @@ export default {
     type2: String,
     type3: String,
     type4: String,
+    type5: String,
+    type6: String,
     target: String
   },
   methods: {
@@ -111,10 +113,46 @@ export default {
   border: none;
   cursor: pointer;
 }
+.app-button-tweet {
+  margin-top: 1em;
+  background-color: #00a2ed;
+  width: 6em;
+  height: 2.5em;
+  font-size: 1.2em;
+  font-family: "Montserrat";
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+  padding: 8px 20px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+}
+.app-button-return {
+  background-color: rgb(17, 206, 69);
+  width: 210px;
+  height: 50px;
+  font-size: 16px;
+  font-family: "Roboto Condensed";
+  color: #fff;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border-radius: 50px;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+}
 
 @media only screen and (max-width: 991px) {
   .app-button-gettoken {
     display: none;
+  }
+}
+@media only screen and (max-width: 410px) {
+  .app-button-tweet {
+    width: 6em;
+    height: 2.5em;
+    font-size: 1em;
   }
 }
 </style>
