@@ -17,7 +17,7 @@
               Tokens Left to Share: {{ this.tokenBalancePercentage }}%
             </div>
             <div class="portfolio-subtitle-holding">
-              <span>TOTAL Token Holdings: {{ this.totalHoldings | comma }}</span>
+              <span><b>TOTAL Token Holdings: {{ this.totalHoldings | comma }}</b></span>
             </div>
           </div>
           <div class="portfolio-userimg">
