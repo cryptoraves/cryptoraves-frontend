@@ -4,9 +4,9 @@
       <div class="notfound">
         <div class="notfound-404">
           <h1>404</h1>
+          <img src="https://sample-imgs.s3.amazonaws.com/404ravey.jpeg">
         </div>
-        <div class="notfound-404"><img src="https://sample-imgs.s3.amazonaws.com/404ravey.jpeg"> </div>
-        <p>Woops!  Ravey cannot compute. Try in another spacetime continuum.</p>
+        <h1>Woops!  Ravey cannot compute. Try in another spacetime continuum.</h1>
         <a href="/">
           <AppButton name="Go To Homepage" type6="true"></AppButton>
         </a>
