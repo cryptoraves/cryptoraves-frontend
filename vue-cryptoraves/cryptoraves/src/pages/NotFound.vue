@@ -3,10 +3,11 @@
     <div id="notfound">
       <div class="notfound">
         <div class="notfound-404">
-          <h1>Oops!</h1>
+          <h1>404</h1>
+          
         </div>
-        <h2>404 - Page not found</h2>
-        <p>The page you are looking for might have been removed had its name changed or is temporarily unavailable.</p>
+        <img src="https://sample-imgs.s3.amazonaws.com/404ravey.jpeg">
+        <p>Woops!  Ravey cannot compute. Try in another spacetime continuum.</p>
         <a href="/">
           <AppButton name="Go To Homepage" type6="true"></AppButton>
         </a>
