@@ -8,8 +8,10 @@
         <div class="portfolio-title">
           <SectionHeader>{{this.user}}'s Portfolio Page</SectionHeader>
           <div class="portfolio-subtitle">
-            Token Balance: {{ this.tokenBalance | comma }}
+            
             <div class="portfolio-subtitle-details">
+              Token Balance: {{ this.tokenBalance | comma }}
+              <br />
               Tokens Distributed: {{ this.totalDistributed | comma }}
               <br />
               Tokens Left to Share: {{ this.tokenBalancePercentage }}%
