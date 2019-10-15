@@ -6,7 +6,7 @@
       </div>
       <div v-else>
         <div class="portfolio-title">
-          <SectionHeader>{{this.user}}'s Portfolio Page</SectionHeader>
+          <SectionHeader portfolio="true" :user="this.user">{{this.user}}'s Portfolio Page</SectionHeader>
           <div class="portfolio-subtitle">
             Token Balance: {{ this.tokenBalance | comma }}
             <div class="portfolio-subtitle-details">

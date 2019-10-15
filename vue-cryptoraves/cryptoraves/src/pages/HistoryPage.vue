@@ -36,7 +36,9 @@
                 :class="[platformHandle === item.userFrom? 'tr-orange-color' : 'tr-green-color']"
               >
                 <td>
+                  <div v-if="item.txnHash=='Error'" title="Pending">Pend...</div>
                   <div
+                    v-else
                     class="link"
                     @click="goTransaction(item.txnHash)"
                     title="Link to Confirmation"
@@ -85,6 +87,11 @@
                 </td>
                 <td>
                   <div
+                    v-if="item.txnHash=='Error'"
+                    title="Pending"
+                  >{{ item.date.substring(0,item.date.length-3) }}</div>
+                  <div
+                    v-else
                     class="link"
                     @click="goTransaction(item.txnHash)"
                     title="Link to Confirmation"
@@ -293,11 +300,13 @@ export default {
       window.open(link);
     },
     goTransaction(txnHash) {
-      this.$root.$emit("changeUser", txnHash);
-      this.$router.push({
-        name: "ConfirmationPage",
-        query: { txnId: txnHash }
-      });
+      if (txnHash !== "Error") {
+        this.$root.$emit("changeUser", txnHash);
+        this.$router.push({
+          name: "ConfirmationPage",
+          query: { txnId: txnHash }
+        });
+      }
     }
   }
 };

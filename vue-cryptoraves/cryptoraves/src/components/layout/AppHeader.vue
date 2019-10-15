@@ -41,7 +41,7 @@
                             el: '#getToken',
                             duration: 500,
                             easing: 'linear',
-                            offset: -200,
+                            offset: -250,
                             force: true,
                             cancelable: true,
                         }"

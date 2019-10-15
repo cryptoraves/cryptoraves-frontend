@@ -114,11 +114,11 @@ export default {
   cursor: pointer;
 }
 .app-button-tweet {
-  margin-top: 1em;
   background-color: #00a2ed;
-  width: 6em;
-  height: 2.5em;
-  font-size: 1.2em;
+  width: 10rem;
+  height: 2.5rem;
+  font-size: 1.2rem;
+  line-height: 1.5;
   font-family: "Montserrat";
   color: rgb(255, 255, 255);
   font-weight: bold;
@@ -148,11 +148,11 @@ export default {
     display: none;
   }
 }
-@media only screen and (max-width: 410px) {
+@media only screen and (max-width: 550px) {
   .app-button-tweet {
-    width: 6em;
-    height: 2.5em;
-    font-size: 1em;
+    width: 10rem;
+    height: 2.5rem;
+    font-size: 1rem;
   }
 }
 </style>

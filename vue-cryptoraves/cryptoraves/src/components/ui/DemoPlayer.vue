@@ -4,8 +4,21 @@
     <div class="demoplayer-content">
       <template v-if="droptoken">
         <a href="https://ctt.ac/9FQa1" target="_balnk">
-          <div class="demoplayer-title">{{demotitle}}</div>
+          <div class="demoplayer-drop-title">
+            {{demotitle}}
+            <a href="https://ctt.ac/9FQa1" target="_blank">
+              <AppButton name="Tweet This" type5="true"></AppButton>
+            </a>
+          </div>
         </a>
+      </template>
+      <template v-else-if="tokenmatch">
+        <div class="demoplayer-match-title">
+          {{demotitle}}
+          <a href="https://ctt.ac/2b9lU" target="_blank">
+            <AppButton name="Tweet This" type5="true"></AppButton>
+          </a>
+        </div>
       </template>
       <template v-else>
         <div class="demoplayer-title">{{demotitle}}</div>
@@ -20,6 +33,8 @@
   </div>
 </template>
 <script>
+import AppButton from "../../components/ui/AppButton";
+
 export default {
   name: "DemoPlayer",
   data() {
@@ -27,11 +42,15 @@ export default {
       showModal: "none"
     };
   },
+  components: {
+    AppButton
+  },
   props: {
     image: String,
     demotitle: String,
     demotext: String,
-    droptoken: String
+    droptoken: String,
+    tokenmatch: String
   },
   methods: {
     showmodal: function(event) {
@@ -71,6 +90,31 @@ a {
   line-height: 3;
   text-align: left;
 }
+
+.demoplayer-content .demoplayer-drop-title {
+  display: flex;
+  font-size: 30px;
+  font-family: "Montserrat";
+  color: rgb(0, 38, 101);
+  font-weight: bold;
+  line-height: 3;
+  text-align: left;
+}
+.demoplayer-drop-title a {
+  margin-left: auto;
+}
+.demoplayer-content .demoplayer-match-title {
+  display: flex;
+  font-size: 30px;
+  font-family: "Montserrat";
+  color: rgb(0, 38, 101);
+  font-weight: bold;
+  line-height: 3;
+  text-align: left;
+}
+.demoplayer-match-title a {
+  margin-left: auto;
+}
 .demoplayer-content .demoplayer-text {
   font-size: 20px;
   font-family: "Montserrat";
@@ -78,6 +122,7 @@ a {
   line-height: 1.4;
   text-align: left;
 }
+
 /* modal */
 
 .demoplayer-modal {
@@ -158,6 +203,20 @@ a {
   color: white;
   text-decoration: none;
   cursor: pointer;
+}
+@media only screen and (max-width: 991px) {
+  .demoplayer-content .demoplayer-drop-title {
+    line-height: 1.5;
+  }
+}
+@media only screen and (max-width: 550px) {
+  .demoplayer-content .demoplayer-drop-title {
+    display: block;
+  }
+  .demoplayer-content .demoplayer-match-title {
+    display: block;
+    line-height: 1.5;
+  }
 }
 @media only screen and (max-width: 410px) {
   .demoplayer {

@@ -8,9 +8,6 @@
         demotitle="@cryptoraves #DropMyCrypto"
         demotext="Would you like 1 Billion Personalized ERC-20 Tokens for Twitter? Sweet! All you have to do is Tweet!"
       ></DemoPlayer>
-      <a href="https://ctt.ac/9FQa1" target="_blank">
-        <AppButton name="Tweet" type5="true"></AppButton>
-      </a>
     </div>
   </div>
 </template>
