@@ -130,6 +130,9 @@ export default {
             user: this.user
           }
         });
+      } else {
+        alert("'" + this.user + "'" + " not found!");
+        this.user = "";
       }
     }
   }
