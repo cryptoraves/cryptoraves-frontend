@@ -163,6 +163,9 @@ export default {
   },
   created() {
     this.user = this.$route.query.user;
+
+    this.earliestDatetime = this.$route.query.earliestDatetime
+    this.latestDatetime = this.$route.query.latestDatetime
     this.$ga.page("/");
     // this.initialPagePtr = localStorage.getItem("transactionPageNum") || 0;
     // this.initFlag = localStorage.getItem("transactionFlag") || 0;
@@ -244,6 +247,7 @@ export default {
             this.showLoading = false;
             // localStorage.setItem("latestDatetime", this.latestDatetime);
             // localStorage.setItem("transactionFlag", initFlag);
+            router.push({ path: 'history', query: { earliestDatetime: this.earliestDatetime }})
           })
           .catch(e => {
             console.log(e);
@@ -274,6 +278,7 @@ export default {
             this.showLoading = false;
             // localStorage.setItem("earlistData", this.earliestDatetime);
             // localStorage.setItem("transactionFlag", initFlag);
+            router.push({ path: 'history', query: { latestDatetime: this.latestDatetime }})
           })
           .catch(e => {
             console.log(e);
