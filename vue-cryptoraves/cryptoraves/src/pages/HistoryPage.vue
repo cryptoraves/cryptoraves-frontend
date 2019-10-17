@@ -175,6 +175,8 @@ export default {
       this.initFlag=2
     }
 
+
+
     this.$ga.page("/");
     // this.initialPagePtr = localStorage.getItem("transactionPageNum") || 0;
     // this.initFlag = localStorage.getItem("transactionFlag") || 0;
@@ -242,7 +244,10 @@ export default {
               this.earliestDatetime
           )
           .then(response => {
-            this.$router.push({ path: 'history', query: { user: user, earliestDatetime: this.earliestDatetime}})
+
+            this.initialPagePtr++;
+
+            this.$router.push({ path: 'history', query: { user: user, earliestDatetime: this.earliestDatetime, page: this.initialPagePtr}})
             // JSON responses are automatically parsed.
             this.user = user;
             let res = response.data;
@@ -251,7 +256,7 @@ export default {
             this.tokenBalance = res.tokenBalance;
             this.latestDatetime = res.latestDatetime;
             this.earliestDatetime = res.earliestDatetime;
-            this.initialPagePtr++;
+            
             this.visiblePrev = true;
             this.visibleNext = res.next ? true : false;
             this.platformHandle = res.platformHandle;
@@ -276,7 +281,8 @@ export default {
               this.latestDatetime
           )
           .then(response => {
-            this.$router.push({ path: 'history', query: { user: user, latestDatetime: this.latestDatetime}})
+            this.initialPagePtr--;
+            this.$router.push({ path: 'history', query: { user: user, latestDatetime: this.latestDatetime, page: this.initialPagePtr}})
             // JSON responses are automatically parsed.
             this.user = user;
             let res = response.data;
@@ -285,7 +291,7 @@ export default {
             this.tokenBalance = res.tokenBalance;
             this.latestDatetime = res.latestDatetime;
             this.earliestDatetime = res.earliestDatetime;
-            this.initialPagePtr--;
+            
             this.visiblePrev =
               res.prev && this.initialPagePtr > 0 ? true : false;
             this.visibleNext = true;
