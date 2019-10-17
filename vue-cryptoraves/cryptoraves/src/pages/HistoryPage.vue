@@ -175,7 +175,7 @@ export default {
       this.initFlag=2
     }
     if ( !this.page ){
-      this.page=0
+      this.page=1
     }
     this.$ga.page("/");
     // this.initialPagePtr = localStorage.getItem("transactionPageNum") || 0;
@@ -244,7 +244,7 @@ export default {
               this.earliestDatetime
           )
           .then(response => {
-            if(page){
+            if(page > 1){
               this.initialPagePtr=page
             }
             this.$router.push({ path: 'history', query: { user: user, earliestDatetime: this.earliestDatetime, page: this.initialPagePtr }})
@@ -283,7 +283,7 @@ export default {
               this.latestDatetime
           )
           .then(response => {
-            if(page){
+            if(page > 1){
               this.initialPagePtr=page
             }
             this.$router.push({ path: 'history', query: { user: user, earliestDatetime: this.earliestDatetime, page: this.initialPagePtr }})
