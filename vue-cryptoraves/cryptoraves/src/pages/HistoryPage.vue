@@ -167,21 +167,22 @@ export default {
     this.earliestDatetime = this.$route.query.earliestDatetime
     this.latestDatetime = this.$route.query.latestDatetime
     this.initFlag=0
-    console.log(this.user)
+    
     if ( this.earliestDatetime ){
       this.initFlag=1
-      console.log(this.earliestDatetime)
     }
     if ( this.latestDatetime ){
       this.initFlag=2
-      console.log(this.latestDatetime)
+    }
+    if ( !this.page ){
+      this.page=0
     }
     this.$ga.page("/");
     // this.initialPagePtr = localStorage.getItem("transactionPageNum") || 0;
     // this.initFlag = localStorage.getItem("transactionFlag") || 0;
     // this.earliestDatetime = localStorage.getItem("earliestDatetime");
     // this.latestDatetime = localStorage.getItem("latestDatetime");
-    this.getHistory(this.user, this.initFlag);
+    this.getHistory(this.user, this.initFlag, this.page);
   },
   beforeRouteUpdate(to, from, next) {
     // just use `this`
@@ -201,7 +202,7 @@ export default {
         this.getHistory(this.user, 2);
       }
     },
-    getHistory(user, initFlag) {
+    getHistory(user, initFlag, page) {
       if (initFlag == 0) {
         axios
           .get(
@@ -243,7 +244,10 @@ export default {
               this.earliestDatetime
           )
           .then(response => {
-            this.$router.push({ path: 'history', query: { user: user, earliestDatetime: this.earliestDatetime }})
+            if(page){
+              this.initialPagePtr=page
+            }
+            this.$router.push({ path: 'history', query: { user: user, earliestDatetime: this.earliestDatetime, page: this.initialPagePtr }})
             // JSON responses are automatically parsed.
             this.user = user;
             let res = response.data;
@@ -252,7 +256,9 @@ export default {
             this.tokenBalance = res.tokenBalance;
             this.latestDatetime = res.latestDatetime;
             this.earliestDatetime = res.earliestDatetime;
-            this.initialPagePtr++;
+            if( !page ){
+              this.initialPagePtr++;
+            }
             this.visiblePrev = true;
             this.visibleNext = res.next ? true : false;
             this.platformHandle = res.platformHandle;
@@ -277,7 +283,10 @@ export default {
               this.latestDatetime
           )
           .then(response => {
-            this.$router.push({ path: 'history', query: { user: user, latestDatetime: this.latestDatetime }})
+            if(page){
+              this.initialPagePtr=page
+            }
+            this.$router.push({ path: 'history', query: { user: user, earliestDatetime: this.earliestDatetime, page: this.initialPagePtr }})
             // JSON responses are automatically parsed.
             this.user = user;
             let res = response.data;
@@ -286,7 +295,9 @@ export default {
             this.tokenBalance = res.tokenBalance;
             this.latestDatetime = res.latestDatetime;
             this.earliestDatetime = res.earliestDatetime;
-            this.initialPagePtr--;
+            if(!page){
+              this.initialPagePtr--;
+            }
             this.visiblePrev =
               res.prev && this.initialPagePtr > 0 ? true : false;
             this.visibleNext = true;
