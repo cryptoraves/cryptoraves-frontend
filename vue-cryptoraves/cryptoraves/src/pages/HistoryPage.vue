@@ -167,11 +167,14 @@ export default {
     this.earliestDatetime = this.$route.query.earliestDatetime
     this.latestDatetime = this.$route.query.latestDatetime
     this.initFlag=0
+    console.log(this.user)
     if ( this.earliestDatetime ){
       this.initFlag=1
+      console.log(this.earliestDatetime)
     }
     if ( this.latestDatetime ){
       this.initFlag=2
+      console.log(this.latestDatetime)
     }
     this.$ga.page("/");
     // this.initialPagePtr = localStorage.getItem("transactionPageNum") || 0;
