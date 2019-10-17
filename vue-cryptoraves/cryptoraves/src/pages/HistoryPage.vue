@@ -166,12 +166,19 @@ export default {
 
     this.earliestDatetime = this.$route.query.earliestDatetime
     this.latestDatetime = this.$route.query.latestDatetime
+    this.initFlag=0
+    if ( this.earliestDatetime ){
+      this.initFlag=1
+    }
+    if ( this.latestDatetime ){
+      this.initFlag=2
+    }
     this.$ga.page("/");
     // this.initialPagePtr = localStorage.getItem("transactionPageNum") || 0;
     // this.initFlag = localStorage.getItem("transactionFlag") || 0;
     // this.earliestDatetime = localStorage.getItem("earliestDatetime");
     // this.latestDatetime = localStorage.getItem("latestDatetime");
-    this.getHistory(this.user, 0);
+    this.getHistory(this.user, this.initFlag);
   },
   beforeRouteUpdate(to, from, next) {
     // just use `this`
