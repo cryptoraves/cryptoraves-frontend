@@ -256,7 +256,7 @@ export default {
             this.tokenBalance = res.tokenBalance;
             this.latestDatetime = res.latestDatetime;
             this.earliestDatetime = res.earliestDatetime;
-            if( !page ){
+            if( page <= 1){
               this.initialPagePtr++;
             }
             this.visiblePrev = true;
@@ -295,7 +295,7 @@ export default {
             this.tokenBalance = res.tokenBalance;
             this.latestDatetime = res.latestDatetime;
             this.earliestDatetime = res.earliestDatetime;
-            if(!page){
+            if(page <= 1){
               this.initialPagePtr--;
             }
             this.visiblePrev =
