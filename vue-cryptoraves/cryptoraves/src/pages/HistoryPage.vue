@@ -175,7 +175,7 @@ export default {
       this.initFlag=2
     }
     if ( !this.page ){
-      this.page=1
+      this.page=0
     }
     this.$ga.page("/");
     // this.initialPagePtr = localStorage.getItem("transactionPageNum") || 0;
@@ -244,8 +244,8 @@ export default {
               this.earliestDatetime
           )
           .then(response => {
-            if(page > 1){
-              this.initialPagePtr=page
+            if(page){
+              this.initialPagePtr=page+1
             }
             this.$router.push({ path: 'history', query: { user: user, earliestDatetime: this.earliestDatetime, page: this.initialPagePtr }})
             // JSON responses are automatically parsed.
@@ -256,7 +256,7 @@ export default {
             this.tokenBalance = res.tokenBalance;
             this.latestDatetime = res.latestDatetime;
             this.earliestDatetime = res.earliestDatetime;
-            if( page <= 1){
+            if( !page ){
               this.initialPagePtr++;
             }
             this.visiblePrev = true;
@@ -283,8 +283,8 @@ export default {
               this.latestDatetime
           )
           .then(response => {
-            if(page > 1){
-              this.initialPagePtr=page
+            if(page){
+              this.initialPagePtr=page+1
             }
             this.$router.push({ path: 'history', query: { user: user, earliestDatetime: this.earliestDatetime, page: this.initialPagePtr }})
             // JSON responses are automatically parsed.
@@ -295,7 +295,7 @@ export default {
             this.tokenBalance = res.tokenBalance;
             this.latestDatetime = res.latestDatetime;
             this.earliestDatetime = res.earliestDatetime;
-            if(page <= 1){
+            if(!page){
               this.initialPagePtr--;
             }
             this.visiblePrev =
