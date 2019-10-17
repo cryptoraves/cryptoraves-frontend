@@ -243,6 +243,7 @@ export default {
               this.earliestDatetime
           )
           .then(response => {
+            this.$router.push({ path: 'history', query: { user: user, earliestDatetime: this.earliestDatetime }})
             // JSON responses are automatically parsed.
             this.user = user;
             let res = response.data;
@@ -260,7 +261,7 @@ export default {
             this.showLoading = false;
             // localStorage.setItem("latestDatetime", this.latestDatetime);
             // localStorage.setItem("transactionFlag", initFlag);
-            this.$router.push({ path: 'history', query: { user: user, earliestDatetime: this.earliestDatetime }})
+            
           })
           .catch(e => {
             console.log(e);
@@ -276,6 +277,7 @@ export default {
               this.latestDatetime
           )
           .then(response => {
+            this.$router.push({ path: 'history', query: { user: user, latestDatetime: this.latestDatetime }})
             // JSON responses are automatically parsed.
             this.user = user;
             let res = response.data;
@@ -294,7 +296,7 @@ export default {
             this.showLoading = false;
             // localStorage.setItem("earlistData", this.earliestDatetime);
             // localStorage.setItem("transactionFlag", initFlag);
-            this.$router.push({ path: 'history', query: { user: user, latestDatetime: this.latestDatetime }})
+            
           })
           .catch(e => {
             console.log(e);
