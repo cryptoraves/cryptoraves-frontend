@@ -176,10 +176,10 @@ export default {
     }
 
     if(this.$route.query.page && this.initFlag){
-      if( )this.initFlag == 1){
+      if( this.initFlag == 1){
         this.initialPagePtr=this.$route.query.page-2
       }
-      if( )this.initFlag == 2){
+      if( this.initFlag == 2){
         this.initialPagePtr=this.$route.query.page
       }
       console.log('both conditions true')
