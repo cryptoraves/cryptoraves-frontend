@@ -254,6 +254,9 @@ export default {
             this.initialPagePtr++;
             this.visiblePrev = true;
             this.visibleNext = res.next ? true : false;
+            this.platformHandle = res.platformHandle;
+            this.userImageUrl = res.userImageUrl;
+            this.blockexplorerUrl = res.blockexplorerUrl;
             this.showLoading = false;
             // localStorage.setItem("latestDatetime", this.latestDatetime);
             // localStorage.setItem("transactionFlag", initFlag);
@@ -285,6 +288,9 @@ export default {
             this.visiblePrev =
               res.prev && this.initialPagePtr > 0 ? true : false;
             this.visibleNext = true;
+            this.platformHandle = res.platformHandle;
+            this.userImageUrl = res.userImageUrl;
+            this.blockexplorerUrl = res.blockexplorerUrl;
             this.showLoading = false;
             // localStorage.setItem("earlistData", this.earliestDatetime);
             // localStorage.setItem("transactionFlag", initFlag);
