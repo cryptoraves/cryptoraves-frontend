@@ -247,7 +247,7 @@ export default {
             this.showLoading = false;
             // localStorage.setItem("latestDatetime", this.latestDatetime);
             // localStorage.setItem("transactionFlag", initFlag);
-            this.$router.push({ path: 'history', query: { earliestDatetime: this.earliestDatetime }})
+            this.$router.push({ path: 'history', query: { user: user, earliestDatetime: this.earliestDatetime }})
           })
           .catch(e => {
             console.log(e);
@@ -278,7 +278,7 @@ export default {
             this.showLoading = false;
             // localStorage.setItem("earlistData", this.earliestDatetime);
             // localStorage.setItem("transactionFlag", initFlag);
-            this.$router.push({ path: 'history', query: { latestDatetime: this.latestDatetime }})
+            this.$router.push({ path: 'history', query: { user: user, latestDatetime: this.latestDatetime }})
           })
           .catch(e => {
             console.log(e);
