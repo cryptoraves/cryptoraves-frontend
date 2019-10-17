@@ -175,7 +175,9 @@ export default {
       this.initFlag=2
     }
 
-
+    if(this.$route.query.page && this.initFlag){
+      console.log('both conditions true')
+    }
 
     this.$ga.page("/");
     // this.initialPagePtr = localStorage.getItem("transactionPageNum") || 0;
