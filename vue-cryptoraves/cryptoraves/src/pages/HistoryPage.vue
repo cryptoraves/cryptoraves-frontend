@@ -245,7 +245,7 @@ export default {
           )
           .then(response => {
             if(page){
-              this.initialPagePtr=page+1
+              this.initialPagePtr=page
             }
             this.$router.push({ path: 'history', query: { user: user, earliestDatetime: this.earliestDatetime, page: this.initialPagePtr }})
             // JSON responses are automatically parsed.
@@ -284,7 +284,9 @@ export default {
           )
           .then(response => {
             if(page){
-              this.initialPagePtr=page+1
+              this.initialPagePtr=page
+            }else{
+              page=this.initialPagePtr
             }
             this.$router.push({ path: 'history', query: { user: user, earliestDatetime: this.earliestDatetime, page: this.initialPagePtr }})
             // JSON responses are automatically parsed.
