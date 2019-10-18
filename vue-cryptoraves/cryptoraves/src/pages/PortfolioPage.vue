@@ -140,7 +140,6 @@ export default {
   beforeRouteUpdate(to, from, next) {
     // just use `this`
     this.user = to.query.user;
-    this.getPortfolio(this.user, 0);
     next();
   },
   methods: {
