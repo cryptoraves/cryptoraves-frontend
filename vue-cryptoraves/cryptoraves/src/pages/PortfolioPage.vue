@@ -181,7 +181,7 @@ export default {
             this.visibleNext = res.next ? true : false;
             this.userImageUrl = res.userImageUrl;
             this.showLoading = false;
-    console.log("here 0"this.initialPagePtr)
+    console.log("here 0"+this.initialPagePtr)
           })
           .catch(e => {
             console.log(e);
