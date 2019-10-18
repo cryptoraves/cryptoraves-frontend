@@ -171,9 +171,11 @@ export default {
     if ( this.earliestDatetime ){
       this.initFlag=1
     }
+    console.log(this.initFlag)
     if ( this.latestDatetime ){
       this.initFlag=2
     }
+    console.log(this.initFlag)
 
     if(this.$route.query.page && this.initFlag){
       if( this.initFlag == 1){
