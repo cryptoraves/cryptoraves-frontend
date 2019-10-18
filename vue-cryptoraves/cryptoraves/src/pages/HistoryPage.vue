@@ -182,7 +182,6 @@ export default {
       if( this.initFlag == 2){
         this.initialPagePtr=this.$route.query.page
       }
-      console.log('both conditions true')
       
     }
 
@@ -256,9 +255,9 @@ export default {
 
             this.initialPagePtr++;
             if(this.initialPagePtr){
-              this.$router.push({ path: 'portfolio', query: { user: user, earliestDatetime: this.earliestDatetime, page: this.initialPagePtr+1}})
+              this.$router.push({ path: 'history', query: { user: user, earliestDatetime: this.earliestDatetime, page: this.initialPagePtr+1}})
             }else{
-              this.$router.push({ path: 'portfolio', query: { user: user}})
+              this.$router.push({ path: 'history', query: { user: user}})
             }
             // JSON responses are automatically parsed.
             this.user = user;
@@ -295,9 +294,9 @@ export default {
           .then(response => {
             this.initialPagePtr--;
             if(this.initialPagePtr){
-              this.$router.push({ path: 'portfolio', query: { user: user, latestDatetime: this.latestDatetime, page: this.initialPagePtr+1}})
+              this.$router.push({ path: 'history', query: { user: user, latestDatetime: this.latestDatetime, page: this.initialPagePtr+1}})
             }else{
-              this.$router.push({ path: 'portfolio', query: { user: user}})
+              this.$router.push({ path: 'history', query: { user: user}})
             }
             // JSON responses are automatically parsed.
             this.user = user;

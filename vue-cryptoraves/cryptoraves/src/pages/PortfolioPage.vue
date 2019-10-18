@@ -132,7 +132,6 @@ export default {
       if( this.initFlag == 2){
         this.initialPagePtr=this.$route.query.page
       }
-      console.log('both conditions true')
       
     }
     this.$ga.page("/");
