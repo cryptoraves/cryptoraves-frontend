@@ -181,7 +181,7 @@ export default {
             this.visibleNext = res.next ? true : false;
             this.userImageUrl = res.userImageUrl;
             this.showLoading = false;
-    console.log(this.initialPagePtr)
+    console.log("here 0"this.initialPagePtr)
           })
           .catch(e => {
             console.log(e);
@@ -196,7 +196,7 @@ export default {
           )
           .then(response => {
             this.initialPagePtr++;
-    console.log(this.initialPagePtr)
+    console.log("here 1"+this.initialPagePtr)
             if(this.initialPagePtr){
               this.$router.push({ path: 'portfolio', query: { user: user, earliestDatetime: this.earliestDatetime, page: this.initialPagePtr+1}})
             }else{
@@ -234,7 +234,7 @@ export default {
           )
           .then(response => {
             this.initialPagePtr--;
-console.log(this.initialPagePtr)
+console.log("here 2"+this.initialPagePtr)
     
             if(this.initialPagePtr){
               this.$router.push({ path: 'portfolio', query: { user: user, latestDatetime: this.latestDatetime, page: this.initialPagePtr+1}})
