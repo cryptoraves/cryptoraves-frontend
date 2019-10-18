@@ -3,7 +3,7 @@
     <img src="../../assets/img/cryptoraves_PNG-01.png" />
     <br />
     <slot></slot>
-    <i v-if="portfolio" class="fa fa-list-alt" title="Transaction History" @click="goHistory(user)"></i>
+    <i v-if="portfolio" class="fa fa-list-alt" title="Go To {{user}}'s Transaction History" @click="goHistory(user)"></i>
   </div>
 </template>
 
