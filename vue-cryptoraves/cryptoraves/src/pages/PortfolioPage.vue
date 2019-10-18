@@ -113,8 +113,30 @@ export default {
   },
   created() {
     this.user = this.$route.query.user;
+
+    this.earliestDatetime = this.$route.query.earliestDatetime
+    this.latestDatetime = this.$route.query.latestDatetime
+    this.initFlag=0
+
+    if ( this.earliestDatetime ){
+      this.initFlag=1
+    }
+    if ( this.latestDatetime ){
+      this.initFlag=2
+    }
+
+    if(this.$route.query.page && this.initFlag){
+      if( this.initFlag == 1){
+        this.initialPagePtr=this.$route.query.page-2
+      }
+      if( this.initFlag == 2){
+        this.initialPagePtr=this.$route.query.page
+      }
+      console.log('both conditions true')
+      
+    }
     this.$ga.page("/");
-    this.getPortfolio(this.user, 0);
+    this.getPortfolio(this.user, this.initFlag);
   },
   beforeRouteUpdate(to, from, next) {
     // just use `this`
@@ -173,6 +195,12 @@ export default {
               this.earliestDatetime
           )
           .then(response => {
+            this.initialPagePtr++;
+            if(this.initialPagePtr){
+              this.$router.push({ path: 'history', query: { user: user, earliestDatetime: this.earliestDatetime, page: this.initialPagePtr+1}})
+            }else{
+              this.$router.push({ path: 'history', query: { user: user}})
+            }
             // JSON responses are automatically parsed.
             let res = response.data;
             this.user = res.platformHandle;
@@ -185,10 +213,11 @@ export default {
             this.totalHoldings = res.totalHoldings;
             this.latestDatetime = res.latestDatetime;
             this.earliestDatetime = res.earliestDatetime;
-            this.initialPagePtr++;
+           
             this.visiblePrev = true;
             this.visibleNext = res.next ? true : false;
             this.userImageUrl = res.userImageUrl;
+            this.platformHandle = res.platformHandle;
             this.showLoading = false;
           })
           .catch(e => {
@@ -203,6 +232,12 @@ export default {
               this.latestDatetime
           )
           .then(response => {
+            this.initialPagePtr--;
+            if(this.initialPagePtr){
+              this.$router.push({ path: 'history', query: { user: user, latestDatetime: this.latestDatetime, page: this.initialPagePtr+1}})
+            }else{
+              this.$router.push({ path: 'history', query: { user: user}})
+            }
             // JSON responses are automatically parsed.
             let res = response.data;
             this.user = res.platformHandle;
@@ -215,11 +250,12 @@ export default {
             this.totalHoldings = res.totalHoldings;
             this.latestDatetime = res.latestDatetime;
             this.earliestDatetime = res.earliestDatetime;
-            this.initialPagePtr--;
+            
             this.visiblePrev =
               res.prev && this.initialPagePtr > 0 ? true : false;
             this.visibleNext = true;
             this.userImageUrl = res.userImageUrl;
+            this.platformHandle = res.platformHandle;
             this.showLoading = false;
           })
           .catch(e => {
