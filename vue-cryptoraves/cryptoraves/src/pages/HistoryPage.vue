@@ -219,8 +219,8 @@ export default {
           )
           .then(response => {
             // JSON responses are automatically parsed.
-            this.user = user;
             let res = response.data;
+            this.user = user;
             this.tableRows = _.cloneDeep(res.tableRows);
             this.rowCount = res.rowCount;
             this.tokenBalance = res.tokenBalance;
@@ -242,8 +242,6 @@ export default {
             console.log(e);
           });
       } else if (initFlag == 1) {
-        // localStorage.setItem("earlistData", this.earliestDatetime);
-        // localStorage.setItem("transactionPageNum", this.initialPagePtr);
         axios
           .get(
             "https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=transactionHistory&userName=" +
@@ -252,7 +250,6 @@ export default {
               this.earliestDatetime
           )
           .then(response => {
-
             this.initialPagePtr++;
             if(this.initialPagePtr){
               this.$router.push({ path: 'history', query: { user: user, earliestDatetime: this.earliestDatetime, page: this.initialPagePtr+1}})
