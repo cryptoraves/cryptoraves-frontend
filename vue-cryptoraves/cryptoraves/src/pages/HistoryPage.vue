@@ -220,6 +220,7 @@ export default {
               user
           )
           .then(response => {
+
             // JSON responses are automatically parsed.
             let res = response.data;
             this.user = user;
@@ -239,6 +240,8 @@ export default {
             // localStorage.setItem("latestDatetime", this.latestDatetime);
             // localStorage.setItem("transactionFlag", initFlag);
             // localStorage.setItem("transactionPageNum", this.initialPagePtr);
+console.log(this.initialPagePtr)
+
           })
           .catch(e => {
             console.log(e);
@@ -253,6 +256,8 @@ export default {
           )
           .then(response => {
             this.initialPagePtr++;
+console.log(this.initialPagePtr)
+
             if(this.initialPagePtr){
               this.$router.push({ path: 'history', query: { user: user, earliestDatetime: this.earliestDatetime, page: this.initialPagePtr+1}})
             }else{
@@ -292,6 +297,8 @@ export default {
           )
           .then(response => {
             this.initialPagePtr--;
+console.log(this.initialPagePtr)
+                
             if(this.initialPagePtr){
               this.$router.push({ path: 'history', query: { user: user, latestDatetime: this.latestDatetime, page: this.initialPagePtr+1}})
             }else{
