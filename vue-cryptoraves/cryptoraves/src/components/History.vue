@@ -50,7 +50,10 @@
                                                     <td class="link" v-on:click="goTweet(item.linkToContent)"><img v-bind:src="'/static/img/twittersmall.png'" /> </td>
                                                     <td>{{item.tokenBrand}}</td>
                                                     <td>{{item.amount | comma}}</td>
+<<<<<<< HEAD
                                                     <td>{{item.inOut}}</td>
+=======
+>>>>>>> develop
                                                     <td class="link" v-on:click="goAnother(item.userTo)"><b>{{item.userTo}}</b></td>
                                                     <td>{{item.date}}</td>
                                                 </tr>                                                                                            
@@ -84,9 +87,7 @@
 <script>
 import axios from 'axios';
 import _ from 'lodash';
-
 const Record = 20;
-
 export default {
     name: 'History',
     data() {
@@ -104,7 +105,6 @@ export default {
     },
     created() {
         this.user = this.$route.query.user;
-
         this.$ga.page('/')
         
         this.getHistory(this.user, 0);
@@ -207,4 +207,3 @@ export default {
     } 
 }
 </script>
-
