@@ -116,30 +116,30 @@ export default {
 
     this.earliestDatetime = this.$route.query.earliestDatetime
     this.latestDatetime = this.$route.query.latestDatetime
-    this.initFlag=0
-
-    if ( this.earliestDatetime ){
-      this.initFlag=1
-    }
-    if ( this.latestDatetime ){
-      this.initFlag=2
-    }
-
-    if(this.$route.query.page && this.initFlag){
-      if( this.initFlag == 1){
-        this.initialPagePtr=this.$route.query.page-2
-      }
-      if( this.initFlag == 2){
-        this.initialPagePtr=this.$route.query.page
-      }
-      
-    }
+    
     this.$ga.page("/");
     this.getPortfolio(this.user, this.initFlag);
   },
   beforeRouteUpdate(to, from, next) {
     // just use `this`
     this.user = to.query.user;
+    this.initFlag=0
+
+    if ( to.query.earliestDatetime ){
+      this.initFlag=1
+    }
+    if ( to.query.latestDatetime ){
+      this.initFlag=2
+    }
+
+    if(to.query.page && this.initFlag){
+      if( this.initFlag == 1){
+        this.initialPagePtr=to.query.page-2
+      }
+      if( this.initFlag == 2){
+        this.initialPagePtr=to.query.page
+      }
+    }
     next();
   },
   methods: {
