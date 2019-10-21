@@ -140,9 +140,12 @@ export default {
   beforeRouteUpdate(to, from, next) {
     // just use `this`
     this.user = to.query.user;
-    if(from.query.user){
+    if(!from.query.user){
       this.getPortfolio(this.user, 0);
+      console.log(this.user+" this.user")
+
     }
+    console.log(from.query.user+" from.query.user")
     next();
   },
   methods: {
