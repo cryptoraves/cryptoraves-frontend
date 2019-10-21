@@ -241,7 +241,6 @@ export default {
             // localStorage.setItem("transactionFlag", initFlag);
             // localStorage.setItem("transactionPageNum", this.initialPagePtr);
 
-console.log("here 0"+this.initialPagePtr)
 
           })
           .catch(e => {
@@ -257,7 +256,6 @@ console.log("here 0"+this.initialPagePtr)
           )
           .then(response => {
             this.initialPagePtr++;
-console.log("here 1"+this.initialPagePtr)
 
             if(this.initialPagePtr){
               this.$router.push({ path: 'history', query: { user: user, earliestDatetime: this.earliestDatetime, page: this.initialPagePtr+1}})
@@ -298,7 +296,6 @@ console.log("here 1"+this.initialPagePtr)
           )
           .then(response => {
             this.initialPagePtr--;
-console.log("here 2"+this.initialPagePtr)
 
             if(this.initialPagePtr){
               this.$router.push({ path: 'history', query: { user: user, latestDatetime: this.latestDatetime, page: this.initialPagePtr+1}})
