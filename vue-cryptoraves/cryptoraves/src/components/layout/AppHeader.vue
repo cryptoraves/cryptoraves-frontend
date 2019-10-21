@@ -89,36 +89,37 @@ export default {
             "lastUpdated",
             JSON.stringify(response.data.lastUpdated)
           );
+          this.update = true;
+          if (localStorage.userListLastUpdated) {
+            if (localStorage.lastUpdated == localStorage.userListLastUpdated) {
+              this.update = false;
+            }
+          }
+          if (this.update) {
+            localStorage.setItem(
+              "userListLastUpdated",
+              localStorage.lastUpdated
+            );
+            axios
+              .get(
+                "https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=searchBar"
+              )
+              .then(response => {
+                // JSON responses are automatically parsed.
+                localStorage.setItem(
+                  "userList",
+                  JSON.stringify(response.data.userList)
+                );
+                this.userList = JSON.parse(localStorage.getItem("userList"));
+              })
+              .catch(e => {
+                this.errors.push(e);
+              });
+          } else this.userList = JSON.parse(localStorage.getItem("userList"));
         })
         .catch(e => {
           this.errors.push(e);
         });
-
-      this.update = true;
-      if (localStorage.userListLastUpdated) {
-        if (localStorage.lastUpdated == localStorage.userListLastUpdated) {
-          this.update = false;
-        }
-      }
-
-      if (this.update) {
-        localStorage.setItem("userListLastUpdated", localStorage.lastUpdated);
-        axios
-          .get(
-            "https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=searchBar"
-          )
-          .then(response => {
-            // JSON responses are automatically parsed.
-            localStorage.setItem(
-              "userList",
-              JSON.stringify(response.data.userList)
-            );
-          })
-          .catch(e => {
-            this.errors.push(e);
-          });
-      }
-      this.userList = JSON.parse(localStorage.getItem("userList"));
     },
     goPortfolio: function(event) {
       // `this` inside methods points to the Vue instance
