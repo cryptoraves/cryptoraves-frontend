@@ -240,7 +240,7 @@ export default {
             // localStorage.setItem("latestDatetime", this.latestDatetime);
             // localStorage.setItem("transactionFlag", initFlag);
             // localStorage.setItem("transactionPageNum", this.initialPagePtr);
-
+            next()
 
           })
           .catch(e => {
@@ -279,7 +279,7 @@ export default {
             this.showLoading = false;
             // localStorage.setItem("latestDatetime", this.latestDatetime);
             // localStorage.setItem("transactionFlag", initFlag);
-            
+            next()
           })
           .catch(e => {
             console.log(e);
@@ -320,7 +320,7 @@ export default {
             this.showLoading = false;
             // localStorage.setItem("earlistData", this.earliestDatetime);
             // localStorage.setItem("transactionFlag", initFlag);
-            
+            next()
           })
           .catch(e => {
             console.log(e);
