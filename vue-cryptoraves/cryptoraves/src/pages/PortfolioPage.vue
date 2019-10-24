@@ -6,7 +6,7 @@
       </div>
       <div v-else>
         <div class="portfolio-title">
-          <SectionHeader portfolio="true" :user="this.user">{{this.user}}'s Portfolio Page</SectionHeader>
+          <SectionHeader :user="this.user">{{this.user}}'s Portfolio Page</SectionHeader>
           <div class="portfolio-subtitle">
             <div class="portfolio-subtitle-details">
               Token Balance: {{ this.tokenBalance | comma }}
@@ -22,7 +22,11 @@
             </div>
           </div>
           <div class="portfolio-userimg">
-            <img :src="this.userImageUrl" :title="this.user" @click="goAnother(user)" />
+            <img
+              :src="this.userImageUrl"
+              title="See this user’s Transaction History"
+              @click="goHistory(user)"
+            />
           </div>
         </div>
 
@@ -41,7 +45,7 @@
                     class="table-img"
                     :src="item.tokenBrandImageUrl"
                     :title="item.tokenBrand"
-                    @click="goAnother(item.tokenBrand)"
+                    @click="goHistory(item.tokenBrand)"
                   />
                 </td>
                 <td>
@@ -141,12 +145,12 @@ export default {
     // just use `this`
     this.user = to.query.user;
 
-      console.log(from.query.user+" from.query.user")
-      if (from.query.user != this.user){
-        this.getPortfolio(this.user, 0);
-      }
+    console.log(from.query.user + " from.query.user");
+    if (from.query.user != this.user) {
+      this.getPortfolio(this.user, 0);
+    }
 
-    console.log(this.user+" this.user")
+    console.log(this.user + " this.user");
     next();
   },
   methods: {
@@ -370,19 +374,28 @@ export default {
   height: 120px;
   border-radius: 50%;
   border: 1px solid lightgrey;
-  -webkit-box-shadow: 0px 0px 15px 5px rgba(0, 0, 1, 0.3);
-  -moz-box-shadow: 0px 0px 15px 5px rgba(0, 0, 1, 0.3);
-  box-shadow: 0px 0px 15px 5px rgba(0, 0, 1, 0.3);
   animation: avatar-from-effect 2s infinite;
+  transition: all 0.5s ease-out;
 }
 @keyframes avatar-from-effect {
   0% {
-    box-shadow: 0 0 0 0px rgb(0, 38, 101, 0.5);
+    box-shadow: 0 0 0 0px rgb(43, 96, 222, 0.8);
   }
   100% {
-    box-shadow: 0 0 0 15px rgb(0, 38, 101, 0);
+    box-shadow: 0 0 0 15px rgb(43, 96, 222, 0);
   }
 }
+
+.portfolio-userimg:hover {
+  cursor: pointer;
+  transition: all 0.5s ease-out;
+  transform: translateY(-0.5em);
+}
+
+.portfolio-userimg:active {
+  transform: translateY(0.5em);
+}
+
 .portfolio-userimg img {
   width: 110px;
   height: 110px;

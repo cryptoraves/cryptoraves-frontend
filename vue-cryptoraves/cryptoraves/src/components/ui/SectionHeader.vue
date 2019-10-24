@@ -3,7 +3,6 @@
     <img src="../../assets/img/cryptoraves_PNG-01.png" />
     <br />
     <slot></slot>
-    <i v-if="portfolio" class="fa fa-list-alt" title="See This User's Transaction History" @click="goHistory(user)"></i>
   </div>
 </template>
 
@@ -11,7 +10,6 @@
 export default {
   name: "SectionHeader",
   props: {
-    portfolio: String,
     user: String
   },
   methods: {
@@ -42,17 +40,7 @@ export default {
   height: 100%;
   margin-top: 50px;
 }
-.section-header i {
-  transition: all 0.5s ease;
-}
-.section-header i:hover {
-  cursor: pointer;
-  transition: all 0.5s ease;
-  transform: translateY(-0.25em);
-}
-.section-header i:active {
-  transform: translateY(0.25em);
-}
+
 @media only screen and (max-width: 500px) {
   .section-header {
     font-size: 20px;

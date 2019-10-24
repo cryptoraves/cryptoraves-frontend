@@ -9,14 +9,14 @@
         type="text"
         v-model="user"
         list="tokenlist"
-        @change="goPortfolio"
+        @change="goHistory"
         placeholder="Lookup Twitter @username"
       />
       <datalist id="tokenlist" v-if="user.length>1">
         <option v-bind:key="item" v-for="item in userList" :value="item">{{item}}</option>
       </datalist>
     </div>
-    <div class="tokensearch-icon" @click="goPortfolio">
+    <div class="tokensearch-icon" @click="goHistory">
       <i class="fa fa-search"></i>
     </div>
   </div>
@@ -83,16 +83,19 @@ export default {
       }
       this.userList = JSON.parse(localStorage.getItem("userList"));
     },
-    goPortfolio: function(event) {
+    goHistory: function(event) {
       // `this` inside methods points to the Vue instance
       if (this.userList.includes(this.user)) {
         document.getElementById("autoTokenSelect1").blur();
         this.$router.push({
-          name: "PortfolioPage",
+          name: "HistoryPage",
           query: {
             user: this.user
           }
         });
+      } else {
+        alert("'" + this.user + "'" + " not found!");
+        this.user = "";
       }
     }
   }
