@@ -140,7 +140,13 @@ export default {
   beforeRouteUpdate(to, from, next) {
     // just use `this`
     this.user = to.query.user;
-    this.getPortfolio(this.user, 0);
+
+      console.log(from.query.user+" from.query.user")
+      if (from.query.user != this.user){
+        this.getPortfolio(this.user, 0);
+      }
+
+    console.log(this.user+" this.user")
     next();
   },
   methods: {
@@ -181,7 +187,6 @@ export default {
             this.visibleNext = res.next ? true : false;
             this.userImageUrl = res.userImageUrl;
             this.showLoading = false;
-            console.log("here 0" + this.initialPagePtr);
           })
           .catch(e => {
             console.log(e);
@@ -196,7 +201,6 @@ export default {
           )
           .then(response => {
             this.initialPagePtr++;
-            console.log("here 1" + this.initialPagePtr);
             if (this.initialPagePtr) {
               this.$router.push({
                 path: "portfolio",
@@ -241,7 +245,6 @@ export default {
           )
           .then(response => {
             this.initialPagePtr--;
-            console.log("here 2" + this.initialPagePtr);
 
             if (this.initialPagePtr) {
               this.$router.push({
