@@ -25,7 +25,7 @@
             <img
               :src="this.userImageUrl"
               title="See this user’s Transaction History"
-              @click="goHistory(user)"
+              @click="goAnother(user)"
             />
           </div>
         </div>
@@ -45,7 +45,7 @@
                     class="table-img"
                     :src="item.tokenBrandImageUrl"
                     :title="item.tokenBrand"
-                    @click="goHistory(item.tokenBrand)"
+                    @click="goAnother(item.tokenBrand)"
                   />
                 </td>
                 <td>
