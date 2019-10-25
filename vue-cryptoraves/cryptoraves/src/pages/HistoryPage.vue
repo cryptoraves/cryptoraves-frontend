@@ -180,7 +180,6 @@ export default {
       this.initFlag = 2;
     }
 
-
     if (this.$route.query.page && this.initFlag) {
       if (this.initFlag == 1) {
         this.initialPagePtr = this.$route.query.page - 2;
@@ -241,7 +240,7 @@ export default {
             // localStorage.setItem("latestDatetime", this.latestDatetime);
             // localStorage.setItem("transactionFlag", initFlag);
             // localStorage.setItem("transactionPageNum", this.initialPagePtr);
- 
+
           })
           .catch(e => {
             console.log(e);
