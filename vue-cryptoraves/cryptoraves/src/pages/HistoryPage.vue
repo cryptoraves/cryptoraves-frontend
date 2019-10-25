@@ -10,7 +10,7 @@
           <div class="history-userimg">
             <img
               :src="this.userImageUrl"
-              title="Portfolio & Token Balance"
+              title="Click to See Portfolio & Token Balance"
               @click="goPortfolio(user)"
             />
           </div>
