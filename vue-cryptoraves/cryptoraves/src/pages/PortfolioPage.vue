@@ -8,7 +8,6 @@
         <div class="portfolio-title">
           <SectionHeader :user="this.user">{{this.user}}'s Portfolio Page</SectionHeader>
           <div class="portfolio-subtitle">
-            
             <div class="portfolio-subtitle-details">
               Token Balance: {{ this.tokenBalance | comma }}
               <br />
@@ -17,7 +16,9 @@
               Tokens Left to Share: {{ this.tokenBalancePercentage }}%
             </div>
             <div class="portfolio-subtitle-holding">
-              <span><b>TOTAL Token Holdings: {{ this.totalHoldings | comma }}</b></span>
+              <span>
+                <b>TOTAL Token Holdings: {{ this.totalHoldings | comma }}</b>
+              </span>
             </div>
           </div>
           <div class="portfolio-userimg">
@@ -118,25 +119,24 @@ export default {
   created() {
     this.user = this.$route.query.user;
 
-    this.earliestDatetime = this.$route.query.earliestDatetime
-    this.latestDatetime = this.$route.query.latestDatetime
-    this.initFlag=0
+    this.earliestDatetime = this.$route.query.earliestDatetime;
+    this.latestDatetime = this.$route.query.latestDatetime;
+    this.initFlag = 0;
 
-    if ( this.earliestDatetime ){
-      this.initFlag=1
+    if (this.earliestDatetime) {
+      this.initFlag = 1;
     }
-    if ( this.latestDatetime ){
-      this.initFlag=2
+    if (this.latestDatetime) {
+      this.initFlag = 2;
     }
 
-    if(this.$route.query.page && this.initFlag){
-      if( this.initFlag == 1){
-        this.initialPagePtr=this.$route.query.page-2
+    if (this.$route.query.page && this.initFlag) {
+      if (this.initFlag == 1) {
+        this.initialPagePtr = this.$route.query.page - 2;
       }
-      if( this.initFlag == 2){
-        this.initialPagePtr=this.$route.query.page
+      if (this.initFlag == 2) {
+        this.initialPagePtr = this.$route.query.page;
       }
-      
     }
     this.$ga.page("/");
     this.getPortfolio(this.user, this.initFlag);
@@ -189,10 +189,6 @@ export default {
             this.visibleNext = res.next ? true : false;
             this.userImageUrl = res.userImageUrl;
             this.showLoading = false;
-<<<<<<< HEAD
-    console.log("here 0"+this.initialPagePtr)
-=======
->>>>>>> develop
           })
           .catch(e => {
             console.log(e);
@@ -207,13 +203,6 @@ export default {
           )
           .then(response => {
             this.initialPagePtr++;
-<<<<<<< HEAD
-    console.log("here 1"+this.initialPagePtr)
-            if(this.initialPagePtr){
-              this.$router.push({ path: 'portfolio', query: { user: user, earliestDatetime: this.earliestDatetime, page: this.initialPagePtr+1}})
-            }else{
-              this.$router.push({ path: 'portfolio', query: { user: user}})
-=======
             if (this.initialPagePtr) {
               this.$router.push({
                 path: "portfolio",
@@ -225,7 +214,6 @@ export default {
               });
             } else {
               this.$router.push({ path: "portfolio", query: { user: user } });
->>>>>>> develop
             }
             // JSON responses are automatically parsed.
             let res = response.data;
@@ -239,7 +227,7 @@ export default {
             this.totalHoldings = res.totalHoldings;
             this.latestDatetime = res.latestDatetime;
             this.earliestDatetime = res.earliestDatetime;
-           
+
             this.visiblePrev = true;
             this.visibleNext = res.next ? true : false;
             this.userImageUrl = res.userImageUrl;
@@ -259,14 +247,6 @@ export default {
           )
           .then(response => {
             this.initialPagePtr--;
-<<<<<<< HEAD
-console.log("here 2"+this.initialPagePtr)
-    
-            if(this.initialPagePtr){
-              this.$router.push({ path: 'portfolio', query: { user: user, latestDatetime: this.latestDatetime, page: this.initialPagePtr+1}})
-            }else{
-              this.$router.push({ path: 'portfolio', query: { user: user}})
-=======
 
             if (this.initialPagePtr) {
               this.$router.push({
@@ -279,7 +259,6 @@ console.log("here 2"+this.initialPagePtr)
               });
             } else {
               this.$router.push({ path: "portfolio", query: { user: user } });
->>>>>>> develop
             }
             // JSON responses are automatically parsed.
             let res = response.data;
@@ -293,7 +272,7 @@ console.log("here 2"+this.initialPagePtr)
             this.totalHoldings = res.totalHoldings;
             this.latestDatetime = res.latestDatetime;
             this.earliestDatetime = res.earliestDatetime;
-            
+
             this.visiblePrev =
               res.prev && this.initialPagePtr > 0 ? true : false;
             this.visibleNext = true;
