@@ -9,15 +9,15 @@
           <SectionHeader :user="this.user">{{this.user}}'s Portfolio Page</SectionHeader>
           <div class="portfolio-subtitle">
             <div class="portfolio-subtitle-details">
-              Token Balance: {{ this.tokenBalance | comma }}
-              <br />
-              Tokens Distributed: {{ this.totalDistributed | comma }}
-              <br />
-              Tokens Left to Share: {{ this.tokenBalancePercentage }}%
-              <br />
-                <div class="tr-orange-color">Total Reciprocated: {{ this.totalReciprocated | comma }}</div>
+              <div title="Remaining personal tokens available to distribute.">Token Balance: {{ this.tokenBalance | comma }}</div>
+              
+              <div title="Total personal tokens given by this user.">Tokens Distributed: {{ this.totalDistributed | comma }}</div>
+              
+              <div title="Percentage remaining">Tokens Left to Share: {{ this.tokenBalancePercentage }}%</div>
+              
+                <div class="tr-orange-color" title="The sum of jointly-held tokens between this user and others.">Total Reciprocated: {{ this.totalReciprocated | comma }}</div>
             </div>
-            <div class="portfolio-subtitle-holding">
+            <div class="portfolio-subtitle-holding" title="Total tokens from others held in this portfolio.">
               <span>
                 <b>TOTAL Token Holdings: {{ this.totalHoldings | comma }}</b>
                 
