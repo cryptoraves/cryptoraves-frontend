@@ -8,7 +8,11 @@
         <div class="history-title">
           <SectionHeader>{{this.platformHandle}}'s Transaction History</SectionHeader>
           <div class="history-userimg">
-            <img :src="this.userImageUrl" :title="this.user" @click="goPortfolio(user)" />
+            <img
+              :src="this.userImageUrl"
+              title="Click to See Portfolio & Token Balance"
+              @click="goPortfolio(user)"
+            />
           </div>
           <div class="elastic-arrow">
             <img src="../assets/gif/elasticrightarrow.gif" alt />
@@ -50,7 +54,7 @@
                     class="table-img"
                     :src="item.userFromImageUrl"
                     :title="item.userFrom"
-                    @click="goPortfolio(item.userFrom)"
+                    @click="getHistory(item.userFrom, 0)"
                   />
                   <img v-else class="launch-img" :src="item.userFromImageUrl" title="LAUNCH" />
                 </td>
@@ -71,7 +75,7 @@
                     class="table-img"
                     :src="item.tokenBrandImageUrl"
                     :title="item.tokenBrand"
-                    @click="goPortfolio(item.tokenBrand)"
+                    @click="getHistory(item.tokenBrand, 0)"
                   />
                 </td>
                 <td>
@@ -82,7 +86,7 @@
                     class="table-img"
                     :src="item.userToImageUrl"
                     :title="item.userTo"
-                    @click="goPortfolio(item.userTo)"
+                    @click="getHistory(item.userTo, 0)"
                   />
                 </td>
                 <td>
@@ -164,27 +168,26 @@ export default {
   created() {
     this.user = this.$route.query.user;
 
-    this.earliestDatetime = this.$route.query.earliestDatetime
-    this.latestDatetime = this.$route.query.latestDatetime
-    this.initFlag=0
+    this.earliestDatetime = this.$route.query.earliestDatetime;
+    this.latestDatetime = this.$route.query.latestDatetime;
+    this.initFlag = 0;
 
-    if ( this.earliestDatetime ){
-      this.initFlag=1
+    if (this.earliestDatetime) {
+      this.initFlag = 1;
     }
-    console.log(this.initFlag)
-    if ( this.latestDatetime ){
-      this.initFlag=2
+    console.log(this.initFlag);
+    if (this.latestDatetime) {
+      this.initFlag = 2;
     }
-    console.log(this.initFlag)
+    console.log(this.initFlag);
 
-    if(this.$route.query.page && this.initFlag){
-      if( this.initFlag == 1){
-        this.initialPagePtr=this.$route.query.page-2
+    if (this.$route.query.page && this.initFlag) {
+      if (this.initFlag == 1) {
+        this.initialPagePtr = this.$route.query.page - 2;
       }
-      if( this.initFlag == 2){
-        this.initialPagePtr=this.$route.query.page
+      if (this.initFlag == 2) {
+        this.initialPagePtr = this.$route.query.page;
       }
-      
     }
 
     this.$ga.page("/");
@@ -202,17 +205,16 @@ export default {
   methods: {
     goNext() {
       if (this.visibleNext) {
-        this.showLoading = true;
         this.getHistory(this.user, 1);
       }
     },
     goPrev() {
       if (this.visiblePrev) {
-        this.showLoading = true;
         this.getHistory(this.user, 2);
       }
     },
     getHistory(user, initFlag) {
+      this.showLoading = true;
       if (initFlag == 0) {
         axios
           .get(
@@ -220,7 +222,6 @@ export default {
               user
           )
           .then(response => {
-
             // JSON responses are automatically parsed.
             let res = response.data;
             this.user = user;
@@ -240,9 +241,7 @@ export default {
             // localStorage.setItem("latestDatetime", this.latestDatetime);
             // localStorage.setItem("transactionFlag", initFlag);
             // localStorage.setItem("transactionPageNum", this.initialPagePtr);
-
-console.log("here 0"+this.initialPagePtr)
-
+            next();
           })
           .catch(e => {
             console.log(e);
@@ -257,12 +256,18 @@ console.log("here 0"+this.initialPagePtr)
           )
           .then(response => {
             this.initialPagePtr++;
-console.log("here 1"+this.initialPagePtr)
 
-            if(this.initialPagePtr){
-              this.$router.push({ path: 'history', query: { user: user, earliestDatetime: this.earliestDatetime, page: this.initialPagePtr+1}})
-            }else{
-              this.$router.push({ path: 'history', query: { user: user}})
+            if (this.initialPagePtr) {
+              this.$router.push({
+                path: "history",
+                query: {
+                  user: user,
+                  earliestDatetime: this.earliestDatetime,
+                  page: this.initialPagePtr + 1
+                }
+              });
+            } else {
+              this.$router.push({ path: "history", query: { user: user } });
             }
             // JSON responses are automatically parsed.
             this.user = user;
@@ -272,7 +277,7 @@ console.log("here 1"+this.initialPagePtr)
             this.tokenBalance = res.tokenBalance;
             this.latestDatetime = res.latestDatetime;
             this.earliestDatetime = res.earliestDatetime;
-            
+
             this.visiblePrev = true;
             this.visibleNext = res.next ? true : false;
             this.platformHandle = res.platformHandle;
@@ -281,7 +286,7 @@ console.log("here 1"+this.initialPagePtr)
             this.showLoading = false;
             // localStorage.setItem("latestDatetime", this.latestDatetime);
             // localStorage.setItem("transactionFlag", initFlag);
-            
+            next();
           })
           .catch(e => {
             console.log(e);
@@ -298,12 +303,18 @@ console.log("here 1"+this.initialPagePtr)
           )
           .then(response => {
             this.initialPagePtr--;
-console.log("here 2"+this.initialPagePtr)
 
-            if(this.initialPagePtr){
-              this.$router.push({ path: 'history', query: { user: user, latestDatetime: this.latestDatetime, page: this.initialPagePtr+1}})
-            }else{
-              this.$router.push({ path: 'history', query: { user: user}})
+            if (this.initialPagePtr) {
+              this.$router.push({
+                path: "history",
+                query: {
+                  user: user,
+                  latestDatetime: this.latestDatetime,
+                  page: this.initialPagePtr + 1
+                }
+              });
+            } else {
+              this.$router.push({ path: "history", query: { user: user } });
             }
             // JSON responses are automatically parsed.
             this.user = user;
@@ -313,7 +324,7 @@ console.log("here 2"+this.initialPagePtr)
             this.tokenBalance = res.tokenBalance;
             this.latestDatetime = res.latestDatetime;
             this.earliestDatetime = res.earliestDatetime;
-            
+
             this.visiblePrev =
               res.prev && this.initialPagePtr > 0 ? true : false;
             this.visibleNext = true;
@@ -323,7 +334,7 @@ console.log("here 2"+this.initialPagePtr)
             this.showLoading = false;
             // localStorage.setItem("earlistData", this.earliestDatetime);
             // localStorage.setItem("transactionFlag", initFlag);
-            
+            next();
           })
           .catch(e => {
             console.log(e);
@@ -387,29 +398,40 @@ console.log("here 2"+this.initialPagePtr)
   height: 120px;
   border-radius: 50%;
   border: 1px solid lightgrey;
-  -webkit-box-shadow: 0px 0px 15px 5px rgba(0, 0, 1, 0.3);
-  -moz-box-shadow: 0px 0px 15px 5px rgba(0, 0, 1, 0.3);
-  box-shadow: 0px 0px 15px 5px rgba(0, 0, 1, 0.3);
   animation: avatar-from-effect 2s infinite;
+  transition: all 0.5s ease-out;
 }
 @keyframes avatar-from-effect {
   0% {
-    box-shadow: 0 0 0 0px rgb(0, 38, 101, 0.5);
+    box-shadow: 0 0 0 0px rgba(205, 136, 57, 0.8);
   }
   100% {
-    box-shadow: 0 0 0 15px rgb(0, 38, 101, 0);
+    box-shadow: 0 0 0 15px rgba(205, 136, 57, 0);
   }
 }
+
+.history-userimg:hover {
+  cursor: pointer;
+  transition: all 0.5s ease-out;
+  transform: translateY(-0.5em);
+}
+
+.history-userimg:active {
+  transform: translateY(0.5em);
+}
+
 .history-userimg img {
   width: 110px;
   height: 110px;
   border-radius: 50%;
   margin: auto;
 }
+
 .history-userimg img:hover {
-  opacity: 0.7;
+  opacity: 0.8;
   cursor: pointer;
 }
+
 .history-pagination {
   margin: 10px auto 50px auto;
   font-weight: bold;

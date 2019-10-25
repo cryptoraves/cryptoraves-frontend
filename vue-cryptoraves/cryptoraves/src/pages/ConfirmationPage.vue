@@ -17,13 +17,13 @@
             <div class="confirmation-userfromimage">
               <img
                 :src="this.item.userFromImageUrl"
-                v-on:click="goAnother(item.userFrom)"
                 :title="item.userFrom"
+                @click="goHistory(item.userFrom)"
               />
             </div>
             <div
               class="confirmation-userFromTo"
-              v-on:click="goAnother(item.userFrom)"
+              @click="goHistory(item.userFrom)"
               :title="item.userFrom"
             >{{this.item.userFrom}}</div>
           </div>
@@ -45,7 +45,7 @@
               <div class="confirmation-tokenbrandimage">
                 <img
                   :src="this.item.tokenBrandImageUrl"
-                  v-on:click="goAnother(item.tokenBrand)"
+                  @click="goHistory(item.tokenBrand)"
                   :title="item.tokenBrand"
                 />
               </div>
@@ -55,13 +55,13 @@
             <div class="confirmation-tosection-show1">
               <div
                 class="confirmation-userFromTo"
-                v-on:click="goAnother(item.userTo)"
+                @click="goHistory(item.userTo)"
                 :title="item.userTo"
               >{{this.item.userTo}}</div>
               <div class="confirmation-usertoimage">
                 <img
                   :src="this.item.userToImageUrl"
-                  v-on:click="goAnother(item.userTo)"
+                  @click="goHistory(item.userTo)"
                   :title="item.userTo"
                 />
               </div>
@@ -70,13 +70,13 @@
               <div class="confirmation-usertoimage">
                 <img
                   :src="this.item.userToImageUrl"
-                  v-on:click="goAnother(item.userTo)"
+                  @click="goHistory(item.userTo)"
                   :title="item.userTo"
                 />
               </div>
               <div
                 class="confirmation-userFromTo"
-                v-on:click="goAnother(item.userTo)"
+                @click="goHistory(item.userTo)"
                 :title="item.userTo"
               >{{this.item.userTo}}</div>
             </div>
@@ -86,7 +86,7 @@
           <div class="confirmation-tokenbrand">
             <div
               class="confirmation-tokenbrand-header"
-              v-on:click="goAnother(item.tokenBrand)"
+              @click="goHistory(item.tokenBrand)"
               :title="item.tokenBrand"
             >{{this.item.tokenBrand}}</div>
             <div class="confirmation-tokenbrand-text">Tokens</div>
@@ -174,6 +174,17 @@ export default {
     },
     goTweet(link) {
       window.open(link);
+    },
+    goHistory(user) {
+      this.$root.$emit("changeUser", user);
+      // localStorage.setItem("transactionPageNum", 0);
+      // localStorage.setItem("transactionFlag", 0);
+      this.$router.push({
+        name: "HistoryPage",
+        query: {
+          user: user
+        }
+      });
     }
   }
 };

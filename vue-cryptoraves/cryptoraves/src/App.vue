@@ -56,20 +56,4 @@ export default {
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
 @import url("./assets/css/style.css");
 @import url("./assets/css/responsive.css");
-// .fade-enter {
-//   opacity: 0;
-// }
-
-// .fade-enter-to {
-//   transition: opacity 0.5s ease-in;
-// }
-
-// .fade-leave {
-//   opacity: 0;
-// }
-
-// .fade-leave-to {
-//   transition: opacity 0.5s ease-in;
-//   opacity: 0;
-// }
 </style>

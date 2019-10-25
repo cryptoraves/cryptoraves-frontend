@@ -6,7 +6,7 @@
       </div>
       <div v-else>
         <div class="portfolio-title">
-          <SectionHeader portfolio="true" :user="this.user">{{this.user}}'s Portfolio Page</SectionHeader>
+          <SectionHeader :user="this.user">{{this.user}}'s Portfolio Page</SectionHeader>
           <div class="portfolio-subtitle">
             
             <div class="portfolio-subtitle-details">
@@ -21,7 +21,11 @@
             </div>
           </div>
           <div class="portfolio-userimg">
-            <img :src="this.userImageUrl" :title="this.user" @click="goAnother(user)" />
+            <img
+              :src="this.userImageUrl"
+              title="Click to See Transaction History"
+              @click="goHistory(user)"
+            />
           </div>
         </div>
 
@@ -140,6 +144,16 @@ export default {
   beforeRouteUpdate(to, from, next) {
     // just use `this`
     this.user = to.query.user;
+<<<<<<< HEAD
+=======
+
+    console.log(from.query.user + " from.query.user");
+    if (from.query.user != this.user) {
+      this.getPortfolio(this.user, 0);
+    }
+
+    console.log(this.user + " this.user");
+>>>>>>> develop
     next();
   },
   methods: {
@@ -180,7 +194,10 @@ export default {
             this.visibleNext = res.next ? true : false;
             this.userImageUrl = res.userImageUrl;
             this.showLoading = false;
+<<<<<<< HEAD
     console.log("here 0"+this.initialPagePtr)
+=======
+>>>>>>> develop
           })
           .catch(e => {
             console.log(e);
@@ -195,11 +212,25 @@ export default {
           )
           .then(response => {
             this.initialPagePtr++;
+<<<<<<< HEAD
     console.log("here 1"+this.initialPagePtr)
             if(this.initialPagePtr){
               this.$router.push({ path: 'portfolio', query: { user: user, earliestDatetime: this.earliestDatetime, page: this.initialPagePtr+1}})
             }else{
               this.$router.push({ path: 'portfolio', query: { user: user}})
+=======
+            if (this.initialPagePtr) {
+              this.$router.push({
+                path: "portfolio",
+                query: {
+                  user: user,
+                  earliestDatetime: this.earliestDatetime,
+                  page: this.initialPagePtr + 1
+                }
+              });
+            } else {
+              this.$router.push({ path: "portfolio", query: { user: user } });
+>>>>>>> develop
             }
             // JSON responses are automatically parsed.
             let res = response.data;
@@ -233,12 +264,27 @@ export default {
           )
           .then(response => {
             this.initialPagePtr--;
+<<<<<<< HEAD
 console.log("here 2"+this.initialPagePtr)
     
             if(this.initialPagePtr){
               this.$router.push({ path: 'portfolio', query: { user: user, latestDatetime: this.latestDatetime, page: this.initialPagePtr+1}})
             }else{
               this.$router.push({ path: 'portfolio', query: { user: user}})
+=======
+
+            if (this.initialPagePtr) {
+              this.$router.push({
+                path: "portfolio",
+                query: {
+                  user: user,
+                  latestDatetime: this.latestDatetime,
+                  page: this.initialPagePtr + 1
+                }
+              });
+            } else {
+              this.$router.push({ path: "portfolio", query: { user: user } });
+>>>>>>> develop
             }
             // JSON responses are automatically parsed.
             let res = response.data;
@@ -352,19 +398,28 @@ console.log("here 2"+this.initialPagePtr)
   height: 120px;
   border-radius: 50%;
   border: 1px solid lightgrey;
-  -webkit-box-shadow: 0px 0px 15px 5px rgba(0, 0, 1, 0.3);
-  -moz-box-shadow: 0px 0px 15px 5px rgba(0, 0, 1, 0.3);
-  box-shadow: 0px 0px 15px 5px rgba(0, 0, 1, 0.3);
   animation: avatar-from-effect 2s infinite;
+  transition: all 0.5s ease-out;
 }
 @keyframes avatar-from-effect {
   0% {
-    box-shadow: 0 0 0 0px rgb(0, 38, 101, 0.5);
+    box-shadow: 0 0 0 0px rgb(43, 96, 222, 0.8);
   }
   100% {
-    box-shadow: 0 0 0 15px rgb(0, 38, 101, 0);
+    box-shadow: 0 0 0 15px rgb(43, 96, 222, 0);
   }
 }
+
+.portfolio-userimg:hover {
+  cursor: pointer;
+  transition: all 0.5s ease-out;
+  transform: translateY(-0.5em);
+}
+
+.portfolio-userimg:active {
+  transform: translateY(0.5em);
+}
+
 .portfolio-userimg img {
   width: 110px;
   height: 110px;

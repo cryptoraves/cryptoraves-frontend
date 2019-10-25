@@ -22,7 +22,7 @@
                 id="autoTokenSelect"
                 type="text"
                 v-model="user"
-                @change="goPortfolio"
+                @change="goHistory"
                 class="app-header-input"
                 placeholder="Lookup Twitter @username"
                 list="mylist"
@@ -30,7 +30,7 @@
               <datalist id="mylist" v-if="user.length>1">
                 <option v-bind:key="item" v-for="item in userList" :value="item">{{item}}</option>
               </datalist>
-              <div class="app-header-icon" @click="goPortfolio">
+              <div class="app-header-icon" @click="goHistory">
                 <i class="fa fa-search"></i>
               </div>
             </div>
@@ -121,12 +121,12 @@ export default {
           this.errors.push(e);
         });
     },
-    goPortfolio: function(event) {
+    goHistory: function(event) {
       // `this` inside methods points to the Vue instance
       if (this.userList.includes(this.user)) {
         document.getElementById("autoTokenSelect").blur();
         this.$router.push({
-          name: "PortfolioPage",
+          name: "HistoryPage",
           query: {
             user: this.user
           }
