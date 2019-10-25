@@ -14,12 +14,16 @@
               Tokens Distributed: {{ this.totalDistributed | comma }}
               <br />
               Tokens Left to Share: {{ this.tokenBalancePercentage }}%
+              <br />
+                <div class="tr-orange-color">Total Reciprocated: {{ this.totalReciprocated | comma }}</div>
             </div>
             <div class="portfolio-subtitle-holding">
               <span>
                 <b>TOTAL Token Holdings: {{ this.totalHoldings | comma }}</b>
+                
               </span>
             </div>
+            
           </div>
           <div class="portfolio-userimg">
             <img
@@ -182,6 +186,7 @@ export default {
             this.rowCount = res.rowCount;
             this.tokenBalance = res.tokenBalance;
             this.totalDistributed = res.totalDistributed;
+            this.totalReciprocated = res.totalReciprocated;
             this.tokenBalancePercentage = res.tokenBalancePercentage;
             this.totalHoldings = res.totalHoldings;
             this.latestDatetime = res.latestDatetime;
@@ -474,7 +479,9 @@ tr:nth-child(even) {
   opacity: 0.7;
   animation: avatar-from-effect 1s infinite;
 }
-
+.tr-orange-color {
+  color: peru;
+}
 .history-link {
   font-size: 1.5em;
   font-family: "Montserrat";
