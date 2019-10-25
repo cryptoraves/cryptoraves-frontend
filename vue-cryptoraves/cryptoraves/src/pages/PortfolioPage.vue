@@ -24,8 +24,8 @@
           <div class="portfolio-userimg">
             <img
               :src="this.userImageUrl"
-              title="See this user’s Transaction History"
-              @click="goAnother(user)"
+              title="See Transaction History"
+              @click="goHistory(user)"
             />
           </div>
         </div>
