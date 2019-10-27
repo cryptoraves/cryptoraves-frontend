@@ -278,6 +278,7 @@ export default {
   text-align: center;
   color: #06a8ff;
   font-weight: 520;
+  overflow-wrap: break-word;
 }
 .confirmation-userFromTo:hover {
   cursor: pointer;
