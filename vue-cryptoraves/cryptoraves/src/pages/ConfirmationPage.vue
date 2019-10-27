@@ -240,17 +240,14 @@ export default {
   height: 90px;
   border-radius: 50%;
   border: 1px solid lightgrey;
-  -webkit-box-shadow: 0px 0px 15px 5px rgba(0, 0, 1, 0.3);
-  -moz-box-shadow: 0px 0px 15px 5px rgba(0, 0, 1, 0.3);
-  box-shadow: 0px 0px 15px 5px rgba(0, 0, 1, 0.3);
   animation: avatar-from-effect 2s infinite;
 }
 @keyframes avatar-from-effect {
   0% {
-    box-shadow: 0 0 0 0px rgb(0, 38, 101, 0.5);
+    box-shadow: 0 0 0 0px rgba(205, 136, 57, 0.8);
   }
   100% {
-    box-shadow: 0 0 0 15px rgb(0, 38, 101, 0);
+    box-shadow: 0 0 0 15px rgba(205, 136, 57, 0);
   }
 }
 .confirmation-userfromimage img {
@@ -319,12 +316,13 @@ export default {
 }
 @keyframes avatar-to-effect {
   0% {
-    box-shadow: 0 0 0 15px rgb(17, 206, 69, 0);
+    box-shadow: 0 0 0 15px rgb(43, 96, 222, 0);
   }
   100% {
-    box-shadow: 0 0 0 0px rgb(17, 206, 69, 0.5);
+    box-shadow: 0 0 0 0px rgb(43, 96, 222, 0.8);
   }
 }
+
 .confirmation-usertoimage img {
   width: 80px;
   height: 80px;
