@@ -53,7 +53,10 @@
             <a
               href="https://loomx.io/"
               target="_blank"
-            >Loom’s Layer 2 PlasmaChain.</a> Token export to mainnet is on our roadmap, & is an important, planned feature for Cryptoraves. Our vision is to eventually allow your tokens to be transferred across multiple platforms (Reddit, Instagram, YouTube, etc.).
+            >Loom’s Layer 2 PlasmaChain.</a> Token export to mainnet is on our <a
+              href="https://medium.com/@cryptoraves/the-cryptoraves-roadmap-vision-1a8b37fc0942"
+              target="_blank"
+            >roadmap</a>, & is an important, planned feature for Cryptoraves. Our vision is to eventually allow your tokens to be transferred across multiple platforms (Reddit, Instagram, YouTube, etc.).
             <br />
             <br />We are working toward open-sourcing our project. Some portions are already available. You can find us on GitHub
             <a
