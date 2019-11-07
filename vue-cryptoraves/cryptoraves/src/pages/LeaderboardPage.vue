@@ -38,6 +38,14 @@
                   />
                 </td>
                 <td>
+                  <img
+                    class="link"
+                    src="../assets/img/twittersmall.png"
+                    @click="goTwitterProfile(item.platformHandle)"
+                    title="Link to Tweet"
+                  />
+                </td>
+                <td>
                   <div>{{item.score | comma}}</div>
                 </td>
               </tr>
@@ -114,13 +122,13 @@ export default {
     goNext() {
       if (this.visibleNext) {
         this.showLoading = true;
-        this.getPortfolio(this.page+1);
+        this.getLeaderboard(this.page+1);
       }
     },
     goPrev() {
       if (this.visiblePrev) {
         this.showLoading = true;
-        this.getPortfolio(this.page-1);
+        this.getLeaderboard(this.page-1);
       }
     },
     getLeaderboard(page) {
