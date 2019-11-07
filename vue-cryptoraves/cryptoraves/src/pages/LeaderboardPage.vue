@@ -7,8 +7,8 @@
       <div v-else>
         <div class="portfolio-title">
           <SectionHeader >Leaderboard</SectionHeader>
-          <div class="portfolio-subtitle">
-            
+          <div class="portfolio-subtitle">   
+            How is score calculated?
           </div>
           
         </div>
@@ -22,17 +22,17 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(item,index) in tableRows" :index="index" :key="item.txnId">
+              <tr v-for="(item,index) in tableRows" :index="index">
                 <td>
                   <img
                     class="table-img"
                     :src="item.tokenBrandImageUrl"
                     :title="item.tokenBrand"
-                    @click="goAnother(item.tokenBrand)"
+                    @click="goPortfolio(item.tokenBrand)"
                   />
                 </td>
                 <td>
-                  <div>{{item.balance | comma}}</div>
+                  <div>{{item.score | comma}}</div>
                 </td>
               </tr>
             </tbody>
@@ -58,12 +58,7 @@
             </span>
           </div>
         </div>
-        <div class="row">
-          <div
-            class="history-link"
-            @click="goHistory(user)"
-          >Link to {{this.user}}'s Transaction History Page.</div>
-        </div>
+       
       </div>
     </div>
   </div>
@@ -86,51 +81,22 @@ export default {
       user: "",
       tableRows: [],
       rowCount: 0,
-      tokenBalance: "0",
-      tokenBalancePercentage: 0,
-      totalDistributed: 0,
-      totalHoldings: 0,
-      earliestDatetime: "",
-      latestDatetime: "",
       initialPagePtr: 0,
       visibleNext: true,
       visiblePrev: true,
       showLoading: true,
-      userImageUrl: ""
     };
   },
   created() {
-    this.user = this.$route.query.user;
+    
+    this.page = this.$route.query.page;
 
-    this.earliestDatetime = this.$route.query.earliestDatetime;
-    this.latestDatetime = this.$route.query.latestDatetime;
-    this.initFlag = 0;
-
-    if (this.earliestDatetime) {
-      this.initFlag = 1;
-    }
-    if (this.latestDatetime) {
-      this.initFlag = 2;
-    }
-
-    if (this.$route.query.page && this.initFlag) {
-      if (this.initFlag == 1) {
-        this.initialPagePtr = this.$route.query.page - 2;
-      }
-      if (this.initFlag == 2) {
-        this.initialPagePtr = this.$route.query.page;
-      }
-    }
     this.$ga.page("/");
-    this.getPortfolio(this.user, this.initFlag);
+    this.getLeaderboard(this.page);
   },
   beforeRouteUpdate(to, from, next) {
-    // just use `this`
-    this.user = to.query.user;
-
-    if (from.query.user != this.user) {
-      this.getPortfolio(this.user, 0);
-    }
+    this.page = this.$route.query.page;
+    this.getLeaderboard(this.page);
 
     next();
   },
@@ -138,170 +104,42 @@ export default {
     goNext() {
       if (this.visibleNext) {
         this.showLoading = true;
-        this.getPortfolio(this.user, 1);
+        this.getPortfolio(this.page+1);
       }
     },
     goPrev() {
       if (this.visiblePrev) {
         this.showLoading = true;
-        this.getPortfolio(this.user, 2);
+        this.getPortfolio(this.page-1);
       }
     },
-    getPortfolio(user, initFlag) {
-      if (initFlag == 0) {
+    getLeaderboard(page) {
+     
         axios
           .get(
-            "https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=leaderboard" +
-              user
+            "https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=leaderboard&page=" +
+              page
           )
           .then(response => {
             // JSON responses are automatically parsed.
             let res = response.data;
-            this.user = res.platformHandle;
             this.tableRows = _.cloneDeep(res.tableRows);
-            this.ravity = res.ravity;
             this.rowCount = res.rowCount;
-            this.tokenBalance = res.tokenBalance;
-            this.totalDistributed = res.totalDistributed;
-            this.totalReciprocated = res.totalReciprocated;
-            this.tokenBalancePercentage = res.tokenBalancePercentage;
-            this.totalHoldings = res.totalHoldings;
-            this.latestDatetime = res.latestDatetime;
-            this.earliestDatetime = res.earliestDatetime;
-            this.initialPagePtr = 0;
-            this.visiblePrev = false;
+            this.initialPagePtr = page;
+            this.visiblePrev = res.prev ? true : false;;
             this.visibleNext = res.next ? true : false;
-            this.userImageUrl = res.userImageUrl;
             this.showLoading = false;
           })
           .catch(e => {
             console.log(e);
           });
-      } else if (initFlag == 1) {
-        axios
-          .get(
-            "https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=portfolioPage&userName=" +
-              user +
-              "&earliestDatetime=" +
-              this.earliestDatetime
-          )
-          .then(response => {
-            this.initialPagePtr++;
-            if (this.initialPagePtr) {
-              this.$router.push({
-                path: "portfolio",
-                query: {
-                  user: user,
-                  earliestDatetime: this.earliestDatetime,
-                  page: this.initialPagePtr + 1
-                }
-              });
-            } else {
-              this.$router.push({ path: "portfolio", query: { user: user } });
-            }
-            // JSON responses are automatically parsed.
-            let res = response.data;
-            this.user = res.platformHandle;
-            this.tableRows = _.cloneDeep(res.tableRows);
-            this.ravity = res.ravity;
-            this.rowCount = res.rowCount;
-            this.tokenBalance = res.tokenBalance;
-            this.totalDistributed = res.totalDistributed;
-            this.tokenBalancePercentage = res.tokenBalancePercentage;
-            this.totalHoldings = res.totalHoldings;
-            this.latestDatetime = res.latestDatetime;
-            this.earliestDatetime = res.earliestDatetime;
-
-            this.visiblePrev = true;
-            this.visibleNext = res.next ? true : false;
-            this.userImageUrl = res.userImageUrl;
-            this.platformHandle = res.platformHandle;
-            this.showLoading = false;
-          })
-          .catch(e => {
-            console.log(e);
-          });
-      } else {
-        axios
-          .get(
-            "https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=portfolioPage&userName=" +
-              user +
-              "&latestDatetime=" +
-              this.latestDatetime
-          )
-          .then(response => {
-            this.initialPagePtr--;
-
-            if (this.initialPagePtr) {
-              this.$router.push({
-                path: "portfolio",
-                query: {
-                  user: user,
-                  latestDatetime: this.latestDatetime,
-                  page: this.initialPagePtr + 1
-                }
-              });
-            } else {
-              this.$router.push({ path: "portfolio", query: { user: user } });
-            }
-            // JSON responses are automatically parsed.
-            let res = response.data;
-            this.user = res.platformHandle;
-            this.tableRows = _.cloneDeep(res.tableRows);
-            this.ravity = res.ravity;
-            this.rowCount = res.rowCount;
-            this.tokenBalance = res.tokenBalance;
-            this.totalDistributed = res.totalDistributed;
-            this.tokenBalancePercentage = res.tokenBalancePercentage;
-            this.totalHoldings = res.totalHoldings;
-            this.latestDatetime = res.latestDatetime;
-            this.earliestDatetime = res.earliestDatetime;
-
-            this.visiblePrev =
-              res.prev && this.initialPagePtr > 0 ? true : false;
-            this.visibleNext = true;
-            this.userImageUrl = res.userImageUrl;
-            this.platformHandle = res.platformHandle;
-            this.showLoading = false;
-          })
-          .catch(e => {
-            console.log(e);
-          });
-      }
+      
     },
-    goAnother(user) {
-      if (this.user !== user) {
-        this.showLoading = true;
-        this.$root.$emit("changeUser", user);
-        this.$router.push({
-          name: "PortfolioPage",
-          query: {
-            user: user
-          }
-        });
-      }
-    },
-    goHistory(user) {
+    goPortfolio(user) {
       this.$root.$emit("changeUser", user);
-      // localStorage.setItem("transactionPageNum", 0);
-      // localStorage.setItem("transactionFlag", 0);
-      this.$router.push({
-        name: "HistoryPage",
-        query: {
-          user: user
-        }
-      });
+      this.$router.push({ name: "PortfolioPage", query: { user: user } });
     },
-
-    goTransaction(txnHash) {
-      this.$root.$emit("changeUser", user);
-      this.$router.push({
-        name: "HistoryPage",
-        query: {
-          user: user
-        }
-      });
-    }
+   
   }
 };
 </script>
