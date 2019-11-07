@@ -17,13 +17,19 @@
           <table>
             <thead>
               <tr>
+                <th scope="col"></th>
                 <th scope="col">User</th>
+                <th scope="col"></th>
                 <th scope="col">Score</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="(item,index) in tableRows" :index="index">
                 <td>
+                  <div>{{item.num}}</div>
+                </td>
+                <td>
+
                   <img
                     class="table-img"
                     :src="item.tokenBrandImageUrl"
@@ -90,6 +96,10 @@ export default {
   created() {
     
     this.page = this.$route.query.page;
+
+    if(!this.page){
+      this.page = 1
+    }
 
     this.$ga.page("/");
     this.getLeaderboard(this.page);
