@@ -5,6 +5,7 @@ import TweetDemo from "@/pages/TweetDemoPage/TweetDemoPage";
 import ConfirmationPage from "@/pages/ConfirmationPage";
 import HistoryPage from "@/pages/HistoryPage";
 import PortfolioPage from "@/pages/PortfolioPage";
+import LeaderboardPage from "@/pages/LeaderboardPage";
 import Faq from "@/components/Faq";
 import NotFound from "@/pages/NotFound";
 
@@ -37,6 +38,11 @@ export default new Router({
       path: "/portfolio/:user?",
       name: "PortfolioPage",
       component: PortfolioPage
+    },
+    {
+      path: "/leaderboard/:page?",
+      name: "LeaderboardPage",
+      component: LeaderboardPage
     },
     {
       path: "/history/:user?",
