@@ -122,14 +122,18 @@ export default {
     goNext() {
       if (this.visibleNext) {
         this.showLoading = true;
-        this.getLeaderboard(this.page+1);
+        this.getLeaderboard(this.page);
       }
     },
     goPrev() {
       if (this.visiblePrev) {
         this.showLoading = true;
-        this.getLeaderboard(this.page-1);
+        this.getLeaderboard(this.page);
       }
+    },
+    goTwitterProfile(handle){
+      handle=handle.replace('@','');
+      window.open('https://twitter.com/'+handle);
     },
     getLeaderboard(page) {
      
