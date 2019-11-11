@@ -17,7 +17,7 @@
           <table>
             <thead>
               <tr>
-                <th scope="col"></th>
+                <th scope="col">#</th>
                 <th scope="col">User</th>
                 <th scope="col"></th>
                 <th scope="col">Score</th>
@@ -42,7 +42,7 @@
                     class="link"
                     src="../assets/img/twittersmall.png"
                     @click="goTwitterProfile(item.platformHandle)"
-                    title="Link to Tweet"
+                    title="Link to Twitter Profile"
                   />
                 </td>
                 <td>
@@ -61,7 +61,7 @@
             >
               <i class="fa fa-angle-left"></i>
             </span>
-            Page {{initialPagePtr + 1}}
+            Page {{initialPagePtr}}
             <span
               href="#"
               v-on:click="goNext"
@@ -109,25 +109,26 @@ export default {
       this.page = 1
     }
 
-    this.$ga.page("/");
+    if(window.location.host.split(':')[0] == 'cryptoraves.space'){
+      this.$ga.page("/");
+    }else{
+      console.log(window.location.host)
+    }
     this.getLeaderboard(this.page);
   },
-  beforeRouteUpdate(to, from, next) {
-    this.page = this.$route.query.page;
-    this.getLeaderboard(this.page);
-
-    next();
-  },
+  
   methods: {
     goNext() {
       if (this.visibleNext) {
         this.showLoading = true;
+        this.page = this.page + 1
         this.getLeaderboard(this.page);
       }
     },
     goPrev() {
       if (this.visiblePrev) {
         this.showLoading = true;
+        this.page = this.page - 1
         this.getLeaderboard(this.page);
       }
     },
@@ -147,8 +148,9 @@ export default {
             let res = response.data;
             this.tableRows = _.cloneDeep(res.tableRows);
             this.rowCount = res.rowCount;
+            
             this.initialPagePtr = page;
-            this.visiblePrev = res.prev ? true : false;;
+            this.visiblePrev = res.prev ? true : false;
             this.visibleNext = res.next ? true : false;
             this.showLoading = false;
           })

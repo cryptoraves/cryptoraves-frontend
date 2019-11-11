@@ -89,7 +89,11 @@ export default {
     goHistory: function(event) {
       // `this` inside methods points to the Vue instance
       if (this.userList.includes(this.user)) {
+
+        this.$root.$emit("changeUser", this.user);
         document.getElementById("autoTokenSelect1").blur();
+
+        
         this.$router.push({
           name: "HistoryPage",
           query: {

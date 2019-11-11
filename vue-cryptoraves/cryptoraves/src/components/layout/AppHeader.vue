@@ -131,9 +131,12 @@ export default {
             user: this.user
           }
         });
-      } else {
-        alert("'" + this.user + "'" + " not found!");
         this.user = "";
+      } else {
+        if(this.user){
+          alert("'" + this.user + "'" + " not found!");
+          this.user = "";
+        }
       }
     }
   }

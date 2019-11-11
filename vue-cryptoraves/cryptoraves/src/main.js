@@ -13,11 +13,14 @@ Vue.config.productionTip = false;
 Vue.use(Clipboard);
 Vue.use(VueScrollTo);
 
-Vue.use(VueAnalytics, {
-  id: ["UA-142913413-1"],
-  router
-});
-/* eslint-disable no-new */
+
+if(window.location.host.split(':')[0] == 'cryptoraves.space'){
+  Vue.use(VueAnalytics, {
+    id: ["UA-142913413-1"],
+    router
+  });
+  /* eslint-disable no-new */
+}
 
 Vue.filter("truncate", function(value) {
   if (!value) return "";
