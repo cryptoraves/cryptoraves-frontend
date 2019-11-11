@@ -149,12 +149,12 @@ export default {
     // just use `this`
     this.user = to.query.user;
 
-    console.log(from.query.user + " from.query.user");
+    
     if (from.query.user != this.user) {
       this.getPortfolio(this.user, 0);
     }
 
-    console.log(this.user + " this.user");
+    
     next();
   },
   methods: {
