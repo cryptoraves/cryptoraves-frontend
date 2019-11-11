@@ -76,12 +76,15 @@ export default {
               "userList",
               JSON.stringify(response.data.userList)
             );
+            this.userList = response.data.userList
           })
           .catch(e => {
             this.errors.push(e);
           });
+      }else{
+        this.userList = JSON.parse(localStorage.getItem("userList"));
       }
-      this.userList = JSON.parse(localStorage.getItem("userList"));
+      
     },
     goHistory: function(event) {
       // `this` inside methods points to the Vue instance
