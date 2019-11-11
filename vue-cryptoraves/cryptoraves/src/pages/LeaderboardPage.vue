@@ -109,15 +109,12 @@ export default {
       this.page = 1
     }
 
-    this.$ga.page("/");
+    if(window.location.host.split(':')[0] != 'cryptoraves.space'){
+      this.$ga.page("/");
+    }
     this.getLeaderboard(this.page);
   },
-  beforeRouteUpdate(to, from, next) {
-    this.page = this.$route.query.page;
-    this.getLeaderboard(this.page);
-
-    next();
-  },
+  
   methods: {
     goNext() {
       if (this.visibleNext) {

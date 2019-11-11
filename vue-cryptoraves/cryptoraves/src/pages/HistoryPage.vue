@@ -188,7 +188,10 @@ export default {
       }
     }
 
-    this.$ga.page("/");
+    if(window.location.host.split(':')[0] != 'cryptoraves.space'){
+      this.$ga.page("/");
+    }
+    
     // this.initialPagePtr = localStorage.getItem("transactionPageNum") || 0;
     // this.initFlag = localStorage.getItem("transactionFlag") || 0;
     // this.earliestDatetime = localStorage.getItem("earliestDatetime");
