@@ -40,7 +40,7 @@ export default new Router({
       component: PortfolioPage
     },
     {
-      path: "/leaderboard",
+      path: "/leaderboard/:page?",
       name: "LeaderboardPage",
       component: LeaderboardPage
     },
