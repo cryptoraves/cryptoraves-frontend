@@ -17,7 +17,7 @@
           <table>
             <thead>
               <tr>
-                <th scope="col"></th>
+                <th scope="col">#</th>
                 <th scope="col">User</th>
                 <th scope="col"></th>
                 <th scope="col">Score</th>
@@ -122,13 +122,13 @@ export default {
     goNext() {
       if (this.visibleNext) {
         this.showLoading = true;
-        this.getLeaderboard(this.page);
+        this.getLeaderboard(this.page + 1);
       }
     },
     goPrev() {
       if (this.visiblePrev) {
         this.showLoading = true;
-        this.getLeaderboard(this.page);
+        this.getLeaderboard(this.page - 1);
       }
     },
     goTwitterProfile(handle){
@@ -147,7 +147,7 @@ export default {
             let res = response.data;
             this.tableRows = _.cloneDeep(res.tableRows);
             this.rowCount = res.rowCount;
-            this.num=res.rank;
+            
             this.initialPagePtr = page;
             this.visiblePrev = res.prev ? true : false;
             this.visibleNext = res.next ? true : false;
