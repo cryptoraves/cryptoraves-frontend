@@ -122,6 +122,7 @@ export default {
         });
     },
     goHistory: function(event) {
+      console.log(this.user)
       // `this` inside methods points to the Vue instance
       if (this.userList.includes(this.user)) {
         document.getElementById("autoTokenSelect").blur();
@@ -133,8 +134,10 @@ export default {
         });
         this.user = "";
       } else {
-        alert("'" + this.user + "'" + " not found!");
-        this.user = "";
+        if(this.user){
+          alert("'" + this.user + "'" + " not found!");
+          this.user = "";
+        }
       }
     }
   }
