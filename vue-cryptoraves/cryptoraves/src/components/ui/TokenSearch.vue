@@ -90,6 +90,7 @@ export default {
       // `this` inside methods points to the Vue instance
       if (this.userList.includes(this.user)) {
         document.getElementById("autoTokenSelect1").blur();
+        this.$root.$emit("changeUser", user);
         this.$router.push({
           name: "HistoryPage",
           query: {
