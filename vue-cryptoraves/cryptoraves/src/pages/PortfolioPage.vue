@@ -151,18 +151,12 @@ export default {
     // just use `this`
     this.user = to.query.user;
 
-<<<<<<< HEAD
-=======
-    
->>>>>>> develop
+
     if (from.query.user != this.user) {
       this.getPortfolio(this.user, 0);
     }
 
-<<<<<<< HEAD
-=======
-    
->>>>>>> develop
+
     next();
   },
   methods: {
