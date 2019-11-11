@@ -111,6 +111,8 @@ export default {
 
     if(window.location.host.split(':')[0] == 'cryptoraves.space'){
       this.$ga.page("/");
+    }else{
+      console.log(window.location.host)
     }
     this.getLeaderboard(this.page);
   },
@@ -119,13 +121,15 @@ export default {
     goNext() {
       if (this.visibleNext) {
         this.showLoading = true;
-        this.getLeaderboard(this.page + 1);
+        this.page = this.page + 1
+        this.getLeaderboard(this.page);
       }
     },
     goPrev() {
       if (this.visiblePrev) {
         this.showLoading = true;
-        this.getLeaderboard(this.page - 1);
+        this.page = this.page - 1
+        this.getLeaderboard(this.page);
       }
     },
     goTwitterProfile(handle){

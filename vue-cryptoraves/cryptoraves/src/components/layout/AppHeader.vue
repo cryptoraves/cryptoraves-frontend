@@ -122,7 +122,6 @@ export default {
         });
     },
     goHistory: function(event) {
-      console.log(this.user)
       // `this` inside methods points to the Vue instance
       if (this.userList.includes(this.user)) {
         document.getElementById("autoTokenSelect").blur();
