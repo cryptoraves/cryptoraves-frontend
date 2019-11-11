@@ -188,7 +188,7 @@ export default {
       }
     }
 
-    if(window.location.host.split(':')[0] != 'cryptoraves.space'){
+    if(window.location.host.split(':')[0] == 'cryptoraves.space'){
       this.$ga.page("/");
     }
     

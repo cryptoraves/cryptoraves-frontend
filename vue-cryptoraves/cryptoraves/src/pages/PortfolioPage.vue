@@ -142,7 +142,7 @@ export default {
         this.initialPagePtr = this.$route.query.page;
       }
     }
-    if(window.location.host.split(':')[0] != 'cryptoraves.space'){
+    if(window.location.host.split(':')[0] == 'cryptoraves.space'){
       this.$ga.page("/");
     }
     this.getPortfolio(this.user, this.initFlag);

@@ -143,7 +143,7 @@ export default {
   },
   created() {
     this.txnId = this.$route.query.txnId;
-    if(window.location.host.split(':')[0] != 'cryptoraves.space'){
+    if(window.location.host.split(':')[0] == 'cryptoraves.space'){
       this.$ga.page("/");
     }
     this.getTransaction(this.txnId);

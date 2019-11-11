@@ -109,7 +109,7 @@ export default {
       this.page = 1
     }
 
-    if(window.location.host.split(':')[0] != 'cryptoraves.space'){
+    if(window.location.host.split(':')[0] == 'cryptoraves.space'){
       this.$ga.page("/");
     }
     this.getLeaderboard(this.page);
