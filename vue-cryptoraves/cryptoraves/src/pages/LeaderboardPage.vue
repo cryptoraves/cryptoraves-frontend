@@ -144,6 +144,13 @@ export default {
               page
           )
           .then(response => {
+
+            this.$router.push({
+                path: "leaderboard",
+                query: {
+                  page: page
+                }
+            });
             // JSON responses are automatically parsed.
             let res = response.data;
             this.tableRows = _.cloneDeep(res.tableRows);
