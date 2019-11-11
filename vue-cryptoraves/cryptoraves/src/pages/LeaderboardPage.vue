@@ -42,7 +42,7 @@
                     class="link"
                     src="../assets/img/twittersmall.png"
                     @click="goTwitterProfile(item.platformHandle)"
-                    title="Link to Tweet"
+                    title="Link to Twitter Profile"
                   />
                 </td>
                 <td>
@@ -61,7 +61,7 @@
             >
               <i class="fa fa-angle-left"></i>
             </span>
-            Page {{initialPagePtr + 1}}
+            Page {{initialPagePtr}}
             <span
               href="#"
               v-on:click="goNext"
@@ -147,8 +147,9 @@ export default {
             let res = response.data;
             this.tableRows = _.cloneDeep(res.tableRows);
             this.rowCount = res.rowCount;
+            this.num=res.rank;
             this.initialPagePtr = page;
-            this.visiblePrev = res.prev ? true : false;;
+            this.visiblePrev = res.prev ? true : false;
             this.visibleNext = res.next ? true : false;
             this.showLoading = false;
           })
