@@ -29,6 +29,14 @@ export default {
           }
         });
       }
+      if (this.type3 === "true"){
+        this.$router.push({
+            name: "LeaderboardPage",
+            query: {
+              page: 1
+            }
+          });
+      }
     }
   }
 };

@@ -12,7 +12,7 @@
         <div class="d-flex d-flex-right col-lg-4 col-sm-12">
           <!-- ---------------------------------------------------------------------------------------- -->
           <!-- LeaderBoard after Date Ready -->
-          <!-- <div class="app-header-leaderboard">LEADERBOARD</div> -->
+          <div class="app-header-leaderboard" @click="goLeaderboard">LEADERBOARD</div>
           <!-- ---------------------------------------------------------------------------------------- -->
         </div>
         <div class="col-lg-6 col-sm-12 text-right">
@@ -119,6 +119,14 @@ export default {
         })
         .catch(e => {
           this.errors.push(e);
+        });
+    },
+    goLeaderboard: function(event) {
+      this.$router.push({
+          name: "LeaderboardPage",
+          query: {
+            page: 1
+          }
         });
     },
     goHistory: function(event) {
