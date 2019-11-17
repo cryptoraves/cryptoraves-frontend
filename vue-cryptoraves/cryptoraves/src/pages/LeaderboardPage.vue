@@ -8,7 +8,7 @@
         <div class="portfolio-title">
           <SectionHeader >Leaderboard</SectionHeader>
           <div class="portfolio-subtitle">   
-            How is score calculated?
+            <a href="https://medium.com/@cryptoraves/how-to-grow-your-cryptoraves-token-score-84bc6b18554f">How is score calculated?</a>
           </div>
           
         </div>
