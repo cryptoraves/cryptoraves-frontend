@@ -29,7 +29,7 @@ export default {
           }
         });
       }
-      if (this.type3 === "true"){
+      if (this.type7 === "true"){
         this.$router.push({
             name: "LeaderboardPage",
             query: {
