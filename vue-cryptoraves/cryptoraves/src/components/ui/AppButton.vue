@@ -29,7 +29,7 @@ export default {
           }
         });
       }
-      if (this.type7 === "true"){
+      if (this.type4 === "true" && this.name == "See who is trending"){
         this.$router.push({
             name: "LeaderboardPage",
             query: {

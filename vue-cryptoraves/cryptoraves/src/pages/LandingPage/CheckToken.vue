@@ -39,7 +39,7 @@
         <!-- ---------------------------------------------------------------------------- -->
         <!-- need to do in future -->
         <div class="space-40"></div>
-        <AppButton name="See who is trending" type7="true"></AppButton>
+        <AppButton name="See who is trending" type4="true"></AppButton>
 
         <!-- ---------------------------------------------------------------------------- -->
         <div class="checktoken-content-2">But what is the meaning (or value) behind these tokens?</div>
@@ -58,11 +58,6 @@ export default {
     SectionHeader,
     AppButton,
     TokenSearch
-  },
-  methods: {
-    alert: function() {
-      alert("asdfadsf");
-    }
   }
 };
 </script>
