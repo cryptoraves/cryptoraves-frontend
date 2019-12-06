@@ -52,7 +52,7 @@
             </div>
           </div>
           <div class="confirmation-tosection col-lg-4 col-md-4 col-sm-4">
-            <div class="confirmation-tosection-show1">
+            <div v-if="!item.userTo.includes('Export To Mainnet')" class="confirmation-tosection-show1">
               <div
                 class="confirmation-userFromTo"
                 @click="goHistory(item.userTo)"
@@ -66,20 +66,19 @@
                 />
               </div>
             </div>
-            <div class="confirmation-tosection-show2">
-              <div class="confirmation-usertoimage">
+            <div v-else class="confirmation-tosection-show1">
+              <div
+                class="confirmation-export"
+                :title="item.userTo"
+              >{{this.item.userTo}}</div>
+              <div class="confirmation-export">
                 <img
                   :src="this.item.userToImageUrl"
-                  @click="goHistory(item.userTo)"
                   :title="item.userTo"
                 />
               </div>
-              <div
-                class="confirmation-userFromTo"
-                @click="goHistory(item.userTo)"
-                :title="item.userTo"
-              >{{this.item.userTo}}</div>
             </div>
+            
           </div>
         </div>
         <div class="row">
@@ -283,6 +282,16 @@ export default {
   cursor: pointer;
   text-decoration: underline;
 }
+.confirmation-export {
+  margin: auto 0.5em auto 0.5em;
+  font-size: 2em;
+  font-family: "Montserrat";
+  text-align: center;
+  color: #06a8ff;
+  font-weight: 520;
+  overflow-wrap: break-word;
+}
+
 .confirmation-tokenbrandimage {
   display: flex;
   margin: 50px auto 50px auto;
