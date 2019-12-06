@@ -131,21 +131,15 @@ export default {
     },
     goHistory: function(event) {
       // `this` inside methods points to the Vue instance
-      if (this.userList.includes(this.user)) {
-        document.getElementById("autoTokenSelect").blur();
-        this.$router.push({
-          name: "HistoryPage",
-          query: {
-            user: this.user
-          }
-        });
-        this.user = "";
-      } else {
-        if(this.user){
-          alert("'" + this.user + "'" + " not found!");
-          this.user = "";
+      document.getElementById("autoTokenSelect").blur();
+      this.$router.push({
+        name: "HistoryPage",
+        query: {
+          user: this.user
         }
-      }
+      });
+      this.user = "";
+      
     }
   }
 };
