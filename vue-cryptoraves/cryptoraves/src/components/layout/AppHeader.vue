@@ -28,7 +28,7 @@
                 list="mylist"
               />
               <datalist id="mylist" v-if="user.length>3">
-                <option v-bind:key="item" v-for="item in userList" :value="item" >{{item}}</option>
+                <option v-bind:key="item" v-for="item in userList" :value="item">{{item}}</option>
               </datalist>
               <div class="app-header-icon" @click="goHistory">
                 <i class="fa fa-search"></i>
@@ -110,7 +110,7 @@ export default {
                   "userList",
                   JSON.stringify(response.data.userList)
                 );
-                this.userList = response.data.userList;
+                this.userList = JSON.parse(localStorage.getItem("userList"));
               })
               .catch(e => {
                 this.errors.push(e);
@@ -131,15 +131,21 @@ export default {
     },
     goHistory: function(event) {
       // `this` inside methods points to the Vue instance
-      document.getElementById("autoTokenSelect").blur();
-      this.$router.push({
-        name: "HistoryPage",
-        query: {
-          user: this.user
+      if (this.userList.includes(this.user)) {
+        document.getElementById("autoTokenSelect").blur();
+        this.$router.push({
+          name: "HistoryPage",
+          query: {
+            user: this.user
+          }
+        });
+        this.user = "";
+      } else {
+        if(this.user){
+          alert("'" + this.user + "'" + " not found!");
+          this.user = "";
         }
-      });
-      this.user = "";
-      
+      }
     }
   }
 };
