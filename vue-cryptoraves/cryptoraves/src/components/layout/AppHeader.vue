@@ -30,7 +30,7 @@
               <datalist id="mylist" v-if="user.length>3">
                 <option v-bind:key="item" v-for="item in userList" :value="item">{{item}}</option>
               </datalist>
-              <div class="app-header-icon" @click="goHistory">
+              <div class="app-header-icon" v-on:select="goHistory">
                 <i class="fa fa-search"></i>
               </div>
             </div>
