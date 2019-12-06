@@ -28,7 +28,7 @@
                 list="mylist"
               />
               <datalist id="mylist" v-if="user.length>3">
-                <option v-bind:key="item" v-for="item in userList" :value="item" @click="item='Loading...'">{{item}}</option>
+                <option v-for="item in userList"  >{{item}}</option>
               </datalist>
               <div class="app-header-icon" @click="goHistory">
                 <i class="fa fa-search"></i>
@@ -110,7 +110,7 @@ export default {
                   "userList",
                   JSON.stringify(response.data.userList)
                 );
-                this.userList = JSON.parse(localStorage.getItem("userList"));
+                this.userList = response.data.userList;
               })
               .catch(e => {
                 this.errors.push(e);
