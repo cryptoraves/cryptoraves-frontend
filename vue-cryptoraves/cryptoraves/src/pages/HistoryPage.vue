@@ -82,12 +82,15 @@
                   <div>{{item.amount | comma}}</div>
                 </td>
                 <td>
+                  
                   <img
+                    v-if="!item.userTo.includes('Export To Mainnet')"
                     class="table-img"
                     :src="item.userToImageUrl"
                     :title="item.userTo"
                     @click="getHistory(item.userTo, 0)"
                   />
+                  <img v-else class="launch-img" :src="item.userToImageUrl" :title="item.userTo" />
                 </td>
                 <td>
                   <div
