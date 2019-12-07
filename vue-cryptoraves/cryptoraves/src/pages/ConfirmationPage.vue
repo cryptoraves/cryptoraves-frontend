@@ -55,6 +55,7 @@
             <div v-if="!item.userTo.includes('Export To Mainnet')" class="confirmation-tosection-show1">
               <div
                 class="confirmation-userFromTo"
+                :src="this.item.userToImageUrl"
                 @click="goHistory(item.userTo)"
                 :title="item.userTo"
               >{{this.item.userTo}}</div>
