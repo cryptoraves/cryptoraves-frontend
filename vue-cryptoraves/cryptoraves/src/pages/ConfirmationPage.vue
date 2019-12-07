@@ -52,10 +52,9 @@
             </div>
           </div>
           <div class="confirmation-tosection col-lg-4 col-md-4 col-sm-4">
-            <div v-if="!item.userTo.includes('Export To Mainnet')" class="confirmation-tosection-show1">
+            <div  class="confirmation-tosection-show1">
               <div
                 class="confirmation-userFromTo"
-                :src="this.item.userToImageUrl"
                 @click="goHistory(item.userTo)"
                 :title="item.userTo"
               >{{this.item.userTo}}</div>
@@ -67,18 +66,8 @@
                 />
               </div>
             </div>
-            <div v-else class="confirmation-tosection-show1">
-              <div
-                class="confirmation-export"
-                :title="item.userTo"
-              >{{this.item.userTo}}</div>
-              <div class="confirmation-export">
-                <img
-                  :src="this.item.userToImageUrl"
-                  :title="item.userTo"
-                />
-              </div>
-            </div>
+           
+            
             
           </div>
         </div>
