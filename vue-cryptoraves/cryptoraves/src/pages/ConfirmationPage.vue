@@ -401,9 +401,7 @@ export default {
     display: block;
     margin: auto;
   }
-  .confirmation-tosection-show1 {
-    display: none;
-  }
+  
   .confirmation-tosection-show2 {
     display: block;
   }
