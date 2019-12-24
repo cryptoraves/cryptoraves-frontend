@@ -110,12 +110,12 @@ export default {
                   "userList",
                   JSON.stringify(response.data.userList)
                 );
-                this.userList = JSON.parse(localStorage.getItem("userList"));
+                this.userList = Object.freeze(JSON.parse(localStorage.getItem("userList")));
               })
               .catch(e => {
                 this.errors.push(e);
               });
-          } else this.userList = JSON.parse(localStorage.getItem("userList"));
+          } else this.userList = Object.freeze(JSON.parse(localStorage.getItem("userList")));
         })
         .catch(e => {
           this.errors.push(e);
