@@ -25,7 +25,7 @@
           <div class="space-20"></div>You give, we give back.
           <div class="space-20"></div>Like So :
         </div>
-        <a href="https://ctt.ac/hjp6Q" target="_blank">
+        <a href="https://ctt.ac/cY9V9" target="_blank">
           <TweetButton type2="true">@cryptoraves 1,000 @cryptoraves</TweetButton>
         </a>
         <AppButton name="Show me a tweet demo" type4="true" target="recipro"></AppButton>
