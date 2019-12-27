@@ -27,7 +27,7 @@
                 placeholder="Lookup Twitter @username"
                 list="mylist"
               />
-              <datalist id="mylist" v-if="user.length>3">
+              <datalist id="mylist" v-if="user.length>4">
                 <option v-bind:key="item" v-for="item in userList" :value="item">{{item}}</option>
               </datalist>
               <div class="app-header-icon" @click="goHistory">
@@ -110,12 +110,12 @@ export default {
                   "userList",
                   JSON.stringify(response.data.userList)
                 );
-                this.userList = JSON.parse(localStorage.getItem("userList"));
+                this.userList = Object.freeze(JSON.parse(localStorage.getItem("userList")));
               })
               .catch(e => {
                 this.errors.push(e);
               });
-          } else this.userList = JSON.parse(localStorage.getItem("userList"));
+          } else this.userList = Object.freeze(JSON.parse(localStorage.getItem("userList")));
         })
         .catch(e => {
           this.errors.push(e);
