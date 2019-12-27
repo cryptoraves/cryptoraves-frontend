@@ -27,7 +27,7 @@
                 placeholder="Lookup Twitter @username"
                 list="mylist"
               />
-              <datalist id="mylist" v-if="user.length>3">
+              <datalist id="mylist" v-if="user.length>4">
                 <option v-bind:key="item" v-for="item in userList" :value="item">{{item}}</option>
               </datalist>
               <div class="app-header-icon" @click="goHistory">
