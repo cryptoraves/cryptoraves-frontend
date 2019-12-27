@@ -73,7 +73,12 @@
         </div>
         <div class="row">
           <div class="confirmation-tokenbrand">
-            <div
+            <div v-if="this.item.ticker"
+              class="confirmation-tokenbrand-header"
+              @click="goHistory(item.tokenBrand)"
+              :title="item.ticker"
+            >{{this.item.ticker}}</div>
+            <div v-else
               class="confirmation-tokenbrand-header"
               @click="goHistory(item.tokenBrand)"
               :title="item.tokenBrand"

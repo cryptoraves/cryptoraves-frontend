@@ -45,7 +45,13 @@
             <tbody>
               <tr v-for="(item,index) in tableRows" :index="index" :key="item.txnId">
                 <td>
-                  <img
+                  <img v-if="item.ticker" 
+                    class="table-img"
+                    :src="item.tokenBrandImageUrl"
+                    :title="item.ticker"
+                    @click="goAnother(item.tokenBrand)"
+                  />
+                  <img v-else
                     class="table-img"
                     :src="item.tokenBrandImageUrl"
                     :title="item.tokenBrand"

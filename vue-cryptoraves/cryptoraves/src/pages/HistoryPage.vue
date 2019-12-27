@@ -71,7 +71,13 @@
                   />
                 </td>
                 <td>
-                  <img
+                  <img v-if="item.ticker"
+                    class="table-img"
+                    :src="item.tokenBrandImageUrl"
+                    :title="item.ticker"
+                    @click="getHistory(item.tokenBrand, 0)"
+                  />
+                  <img v-else
                     class="table-img"
                     :src="item.tokenBrandImageUrl"
                     :title="item.tokenBrand"
