@@ -74,7 +74,7 @@
             >
               <i class="fa fa-angle-left"></i>
             </span>
-            Page {{initialPagePtr + 1}}
+            Page {{initialPagePtr}}
             <span
               href="#"
               v-on:click="goNext"
@@ -117,9 +117,7 @@ export default {
       tokenBalancePercentage: 0,
       totalDistributed: 0,
       totalHoldings: 0,
-      earliestDatetime: "",
-      latestDatetime: "",
-      initialPagePtr: 0,
+      initialPagePtr: 1,
       visibleNext: true,
       visiblePrev: true,
       showLoading: true,
@@ -128,30 +126,16 @@ export default {
   },
   created() {
     this.user = this.$route.query.user;
-
-    this.earliestDatetime = this.$route.query.earliestDatetime;
-    this.latestDatetime = this.$route.query.latestDatetime;
-    this.initFlag = 0;
-
-    if (this.earliestDatetime) {
-      this.initFlag = 1;
+    if(this.$route.query.page){
+      this.initialPagePtr = this.$route.query.page;
+    }else{
+      this.initialPagePtr = 1
     }
-    if (this.latestDatetime) {
-      this.initFlag = 2;
-    }
-
-    if (this.$route.query.page && this.initFlag) {
-      if (this.initFlag == 1) {
-        this.initialPagePtr = this.$route.query.page - 2;
-      }
-      if (this.initFlag == 2) {
-        this.initialPagePtr = this.$route.query.page;
-      }
-    }
+    
     if(window.location.host.split(':')[0] == 'cryptoraves.space'){
       this.$ga.page("/");
     }
-    this.getPortfolio(this.user, this.initFlag);
+    this.getPortfolio(this.user, this.initialPagePtr);
   },
   beforeRouteUpdate(to, from, next) {
     // just use `this`
@@ -169,21 +153,20 @@ export default {
     goNext() {
       if (this.visibleNext) {
         this.showLoading = true;
-        this.getPortfolio(this.user, 1);
+        this.getPortfolio(this.user, this.initialPagePtr+1);
       }
     },
     goPrev() {
       if (this.visiblePrev) {
         this.showLoading = true;
-        this.getPortfolio(this.user, 2);
+        this.getPortfolio(this.user, this.initialPagePtr-1);
       }
     },
-    getPortfolio(user, initFlag) {
-      if (initFlag == 0) {
+    getPortfolio(user, page) {
         axios
           .get(
             "https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=portfolioPage&userName=" +
-              user
+              user + "&page=" + page
           )
           .then(response => {
             // JSON responses are automatically parsed.
@@ -197,108 +180,23 @@ export default {
             this.totalReciprocated = res.totalReciprocated;
             this.tokenBalancePercentage = res.tokenBalancePercentage;
             this.totalHoldings = res.totalHoldings;
-            this.latestDatetime = res.latestDatetime;
-            this.earliestDatetime = res.earliestDatetime;
-            this.initialPagePtr = 0;
-            this.visiblePrev = false;
+            this.initialPagePtr = page;
+            this.visiblePrev = res.prev ? true : false;;
             this.visibleNext = res.next ? true : false;
             this.userImageUrl = res.userImageUrl;
             this.showLoading = false;
-          })
-          .catch(e => {
-            console.log(e);
-          });
-      } else if (initFlag == 1) {
-        axios
-          .get(
-            "https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=portfolioPage&userName=" +
-              user +
-              "&earliestDatetime=" +
-              this.earliestDatetime
-          )
-          .then(response => {
-            this.initialPagePtr++;
-            if (this.initialPagePtr) {
-              this.$router.push({
+            this.$router.push({
                 path: "portfolio",
                 query: {
                   user: user,
-                  earliestDatetime: this.earliestDatetime,
-                  page: this.initialPagePtr + 1
+                  page: page
                 }
               });
-            } else {
-              this.$router.push({ path: "portfolio", query: { user: user } });
-            }
-            // JSON responses are automatically parsed.
-            let res = response.data;
-            this.user = res.platformHandle;
-            this.tableRows = _.cloneDeep(res.tableRows);
-            this.ravity = res.ravity;
-            this.rowCount = res.rowCount;
-            this.tokenBalance = res.tokenBalance;
-            this.totalDistributed = res.totalDistributed;
-            this.tokenBalancePercentage = res.tokenBalancePercentage;
-            this.totalHoldings = res.totalHoldings;
-            this.latestDatetime = res.latestDatetime;
-            this.earliestDatetime = res.earliestDatetime;
-
-            this.visiblePrev = true;
-            this.visibleNext = res.next ? true : false;
-            this.userImageUrl = res.userImageUrl;
-            this.platformHandle = res.platformHandle;
-            this.showLoading = false;
           })
           .catch(e => {
             console.log(e);
           });
-      } else {
-        axios
-          .get(
-            "https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=portfolioPage&userName=" +
-              user +
-              "&latestDatetime=" +
-              this.latestDatetime
-          )
-          .then(response => {
-            this.initialPagePtr--;
-
-            if (this.initialPagePtr) {
-              this.$router.push({
-                path: "portfolio",
-                query: {
-                  user: user,
-                  latestDatetime: this.latestDatetime,
-                  page: this.initialPagePtr + 1
-                }
-              });
-            } else {
-              this.$router.push({ path: "portfolio", query: { user: user } });
-            }
-            // JSON responses are automatically parsed.
-            let res = response.data;
-            this.user = res.platformHandle;
-            this.tableRows = _.cloneDeep(res.tableRows);
-            this.ravity = res.ravity;
-            this.rowCount = res.rowCount;
-            this.tokenBalance = res.tokenBalance;
-            this.totalDistributed = res.totalDistributed;
-            this.tokenBalancePercentage = res.tokenBalancePercentage;
-            this.totalHoldings = res.totalHoldings;
-            this.latestDatetime = res.latestDatetime;
-            this.earliestDatetime = res.earliestDatetime;
-
-            this.visiblePrev =
-              res.prev && this.initialPagePtr > 0 ? true : false;
-            this.visibleNext = true;
-            this.userImageUrl = res.userImageUrl;
-            this.platformHandle = res.platformHandle;
-            this.showLoading = false;
-          })
-          .catch(e => {
-            console.log(e);
-          });
-      }
+      
     },
     goAnother(user) {
       if (this.user !== user) {
