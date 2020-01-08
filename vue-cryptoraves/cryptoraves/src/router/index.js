@@ -5,9 +5,11 @@ import TweetDemo from "@/pages/TweetDemoPage/TweetDemoPage";
 import ConfirmationPage from "@/pages/ConfirmationPage";
 import HistoryPage from "@/pages/HistoryPage";
 import PortfolioPage from "@/pages/PortfolioPage";
+import HolderPage from "@/pages/HolderPage";
 import LeaderboardPage from "@/pages/LeaderboardPage";
 import Faq from "@/components/Faq";
 import NotFound from "@/pages/NotFound";
+import PartnershipsPage from "@/pages/PartnershipsPage";
 
 Vue.use(Router);
 
@@ -40,6 +42,11 @@ export default new Router({
       component: PortfolioPage
     },
     {
+      path: "/holder/:user?",
+      name: "HolderPage",
+      component: HolderPage
+    },
+    {
       path: "/leaderboard/:page?",
       name: "LeaderboardPage",
       component: LeaderboardPage
@@ -48,6 +55,11 @@ export default new Router({
       path: "/history/:user?",
       name: "HistoryPage",
       component: HistoryPage
+    },
+    {
+      path: "/partnerships",
+      name: "PartnershipsPage",
+      component: PartnershipsPage
     },
     {
       path: "/404",

@@ -31,6 +31,10 @@
           <span v-on:click="goFaqTop">
             <AppButton name="Learn More" type3="true"></AppButton>
           </span>
+          <br />
+          <span v-on:click="goPartnership">
+            <AppButton name="New! Tipping" type7="true"></AppButton>
+          </span>
         </div>
       </div>
     </div>
@@ -61,6 +65,9 @@ export default {
           user: "@cypher"
         }
       });
+    },
+    goPartnership: function(event) {
+      this.$router.push({ name: "PartnershipsPage" });
     }
   }
 };

@@ -5,14 +5,19 @@
         <div class="d-flex col-sm-12 col-lg-2">
           <div class="app-header-logoarea">
             <a href="/">
-              <img src="../../assets/img/cryptoraves_Horozontal Alignment_Full Color_JPG.png" alt />
+              <img
+                src="../../assets/img/cryptoraves_Horozontal Alignment_Full Color_JPG.png"
+                alt
+              />
             </a>
           </div>
         </div>
         <div class="d-flex d-flex-right col-lg-4 col-sm-12">
           <!-- ---------------------------------------------------------------------------------------- -->
           <!-- LeaderBoard after Date Ready -->
-          <div class="app-header-leaderboard" @click="goLeaderboard">LEADERBOARD</div>
+          <div class="app-header-leaderboard" @click="goLeaderboard">
+            LEADERBOARD
+          </div>
           <!-- ---------------------------------------------------------------------------------------- -->
         </div>
         <div class="col-lg-6 col-sm-12 text-right">
@@ -27,8 +32,13 @@
                 placeholder="Lookup Twitter @username"
                 list="mylist"
               />
-              <datalist id="mylist" v-if="user.length>4">
-                <option v-bind:key="item" v-for="item in userList" :value="item">{{item}}</option>
+              <datalist id="mylist" v-if="user.length > 4">
+                <option
+                  v-bind:key="item"
+                  v-for="item in userList"
+                  :value="item"
+                  >{{ item }}</option
+                >
               </datalist>
               <div class="app-header-icon" @click="goHistory">
                 <i class="fa fa-search"></i>
@@ -38,13 +48,13 @@
             <router-link
               to="/"
               v-scroll-to="{
-                            el: '#getToken',
-                            duration: 500,
-                            easing: 'linear',
-                            offset: -250,
-                            force: true,
-                            cancelable: true,
-                        }"
+                el: '#getToken',
+                duration: 500,
+                easing: 'linear',
+                offset: -250,
+                force: true,
+                cancelable: true
+              }"
             >
               <AppButton name="GET YOUR TOKENS" type1="true"></AppButton>
             </router-link>
@@ -110,12 +120,17 @@ export default {
                   "userList",
                   JSON.stringify(response.data.userList)
                 );
-                this.userList = Object.freeze(JSON.parse(localStorage.getItem("userList")));
+                this.userList = Object.freeze(
+                  JSON.parse(localStorage.getItem("userList"))
+                );
               })
               .catch(e => {
                 this.errors.push(e);
               });
-          } else this.userList = Object.freeze(JSON.parse(localStorage.getItem("userList")));
+          } else
+            this.userList = Object.freeze(
+              JSON.parse(localStorage.getItem("userList"))
+            );
         })
         .catch(e => {
           this.errors.push(e);
@@ -123,11 +138,11 @@ export default {
     },
     goLeaderboard: function(event) {
       this.$router.push({
-          name: "LeaderboardPage",
-          query: {
-            page: 1
-          }
-        });
+        name: "LeaderboardPage",
+        query: {
+          page: 1
+        }
+      });
     },
     goHistory: function(event) {
       // `this` inside methods points to the Vue instance
@@ -141,7 +156,7 @@ export default {
         });
         this.user = "";
       } else {
-        if(this.user){
+        if (this.user) {
           alert("'" + this.user + "'" + " not found!");
           this.user = "";
         }

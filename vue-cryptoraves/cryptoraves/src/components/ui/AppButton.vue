@@ -1,7 +1,7 @@
 <template>
   <button
     class="app-button"
-    :class="{'app-button-gettoken':type1, 'app-button-gettoken1':type2, 'app-button-learnmore':type3, 'app-button-demo':type4, 'app-button-tweet':type5, 'app-button-return':type6}"
+    :class="{'app-button-gettoken':type1, 'app-button-gettoken1':type2, 'app-button-learnmore':type3, 'app-button-demo':type4, 'app-button-tweet':type5, 'app-button-return':type6, 'app-button-tipping':type7}"
     @click="buttonclick"
   >{{name}}</button>
 </template>
@@ -17,6 +17,7 @@ export default {
     type4: String,
     type5: String,
     type6: String,
+    type7: String,
     target: String
   },
   methods: {
@@ -29,13 +30,13 @@ export default {
           }
         });
       }
-      if (this.type4 === "true" && this.name == "See who is trending"){
+      if (this.type4 === "true" && this.name == "See who is trending") {
         this.$router.push({
-            name: "LeaderboardPage",
-            query: {
-              page: 1
-            }
-          });
+          name: "LeaderboardPage",
+          query: {
+            page: 1
+          }
+        });
       }
     }
   }
@@ -63,6 +64,22 @@ export default {
   width: 210px;
   height: 50px;
   font-size: 16px;
+  font-family: "Roboto Condensed";
+  color: #fff;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border-radius: 50px;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+}
+
+.app-button-tipping {
+  background-color: rgb(17, 99, 206);
+  width: 250px;
+  height: 65px;
+  font-size: 20px;
   font-family: "Roboto Condensed";
   color: #fff;
   font-weight: bold;

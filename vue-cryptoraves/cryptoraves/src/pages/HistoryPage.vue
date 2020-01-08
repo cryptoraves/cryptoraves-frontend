@@ -7,12 +7,15 @@
       <div v-else>
         <div class="history-title">
           <SectionHeader>{{this.platformHandle}}'s Transaction History</SectionHeader>
-          <div class="history-userimg">
-            <img
-              :src="this.userImageUrl"
-              title="Click to See Portfolio & Token Balance"
-              @click="goPortfolio(user)"
-            />
+          <div class="history-user">
+            <a href>Click for Portfolio Page</a>
+            <div class="history-userimg">
+              <img
+                :src="this.userImageUrl"
+                title="Click to See Portfolio & Token Balance"
+                @click="goPortfolio(user)"
+              />
+            </div>
           </div>
           <div class="elastic-arrow">
             <img src="../assets/gif/elasticrightarrow.gif" alt />
@@ -71,13 +74,15 @@
                   />
                 </td>
                 <td>
-                  <img v-if="item.ticker"
+                  <img
+                    v-if="item.ticker"
                     class="table-img"
                     :src="item.tokenBrandImageUrl"
                     :title="item.ticker"
                     @click="getHistory(item.tokenBrand, 0)"
                   />
-                  <img v-else
+                  <img
+                    v-else
                     class="table-img"
                     :src="item.tokenBrandImageUrl"
                     :title="item.tokenBrand"
@@ -88,7 +93,6 @@
                   <div>{{item.amount | comma}}</div>
                 </td>
                 <td>
-                  
                   <img
                     v-if="!item.userTo.includes('Export To Mainnet')"
                     class="table-img"
@@ -198,10 +202,10 @@ export default {
       }
     }
 
-    if(window.location.host.split(':')[0] == 'cryptoraves.space'){
+    if (window.location.host.split(":")[0] == "cryptoraves.space") {
       this.$ga.page("/");
     }
-    
+
     // this.initialPagePtr = localStorage.getItem("transactionPageNum") || 0;
     // this.initFlag = localStorage.getItem("transactionFlag") || 0;
     // this.earliestDatetime = localStorage.getItem("earliestDatetime");
@@ -255,7 +259,6 @@ export default {
             // localStorage.setItem("latestDatetime", this.latestDatetime);
             // localStorage.setItem("transactionFlag", initFlag);
             // localStorage.setItem("transactionPageNum", this.initialPagePtr);
-
           })
           .catch(e => {
             console.log(e);
@@ -400,12 +403,14 @@ export default {
 .history-title {
   position: relative;
 }
-
-.history-userimg {
+.history-user {
   position: absolute;
-  background: white;
   top: 50%;
   left: 0;
+  text-align: center;
+}
+.history-userimg {
+  background: white;
   display: flex;
   margin: auto;
   width: 120px;
@@ -557,9 +562,8 @@ tr:nth-child(even) {
   table {
     min-width: 1000px;
   }
-  .history-userimg {
+  .history-user {
     position: relative;
-    margin-top: 50px;
     margin-bottom: -110px;
     z-index: 2;
   }

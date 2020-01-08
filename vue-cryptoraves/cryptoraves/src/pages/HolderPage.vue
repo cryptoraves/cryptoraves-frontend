@@ -116,7 +116,7 @@ import SectionHeader from "../components/ui/SectionHeader";
 const Record = 20;
 
 export default {
-  name: "PortfolioPage",
+  name: "HolderPage",
   components: {
     SectionHeader
   },
