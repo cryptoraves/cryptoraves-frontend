@@ -16,16 +16,30 @@
           >
             <div class="confirmation-userfromimage">
               <img
+                v-if="!this.item.userFromTitle"
                 :src="this.item.userFromImageUrl"
                 :title="item.userFrom"
                 @click="goHistory(item.userFrom)"
               />
+              <img
+                v-else
+                :src="this.item.userFromImageUrl"
+                :title="this.item.userFromTitle"
+                @click="goHistory(item.userFrom)"
+              />
             </div>
             <div
+              v-if="!this.item.userFromTitle"
               class="confirmation-userFromTo"
               @click="goHistory(item.userFrom)"
               :title="item.userFrom"
             >{{this.item.userFrom}}</div>
+            <div
+              v-else
+              class="confirmation-userFromTo"
+              @click="goHistory(item.userFrom)"
+              :title="this.item.userFromTitle"
+            >{{this.item.userFromTitle}}</div>
           </div>
           <div v-else class="confirmation-fromsection col-lg-4 col-md-4 col-sm-4">
             <div class="launch-userfromimage">
