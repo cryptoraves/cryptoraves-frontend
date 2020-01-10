@@ -106,7 +106,7 @@
           </div>
         </FaqSection>
         <FaqSection>
-          <div slot="title">What is a “Hodler”?</div>
+          <div id="hodler" slot="title">What is a “Hodler”?</div>
           <div slot="answer">
             A “hodler” is any other Cryptoraves user who has your personalized
             token in their portfolio.
@@ -121,7 +121,7 @@
         </FaqSection>
         <FaqSection>
           <div slot="title">What is the Cryptoraves Privacy Policy?</div>
-          <div id="faq" slot="answer">
+          <div id="privacy" slot="answer">
             By Tweeting:
             <a href="https://ctt.ac/9FQa1" target="_blank">@cryptoraves #DropMyCrypto</a>, or by Tweeting any command request tagging @cryptoraves, you
             agree to our Privacy Policy, as follows:
@@ -201,12 +201,17 @@ export default {
   },
   mounted: function() {
     this.$nextTick(function() {
-      if (!this.$route.query.top)
+      if (this.$route.query.target == "top") window.scrollTo(0, 0);
+      else if (this.$route.query.target == "privacy")
         window.scrollTo(
           0,
-          this.getOffsetLeft(document.getElementById("faq")) - 150
+          this.getOffsetLeft(document.getElementById("privacy")) - 150
         );
-      else window.scrollTo(0, 0);
+      else if (this.$route.query.target == "hodler")
+        window.scrollTo(
+          0,
+          this.getOffsetLeft(document.getElementById("hodler")) - 100
+        );
     });
   },
   created() {

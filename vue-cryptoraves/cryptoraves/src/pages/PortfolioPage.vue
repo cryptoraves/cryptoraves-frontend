@@ -10,19 +10,6 @@
           <div class="portfolio-subtitle">
             <div class="portfolio-subtitle-details">
               <div
-                title="Remaining personal tokens available to distribute."
-              >Token Balance: {{ this.tokenBalance | comma }}</div>
-
-              <div
-                title="Total personal tokens given by this user."
-              >Tokens Distributed: {{ this.totalDistributed | comma }}</div>
-
-              <div
-                title="Percentage remaining"
-              >Tokens Left to Share: {{ this.tokenBalancePercentage }}%</div>
-
-              <div
-                class="tr-orange-color"
                 title="The sum of jointly-held tokens between this user and others."
               >Total Reciprocated: {{ this.totalReciprocated | comma }}</div>
             </div>
@@ -35,18 +22,29 @@
               </span>
             </div>
           </div>
-          <div class="portfolio-userimg">
-            <img
-              :src="this.userImageUrl"
-              title="Click to See Transaction History"
-              @click="goHistory(user)"
-            />
+          <div class="portfolio-user">
+            <div
+              class="portfolio-userlink"
+              title="Click to See Hodler's Page"
+              @click="goHodler(user)"
+            >Click for Hodler's Page</div>
+            <div class="portfolio-userimg">
+              <img
+                :src="this.userImageUrl"
+                title="Click to See Hodler's Page"
+                @click="goHodler(user)"
+              />
+            </div>
           </div>
         </div>
 
         <div class="table-section row">
           <table>
             <thead>
+              <td colspan="2">
+                Token Balance : {{this.tokenBalance}}
+                <div>Tokens Left to Share : {{this.tokenBalancePercentage}}%</div>
+              </td>
               <tr>
                 <th scope="col">Token Brand</th>
                 <th scope="col">Token Holdings</th>
@@ -65,7 +63,6 @@
                   <img
                     v-else
                     class="table-img"
-                    :src="item.tokenBrandImageUrl"
                     :title="item.tokenBrand"
                     @click="goAnother(item.tokenBrand)"
                   />
@@ -98,10 +95,7 @@
           </div>
         </div>
         <div class="row">
-          <div
-            class="history-link"
-            @click="goHistory(user)"
-          >Link to {{this.user}}'s Transaction History Page.</div>
+          <div class="history-link" @click="goHodler(user)">Link to {{this.user}}'s Hodler's Page.</div>
         </div>
       </div>
     </div>
@@ -126,6 +120,7 @@ export default {
       tableRows: [],
       rowCount: 0,
       tokenBalance: "0",
+      totalReciprocated: 3,
       tokenBalancePercentage: 0,
       totalDistributed: 0,
       totalHoldings: 0,
@@ -211,6 +206,10 @@ export default {
           console.log(e);
         });
     },
+    goHodler(user) {
+      this.$root.$emit("changeUser", user);
+      this.$router.push({ name: "HodlerPage", query: { user: user } });
+    },
     goAnother(user) {
       if (this.user !== user) {
         this.showLoading = true;
@@ -287,11 +286,24 @@ export default {
 .portfolio-loading-img img {
   margin: auto;
 }
-.portfolio-userimg {
+.portfolio-user {
   position: absolute;
-  background: white;
-  top: 50%;
+  top: 70px;
   left: 0;
+  text-align: center;
+}
+.portfolio-userlink {
+  margin: 10px auto 10px auto;
+  font-family: "Montserrat";
+  font-size: 15px;
+  color: royalblue;
+  text-decoration: underline;
+}
+.portfolio-userlink:hover {
+  cursor: pointer;
+}
+.portfolio-userimg {
+  background: white;
   display: flex;
   margin: auto;
   width: 120px;
@@ -352,12 +364,25 @@ table th {
   padding-top: 8px;
   padding-bottom: 8px;
 }
-table thead tr {
+table thead tr,
+td {
   height: 60px;
   color: rgb(0, 38, 101);
-  background: lightgrey;
   font-weight: bold;
   font-size: 20px;
+}
+table thead td {
+  background-color: lightblue;
+  position: relative;
+}
+table thead td div {
+  position: absolute;
+  top: 40%;
+  right: 10px;
+  font-size: 10px;
+}
+table thead tr {
+  background: lightgrey;
 }
 
 table tbody tr {
@@ -381,7 +406,7 @@ table td.r,
 table th.r {
   text-align: center;
 }
-tr:nth-child(even) {
+table tbody tr:nth-child(even) {
   background-color: rgb(246, 250, 251);
 }
 .table-img {
@@ -416,10 +441,9 @@ tr:nth-child(even) {
   color: rgb(0, 38, 101);
 }
 @media only screen and (max-width: 767px) {
-  .portfolio-userimg {
+  .portfolio-user {
     position: relative;
-    margin-top: 50px;
-    margin-bottom: -110px;
+    margin-bottom: -40px;
     z-index: 2;
   }
   .portfolio-subtitle-holding {
@@ -428,6 +452,11 @@ tr:nth-child(even) {
   }
   .portfolio-subtitle-holding span {
     transform: none;
+  }
+
+  table thead td div {
+    position: relative;
+    margin-top: -20px;
   }
 }
 @media only screen and (max-width: 410px) {

@@ -8,7 +8,11 @@
         <div class="history-title">
           <SectionHeader>{{this.platformHandle}}'s Transaction History</SectionHeader>
           <div class="history-user">
-            <a href>Click for Portfolio Page</a>
+            <div
+              class="history-userlink"
+              title="Click to See Portfolio & Token Balance"
+              @click="goPortfolio(user)"
+            >Click for Portfolio Page</div>
             <div class="history-userimg">
               <img
                 :src="this.userImageUrl"
@@ -405,10 +409,22 @@ export default {
 }
 .history-user {
   position: absolute;
-  top: 50%;
+  top: 70px;
   left: 0;
   text-align: center;
 }
+.history-userlink {
+  margin: 10px auto 10px auto;
+  font-family: "Montserrat";
+  font-size: 15px;
+  color: royalblue;
+  text-decoration: underline;
+}
+.history-userlink:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 .history-userimg {
   background: white;
   display: flex;
@@ -420,6 +436,7 @@ export default {
   animation: avatar-from-effect 2s infinite;
   transition: all 0.5s ease-out;
 }
+
 @keyframes avatar-from-effect {
   0% {
     box-shadow: 0 0 0 0px rgba(205, 136, 57, 0.8);
@@ -550,7 +567,7 @@ tr:nth-child(even) {
 .elastic-arrow {
   display: none;
   position: absolute;
-  bottom: 0;
+  bottom: -70px;
   right: 0;
   z-index: 2;
 }
@@ -564,7 +581,7 @@ tr:nth-child(even) {
   }
   .history-user {
     position: relative;
-    margin-bottom: -110px;
+    margin-bottom: -40px;
     z-index: 2;
   }
   .elastic-arrow {

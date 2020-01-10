@@ -1,46 +1,44 @@
 <template>
-  <div class="portfolio-page">
+  <div class="hodler-page">
     <div class="container">
-      <div v-if="showLoading" class="portfolio-loading-img">
+      <div v-if="showLoading" class="hodler-loading-img">
         <img src="../assets/gif/loading.gif" alt />
       </div>
       <div v-else>
-        <div class="portfolio-title">
-          <SectionHeader :user="this.user">{{this.user}}'s Portfolio Page</SectionHeader>
-          <div class="portfolio-subtitle">
-            <div class="portfolio-subtitle-details">
+        <div class="hodler-title">
+          <SectionHeader :user="this.user">{{this.user}}'s Hodler's Page</SectionHeader>
+          <div class="hodler-subtitle">
+            <div class="hodler-subtitle-details">
               <div
-                title="Remaining personal tokens available to distribute."
-              >Token Balance: {{ this.tokenBalance | comma }}</div>
-
+                class="hodler-subtitle-details-link"
+                @click="goHodlerFaq"
+              >What the heck is a hodler, anyway?</div>
               <div
-                title="Total personal tokens given by this user."
-              >Tokens Distributed: {{ this.totalDistributed | comma }}</div>
-
-              <div
-                title="Percentage remaining"
-              >Tokens Left to Share: {{ this.tokenBalancePercentage }}%</div>
-
-              <div
-                class="tr-orange-color"
                 title="The sum of jointly-held tokens between this user and others."
               >Total Reciprocated: {{ this.totalReciprocated | comma }}</div>
             </div>
             <div
-              class="portfolio-subtitle-holding"
+              class="hodler-subtitle-holding"
               title="Total tokens from others held in this portfolio."
             >
               <span>
-                <b>TOTAL Token Holdings: {{ this.totalHoldings | comma }}</b>
+                <b>TOTAL Token Distributed: {{ this.totalDistributed | comma }}</b>
               </span>
             </div>
           </div>
-          <div class="portfolio-userimg">
-            <img
-              :src="this.userImageUrl"
+          <div class="hodler-user">
+            <div
+              class="hodler-userlink"
               title="Click to See Transaction History"
               @click="goHistory(user)"
-            />
+            >Click for Transactions</div>
+            <div class="hodler-userimg">
+              <img
+                :src="this.userImageUrl"
+                title="Click to See Transaction History"
+                @click="goHistory(user)"
+              />
+            </div>
           </div>
         </div>
 
@@ -48,8 +46,8 @@
           <table>
             <thead>
               <tr>
-                <th scope="col">Token Brand</th>
-                <th scope="col">Token Holdings</th>
+                <th scope="col">Hodler's</th>
+                <th scope="col">Tokens Distributed</th>
               </tr>
             </thead>
             <tbody>
@@ -60,25 +58,25 @@
                     class="table-img"
                     :src="item.tokenBrandImageUrl"
                     :title="item.ticker"
-                    @click="goAnother(item.tokenBrand)"
+                    @click="goAnother(item.hodler)"
                   />
                   <img
                     v-else
                     class="table-img"
                     :src="item.tokenBrandImageUrl"
-                    :title="item.tokenBrand"
-                    @click="goAnother(item.tokenBrand)"
+                    :title="item.hodler"
+                    @click="goAnother(item.hodler)"
                   />
                 </td>
                 <td>
-                  <div>{{item.balance | comma}}</div>
+                  <div>{{item.tokensDistributed | comma}}</div>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
         <div class="row">
-          <div class="portfolio-pagination">
+          <div class="hodler-pagination">
             <span
               v-on:click="goPrev"
               class="btn btnpagination"
@@ -116,7 +114,7 @@ import SectionHeader from "../components/ui/SectionHeader";
 const Record = 20;
 
 export default {
-  name: "HolderPage",
+  name: "HodlerPage",
   components: {
     SectionHeader
   },
@@ -125,12 +123,7 @@ export default {
       user: "",
       tableRows: [],
       rowCount: 0,
-      tokenBalance: "0",
-      tokenBalancePercentage: 0,
       totalDistributed: 0,
-      totalHoldings: 0,
-      earliestDatetime: "",
-      latestDatetime: "",
       initialPagePtr: 1,
       visibleNext: true,
       visiblePrev: true,
@@ -149,35 +142,43 @@ export default {
     if (window.location.host.split(":")[0] == "cryptoraves.space") {
       this.$ga.page("/");
     }
-    this.getPortfolio(this.user, this.initialPagePtr);
+    this.getHodler(this.user, this.initialPagePtr);
   },
   beforeRouteUpdate(to, from, next) {
     // just use `this`
     this.user = to.query.user;
 
     if (from.query.user != this.user) {
-      this.getPortfolio(this.user, 0);
+      this.getHodler(this.user, 0);
     }
 
     next();
   },
   methods: {
+    goHodlerFaq: function(event) {
+      this.$router.push({
+        name: "Faq",
+        query: {
+          target: "hodler"
+        }
+      });
+    },
     goNext() {
       if (this.visibleNext) {
         this.showLoading = true;
-        this.getPortfolio(this.user, this.initialPagePtr + 1);
+        this.getHodler(this.user, this.initialPagePtr + 1);
       }
     },
     goPrev() {
       if (this.visiblePrev) {
         this.showLoading = true;
-        this.getPortfolio(this.user, this.initialPagePtr - 1);
+        this.getHodler(this.user, this.initialPagePtr - 1);
       }
     },
-    getPortfolio(user, page) {
+    getHodler(user, page) {
       axios
         .get(
-          "https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=portfolioPage&userName=" +
+          "https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=hodlersPage&userName=" +
             user +
             "&page=" +
             page
@@ -187,20 +188,15 @@ export default {
           let res = response.data;
           this.user = res.platformHandle;
           this.tableRows = _.cloneDeep(res.tableRows);
-          this.ravity = res.ravity;
           this.rowCount = res.rowCount;
-          this.tokenBalance = res.tokenBalance;
           this.totalDistributed = res.totalDistributed;
-          this.totalReciprocated = res.totalReciprocated;
-          this.tokenBalancePercentage = res.tokenBalancePercentage;
-          this.totalHoldings = res.totalHoldings;
           this.initialPagePtr = page;
           this.visiblePrev = res.prev ? true : false;
           this.visibleNext = res.next ? true : false;
           this.userImageUrl = res.userImageUrl;
           this.showLoading = false;
           this.$router.push({
-            path: "portfolio",
+            path: "hodler",
             query: {
               user: user,
               page: page
@@ -248,23 +244,29 @@ export default {
 };
 </script>
 <style scoped>
-.portfolio-title {
+.hodler-title {
   position: relative;
 }
-.portfolio-subtitle {
+.hodler-subtitle {
   color: rgb(0, 38, 101);
   font-family: "Montserrat";
   text-align: center;
   line-height: 2em;
 }
-.portfolio-subtitle-details {
+.hodler-subtitle-details {
   margin-top: 20px;
   color: rgb(0, 38, 101);
   font-family: "Montserrat";
   text-align: center;
   line-height: 1.2em;
 }
-.portfolio-subtitle-holding {
+.hodler-subtitle-details-link {
+  text-decoration: underline;
+  cursor: pointer;
+  margin-bottom: 20px;
+  font-size: 15px;
+}
+.hodler-subtitle-holding {
   display: flex;
   margin-top: 100px;
   margin-bottom: -90px;
@@ -274,24 +276,37 @@ export default {
   line-height: 1.2em;
   justify-content: center;
 }
-.portfolio-subtitle-holding span {
+.hodler-subtitle-holding span {
   transform: translate(70%, 0);
 }
-.portfolio-page {
+.hodler-page {
   margin-bottom: 50px;
 }
-.portfolio-loading-img {
+.hodler-loading-img {
   display: flex;
   height: calc(100vh - 370px);
 }
-.portfolio-loading-img img {
+.hodler-loading-img img {
   margin: auto;
 }
-.portfolio-userimg {
+.hodler-user {
   position: absolute;
-  background: white;
-  top: 50%;
+  top: 70px;
   left: 0;
+  text-align: center;
+}
+.hodler-userlink {
+  margin: 10px auto 10px auto;
+  font-family: "Montserrat";
+  font-size: 15px;
+  color: royalblue;
+  text-decoration: underline;
+}
+.hodler-userlink:hover {
+  cursor: pointer;
+}
+.hodler-userimg {
+  background: white;
   display: flex;
   margin: auto;
   width: 120px;
@@ -310,23 +325,23 @@ export default {
   }
 }
 
-.portfolio-userimg:hover {
+.hodler-userimg:hover {
   cursor: pointer;
   transition: all 0.5s ease-out;
   transform: translateY(-0.5em);
 }
 
-.portfolio-userimg:active {
+.hodler-userimg:active {
   transform: translateY(0.5em);
 }
 
-.portfolio-userimg img {
+.hodler-userimg img {
   width: 110px;
   height: 110px;
   border-radius: 50%;
   margin: auto;
 }
-.portfolio-userimg img:hover {
+.hodler-userimg img:hover {
   opacity: 0.7;
   cursor: pointer;
 }
@@ -409,24 +424,23 @@ tr:nth-child(even) {
   margin: auto;
   cursor: pointer;
 }
-.portfolio-pagination {
+.hodler-pagination {
   margin: 10px auto 50px auto;
   font-weight: bold;
   font-size: 20px;
   color: rgb(0, 38, 101);
 }
 @media only screen and (max-width: 767px) {
-  .portfolio-userimg {
+  .hodler-user {
     position: relative;
-    margin-top: 50px;
-    margin-bottom: -110px;
+    margin-bottom: -40px;
     z-index: 2;
   }
-  .portfolio-subtitle-holding {
+  .hodler-subtitle-holding {
     margin-top: 30px;
     margin-bottom: 0px;
   }
-  .portfolio-subtitle-holding span {
+  .hodler-subtitle-holding span {
     transform: none;
   }
 }
@@ -434,11 +448,11 @@ tr:nth-child(even) {
   .history-link {
     font-size: 1em;
   }
-  .portfolio-userimg {
+  .hodler-userimg {
     width: 80px;
     height: 80px;
   }
-  .portfolio-userimg img {
+  .hodler-userimg img {
     width: 70px;
     height: 70px;
   }
@@ -450,7 +464,7 @@ tr:nth-child(even) {
     height: 55px;
     font-size: 12px;
   }
-  .portfolio-pagination {
+  .hodler-pagination {
     font-size: 15px;
   }
   .table-img {

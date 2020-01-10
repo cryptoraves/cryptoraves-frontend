@@ -53,7 +53,7 @@ export default {
       this.$router.push({
         name: "Faq",
         query: {
-          top: true
+          target: "top"
         }
       });
     },

@@ -76,24 +76,21 @@ export default {
               "userList",
               JSON.stringify(response.data.userList)
             );
-            this.userList = response.data.userList
+            this.userList = response.data.userList;
           })
           .catch(e => {
             this.errors.push(e);
           });
-      }else{
+      } else {
         this.userList = JSON.parse(localStorage.getItem("userList"));
       }
-      
     },
     goHistory: function(event) {
       // `this` inside methods points to the Vue instance
       if (this.userList.includes(this.user)) {
-
         this.$root.$emit("changeUser", this.user);
         document.getElementById("autoTokenSelect1").blur();
 
-        
         this.$router.push({
           name: "HistoryPage",
           query: {

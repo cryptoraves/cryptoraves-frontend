@@ -5,7 +5,7 @@ import TweetDemo from "@/pages/TweetDemoPage/TweetDemoPage";
 import ConfirmationPage from "@/pages/ConfirmationPage";
 import HistoryPage from "@/pages/HistoryPage";
 import PortfolioPage from "@/pages/PortfolioPage";
-import HolderPage from "@/pages/HolderPage";
+import HodlerPage from "@/pages/HodlerPage";
 import LeaderboardPage from "@/pages/LeaderboardPage";
 import Faq from "@/components/Faq";
 import NotFound from "@/pages/NotFound";
@@ -27,7 +27,7 @@ export default new Router({
       component: TweetDemo
     },
     {
-      path: "/faq/:top?",
+      path: "/faq/:target?",
       name: "Faq",
       component: Faq
     },
@@ -42,9 +42,9 @@ export default new Router({
       component: PortfolioPage
     },
     {
-      path: "/holder/:user?",
-      name: "HolderPage",
-      component: HolderPage
+      path: "/hodler/:user?",
+      name: "HodlerPage",
+      component: HodlerPage
     },
     {
       path: "/leaderboard/:page?",
