@@ -41,17 +41,18 @@
         <div class="table-section row">
           <table>
             <thead>
-              <td colspan="2">
-                Token Balance : {{this.tokenBalance}}
-                <div>Tokens Left to Share : {{this.tokenBalancePercentage}}%</div>
-              </td>
               <tr>
                 <th scope="col">Token Brand</th>
                 <th scope="col">Token Holdings</th>
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(item,index) in tableRows" :index="index" :key="item.txnId">
+              <tr
+                v-for="(item,index) in tableRows"
+                :index="index"
+                :key="item.txnId"
+                :class="[user === item.tokenBrand? 'tr-lightblue-color':'']"
+              >
                 <td>
                   <img
                     v-if="item.ticker"
@@ -67,8 +68,13 @@
                     @click="goAnother(item.tokenBrand)"
                   />
                 </td>
-                <td>
+                <td :class="[user === item.tokenBrand? 'td-position-relative':'']">
                   <div>{{item.balance | comma}}</div>
+                  <div
+                    v-if="user === item.tokenBrand"
+                    class="td-position-absolute"
+                    title="Tokens Left To Share"
+                  >{{tokenBalancePercentage}}%</div>
                 </td>
               </tr>
             </tbody>
@@ -364,25 +370,12 @@ table th {
   padding-top: 8px;
   padding-bottom: 8px;
 }
-table thead tr,
-td {
+table thead tr {
+  background: lightgrey;
   height: 60px;
   color: rgb(0, 38, 101);
   font-weight: bold;
   font-size: 20px;
-}
-table thead td {
-  background-color: lightblue;
-  position: relative;
-}
-table thead td div {
-  position: absolute;
-  top: 40%;
-  right: 10px;
-  font-size: 10px;
-}
-table thead tr {
-  background: lightgrey;
 }
 
 table tbody tr {
@@ -426,6 +419,20 @@ table tbody tr:nth-child(even) {
 .tr-orange-color {
   color: peru;
 }
+.tr-lightblue-color {
+  background-color: lightblue;
+}
+.td-position-relative {
+  position: relative;
+}
+.td-position-absolute {
+  position: absolute;
+  top: 30%;
+  right: 10px;
+}
+.td-position-absolute:hover {
+  cursor: pointer;
+}
 .history-link {
   font-size: 1.5em;
   font-family: "Montserrat";
@@ -453,7 +460,11 @@ table tbody tr:nth-child(even) {
   .portfolio-subtitle-holding span {
     transform: none;
   }
-
+  .td-position-absolute {
+    position: relative;
+    top: 0;
+    right: 0;
+  }
   table thead td div {
     position: relative;
     margin-top: -20px;

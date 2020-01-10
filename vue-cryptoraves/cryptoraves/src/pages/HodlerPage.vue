@@ -51,7 +51,12 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(item,index) in tableRows" :index="index" :key="item.txnId">
+              <tr
+                v-for="(item,index) in tableRows"
+                :index="index"
+                :key="item.txnId"
+                :class="[user === item.hodler? 'tr-lightblue-color':'']"
+              >
                 <td>
                   <img
                     v-if="item.ticker"
@@ -415,6 +420,9 @@ tr:nth-child(even) {
 }
 .tr-orange-color {
   color: peru;
+}
+.tr-lightblue-color {
+  background-color: lightblue;
 }
 .history-link {
   font-size: 1.5em;

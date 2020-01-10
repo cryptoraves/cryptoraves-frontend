@@ -5,19 +5,14 @@
         <div class="d-flex col-sm-12 col-lg-2">
           <div class="app-header-logoarea">
             <a href="/">
-              <img
-                src="../../assets/img/cryptoraves_Horozontal Alignment_Full Color_JPG.png"
-                alt
-              />
+              <img src="../../assets/img/cryptoraves_Horozontal Alignment_Full Color_JPG.png" alt />
             </a>
           </div>
         </div>
         <div class="d-flex d-flex-right col-lg-4 col-sm-12">
           <!-- ---------------------------------------------------------------------------------------- -->
           <!-- LeaderBoard after Date Ready -->
-          <div class="app-header-leaderboard" @click="goLeaderboard">
-            LEADERBOARD
-          </div>
+          <div class="app-header-leaderboard" @click="goLeaderboard">LEADERBOARD</div>
           <!-- ---------------------------------------------------------------------------------------- -->
         </div>
         <div class="col-lg-6 col-sm-12 text-right">
@@ -33,12 +28,7 @@
                 list="mylist"
               />
               <datalist id="mylist" v-if="user.length > 4">
-                <option
-                  v-bind:key="item"
-                  v-for="item in userList"
-                  :value="item"
-                  >{{ item }}</option
-                >
+                <option v-bind:key="item" v-for="item in userList" :value="item">{{ item }}</option>
               </datalist>
               <div class="app-header-icon" @click="goHistory">
                 <i class="fa fa-search"></i>
