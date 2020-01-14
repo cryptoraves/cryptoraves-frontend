@@ -26,26 +26,33 @@
               <div class="d-flex app-header-searchbar">
                 <input
                   id="autoTokenSelect"
-                  :value="this.user"
                   type="text"
-                  @change="goHistory"
+                  v-model="user"
                   @input="debounceSearch"
+                  @keyup.enter="onEnter"
+                  @keyup.down="onArrowDown"
+                  @keyup.up="onArrowUp"
+                  @focus="inputFocused"
                   class="app-header-input"
                   placeholder="Lookup Twitter @username"
                 />
-
-                <div class="app-header-icon" @click="goHistory">
+                <div class="app-header-icon" @click="goHistory(user)">
                   <i class="fa fa-search"></i>
                 </div>
               </div>
-              <div v-if="this.user.length > 1" class="app-header-search-result">
+              <div
+                id="searchResult"
+                v-show="openSearch"
+                class="app-header-search-result"
+              >
                 <div
-                  v-for="(user, index) in filteredList"
+                  v-for="(filteredUser, index) in result"
                   :key="index"
                   class="app-header-search-result-item"
-                  @click="goHistory(user)"
+                  @click="setResult(filteredUser)"
+                  :class="{ 'is-active': index === arrowCounter }"
                 >
-                  {{ user }}
+                  {{ filteredUser }}
                 </div>
               </div>
             </div>
@@ -81,9 +88,12 @@ export default {
   },
   data() {
     return {
+      openSearch: false,
       user: "",
-      debounce: null,
-      userList: []
+      userList: [],
+      result: [],
+      arrowCounter: 0,
+      debounce: null
     };
   },
   created() {
@@ -91,6 +101,12 @@ export default {
     this.$root.$on("changeUser", user => {
       this.user = "";
     });
+  },
+  mounted() {
+    document.addEventListener("click", this.handleClickOutside);
+  },
+  destroyed() {
+    document.removeEventListener("click", this.handleClickOutside);
   },
   methods: {
     getUserList() {
@@ -142,12 +158,6 @@ export default {
           this.errors.push(e);
         });
     },
-    debounceSearch(event) {
-      clearTimeout(this.debounce);
-      this.debounce = setTimeout(() => {
-        this.user = event.target.value;
-      }, 600);
-    },
     goLeaderboard: function(event) {
       this.$router.push({
         name: "LeaderboardPage",
@@ -156,9 +166,61 @@ export default {
         }
       });
     },
+    filteredList() {
+      this.result = this.userList.filter(user => {
+        return user.toLowerCase().indexOf(this.user.toLowerCase()) > -1;
+      });
+    },
+    debounceSearch(event) {
+      clearTimeout(this.debounce);
+      this.debounce = setTimeout(() => {
+        this.user = event.target.value;
+        if (this.user.length > 1) {
+          this.openSearch = true;
+          this.filteredList();
+        } else {
+          this.openSearch = false;
+        }
+      }, 600);
+    },
+    inputFocused(event) {
+      if (this.user.length > 1) {
+        this.openSearch = true;
+        this.filteredList();
+        this.arrowCounter = 0;
+      }
+    },
+    setResult(result) {
+      this.user = result;
+      this.arrowCounter = -1;
+      this.openSearch = false;
+    },
+    onArrowDown(event) {
+      if (this.arrowCounter < this.result.length - 1) {
+        this.arrowCounter = this.arrowCounter + 1;
+        this.user = this.result[this.arrowCounter];
+        document.getElementById("searchResult").scrollTop += 44;
+      }
+    },
+    onArrowUp(event) {
+      if (this.arrowCounter > 0) {
+        this.arrowCounter = this.arrowCounter - 1;
+        this.user = this.result[this.arrowCounter];
+        document.getElementById("searchResult").scrollTop -= 44;
+      }
+    },
+    onEnter(event) {
+      this.openSearch = false;
+      this.arrowCounter = 0;
+    },
+    handleClickOutside(evt) {
+      if (!this.$el.contains(evt.target)) {
+        this.openSearch = false;
+        this.arrowCounter = -1;
+      }
+    },
     goHistory: function(user) {
       // `this` inside methods points to the Vue instance
-      console.log(user);
       if (this.userList.includes(this.user)) {
         document.getElementById("autoTokenSelect").blur();
         this.$router.push({
@@ -173,13 +235,6 @@ export default {
           this.user = "";
         }
       }
-    }
-  },
-  computed: {
-    filteredList() {
-      return this.userList.filter(user => {
-        return user.toLowerCase().includes(this.user.toLowerCase());
-      });
     }
   }
 };
@@ -254,13 +309,12 @@ img {
   color: rgb(0, 38, 101);
 }
 .app-header-search-result {
-  z-index: 999999;
   position: absolute;
   border: 1px solid #d7d7d7;
   border-radius: 10px;
   background: white;
   width: 90%;
-  max-height: 500px;
+  max-height: 300px;
   overflow: auto;
   top: 105%;
   left: 5%;
@@ -274,7 +328,8 @@ img {
   cursor: pointer;
   padding: 10px;
 }
-.app-header-search-result-item:hover {
+.app-header-search-result-item:hover,
+.is-active {
   background: lightblue;
 }
 @media only screen and (max-width: 1200px) {
