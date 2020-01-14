@@ -170,6 +170,9 @@ export default {
       this.result = this.userList.filter(user => {
         return user.toLowerCase().indexOf(this.user.toLowerCase()) > -1;
       });
+      if (this.result.length == 0) {
+        this.result[0] = "No Result!!!";
+      }
     },
     debounceSearch(event) {
       clearTimeout(this.debounce);
