@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@trevoreyre/autocomplete-vue@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@trevoreyre/autocomplete-vue/-/autocomplete-vue-2.1.0.tgz#44f955a42481848ee7751e22513ef80ff4f896a1"
+  integrity sha512-N3qShgDwNgoHsvQ1X4iF2aKJ8vhGMz+xzmQbKCALu1PY4M827l5r62vcE7Gp/CyVeYumeFwC5OfVJyozDfkjLg==
+
 "@types/node@^8.0.7":
   version "8.10.43"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.10.43.tgz#8d3281a33c92a56038b05d9460a65bc1dcd5735b"

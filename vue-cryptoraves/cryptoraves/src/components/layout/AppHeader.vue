@@ -5,33 +5,48 @@
         <div class="d-flex col-sm-12 col-lg-2">
           <div class="app-header-logoarea">
             <a href="/">
-              <img src="../../assets/img/cryptoraves_Horozontal Alignment_Full Color_JPG.png" alt />
+              <img
+                src="../../assets/img/cryptoraves_Horozontal Alignment_Full Color_JPG.png"
+                alt
+              />
             </a>
           </div>
         </div>
         <div class="d-flex d-flex-right col-lg-4 col-sm-12">
           <!-- ---------------------------------------------------------------------------------------- -->
           <!-- LeaderBoard after Date Ready -->
-          <div class="app-header-leaderboard" @click="goLeaderboard">LEADERBOARD</div>
+          <div class="app-header-leaderboard" @click="goLeaderboard">
+            LEADERBOARD
+          </div>
           <!-- ---------------------------------------------------------------------------------------- -->
         </div>
         <div class="col-lg-6 col-sm-12 text-right">
           <div class="d-flex d-flex-right form-group mt-3">
-            <div class="d-flex app-header-searchbar">
-              <input
-                id="autoTokenSelect"
-                type="text"
-                v-model="user"
-                @change="goHistory"
-                class="app-header-input"
-                placeholder="Lookup Twitter @username"
-                list="mylist"
-              />
-              <datalist id="mylist" v-if="user.length > 4">
-                <option v-bind:key="item" v-for="item in userList" :value="item">{{ item }}</option>
-              </datalist>
-              <div class="app-header-icon" @click="goHistory">
-                <i class="fa fa-search"></i>
+            <div class="app-header-searchbar-container">
+              <div class="d-flex app-header-searchbar">
+                <input
+                  id="autoTokenSelect"
+                  :value="this.user"
+                  type="text"
+                  @change="goHistory"
+                  @input="debounceSearch"
+                  class="app-header-input"
+                  placeholder="Lookup Twitter @username"
+                />
+
+                <div class="app-header-icon" @click="goHistory">
+                  <i class="fa fa-search"></i>
+                </div>
+              </div>
+              <div v-if="this.user.length > 1" class="app-header-search-result">
+                <div
+                  v-for="(user, index) in filteredList"
+                  :key="index"
+                  class="app-header-search-result-item"
+                  @click="goHistory(user)"
+                >
+                  {{ user }}
+                </div>
               </div>
             </div>
 
@@ -67,6 +82,7 @@ export default {
   data() {
     return {
       user: "",
+      debounce: null,
       userList: []
     };
   },
@@ -126,6 +142,12 @@ export default {
           this.errors.push(e);
         });
     },
+    debounceSearch(event) {
+      clearTimeout(this.debounce);
+      this.debounce = setTimeout(() => {
+        this.user = event.target.value;
+      }, 600);
+    },
     goLeaderboard: function(event) {
       this.$router.push({
         name: "LeaderboardPage",
@@ -134,8 +156,9 @@ export default {
         }
       });
     },
-    goHistory: function(event) {
+    goHistory: function(user) {
       // `this` inside methods points to the Vue instance
+      console.log(user);
       if (this.userList.includes(this.user)) {
         document.getElementById("autoTokenSelect").blur();
         this.$router.push({
@@ -147,10 +170,16 @@ export default {
         this.user = "";
       } else {
         if (this.user) {
-          alert("'" + this.user + "'" + " not found!");
           this.user = "";
         }
       }
+    }
+  },
+  computed: {
+    filteredList() {
+      return this.userList.filter(user => {
+        return user.toLowerCase().includes(this.user.toLowerCase());
+      });
     }
   }
 };
@@ -186,6 +215,10 @@ img {
 .app-header-leaderboard:hover {
   color: blue;
 }
+
+.app-header-searchbar-container {
+  position: relative;
+}
 .app-header-searchbar {
   border: 1px solid #d7d7d7;
   border-radius: 50px;
@@ -219,6 +252,30 @@ img {
 .app-header-icon:hover {
   cursor: pointer;
   color: rgb(0, 38, 101);
+}
+.app-header-search-result {
+  z-index: 999999;
+  position: absolute;
+  border: 1px solid #d7d7d7;
+  border-radius: 10px;
+  background: white;
+  width: 90%;
+  max-height: 500px;
+  overflow: auto;
+  top: 105%;
+  left: 5%;
+  text-align: left !important;
+  -webkit-box-shadow: 0px 1px 8px -1px rgba(17, 71, 235, 1);
+  -moz-box-shadow: 0px 1px 8px -1px rgba(17, 71, 235, 1);
+  box-shadow: 0px 1px 8px -1px rgba(17, 71, 235, 1);
+  transition: all 200ms ease-out;
+}
+.app-header-search-result-item {
+  cursor: pointer;
+  padding: 10px;
+}
+.app-header-search-result-item:hover {
+  background: lightblue;
 }
 @media only screen and (max-width: 1200px) {
   .app-header-leaderboard {
