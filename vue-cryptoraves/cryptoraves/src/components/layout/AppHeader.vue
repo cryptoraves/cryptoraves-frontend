@@ -181,6 +181,7 @@ export default {
         if (this.user.length > 1) {
           this.openSearch = true;
           this.filteredList();
+          this.arrowCounter = 0;
         } else {
           this.openSearch = false;
         }
