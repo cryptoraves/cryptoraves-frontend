@@ -179,9 +179,10 @@ export default {
       this.debounce = setTimeout(() => {
         this.user = event.target.value;
         if (this.user.length > 1) {
+          this.$emit("input", this.search);
           this.openSearch = true;
-          this.filteredList();
           this.arrowCounter = 0;
+          this.filteredList();
         } else {
           this.openSearch = false;
         }

@@ -9,7 +9,7 @@ import HodlerPage from "@/pages/HodlerPage";
 import LeaderboardPage from "@/pages/LeaderboardPage";
 import Faq from "@/components/Faq";
 import NotFound from "@/pages/NotFound";
-import PartnershipsPage from "@/pages/PartnershipsPage";
+import PartnershipsPage from "@/pages/PartnershipsPage/PartnershipsPage";
 
 Vue.use(Router);
 
