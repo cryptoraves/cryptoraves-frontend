@@ -64,6 +64,7 @@
                   <img
                     v-else
                     class="table-img"
+                    :src="item.tokenBrandImageUrl"
                     :title="item.tokenBrand"
                     @click="goAnother(item.tokenBrand)"
                   />
