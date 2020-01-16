@@ -3,7 +3,7 @@
     <SectionHeader>Withdrawing Tokens</SectionHeader>
     <div class="row withdrawing-section">
       <div class="col-lg-6 mt-2 d-flex">
-        <img src="../../assets/img/part-withdraw.png" />
+        <img src="../../assets/img/partnerships-2.png" />
       </div>
       <div class="col-lg-6 mt-5 mb-5">
         <div
@@ -37,13 +37,21 @@ export default {
 }
 img {
   margin: auto;
-  width: 450px;
+  width: 500px;
 }
 .withdrawing-content-1 {
-  font-style: italic;
-  font-size: 25px;
-  font-weight: 700;
-  line-height: 1.333;
+  font-size: 18px;
+  line-height: 1.5;
   text-align: left;
+}
+@media only screen and (max-width: 1199px) {
+  img {
+    width: 450px;
+  }
+}
+@media only screen and (max-width: 580px) {
+  img {
+    width: 300px;
+  }
 }
 </style>

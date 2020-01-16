@@ -6,11 +6,12 @@
       </div>
       <div v-else>
         <div class="portfolio-title">
-          <SectionHeader >Leaderboard</SectionHeader>
-          <div class="portfolio-subtitle">   
-            <a href="https://medium.com/@cryptoraves/how-to-grow-your-cryptoraves-token-score-84bc6b18554f">How is score calculated?</a>
+          <SectionHeader>Leaderboard</SectionHeader>
+          <div class="portfolio-subtitle">
+            <a
+              href="https://medium.com/@cryptoraves/how-to-grow-your-cryptoraves-token-score-84bc6b18554f"
+            >How is score calculated?</a>
           </div>
-          
         </div>
 
         <div class="table-section row">
@@ -19,17 +20,16 @@
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">User</th>
-                <th scope="col"></th>
+                <th scope="col">Tweet</th>
                 <th scope="col">Score</th>
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(item,index) in tableRows" :index="index">
+              <tr v-for="(item,index) in tableRows" :key="index">
                 <td>
                   <div>{{item.num}}</div>
                 </td>
                 <td>
-
                   <img
                     class="table-img"
                     :src="item.tokenBrandImageUrl"
@@ -72,7 +72,6 @@
             </span>
           </div>
         </div>
-       
       </div>
     </div>
   </div>
@@ -98,79 +97,74 @@ export default {
       initialPagePtr: 0,
       visibleNext: true,
       visiblePrev: true,
-      showLoading: true,
+      showLoading: true
     };
   },
   created() {
-    
     this.page = parseInt(this.$route.query.page);
 
-    if(!this.page){
-      this.page = 1
+    if (!this.page) {
+      this.page = 1;
     }
 
-    if(window.location.host.split(':')[0] == 'cryptoraves.space'){
+    if (window.location.host.split(":")[0] == "cryptoraves.space") {
       this.$ga.page("/");
-    }else{
-      console.log(window.location.host)
+    } else {
+      console.log(window.location.host);
     }
     this.getLeaderboard(this.page);
   },
-  
+
   methods: {
     goNext() {
       if (this.visibleNext) {
         this.showLoading = true;
-        this.page = this.page + 1
+        this.page = this.page + 1;
         this.getLeaderboard(this.page);
       }
     },
     goPrev() {
       if (this.visiblePrev) {
         this.showLoading = true;
-        this.page = this.page - 1
+        this.page = this.page - 1;
         this.getLeaderboard(this.page);
       }
     },
-    goTwitterProfile(handle){
-      handle=handle.replace('@','');
-      window.open('https://twitter.com/'+handle);
+    goTwitterProfile(handle) {
+      handle = handle.replace("@", "");
+      window.open("https://twitter.com/" + handle);
     },
     getLeaderboard(page) {
-     
-        axios
-          .get(
-            "https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=leaderboard&page=" +
-              page
-          )
-          .then(response => {
-
-            this.$router.push({
-                path: "leaderboard",
-                query: {
-                  page: page
-                }
-            });
-            // JSON responses are automatically parsed.
-            let res = response.data;
-            this.tableRows = _.cloneDeep(res.tableRows);
-            this.rowCount = res.rowCount;
-            
-            this.initialPagePtr = page;
-            this.visiblePrev = res.prev ? true : false;
-            this.visibleNext = res.next ? true : false;
-            this.showLoading = false;
-          })
-          .catch(e => {
-            console.log(e);
+      axios
+        .get(
+          "https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=leaderboard&page=" +
+            page
+        )
+        .then(response => {
+          this.$router.push({
+            path: "leaderboard",
+            query: {
+              page: page
+            }
           });
-      
+          // JSON responses are automatically parsed.
+          let res = response.data;
+          this.tableRows = _.cloneDeep(res.tableRows);
+          this.rowCount = res.rowCount;
+
+          this.initialPagePtr = page;
+          this.visiblePrev = res.prev ? true : false;
+          this.visibleNext = res.next ? true : false;
+          this.showLoading = false;
+        })
+        .catch(e => {
+          console.log(e);
+        });
     },
     goPortfolio(user) {
       this.$root.$emit("changeUser", user);
       this.$router.push({ name: "PortfolioPage", query: { user: user } });
-    },
-   
+    }
   }
 };
 </script>

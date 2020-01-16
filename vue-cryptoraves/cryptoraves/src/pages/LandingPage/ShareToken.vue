@@ -12,7 +12,7 @@
             Amplify your hearts. Give appreciation with a personal crypto
             touch. It feels good!
           </div>
-          <div class="space-20"></div>
+          <AppButton name="Token Sharing Guide" type7="true" target="tag"></AppButton>
           <div class="sharetoken-content-3">To share, just Tweet. Two ways.</div>
           <div class="space-10"></div>
           <div>

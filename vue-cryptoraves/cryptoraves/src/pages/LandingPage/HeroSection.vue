@@ -33,7 +33,7 @@
           </span>
           <br />
           <span v-on:click="goPartnership">
-            <AppButton name="New! Tipping" type7="true"></AppButton>
+            <TippingButton></TippingButton>
           </span>
         </div>
       </div>
@@ -43,10 +43,12 @@
 
 <script>
 import AppButton from "../../components/ui/AppButton";
+import TippingButton from "../../components/ui/TippingButton";
 export default {
   name: "HeroSection",
   components: {
-    AppButton
+    AppButton,
+    TippingButton
   },
   methods: {
     goFaqTop: function(event) {

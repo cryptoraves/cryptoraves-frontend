@@ -6,7 +6,7 @@
       </div>
       <div v-else>
         <div class="hodler-title">
-          <SectionHeader :user="this.user">{{this.user}}'s Hodler's Page</SectionHeader>
+          <SectionHeader :user="user">Hodler's of {{user}}'s Tokens</SectionHeader>
           <div class="hodler-subtitle">
             <div class="hodler-subtitle-details">
               <div
@@ -15,14 +15,14 @@
               >What the heck is a hodler, anyway?</div>
               <div
                 title="The sum of jointly-held tokens between this user and others."
-              >Total Reciprocated: {{ this.totalReciprocated | comma }}</div>
+              >Total Reciprocated: {{ totalReciprocated | comma }}</div>
             </div>
             <div
               class="hodler-subtitle-holding"
               title="Total tokens from others held in this portfolio."
             >
               <span>
-                <b>TOTAL Token Distributed: {{ this.totalDistributed | comma }}</b>
+                <b>TOTAL {{user}}’s Tokens Distributed: {{ totalDistributed | comma }}</b>
               </span>
             </div>
           </div>
@@ -34,7 +34,7 @@
             >Click for Transactions</div>
             <div class="hodler-userimg">
               <img
-                :src="this.userImageUrl"
+                :src="userImageUrl"
                 title="Click to See Transaction History"
                 @click="goHistory(user)"
               />
@@ -46,8 +46,8 @@
           <table>
             <thead>
               <tr>
-                <th scope="col">Hodler's</th>
-                <th scope="col">Tokens Distributed</th>
+                <th scope="col">Hodler</th>
+                <th scope="col">Token Amount Held</th>
               </tr>
             </thead>
             <tbody>
@@ -104,7 +104,7 @@
           <div
             class="history-link"
             @click="goHistory(user)"
-          >Link to {{this.user}}'s Transaction History Page.</div>
+          >Link to {{user}}'s Transaction History Page.</div>
         </div>
       </div>
     </div>
@@ -115,7 +115,6 @@
 import axios from "axios";
 import _ from "lodash";
 import SectionHeader from "../components/ui/SectionHeader";
-
 const Record = 20;
 
 export default {
@@ -128,6 +127,7 @@ export default {
       user: "",
       tableRows: [],
       rowCount: 0,
+      totalReciprocated: 0,
       totalDistributed: 0,
       initialPagePtr: 1,
       visibleNext: true,
@@ -136,6 +136,7 @@ export default {
       userImageUrl: ""
     };
   },
+
   created() {
     this.user = this.$route.query.user;
     if (this.$route.query.page) {
@@ -195,6 +196,7 @@ export default {
           this.tableRows = _.cloneDeep(res.tableRows);
           this.rowCount = res.rowCount;
           this.totalDistributed = res.totalDistributed;
+          // this.totalReciprocated = res.totalReciprocated;
           this.initialPagePtr = page;
           this.visiblePrev = res.prev ? true : false;
           this.visibleNext = res.next ? true : false;

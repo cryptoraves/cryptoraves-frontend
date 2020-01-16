@@ -11,7 +11,7 @@
             <div class="portfolio-subtitle-details">
               <div
                 title="The sum of jointly-held tokens between this user and others."
-              >Total Reciprocated: {{ this.totalReciprocated | comma }}</div>
+              >Total Reciprocated: {{ totalReciprocated | comma }}</div>
             </div>
             <div
               class="portfolio-subtitle-holding"
@@ -43,7 +43,7 @@
             <thead>
               <tr>
                 <th scope="col">Token Brand</th>
-                <th scope="col">Token Holdings</th>
+                <th scope="col">Token Balance</th>
               </tr>
             </thead>
             <tbody>
@@ -64,6 +64,7 @@
                   <img
                     v-else
                     class="table-img"
+                    :src="item.tokenBrandImageUrl"
                     :title="item.tokenBrand"
                     @click="goAnother(item.tokenBrand)"
                   />
@@ -73,7 +74,7 @@
                   <div
                     v-if="user === item.tokenBrand"
                     class="td-position-absolute"
-                    title="Tokens Left To Share"
+                    :title="getTitle()"
                   >{{tokenBalancePercentage}}%</div>
                 </td>
               </tr>
@@ -126,7 +127,7 @@ export default {
       tableRows: [],
       rowCount: 0,
       tokenBalance: "0",
-      totalReciprocated: 3,
+      totalReciprocated: 0,
       tokenBalancePercentage: 0,
       totalDistributed: 0,
       totalHoldings: 0,
@@ -163,6 +164,9 @@ export default {
     next();
   },
   methods: {
+    getTitle() {
+      return this.tokenBalancePercentage + "% Left to Share";
+    },
     goNext() {
       if (this.visibleNext) {
         this.showLoading = true;
@@ -214,6 +218,7 @@ export default {
     },
     goHodler(user) {
       this.$root.$emit("changeUser", user);
+      // this.$root.$emit("sendReciprocated", this.totalReciprocated);
       this.$router.push({ name: "HodlerPage", query: { user: user } });
     },
     goAnother(user) {
@@ -230,8 +235,6 @@ export default {
     },
     goHistory(user) {
       this.$root.$emit("changeUser", user);
-      // localStorage.setItem("transactionPageNum", 0);
-      // localStorage.setItem("transactionFlag", 0);
       this.$router.push({
         name: "HistoryPage",
         query: {
@@ -426,8 +429,10 @@ table tbody tr:nth-child(even) {
   position: relative;
 }
 .td-position-absolute {
+  font-size: 15px;
+  font-style: italic;
   position: absolute;
-  top: 30%;
+  top: 35%;
   right: 10px;
 }
 .td-position-absolute:hover {

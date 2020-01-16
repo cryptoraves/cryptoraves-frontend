@@ -5,19 +5,14 @@
         <div class="d-flex col-sm-12 col-lg-2">
           <div class="app-header-logoarea">
             <a href="/">
-              <img
-                src="../../assets/img/cryptoraves_Horozontal Alignment_Full Color_JPG.png"
-                alt
-              />
+              <img src="../../assets/img/cryptoraves_Horozontal Alignment_Full Color_JPG.png" alt />
             </a>
           </div>
         </div>
         <div class="d-flex d-flex-right col-lg-4 col-sm-12">
           <!-- ---------------------------------------------------------------------------------------- -->
           <!-- LeaderBoard after Date Ready -->
-          <div class="app-header-leaderboard" @click="goLeaderboard">
-            LEADERBOARD
-          </div>
+          <div class="app-header-leaderboard" @click="goLeaderboard">LEADERBOARD</div>
           <!-- ---------------------------------------------------------------------------------------- -->
         </div>
         <div class="col-lg-6 col-sm-12 text-right">
@@ -40,20 +35,14 @@
                   <i class="fa fa-search"></i>
                 </div>
               </div>
-              <div
-                id="searchResult"
-                v-show="openSearch"
-                class="app-header-search-result"
-              >
+              <div id="searchResult" v-show="openSearch" class="app-header-search-result">
                 <div
                   v-for="(filteredUser, index) in result"
                   :key="index"
                   class="app-header-search-result-item"
                   @click="setResult(filteredUser)"
                   :class="{ 'is-active': index === arrowCounter }"
-                >
-                  {{ filteredUser }}
-                </div>
+                >{{ filteredUser }}</div>
               </div>
             </div>
 
@@ -181,7 +170,7 @@ export default {
         if (this.user.length > 1) {
           this.$emit("input", this.search);
           this.openSearch = true;
-          this.arrowCounter = 0;
+          this.arrowCounter = -1;
           this.filteredList();
         } else {
           this.openSearch = false;
@@ -192,7 +181,7 @@ export default {
       if (this.user.length > 1) {
         this.openSearch = true;
         this.filteredList();
-        this.arrowCounter = 0;
+        this.arrowCounter = -1;
       }
     },
     setResult(result) {
@@ -204,19 +193,22 @@ export default {
       if (this.arrowCounter < this.result.length - 1) {
         this.arrowCounter = this.arrowCounter + 1;
         this.user = this.result[this.arrowCounter];
-        document.getElementById("searchResult").scrollTop += 44;
+        document.getElementById("searchResult").scrollTop =
+          44 * this.arrowCounter;
       }
     },
     onArrowUp(event) {
       if (this.arrowCounter > 0) {
         this.arrowCounter = this.arrowCounter - 1;
         this.user = this.result[this.arrowCounter];
-        document.getElementById("searchResult").scrollTop -= 44;
+        document.getElementById("searchResult").scrollTop =
+          44 * this.arrowCounter;
       }
     },
     onEnter(event) {
       this.openSearch = false;
-      this.arrowCounter = 0;
+      this.arrowCounter = -1;
+      this.goHistory();
     },
     handleClickOutside(evt) {
       if (!this.$el.contains(evt.target)) {
@@ -314,6 +306,7 @@ img {
   color: rgb(0, 38, 101);
 }
 .app-header-search-result {
+  z-index: 9999;
   position: absolute;
   border: 1px solid #d7d7d7;
   border-radius: 10px;

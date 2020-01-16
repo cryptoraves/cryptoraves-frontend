@@ -1,7 +1,7 @@
 <template>
   <button
     class="app-button"
-    :class="{'app-button-gettoken':type1, 'app-button-gettoken1':type2, 'app-button-learnmore':type3, 'app-button-demo':type4, 'app-button-tweet':type5, 'app-button-return':type6, 'app-button-tipping':type7}"
+    :class="{'app-button-gettoken':type1, 'app-button-gettoken1':type2, 'app-button-learnmore':type3, 'app-button-demo':type4, 'app-button-tweet':type5, 'app-button-return':type6, 'app-button-guide':type7}"
     @click="buttonclick"
   >{{name}}</button>
 </template>
@@ -64,22 +64,6 @@ export default {
   width: 210px;
   height: 50px;
   font-size: 16px;
-  font-family: "Roboto Condensed";
-  color: #fff;
-  font-weight: bold;
-  text-transform: uppercase;
-  padding: 10px 20px;
-  border-radius: 50px;
-  text-align: center;
-  cursor: pointer;
-  border: none;
-}
-
-.app-button-tipping {
-  background-color: rgb(17, 99, 206);
-  width: 250px;
-  height: 65px;
-  font-size: 20px;
   font-family: "Roboto Condensed";
   color: #fff;
   font-weight: bold;
@@ -166,6 +150,21 @@ export default {
   text-align: center;
   cursor: pointer;
   border: none;
+}
+
+.app-button-guide {
+  background-color: rgb(218, 14, 236);
+  width: 250px;
+  height: 35px;
+  font-size: 15px;
+  font-family: "Roboto Condensed";
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 8px 20px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
 }
 
 @media only screen and (max-width: 991px) {

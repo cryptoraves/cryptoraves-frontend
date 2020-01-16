@@ -41,22 +41,32 @@ export default {
 }
 img {
   margin: auto;
-  width: 450px;
+  width: 500px;
 }
 .vaylatoken-content-1 {
-  font-size: 25px;
-  line-height: 1.4;
+  font-size: 18px;
+  line-height: 1.5;
   text-align: left;
 }
 .vaylatoken-content-2 {
-  font-size: 24px;
-  font-weight: 700;
-  line-height: 1.2;
+  font-size: 18px;
+  line-height: 1.5;
   text-align: left;
 }
 .vaylatoken-content-3 {
-  font-size: 23px;
-  line-height: 1.4;
+  font-size: 18px;
+  line-height: 1.5;
   text-align: left;
 }
+@media only screen and (max-width: 1199px) {
+  img {
+    width: 450px;
+  }
+}
+@media only screen and (max-width: 580px) {
+  img {
+    width: 300px;
+  }
+}
 </style>
+
