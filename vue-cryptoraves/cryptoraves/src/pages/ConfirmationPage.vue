@@ -66,19 +66,17 @@
             </div>
           </div>
           <div class="confirmation-tosection col-lg-4 col-md-4 col-sm-4">
-            <div class="confirmation-tosection-show1">
-              <div
-                class="confirmation-userFromTo"
+            <div
+              class="confirmation-userFromTo"
+              @click="goPortfolio(item.userTo)"
+              :title="item.userTo"
+            >{{this.item.userTo}}</div>
+            <div class="confirmation-usertoimage">
+              <img
+                :src="this.item.userToImageUrl"
                 @click="goPortfolio(item.userTo)"
                 :title="item.userTo"
-              >{{this.item.userTo}}</div>
-              <div class="confirmation-usertoimage">
-                <img
-                  :src="this.item.userToImageUrl"
-                  @click="goPortfolio(item.userTo)"
-                  :title="item.userTo"
-                />
-              </div>
+              />
             </div>
           </div>
         </div>
@@ -407,22 +405,18 @@ export default {
 .confirmation-tosection {
   display: flex;
 }
-.confirmation-tosection-show1 {
-  display: flex;
-}
-.confirmation-tosection-show2 {
-  display: none;
-}
+
 @media only screen and (max-width: 991px) {
-  .confirmation-fromsection,
-  .confirmation-tosection {
-    display: block;
+  .confirmation-fromsection {
     margin: auto;
+    flex-direction: column;
   }
 
-  .confirmation-tosection-show2 {
-    display: block;
+  .confirmation-tosection {
+    margin: auto;
+    flex-direction: column-reverse;
   }
+
   .launch-userFromTo {
     margin: auto 0.5em auto 0.5em;
   }

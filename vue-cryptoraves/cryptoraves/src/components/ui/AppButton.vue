@@ -1,7 +1,7 @@
 <template>
   <button
     class="app-button"
-    :class="{'app-button-gettoken':type1, 'app-button-gettoken1':type2, 'app-button-learnmore':type3, 'app-button-demo':type4, 'app-button-tweet':type5, 'app-button-return':type6, 'app-button-guide':type7}"
+    :class="{'app-button-gettoken':type1, 'app-button-gettoken1':type2, 'app-button-learnmore':type3, 'app-button-demo':type4, 'app-button-tweet':type5, 'app-button-return':type6, 'app-button-guide':type7,'app-button-guide-tweet':type8}"
     @click="buttonclick"
   >{{name}}</button>
 </template>
@@ -18,6 +18,7 @@ export default {
     type5: String,
     type6: String,
     type7: String,
+    type8: String,
     target: String
   },
   methods: {
@@ -59,6 +60,23 @@ export default {
   transform: none;
   transition: all 200ms ease-out;
 }
+
+.app-button-guide-tweet {
+  background-color: rgb(17, 99, 206);
+  width: 250px;
+  height: 65px;
+  font-size: 20px;
+  font-family: "Roboto Condensed";
+  color: #fff;
+  font-weight: bold;
+  margin: 30px auto 30px auto;
+  padding: 10px 20px;
+  border-radius: 50px;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+}
+
 .app-button-gettoken {
   background-color: rgb(17, 206, 69);
   width: 210px;
@@ -177,6 +195,12 @@ export default {
     width: 10rem;
     height: 2.5rem;
     font-size: 1rem;
+  }
+
+  .app-button-guide-tweet {
+    width: 200px;
+    height: 50px;
+    margin: 10px auto 10px auto;
   }
 }
 </style>

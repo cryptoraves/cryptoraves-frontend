@@ -62,7 +62,7 @@
                 :key="item.txnId"
                 :class="[user === item.hodler ? 'tr-purple-color' : '']"
               >
-                <td>
+                <td width="50%">
                   <img
                     v-if="item.ticker"
                     class="table-img"
@@ -78,7 +78,7 @@
                     @click="goAnother(item.hodler)"
                   />
                 </td>
-                <td>
+                <td width="50%">
                   <div>{{ item.tokensDistributed | comma }}</div>
                 </td>
               </tr>

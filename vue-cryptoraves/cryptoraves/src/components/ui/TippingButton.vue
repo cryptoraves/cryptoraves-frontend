@@ -12,7 +12,7 @@ export default {
 </script>
 <style scoped>
 .tipping-button {
-  letter-spacing: 3px;
+  font-weight: bold;
   background-color: rgb(17, 99, 206);
   width: 250px;
   height: 65px;
@@ -41,7 +41,6 @@ export default {
 }
 .tipping-button-1 {
   font-size: 18px;
-  font-weight: bold;
   margin-right: 20px;
 }
 </style>

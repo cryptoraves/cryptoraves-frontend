@@ -3,10 +3,11 @@
     <div class="container">
       <SectionHeader>Partnerships</SectionHeader>
       <div class="row partnerships-section-content">
-        <div class="col-lg-6 mt-2 d-flex">
+        <div class="col-lg-6 m-auto d-flex">
           <img src="../../assets/img/partnerships-1.png" />
         </div>
-        <div class="col-lg-6 mt-2">
+        <div class="col-lg-6 m-auto">
+          <div class="space-30"></div>
           <div
             class="partnerships-section-content-1"
           >Dapps can now import any ERC-20 token to the Cryptoraves platform to promote, tip & onboard new interested users to their project! Interested in partnering with us? We're all ears!</div>
@@ -17,9 +18,12 @@
           <div class="space-20"></div>
           <div class="partnerships-section-content-3">Coming soon: NFTs!</div>
           <div class="space-20"></div>
-          <div
-            class="partnerships-section-content-4"
-          >Read more about innovative ways crypto projects can partner with Cryptoraves. We want to usher in a new era of crypto collaboration!</div>
+          <div class="partnerships-section-content-4">
+            <a
+              href="https://medium.com/@cryptoraves/the-cryptoraves-roadmap-vision-1a8b37fc0942"
+              target="_blank"
+            >Read more</a> about innovative ways crypto projects can partner with Cryptoraves. We want to usher in a new era of crypto collaboration!
+          </div>
           <div class="space-20"></div>
           <div
             class="partnerships-section-content-5"
@@ -45,8 +49,8 @@ export default {
   background-color: #f6fafb;
 }
 .partnerships-section-content {
-  padding-top: 40px;
-  padding-bottom: 40px;
+  padding-top: 50px;
+  padding-bottom: 50px;
   font-family: Montserrat;
   color: #002665;
   font-size: 18px;
@@ -57,16 +61,7 @@ img {
   margin: auto;
   width: 500px;
 }
-.partnerships-section-content-1 {
-}
-.partnerships-section-content-2 {
-}
-.partnerships-section-content-3 {
-}
-.partnerships-section-content-4 {
-}
-.partnerships-section-content-5 {
-}
+
 @media only screen and (max-width: 1199px) {
   img {
     width: 450px;

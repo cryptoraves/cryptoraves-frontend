@@ -2,10 +2,11 @@
   <div class="container">
     <SectionHeader>Withdrawing Tokens</SectionHeader>
     <div class="row withdrawing-section">
-      <div class="col-lg-6 mt-2 d-flex">
+      <div class="col-lg-6 m-auto d-flex">
         <img src="../../assets/img/partnerships-2.png" />
       </div>
-      <div class="col-lg-6 mt-5 mb-5">
+      <div class="col-lg-6 m-auto">
+        <div class="space-30"></div>
         <div
           class="withdrawing-content-1"
         >In order to withdraw tokens from the Cryptoraves platform, users must complete several steps.</div>
@@ -13,6 +14,7 @@
         <div
           class="withdrawing-content-1"
         >This feature is currenly being built, & instructions will be rolled out in Q1 2020. Check back soon!</div>
+        <div class="space-30"></div>
       </div>
     </div>
   </div>
@@ -30,8 +32,8 @@ export default {
 
 <style scoped>
 .withdrawing-section {
-  padding-top: 40px;
-  padding-bottom: 100px;
+  padding-top: 50px;
+  padding-bottom: 90px;
   font-family: Montserrat;
   color: #002665;
 }

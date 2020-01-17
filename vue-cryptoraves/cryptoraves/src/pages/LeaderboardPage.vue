@@ -26,10 +26,10 @@
             </thead>
             <tbody>
               <tr v-for="(item,index) in tableRows" :key="index">
-                <td>
+                <td width="10%">
                   <div>{{item.num}}</div>
                 </td>
-                <td>
+                <td width="10%">
                   <img
                     class="table-img"
                     :src="item.tokenBrandImageUrl"
@@ -37,7 +37,7 @@
                     @click="goPortfolio(item.tokenBrand)"
                   />
                 </td>
-                <td>
+                <td width="40%">
                   <img
                     class="link"
                     src="../assets/img/twittersmall.png"
@@ -45,7 +45,7 @@
                     title="Link to Twitter Profile"
                   />
                 </td>
-                <td>
+                <td width="20%">
                   <div>{{item.score | comma}}</div>
                 </td>
               </tr>

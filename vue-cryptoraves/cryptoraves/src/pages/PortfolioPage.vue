@@ -53,7 +53,7 @@
                 :key="item.txnId"
                 :class="[user === item.tokenBrand? 'tr-lightblue-color':'']"
               >
-                <td>
+                <td width="50%">
                   <img
                     v-if="item.ticker"
                     class="table-img"
@@ -69,7 +69,7 @@
                     @click="goAnother(item.tokenBrand)"
                   />
                 </td>
-                <td :class="[user === item.tokenBrand? 'td-position-relative':'']">
+                <td width="50%" :class="[user === item.tokenBrand? 'td-position-relative':'']">
                   <div>{{item.balance | comma}}</div>
                   <div
                     v-if="user === item.tokenBrand"
@@ -165,7 +165,7 @@ export default {
   },
   methods: {
     getTitle() {
-      return this.tokenBalancePercentage + "% Left to Share";
+      return this.tokenBalancePercentage + "% left to share";
     },
     goNext() {
       if (this.visibleNext) {
