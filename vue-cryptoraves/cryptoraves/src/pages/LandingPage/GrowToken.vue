@@ -1,30 +1,42 @@
 <template>
   <div class="growtoken">
     <div class="container">
-      <SectionHeader>Tokenize Your Social Value</SectionHeader>
+      <SectionHeader>Grow Your Token's Value</SectionHeader>
       <div class="row growtoken-content">
         <div class="col-lg-6 mt-2 d-flex">
           <img src="../../assets/img/growimg.png" />
         </div>
         <div class="col-lg-6 mt-2">
-          <div
-            class="growtoken-content-1"
-          >Your online presence & the social network you’ve built has value. Tokenize it!</div>
-
-          <div class="space-10"></div>
-          <div class="growtoken-content-2">
-            Your tokens represent (awesome) you! They’re a piece of your online reputation.
-            <div class="space-30"></div>Reimagine your social media value in token form,
+          <div>Your online presence & the social network you’ve built has value. Tokenize it!</div>
+          <div class="space-20"></div>
+          <div>Your tokens represent (awesome) you! They’re a piece of your online reputation.</div>
+          <div class="space-20"></div>
+          <div>
+            Grow your Token Score by sharing generously, & giving back! More
+            <a
+              href="https://medium.com/@cryptoraves/how-to-grow-your-cryptoraves-token-score-84bc6b18554f
+"
+              target="_blank"
+            >here.</a>
+          </div>
+          <div class="space-20"></div>
+          <div>
+            Reimagine your social media value in token form,
             <a
               href="https://medium.com/@cryptoraves/your-social-network-is-an-asset-that-can-be-tokenized-meaningfully-c4709b20c3e7"
               target="_blank"
-            >
-              <b>& see where it leads you.</b>
-            </a>
-            <div class="space-30"></div>
+            >& see where it leads you.</a>
+          </div>
+          <div class="space-20"></div>
+          <div>
+            And maybe, when you're ready,
+            <a
+              href="https://medium.com/@plaster1/my-native-layer-2-token-is-all-growd-up-and-listed-on-a-mainnet-exchange-e0ac2d1e64ad"
+              target="_blank"
+            >list your own token on exchange...</a>
           </div>
           <div class="space-90"></div>
-          <div class="growtoken-content-3">So… what next?</div>
+          <div class="growtoken-content-1">So… what next?</div>
         </div>
       </div>
     </div>
@@ -51,21 +63,14 @@ img {
 .growtoken-content {
   padding-top: 40px;
   padding-bottom: 40px;
-}
-.growtoken-content-1,
-.growtoken-content-2 {
   font-size: 18px;
   font-family: "Montserrat";
   color: rgb(0, 38, 101);
   line-height: 1.5;
   text-align: left;
 }
-a {
-  color: rgb(18, 220, 66);
-  text-decoration-color: rgb(18, 220, 66);
-}
 
-.growtoken-content-3 {
+.growtoken-content-1 {
   font-size: 15px;
   font-family: "Montserrat";
   color: rgba(0, 38, 101, 0.702);

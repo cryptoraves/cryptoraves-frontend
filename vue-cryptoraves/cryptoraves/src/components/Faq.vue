@@ -4,32 +4,35 @@
       <div class="faq-page-template">
         <SectionHeader>FAQ</SectionHeader>
         <FaqSection>
-          <div slot="title">What are Cryptoraves Tokens & Why Should I Use Them?</div>
+          <div slot="title">
+            What are Cryptoraves Tokens & Why Should I Use Them?
+          </div>
           <div slot="answer">
             Request 1 Billion of your own
             <i>personalized</i> crypto tokens, directly on Twitter! No Account,
             No Fees. Just Tweet this:
-            <a
-              href="https://ctt.ac/9FQa1"
-              target="_blank"
-            >@cryptoraves #DropMyCrypto</a>
+            <a href="https://ctt.ac/9FQa1" target="_blank"
+              >@cryptoraves #DropMyCrypto</a
+            >
             <br />
-            <br />Sharing your tokens is FUN! Amplify your hearts. Give
-            appreciation with a personal, crypto touch. It’s easy -- share your
-            tokens with a Tweet (& no fees).
+            <br />Sharing your tokens is FUN! Amplify your hearts. Advocate for
+            & support crypto. Give thanks & tip people with your own token. It
+            feels good! And it’s easy -- share your tokens with a Tweet (& no
+            fees).
             <br />
-            <br />Tokenize yourself! Reimagine the value of your online presence
-            & the social media networks you’ve built in token form. You can run
-            your own token economy, right on Twitter.
+            <br />Create a customized token use case! People are already using
+            their tokens to run personal token giveaways, promote their
+            projects, & increase their community engagement.
             <br />
-            <br />Your token = Your tool. Experiment with your tokens. Dream up
-            your own use case. Put blockchain tech to work for YOU.
+            <br />And... One day when you’re ready, you can export your token to
+            Mainnet & list it on exchange.
             <br />
-            <br />Click
+            <br />But mostly… Cryptoraves is just FUN! Click
             <a
               href="https://medium.com/@cryptoraves/beta-launch-announcement-cryptoraves-personalized-tokens-have-launched-42d9d6226ca0"
               target="_blank"
-            >here</a>
+              >here</a
+            >
             for more info.
           </div>
         </FaqSection>
@@ -48,8 +51,8 @@
           <div slot="title">How do I Tip Using VAYLA Tokens?</div>
           <div slot="answer">
             Click
-            <a href target>here</a> for detailed instructions on how
-            to tip with VAYLA tokens.
+            <a href target>here</a> for detailed instructions on how to tip with
+            VAYLA tokens.
           </div>
         </FaqSection>
         <FaqSection>
@@ -59,12 +62,14 @@
             How do I know if my transaction went through?
           </div>
           <div slot="answer">
-            Please see our detailed
-            <a
-              href="https://medium.com/p/2710f70e8d38/edit"
-              target="_blank"
-            >Cryptoraves Usage Guidelines, The Complete How-To</a>
-            for more information and instructions on how our platform works.
+            For a quick token sharing guide, see here. (Notes to Jason: will
+            link to the new Token Sharing Guide page).
+            <br />
+            <br />For a more detailed, step-by-step walkthrough of our platform,
+            read our
+            <a href="https://medium.com/p/2710f70e8d38/edit" target="_blank"
+              >Cryptoraves Usage Guidelines, The Complete How-To.</a
+            >
           </div>
         </FaqSection>
         <FaqSection>
@@ -74,24 +79,27 @@
           </div>
           <div slot="answer">
             Cryptoraves tokens are ERC-20 tokens. Token transfer is possible via
-            <a
-              href="https://loomx.io/"
-              target="_blank"
-            >Loom’s Layer 2 BaseChain.</a>
-            Token export to mainnet is on our
+            <a href="https://loomx.io/" target="_blank"
+              >Loom’s Layer 2 BaseChain.</a
+            >
+            Token export is on our
             <a
               href="https://medium.com/@cryptoraves/the-cryptoraves-roadmap-vision-1a8b37fc0942"
               target="_blank"
-            >roadmap</a>, & is an important, planned feature for Cryptoraves. Our vision is
-            to eventually allow your tokens to be transferred across multiple
-            platforms (Reddit, Instagram, YouTube, etc.).
-            <br />
-            <br />We are working toward open-sourcing our project. Some portions
-            are already available. You can find us on GitHub
+              >Roadmap</a
+            >, & is an important feature for our platform (export proof of
+            concept is already completed, see
             <a
-              href="https://github.com/cryptoraves"
+              href="https://medium.com/@plaster1/my-native-layer-2-token-is-all-growd-up-and-listed-on-a-mainnet-exchange-e0ac2d1e64ad"
               target="_blank"
-            >here.</a>
+              >here</a
+            >). Our vision is to eventually allow your tokens to be transferred
+            across multiple platforms (Reddit, Instagram, YouTube, etc).
+            <br />
+            <br />We are working towards open sourcing the project. Some
+            portions are already available. You can find us
+            <a href="https://github.com/cryptoraves" target="_blank">here</a>
+            on GitHub.
           </div>
         </FaqSection>
         <FaqSection>
@@ -101,8 +109,13 @@
           </div>
           <div slot="answer">
             Cool! Yes, we’re totally interested in partnering up. Our platform
-            can serve as a way to demonstrate or promote your token, right on
-            Twitter. Email shannon@cryptoraves.space for more details.
+            can serve as a way to onboard new, interested users to your project,
+            demonstrate/promote your token, right on Twitter. Working with
+            Cryptoraves is a more decentralized option for tipping on Twitter,
+            unlike most centralized tipbots currently available. All of
+            Cryptoraves Twitter token transactions are recorded on the
+            blockchain. See our partnership page (Jason links to partnership
+            page) for more details, or contact shannon@cryptoraves.space.
           </div>
         </FaqSection>
         <FaqSection>
@@ -111,10 +124,10 @@
             A “hodler” is any other Cryptoraves user who has your personalized
             token in their portfolio.
             <br />
-            <br />The term “hodl” is a popular term within the cryptosphere describing
-            how crypto investors plan to “hold,” or not sell, their crypto
-            tokens. It was a misspelling that became a meme & is commonly used
-            within the cryptosphere. A hodler is therefore someone who is
+            <br />The term “hodl” is a popular term within the cryptosphere
+            describing how crypto investors plan to “hold,” or not sell, their
+            crypto tokens. It was a misspelling that became a meme & is commonly
+            used within the cryptosphere. A hodler is therefore someone who is
             hodling your tokens, or any other crypto tokens, until they increase
             in value.
           </div>
@@ -123,7 +136,9 @@
           <div slot="title">What is the Cryptoraves Privacy Policy?</div>
           <div id="privacy" slot="answer">
             By Tweeting:
-            <a href="https://ctt.ac/9FQa1" target="_blank">@cryptoraves #DropMyCrypto</a>, or by Tweeting any command request tagging @cryptoraves, you
+            <a href="https://ctt.ac/9FQa1" target="_blank"
+              >@cryptoraves #DropMyCrypto</a
+            >, or by Tweeting any command request tagging @cryptoraves, you
             agree to our Privacy Policy, as follows:
             <br />
             <br />The Cryptoraves platform is public, and token transactions
@@ -143,9 +158,7 @@
             <br />
             <br />If you have any questions about how your data is being used,
             please email us at
-            <a
-              href="mailto:info@cryptoraves.space"
-            >info@cryptoraves.space</a>.
+            <a href="mailto:info@cryptoraves.space">info@cryptoraves.space</a>.
             It may take us 3–5 days to respond to requests.
           </div>
         </FaqSection>
@@ -153,7 +166,9 @@
           <div slot="title">What are the Cryptoraves Terms of Service?</div>
           <div slot="answer">
             By Tweeting:
-            <a href="https://ctt.ac/9FQa1" target="_blank">@cryptoraves #DropMyCrypto</a>, or by Tweeting any command request tagging @cryptoraves, you
+            <a href="https://ctt.ac/9FQa1" target="_blank"
+              >@cryptoraves #DropMyCrypto</a
+            >, or by Tweeting any command request tagging @cryptoraves, you
             agree to our Privacy Policy, as follows:
             <br />
             <br />You must comply with Twitter policies at all times.
@@ -170,9 +185,7 @@
           <div slot="title">How do I opt out of Auto Replies?</div>
           <div slot="answer">
             Please email your Twitter @username to
-            <a
-              href="mailto:info@cryptoraves.space"
-            >info@cryptoraves.space.</a>.
+            <a href="mailto:info@cryptoraves.space">info@cryptoraves.space.</a>.
             Send us an email entitled: Opt Out of Auto Replies. It may take 3–5
             days to respond to your request.
           </div>
@@ -199,7 +212,7 @@ export default {
     SectionHeader,
     FaqSection
   },
-  mounted: function() {
+  mounted() {
     this.$nextTick(function() {
       if (this.$route.query.target == "top") window.scrollTo(0, 0);
       else if (this.$route.query.target == "privacy")
@@ -215,7 +228,7 @@ export default {
     });
   },
   created() {
-    this.$ga.page("/");
+    // this.$ga.page("/");
   },
   methods: {
     goHome() {

@@ -10,6 +10,7 @@ import LeaderboardPage from "@/pages/LeaderboardPage";
 import Faq from "@/components/Faq";
 import NotFound from "@/pages/NotFound";
 import PartnershipsPage from "@/pages/PartnershipsPage/PartnershipsPage";
+import GuidePage from "@/pages/GuidePage";
 
 Vue.use(Router);
 
@@ -30,6 +31,11 @@ export default new Router({
       path: "/faq/:target?",
       name: "Faq",
       component: Faq
+    },
+    {
+      path: "/guide",
+      name: "GuidePage",
+      component: GuidePage
     },
     {
       path: "/confirmation/:txnId?",

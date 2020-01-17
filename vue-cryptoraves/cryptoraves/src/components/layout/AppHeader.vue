@@ -31,7 +31,7 @@
                   class="app-header-input"
                   placeholder="Lookup Twitter @username"
                 />
-                <div class="app-header-icon" @click="goHistory(user)">
+                <div class="app-header-icon" @click="goPortfolio(user)">
                   <i class="fa fa-search"></i>
                 </div>
               </div>
@@ -188,6 +188,7 @@ export default {
       this.user = result;
       this.arrowCounter = -1;
       this.openSearch = false;
+      this.goPortfolio();
     },
     onArrowDown(event) {
       if (this.arrowCounter < this.result.length - 1) {
@@ -208,7 +209,7 @@ export default {
     onEnter(event) {
       this.openSearch = false;
       this.arrowCounter = -1;
-      this.goHistory();
+      this.goPortfolio();
     },
     handleClickOutside(evt) {
       if (!this.$el.contains(evt.target)) {
@@ -222,6 +223,22 @@ export default {
         document.getElementById("autoTokenSelect").blur();
         this.$router.push({
           name: "HistoryPage",
+          query: {
+            user: this.user
+          }
+        });
+        this.user = "";
+      } else {
+        if (this.user) {
+          this.user = "";
+        }
+      }
+    },
+    goPortfolio: function(user) {
+      if (this.userList.includes(this.user)) {
+        document.getElementById("autoTokenSelect").blur();
+        this.$router.push({
+          name: "PortfolioPage",
           query: {
             user: this.user
           }

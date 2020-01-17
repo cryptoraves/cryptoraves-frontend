@@ -6,23 +6,28 @@
       </div>
       <div v-else>
         <div class="hodler-title">
-          <SectionHeader :user="user">Hodler's of {{user}}'s Tokens</SectionHeader>
+          <SectionHeader :user="user">Hodler's of {{ user }}'s Tokens</SectionHeader>
           <div class="hodler-subtitle">
             <div class="hodler-subtitle-details">
               <div
                 class="hodler-subtitle-details-link"
                 @click="goHodlerFaq"
               >What the heck is a hodler, anyway?</div>
-              <div
+              <!-- <div
                 title="The sum of jointly-held tokens between this user and others."
-              >Total Reciprocated: {{ totalReciprocated | comma }}</div>
+              >
+                Total Reciprocated: {{ totalReciprocated | comma }}
+              </div>-->
             </div>
             <div
               class="hodler-subtitle-holding"
               title="Total tokens from others held in this portfolio."
             >
               <span>
-                <b>TOTAL {{user}}’s Tokens Distributed: {{ totalDistributed | comma }}</b>
+                <b>
+                  TOTAL {{ user }}’s Tokens Distributed:
+                  {{ totalDistributed | comma }}
+                </b>
               </span>
             </div>
           </div>
@@ -52,10 +57,10 @@
             </thead>
             <tbody>
               <tr
-                v-for="(item,index) in tableRows"
+                v-for="(item, index) in tableRows"
                 :index="index"
                 :key="item.txnId"
-                :class="[user === item.hodler? 'tr-lightblue-color':'']"
+                :class="[user === item.hodler ? 'tr-purple-color' : '']"
               >
                 <td>
                   <img
@@ -74,7 +79,7 @@
                   />
                 </td>
                 <td>
-                  <div>{{item.tokensDistributed | comma}}</div>
+                  <div>{{ item.tokensDistributed | comma }}</div>
                 </td>
               </tr>
             </tbody>
@@ -89,7 +94,7 @@
             >
               <i class="fa fa-angle-left"></i>
             </span>
-            Page {{initialPagePtr}}
+            Page {{ initialPagePtr }}
             <span
               href="#"
               v-on:click="goNext"
@@ -104,7 +109,7 @@
           <div
             class="history-link"
             @click="goHistory(user)"
-          >Link to {{user}}'s Transaction History Page.</div>
+          >Link to {{ user }}'s Transaction History Page.</div>
         </div>
       </div>
     </div>
@@ -423,8 +428,8 @@ tr:nth-child(even) {
 .tr-orange-color {
   color: peru;
 }
-.tr-lightblue-color {
-  background-color: lightblue;
+.tr-purple-color {
+  background-color: rgba(206, 12, 206, 0.644);
 }
 .history-link {
   font-size: 1.5em;
@@ -440,18 +445,20 @@ tr:nth-child(even) {
   font-size: 20px;
   color: rgb(0, 38, 101);
 }
-@media only screen and (max-width: 767px) {
-  .hodler-user {
-    position: relative;
-    margin-bottom: -40px;
-    z-index: 2;
-  }
+@media only screen and (max-width: 991px) {
   .hodler-subtitle-holding {
     margin-top: 30px;
     margin-bottom: 0px;
   }
   .hodler-subtitle-holding span {
     transform: none;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .hodler-user {
+    position: relative;
+    margin-bottom: -40px;
+    z-index: 2;
   }
 }
 @media only screen and (max-width: 410px) {

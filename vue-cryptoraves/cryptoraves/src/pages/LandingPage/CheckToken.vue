@@ -30,6 +30,14 @@
                 <div>
                   <img src="../../assets/img/checkitemimg.png" />
                 </div>
+                <div class="text-margin">Your standing on the Leaderboard</div>
+              </div>
+            </li>
+            <li>
+              <div class="d-flex">
+                <div>
+                  <img src="../../assets/img/checkitemimg.png" />
+                </div>
                 <div class="text-margin">Any other user’s portfolio!</div>
               </div>
             </li>
