@@ -131,25 +131,17 @@ export default {
                   "userList",
                   JSON.stringify(response.data.userList)
                 );
-<<<<<<< HEAD
-                this.userList = Object.freeze(JSON.parse(localStorage.getItem("userList")));
-=======
                 this.userList = Object.freeze(
                   JSON.parse(localStorage.getItem("userList"))
                 );
->>>>>>> develop
               })
               .catch(e => {
                 this.errors.push(e);
               });
-<<<<<<< HEAD
-          } else this.userList = Object.freeze(JSON.parse(localStorage.getItem("userList")));
-=======
           } else
             this.userList = Object.freeze(
               JSON.parse(localStorage.getItem("userList"))
             );
->>>>>>> develop
         })
         .catch(e => {
           this.errors.push(e);

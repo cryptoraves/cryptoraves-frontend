@@ -131,8 +131,6 @@ export default {
       tokenBalancePercentage: 0,
       totalDistributed: 0,
       totalHoldings: 0,
-      earliestDatetime: "",
-      latestDatetime: "",
       initialPagePtr: 1,
       visibleNext: true,
       visiblePrev: true,

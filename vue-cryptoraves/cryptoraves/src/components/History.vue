@@ -50,10 +50,7 @@
                                                     <td class="link" v-on:click="goTweet(item.linkToContent)"><img v-bind:src="'/static/img/twittersmall.png'" /> </td>
                                                     <td>{{item.tokenBrand}}</td>
                                                     <td>{{item.amount | comma}}</td>
-<<<<<<< HEAD
-                                                    <td>{{item.inOut}}</td>
-=======
->>>>>>> develop
+
                                                     <td class="link" v-on:click="goAnother(item.userTo)"><b>{{item.userTo}}</b></td>
                                                     <td>{{item.date}}</td>
                                                 </tr>                                                                                            
