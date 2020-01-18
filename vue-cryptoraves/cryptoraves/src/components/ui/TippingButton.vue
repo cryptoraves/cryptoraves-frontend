@@ -1,8 +1,8 @@
 <template>
-  <button class="tipping-button">
+  <!--<button class="tipping-button">
     <span class="tipping-button-1">NEW!</span>
     TIPPING
-  </button>
+  </button>-->
 </template>
 
 <script>
