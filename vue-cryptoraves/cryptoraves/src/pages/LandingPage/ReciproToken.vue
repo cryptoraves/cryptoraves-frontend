@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <SectionHeader>Be Part of Our Community!</SectionHeader>
+    <SectionHeader>Join Our Community!</SectionHeader>
     <div class="row reciprotoken-content">
       <div class="col-lg-6 mt-2 d-flex">
         <img src="../../assets/img/reciproimg.png" />

@@ -7,12 +7,13 @@
           <img src="../../assets/img/shareimg.png" />
         </div>
         <div class="col-lg-6 mt-5">
-          <div class="sharetoken-content-1">Find a Rad Human & Share!</div>
-          <div class="sharetoken-content-2">
-            Amplify your hearts. Give appreciation with a personal crypto
-            touch. It feels good!
-          </div>
-          <div class="space-20"></div>
+          <div class="sharetoken-content-1">Advocate for Crypto by Sharing!</div>
+          <div
+            class="sharetoken-content-2"
+          >Amplify your hearts. Give thanks & tip people with your own token. It feels good!</div>
+          <span @click="goGuide()">
+            <AppButton name="Token Sharing Guide" type7="true" target="tag"></AppButton>
+          </span>
           <div class="sharetoken-content-3">To share, just Tweet. Two ways.</div>
           <div class="space-10"></div>
           <div>
@@ -54,6 +55,11 @@ export default {
     TweetButton,
     AppButton,
     MethodButton
+  },
+  methods: {
+    goGuide() {
+      this.$router.push({ name: "GuidePage" });
+    }
   }
 };
 </script>

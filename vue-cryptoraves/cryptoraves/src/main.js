@@ -6,15 +6,13 @@ import router from "./router";
 import Clipboard from "v-clipboard";
 import VueScrollTo from "vue-scrollto";
 import "bootstrap";
-
 import VueAnalytics from "vue-analytics";
 
 Vue.config.productionTip = false;
 Vue.use(Clipboard);
 Vue.use(VueScrollTo);
 
-
-if(window.location.host.split(':')[0] == 'cryptoraves.space'){
+if (window.location.host.split(":")[0] == "cryptoraves.space") {
   Vue.use(VueAnalytics, {
     id: ["UA-142913413-1"],
     router

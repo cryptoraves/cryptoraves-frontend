@@ -31,6 +31,10 @@
           <span v-on:click="goFaqTop">
             <AppButton name="Learn More" type3="true"></AppButton>
           </span>
+          <br />
+          <span v-on:click="goPartnership">
+            <TippingButton></TippingButton>
+          </span>
         </div>
       </div>
     </div>
@@ -39,17 +43,19 @@
 
 <script>
 import AppButton from "../../components/ui/AppButton";
+import TippingButton from "../../components/ui/TippingButton";
 export default {
   name: "HeroSection",
   components: {
-    AppButton
+    AppButton,
+    TippingButton
   },
   methods: {
     goFaqTop: function(event) {
       this.$router.push({
         name: "Faq",
         query: {
-          top: true
+          target: "top"
         }
       });
     },
@@ -61,6 +67,9 @@ export default {
           user: "@cypher"
         }
       });
+    },
+    goPartnership: function(event) {
+      this.$router.push({ name: "PartnershipsPage" });
     }
   }
 };

@@ -7,12 +7,19 @@
       <div v-else>
         <div class="history-title">
           <SectionHeader>{{this.platformHandle}}'s Transaction History</SectionHeader>
-          <div class="history-userimg">
-            <img
-              :src="this.userImageUrl"
+          <div class="history-user">
+            <div
+              class="history-userlink"
               title="Click to See Portfolio & Token Balance"
               @click="goPortfolio(user)"
-            />
+            >Click for Portfolio Page</div>
+            <div class="history-userimg">
+              <img
+                :src="this.userImageUrl"
+                title="Click to See Portfolio & Token Balance"
+                @click="goPortfolio(user)"
+              />
+            </div>
           </div>
           <div class="elastic-arrow">
             <img src="../assets/gif/elasticrightarrow.gif" alt />
@@ -72,6 +79,14 @@
                 </td>
                 <td>
                   <img
+                    v-if="item.ticker"
+                    class="table-img"
+                    :src="item.tokenBrandImageUrl"
+                    :title="item.ticker"
+                    @click="getHistory(item.tokenBrand, 0)"
+                  />
+                  <img
+                    v-else
                     class="table-img"
                     :src="item.tokenBrandImageUrl"
                     :title="item.tokenBrand"
@@ -82,7 +97,6 @@
                   <div>{{item.amount | comma}}</div>
                 </td>
                 <td>
-                  
                   <img
                     v-if="!item.userTo.includes('Export To Mainnet')"
                     class="table-img"
@@ -192,10 +206,10 @@ export default {
       }
     }
 
-    if(window.location.host.split(':')[0] == 'cryptoraves.space'){
+    if (window.location.host.split(":")[0] == "cryptoraves.space") {
       this.$ga.page("/");
     }
-    
+
     // this.initialPagePtr = localStorage.getItem("transactionPageNum") || 0;
     // this.initFlag = localStorage.getItem("transactionFlag") || 0;
     // this.earliestDatetime = localStorage.getItem("earliestDatetime");
@@ -249,7 +263,6 @@ export default {
             // localStorage.setItem("latestDatetime", this.latestDatetime);
             // localStorage.setItem("transactionFlag", initFlag);
             // localStorage.setItem("transactionPageNum", this.initialPagePtr);
-
           })
           .catch(e => {
             console.log(e);
@@ -394,12 +407,26 @@ export default {
 .history-title {
   position: relative;
 }
+.history-user {
+  position: absolute;
+  top: 70px;
+  left: 0;
+  text-align: center;
+}
+.history-userlink {
+  margin: 10px auto 10px auto;
+  font-family: "Montserrat";
+  font-size: 15px;
+  color: royalblue;
+  text-decoration: underline;
+}
+.history-userlink:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
 
 .history-userimg {
-  position: absolute;
   background: white;
-  top: 50%;
-  left: 0;
   display: flex;
   margin: auto;
   width: 120px;
@@ -409,6 +436,7 @@ export default {
   animation: avatar-from-effect 2s infinite;
   transition: all 0.5s ease-out;
 }
+
 @keyframes avatar-from-effect {
   0% {
     box-shadow: 0 0 0 0px rgba(205, 136, 57, 0.8);
@@ -539,7 +567,7 @@ tr:nth-child(even) {
 .elastic-arrow {
   display: none;
   position: absolute;
-  bottom: 0;
+  bottom: -70px;
   right: 0;
   z-index: 2;
 }
@@ -551,10 +579,9 @@ tr:nth-child(even) {
   table {
     min-width: 1000px;
   }
-  .history-userimg {
+  .history-user {
     position: relative;
-    margin-top: 50px;
-    margin-bottom: -110px;
+    margin-bottom: -40px;
     z-index: 2;
   }
   .elastic-arrow {

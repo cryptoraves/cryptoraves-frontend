@@ -16,16 +16,30 @@
           >
             <div class="confirmation-userfromimage">
               <img
+                v-if="!this.item.userFromTitle"
                 :src="this.item.userFromImageUrl"
                 :title="item.userFrom"
-                @click="goHistory(item.userFrom)"
+                @click="goPortfolio(item.userFrom)"
+              />
+              <img
+                v-else
+                :src="this.item.userFromImageUrl"
+                :title="this.item.userFromTitle"
+                @click="goPortfolio(item.userFrom)"
               />
             </div>
             <div
+              v-if="!this.item.userFromTitle"
               class="confirmation-userFromTo"
-              @click="goHistory(item.userFrom)"
+              @click="goPortfolio(item.userFrom)"
               :title="item.userFrom"
             >{{this.item.userFrom}}</div>
+            <div
+              v-else
+              class="confirmation-userFromTo"
+              @click="goPortfolio(item.userFrom)"
+              :title="this.item.userFromTitle"
+            >{{this.item.userFromTitle}}</div>
           </div>
           <div v-else class="confirmation-fromsection col-lg-4 col-md-4 col-sm-4">
             <div class="launch-userfromimage">
@@ -45,37 +59,39 @@
               <div class="confirmation-tokenbrandimage">
                 <img
                   :src="this.item.tokenBrandImageUrl"
-                  @click="goHistory(item.tokenBrand)"
+                  @click="goPortfolio(item.tokenBrand)"
                   :title="item.tokenBrand"
                 />
               </div>
             </div>
           </div>
           <div class="confirmation-tosection col-lg-4 col-md-4 col-sm-4">
-            <div  class="confirmation-tosection-show1">
-              <div
-                class="confirmation-userFromTo"
-                @click="goHistory(item.userTo)"
+            <div
+              class="confirmation-userFromTo"
+              @click="goPortfolio(item.userTo)"
+              :title="item.userTo"
+            >{{this.item.userTo}}</div>
+            <div class="confirmation-usertoimage">
+              <img
+                :src="this.item.userToImageUrl"
+                @click="goPortfolio(item.userTo)"
                 :title="item.userTo"
-              >{{this.item.userTo}}</div>
-              <div class="confirmation-usertoimage">
-                <img
-                  :src="this.item.userToImageUrl"
-                  @click="goHistory(item.userTo)"
-                  :title="item.userTo"
-                />
-              </div>
+              />
             </div>
-           
-            
-            
           </div>
         </div>
         <div class="row">
           <div class="confirmation-tokenbrand">
             <div
+              v-if="this.item.ticker"
               class="confirmation-tokenbrand-header"
-              @click="goHistory(item.tokenBrand)"
+              @click="goPortfolio(item.tokenBrand)"
+              :title="item.ticker"
+            >{{this.item.ticker}}</div>
+            <div
+              v-else
+              class="confirmation-tokenbrand-header"
+              @click="goPortfolio(item.tokenBrand)"
               :title="item.tokenBrand"
             >{{this.item.tokenBrand}}</div>
             <div class="confirmation-tokenbrand-text">Tokens</div>
@@ -132,7 +148,7 @@ export default {
   },
   created() {
     this.txnId = this.$route.query.txnId;
-    if(window.location.host.split(':')[0] == 'cryptoraves.space'){
+    if (window.location.host.split(":")[0] == "cryptoraves.space") {
       this.$ga.page("/");
     }
     this.getTransaction(this.txnId);
@@ -156,7 +172,7 @@ export default {
           console.log(e);
         });
     },
-    goAnother(user) {
+    goPortfolio(user) {
       this.$root.$emit("changeUser", user);
       this.$router.push({ name: "PortfolioPage", query: { user: user } });
     },
@@ -389,22 +405,18 @@ export default {
 .confirmation-tosection {
   display: flex;
 }
-.confirmation-tosection-show1 {
-  display: flex;
-}
-.confirmation-tosection-show2 {
-  display: none;
-}
+
 @media only screen and (max-width: 991px) {
-  .confirmation-fromsection,
-  .confirmation-tosection {
-    display: block;
+  .confirmation-fromsection {
     margin: auto;
+    flex-direction: column;
   }
-  
-  .confirmation-tosection-show2 {
-    display: block;
+
+  .confirmation-tosection {
+    margin: auto;
+    flex-direction: column-reverse;
   }
+
   .launch-userFromTo {
     margin: auto 0.5em auto 0.5em;
   }

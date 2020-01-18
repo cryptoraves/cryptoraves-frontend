@@ -9,28 +9,32 @@
           <SectionHeader :user="this.user">{{this.user}}'s Portfolio Page</SectionHeader>
           <div class="portfolio-subtitle">
             <div class="portfolio-subtitle-details">
-              <div title="Remaining personal tokens available to distribute.">Token Balance: {{ this.tokenBalance | comma }}</div>
-              
-              <div title="Total personal tokens given by this user.">Tokens Distributed: {{ this.totalDistributed | comma }}</div>
-              
-              <div title="Percentage remaining">Tokens Left to Share: {{ this.tokenBalancePercentage }}%</div>
-              
-                <div class="tr-orange-color" title="The sum of jointly-held tokens between this user and others.">Total Reciprocated: {{ this.totalReciprocated | comma }}</div>
+              <div
+                title="The sum of jointly-held tokens between this user and others."
+              >Total Reciprocated: {{ totalReciprocated | comma }}</div>
             </div>
-            <div class="portfolio-subtitle-holding" title="Total tokens from others held in this portfolio.">
+            <div
+              class="portfolio-subtitle-holding"
+              title="Total tokens from others held in this portfolio."
+            >
               <span>
                 <b>TOTAL Token Holdings: {{ this.totalHoldings | comma }}</b>
-                
               </span>
             </div>
-            
           </div>
-          <div class="portfolio-userimg">
-            <img
-              :src="this.userImageUrl"
-              title="Click to See Transaction History"
-              @click="goHistory(user)"
-            />
+          <div class="portfolio-user">
+            <div
+              class="portfolio-userlink"
+              title="Click to See Hodler's Page"
+              @click="goHodler(user)"
+            >Click for Hodler's Page</div>
+            <div class="portfolio-userimg">
+              <img
+                :src="this.userImageUrl"
+                title="Click to See Hodler's Page"
+                @click="goHodler(user)"
+              />
+            </div>
           </div>
         </div>
 
@@ -39,21 +43,39 @@
             <thead>
               <tr>
                 <th scope="col">Token Brand</th>
-                <th scope="col">Token Holdings</th>
+                <th scope="col">Token Balance</th>
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(item,index) in tableRows" :index="index" :key="item.txnId">
-                <td>
+              <tr
+                v-for="(item,index) in tableRows"
+                :index="index"
+                :key="item.txnId"
+                :class="[user === item.tokenBrand? 'tr-lightblue-color':'']"
+              >
+                <td width="50%">
                   <img
+                    v-if="item.ticker"
+                    class="table-img"
+                    :src="item.tokenBrandImageUrl"
+                    :title="item.ticker"
+                    @click="goAnother(item.tokenBrand)"
+                  />
+                  <img
+                    v-else
                     class="table-img"
                     :src="item.tokenBrandImageUrl"
                     :title="item.tokenBrand"
                     @click="goAnother(item.tokenBrand)"
                   />
                 </td>
-                <td>
+                <td width="50%" :class="[user === item.tokenBrand? 'td-position-relative':'']">
                   <div>{{item.balance | comma}}</div>
+                  <div
+                    v-if="user === item.tokenBrand"
+                    class="td-position-absolute"
+                    :title="getTitle()"
+                  >{{tokenBalancePercentage}}%</div>
                 </td>
               </tr>
             </tbody>
@@ -68,7 +90,7 @@
             >
               <i class="fa fa-angle-left"></i>
             </span>
-            Page {{initialPagePtr + 1}}
+            Page {{initialPagePtr}}
             <span
               href="#"
               v-on:click="goNext"
@@ -80,10 +102,7 @@
           </div>
         </div>
         <div class="row">
-          <div
-            class="history-link"
-            @click="goHistory(user)"
-          >Link to {{this.user}}'s Transaction History Page.</div>
+          <div class="history-link" @click="goHodler(user)">Link to {{this.user}}'s Hodler's Page.</div>
         </div>
       </div>
     </div>
@@ -108,12 +127,13 @@ export default {
       tableRows: [],
       rowCount: 0,
       tokenBalance: "0",
+      totalReciprocated: 0,
       tokenBalancePercentage: 0,
       totalDistributed: 0,
       totalHoldings: 0,
       earliestDatetime: "",
       latestDatetime: "",
-      initialPagePtr: 0,
+      initialPagePtr: 1,
       visibleNext: true,
       visiblePrev: true,
       showLoading: true,
@@ -122,177 +142,84 @@ export default {
   },
   created() {
     this.user = this.$route.query.user;
-
-    this.earliestDatetime = this.$route.query.earliestDatetime;
-    this.latestDatetime = this.$route.query.latestDatetime;
-    this.initFlag = 0;
-
-    if (this.earliestDatetime) {
-      this.initFlag = 1;
-    }
-    if (this.latestDatetime) {
-      this.initFlag = 2;
+    if (this.$route.query.page) {
+      this.initialPagePtr = this.$route.query.page;
+    } else {
+      this.initialPagePtr = 1;
     }
 
-    if (this.$route.query.page && this.initFlag) {
-      if (this.initFlag == 1) {
-        this.initialPagePtr = this.$route.query.page - 2;
-      }
-      if (this.initFlag == 2) {
-        this.initialPagePtr = this.$route.query.page;
-      }
-    }
-    if(window.location.host.split(':')[0] == 'cryptoraves.space'){
+    if (window.location.host.split(":")[0] == "cryptoraves.space") {
       this.$ga.page("/");
     }
-    this.getPortfolio(this.user, this.initFlag);
+    this.getPortfolio(this.user, this.initialPagePtr);
   },
   beforeRouteUpdate(to, from, next) {
     // just use `this`
     this.user = to.query.user;
 
-
     if (from.query.user != this.user) {
       this.getPortfolio(this.user, 0);
     }
 
-
     next();
   },
   methods: {
+    getTitle() {
+      return this.tokenBalancePercentage + "% left to share";
+    },
     goNext() {
       if (this.visibleNext) {
         this.showLoading = true;
-        this.getPortfolio(this.user, 1);
+        this.getPortfolio(this.user, this.initialPagePtr + 1);
       }
     },
     goPrev() {
       if (this.visiblePrev) {
         this.showLoading = true;
-        this.getPortfolio(this.user, 2);
+        this.getPortfolio(this.user, this.initialPagePtr - 1);
       }
     },
-    getPortfolio(user, initFlag) {
-      if (initFlag == 0) {
-        axios
-          .get(
-            "https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=portfolioPage&userName=" +
-              user
-          )
-          .then(response => {
-            // JSON responses are automatically parsed.
-            let res = response.data;
-            this.user = res.platformHandle;
-            this.tableRows = _.cloneDeep(res.tableRows);
-            this.ravity = res.ravity;
-            this.rowCount = res.rowCount;
-            this.tokenBalance = res.tokenBalance;
-            this.totalDistributed = res.totalDistributed;
-            this.totalReciprocated = res.totalReciprocated;
-            this.tokenBalancePercentage = res.tokenBalancePercentage;
-            this.totalHoldings = res.totalHoldings;
-            this.latestDatetime = res.latestDatetime;
-            this.earliestDatetime = res.earliestDatetime;
-            this.initialPagePtr = 0;
-            this.visiblePrev = false;
-            this.visibleNext = res.next ? true : false;
-            this.userImageUrl = res.userImageUrl;
-            this.showLoading = false;
-          })
-          .catch(e => {
-            console.log(e);
-          });
-      } else if (initFlag == 1) {
-        axios
-          .get(
-            "https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=portfolioPage&userName=" +
-              user +
-              "&earliestDatetime=" +
-              this.earliestDatetime
-          )
-          .then(response => {
-            this.initialPagePtr++;
-            if (this.initialPagePtr) {
-              this.$router.push({
-                path: "portfolio",
-                query: {
-                  user: user,
-                  earliestDatetime: this.earliestDatetime,
-                  page: this.initialPagePtr + 1
-                }
-              });
-            } else {
-              this.$router.push({ path: "portfolio", query: { user: user } });
+    getPortfolio(user, page) {
+      axios
+        .get(
+          "https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=portfolioPage&userName=" +
+            user +
+            "&page=" +
+            page
+        )
+        .then(response => {
+          // JSON responses are automatically parsed.
+          let res = response.data;
+          this.user = res.platformHandle;
+          this.tableRows = _.cloneDeep(res.tableRows);
+          this.ravity = res.ravity;
+          this.rowCount = res.rowCount;
+          this.tokenBalance = res.tokenBalance;
+          this.totalDistributed = res.totalDistributed;
+          this.totalReciprocated = res.totalReciprocated;
+          this.tokenBalancePercentage = res.tokenBalancePercentage;
+          this.totalHoldings = res.totalHoldings;
+          this.initialPagePtr = page;
+          this.visiblePrev = res.prev ? true : false;
+          this.visibleNext = res.next ? true : false;
+          this.userImageUrl = res.userImageUrl;
+          this.showLoading = false;
+          this.$router.push({
+            path: "portfolio",
+            query: {
+              user: user,
+              page: page
             }
-            // JSON responses are automatically parsed.
-            let res = response.data;
-            this.user = res.platformHandle;
-            this.tableRows = _.cloneDeep(res.tableRows);
-            this.ravity = res.ravity;
-            this.rowCount = res.rowCount;
-            this.tokenBalance = res.tokenBalance;
-            this.totalDistributed = res.totalDistributed;
-            this.tokenBalancePercentage = res.tokenBalancePercentage;
-            this.totalHoldings = res.totalHoldings;
-            this.latestDatetime = res.latestDatetime;
-            this.earliestDatetime = res.earliestDatetime;
-
-            this.visiblePrev = true;
-            this.visibleNext = res.next ? true : false;
-            this.userImageUrl = res.userImageUrl;
-            this.platformHandle = res.platformHandle;
-            this.showLoading = false;
-          })
-          .catch(e => {
-            console.log(e);
           });
-      } else {
-        axios
-          .get(
-            "https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=portfolioPage&userName=" +
-              user +
-              "&latestDatetime=" +
-              this.latestDatetime
-          )
-          .then(response => {
-            this.initialPagePtr--;
-
-            if (this.initialPagePtr) {
-              this.$router.push({
-                path: "portfolio",
-                query: {
-                  user: user,
-                  latestDatetime: this.latestDatetime,
-                  page: this.initialPagePtr + 1
-                }
-              });
-            } else {
-              this.$router.push({ path: "portfolio", query: { user: user } });
-            }
-            // JSON responses are automatically parsed.
-            let res = response.data;
-            this.user = res.platformHandle;
-            this.tableRows = _.cloneDeep(res.tableRows);
-            this.ravity = res.ravity;
-            this.rowCount = res.rowCount;
-            this.tokenBalance = res.tokenBalance;
-            this.totalDistributed = res.totalDistributed;
-            this.tokenBalancePercentage = res.tokenBalancePercentage;
-            this.totalHoldings = res.totalHoldings;
-            this.latestDatetime = res.latestDatetime;
-            this.earliestDatetime = res.earliestDatetime;
-
-            this.visiblePrev =
-              res.prev && this.initialPagePtr > 0 ? true : false;
-            this.visibleNext = true;
-            this.userImageUrl = res.userImageUrl;
-            this.platformHandle = res.platformHandle;
-            this.showLoading = false;
-          })
-          .catch(e => {
-            console.log(e);
-          });
-      }
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
+    goHodler(user) {
+      this.$root.$emit("changeUser", user);
+      // this.$root.$emit("sendReciprocated", this.totalReciprocated);
+      this.$router.push({ name: "HodlerPage", query: { user: user } });
     },
     goAnother(user) {
       if (this.user !== user) {
@@ -308,8 +235,6 @@ export default {
     },
     goHistory(user) {
       this.$root.$emit("changeUser", user);
-      // localStorage.setItem("transactionPageNum", 0);
-      // localStorage.setItem("transactionFlag", 0);
       this.$router.push({
         name: "HistoryPage",
         query: {
@@ -370,11 +295,24 @@ export default {
 .portfolio-loading-img img {
   margin: auto;
 }
-.portfolio-userimg {
+.portfolio-user {
   position: absolute;
-  background: white;
-  top: 50%;
+  top: 70px;
   left: 0;
+  text-align: center;
+}
+.portfolio-userlink {
+  margin: 10px auto 10px auto;
+  font-family: "Montserrat";
+  font-size: 15px;
+  color: royalblue;
+  text-decoration: underline;
+}
+.portfolio-userlink:hover {
+  cursor: pointer;
+}
+.portfolio-userimg {
+  background: white;
   display: flex;
   margin: auto;
   width: 120px;
@@ -436,9 +374,9 @@ table th {
   padding-bottom: 8px;
 }
 table thead tr {
+  background: lightgrey;
   height: 60px;
   color: rgb(0, 38, 101);
-  background: lightgrey;
   font-weight: bold;
   font-size: 20px;
 }
@@ -464,7 +402,7 @@ table td.r,
 table th.r {
   text-align: center;
 }
-tr:nth-child(even) {
+table tbody tr:nth-child(even) {
   background-color: rgb(246, 250, 251);
 }
 .table-img {
@@ -484,6 +422,22 @@ tr:nth-child(even) {
 .tr-orange-color {
   color: peru;
 }
+.tr-lightblue-color {
+  background-color: lightblue;
+}
+.td-position-relative {
+  position: relative;
+}
+.td-position-absolute {
+  font-size: 15px;
+  font-style: italic;
+  position: absolute;
+  top: 35%;
+  right: 10px;
+}
+.td-position-absolute:hover {
+  cursor: pointer;
+}
 .history-link {
   font-size: 1.5em;
   font-family: "Montserrat";
@@ -499,10 +453,9 @@ tr:nth-child(even) {
   color: rgb(0, 38, 101);
 }
 @media only screen and (max-width: 767px) {
-  .portfolio-userimg {
+  .portfolio-user {
     position: relative;
-    margin-top: 50px;
-    margin-bottom: -110px;
+    margin-bottom: -40px;
     z-index: 2;
   }
   .portfolio-subtitle-holding {
@@ -511,6 +464,15 @@ tr:nth-child(even) {
   }
   .portfolio-subtitle-holding span {
     transform: none;
+  }
+  .td-position-absolute {
+    position: relative;
+    top: 0;
+    right: 0;
+  }
+  table thead td div {
+    position: relative;
+    margin-top: -20px;
   }
 }
 @media only screen and (max-width: 410px) {

@@ -17,34 +17,45 @@
         </div>
         <div class="col-lg-6 col-sm-12 text-right">
           <div class="d-flex d-flex-right form-group mt-3">
-            <div class="d-flex app-header-searchbar">
-              <input
-                id="autoTokenSelect"
-                type="text"
-                v-model="user"
-                @change="goHistory"
-                class="app-header-input"
-                placeholder="Lookup Twitter @username"
-                list="mylist"
-              />
-              <datalist id="mylist" v-if="user.length>3">
-                <option v-bind:key="item" v-for="item in userList" :value="item">{{item}}</option>
-              </datalist>
-              <div class="app-header-icon" @click="goHistory">
-                <i class="fa fa-search"></i>
+            <div class="app-header-searchbar-container">
+              <div class="d-flex app-header-searchbar">
+                <input
+                  id="autoTokenSelect"
+                  type="text"
+                  v-model="user"
+                  @input="debounceSearch"
+                  @keyup.enter="onEnter"
+                  @keyup.down="onArrowDown"
+                  @keyup.up="onArrowUp"
+                  @focus="inputFocused"
+                  class="app-header-input"
+                  placeholder="Lookup Twitter @username"
+                />
+                <div class="app-header-icon" @click="goPortfolio(user)">
+                  <i class="fa fa-search"></i>
+                </div>
+              </div>
+              <div id="searchResult" v-show="openSearch" class="app-header-search-result">
+                <div
+                  v-for="(filteredUser, index) in result"
+                  :key="index"
+                  class="app-header-search-result-item"
+                  @click="setResult(filteredUser)"
+                  :class="{ 'is-active': index === arrowCounter }"
+                >{{ filteredUser }}</div>
               </div>
             </div>
 
             <router-link
               to="/"
               v-scroll-to="{
-                            el: '#getToken',
-                            duration: 500,
-                            easing: 'linear',
-                            offset: -250,
-                            force: true,
-                            cancelable: true,
-                        }"
+                el: '#getToken',
+                duration: 500,
+                easing: 'linear',
+                offset: -250,
+                force: true,
+                cancelable: true
+              }"
             >
               <AppButton name="GET YOUR TOKENS" type1="true"></AppButton>
             </router-link>
@@ -66,8 +77,12 @@ export default {
   },
   data() {
     return {
+      openSearch: false,
       user: "",
-      userList: []
+      userList: [],
+      result: [],
+      arrowCounter: 0,
+      debounce: null
     };
   },
   created() {
@@ -75,6 +90,12 @@ export default {
     this.$root.$on("changeUser", user => {
       this.user = "";
     });
+  },
+  mounted() {
+    document.addEventListener("click", this.handleClickOutside);
+  },
+  destroyed() {
+    document.removeEventListener("click", this.handleClickOutside);
   },
   methods: {
     getUserList() {
@@ -110,12 +131,25 @@ export default {
                   "userList",
                   JSON.stringify(response.data.userList)
                 );
+<<<<<<< HEAD
                 this.userList = Object.freeze(JSON.parse(localStorage.getItem("userList")));
+=======
+                this.userList = Object.freeze(
+                  JSON.parse(localStorage.getItem("userList"))
+                );
+>>>>>>> develop
               })
               .catch(e => {
                 this.errors.push(e);
               });
+<<<<<<< HEAD
           } else this.userList = Object.freeze(JSON.parse(localStorage.getItem("userList")));
+=======
+          } else
+            this.userList = Object.freeze(
+              JSON.parse(localStorage.getItem("userList"))
+            );
+>>>>>>> develop
         })
         .catch(e => {
           this.errors.push(e);
@@ -123,13 +157,75 @@ export default {
     },
     goLeaderboard: function(event) {
       this.$router.push({
-          name: "LeaderboardPage",
-          query: {
-            page: 1
-          }
-        });
+        name: "LeaderboardPage",
+        query: {
+          page: 1
+        }
+      });
     },
-    goHistory: function(event) {
+    filteredList() {
+      this.result = this.userList.filter(user => {
+        return user.toLowerCase().indexOf(this.user.toLowerCase()) > -1;
+      });
+      if (this.result.length == 0) {
+        this.result[0] = "No Result!!!";
+      }
+    },
+    debounceSearch(event) {
+      clearTimeout(this.debounce);
+      this.debounce = setTimeout(() => {
+        this.user = event.target.value;
+        if (this.user.length > 1) {
+          this.$emit("input", this.search);
+          this.openSearch = true;
+          this.arrowCounter = -1;
+          this.filteredList();
+        } else {
+          this.openSearch = false;
+        }
+      }, 600);
+    },
+    inputFocused(event) {
+      if (this.user.length > 1) {
+        this.openSearch = true;
+        this.filteredList();
+        this.arrowCounter = -1;
+      }
+    },
+    setResult(result) {
+      this.user = result;
+      this.arrowCounter = -1;
+      this.openSearch = false;
+      this.goPortfolio();
+    },
+    onArrowDown(event) {
+      if (this.arrowCounter < this.result.length - 1) {
+        this.arrowCounter = this.arrowCounter + 1;
+        this.user = this.result[this.arrowCounter];
+        document.getElementById("searchResult").scrollTop =
+          44 * this.arrowCounter;
+      }
+    },
+    onArrowUp(event) {
+      if (this.arrowCounter > 0) {
+        this.arrowCounter = this.arrowCounter - 1;
+        this.user = this.result[this.arrowCounter];
+        document.getElementById("searchResult").scrollTop =
+          44 * this.arrowCounter;
+      }
+    },
+    onEnter(event) {
+      this.openSearch = false;
+      this.arrowCounter = -1;
+      this.goPortfolio();
+    },
+    handleClickOutside(evt) {
+      if (!this.$el.contains(evt.target)) {
+        this.openSearch = false;
+        this.arrowCounter = -1;
+      }
+    },
+    goHistory: function(user) {
       // `this` inside methods points to the Vue instance
       if (this.userList.includes(this.user)) {
         document.getElementById("autoTokenSelect").blur();
@@ -141,8 +237,23 @@ export default {
         });
         this.user = "";
       } else {
-        if(this.user){
-          alert("'" + this.user + "'" + " not found!");
+        if (this.user) {
+          this.user = "";
+        }
+      }
+    },
+    goPortfolio: function(user) {
+      if (this.userList.includes(this.user)) {
+        document.getElementById("autoTokenSelect").blur();
+        this.$router.push({
+          name: "PortfolioPage",
+          query: {
+            user: this.user
+          }
+        });
+        this.user = "";
+      } else {
+        if (this.user) {
           this.user = "";
         }
       }
@@ -181,6 +292,10 @@ img {
 .app-header-leaderboard:hover {
   color: blue;
 }
+
+.app-header-searchbar-container {
+  position: relative;
+}
 .app-header-searchbar {
   border: 1px solid #d7d7d7;
   border-radius: 50px;
@@ -214,6 +329,31 @@ img {
 .app-header-icon:hover {
   cursor: pointer;
   color: rgb(0, 38, 101);
+}
+.app-header-search-result {
+  z-index: 9999;
+  position: absolute;
+  border: 1px solid #d7d7d7;
+  border-radius: 10px;
+  background: white;
+  width: 90%;
+  max-height: 300px;
+  overflow: auto;
+  top: 105%;
+  left: 5%;
+  text-align: left !important;
+  -webkit-box-shadow: 0px 1px 8px -1px rgba(17, 71, 235, 1);
+  -moz-box-shadow: 0px 1px 8px -1px rgba(17, 71, 235, 1);
+  box-shadow: 0px 1px 8px -1px rgba(17, 71, 235, 1);
+  transition: all 200ms ease-out;
+}
+.app-header-search-result-item {
+  cursor: pointer;
+  padding: 10px;
+}
+.app-header-search-result-item:hover,
+.is-active {
+  background: lightblue;
 }
 @media only screen and (max-width: 1200px) {
   .app-header-leaderboard {
