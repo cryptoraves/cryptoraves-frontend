@@ -60,8 +60,7 @@
             How do I know if my transaction went through?
           </div>
           <div slot="answer">
-            For a quick token sharing guide, see here. (Notes to Jason: will
-            link to the new Token Sharing Guide page).
+            For a quick token sharing guide, see <a href="/guide" target>here</a>.
             <br />
             <br />For a more detailed, step-by-step walkthrough of our platform,
             read our
@@ -115,8 +114,7 @@
             Cryptoraves is a more decentralized option for tipping on Twitter,
             unlike most centralized tipbots currently available. All of
             Cryptoraves Twitter token transactions are recorded on the
-            blockchain. See our partnership page (Jason links to partnership
-            page) for more details, or contact shannon@cryptoraves.space.
+            blockchain. See our partnership page (COMING SOON) for more details, or contact shannon@cryptoraves.space.
           </div>
         </FaqSection>
         <FaqSection>

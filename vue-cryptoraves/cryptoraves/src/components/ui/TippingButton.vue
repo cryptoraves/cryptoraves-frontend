@@ -1,7 +1,5 @@
 <template>
-  <button class="tipping-button">    
-    New! Deposit & Withdraw
-  </button>
+  <button class="tipping-button">New! Deposit & Withdraw</button>
 </template>
 
 <script>
