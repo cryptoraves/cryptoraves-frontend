@@ -26,7 +26,7 @@ export default new Router({
       path: "/tweetdemo/:target?",
       name: "TweetDemo",
       component: TweetDemo
-    },
+    },    
     {
       path: "/faq/:target?",
       name: "Faq",
@@ -63,7 +63,7 @@ export default new Router({
       component: HistoryPage
     },
     {
-      path: "/partnerships",
+      path: "/partnerships/:target?",
       name: "PartnershipsPage",
       component: PartnershipsPage
     },

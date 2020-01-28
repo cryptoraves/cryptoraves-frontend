@@ -8,23 +8,7 @@
 
 <script>
 export default {
-  name: "SectionHeader",
-  props: {
-    user: String
-  },
-  methods: {
-    goHistory(user) {
-      this.$root.$emit("changeUser", user);
-      // localStorage.setItem("transactionPageNum", 0);
-      // localStorage.setItem("transactionFlag", 0);
-      this.$router.push({
-        name: "HistoryPage",
-        query: {
-          user: user
-        }
-      });
-    }
-  }
+  name: "SectionHeader"  
 };
 </script>
 

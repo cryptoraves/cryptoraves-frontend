@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <SectionHeader>Get Your Tokens</SectionHeader>
+    <SectionHeader>Launch Your Token</SectionHeader>
     <div class="row gettoken-content">
       <div id="getToken" class="col-lg-6 mt-2 d-flex">
         <a href="http://twitter.com" target="_blank">

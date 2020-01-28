@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <SectionHeader>Withdrawing Tokens</SectionHeader>
+    <SectionHeader>Deposit & Withdrawal</SectionHeader>
     <div class="row withdrawing-section">
       <div class="col-lg-6 m-auto d-flex">
         <img src="../../assets/img/partnerships-2.png" />
@@ -9,11 +9,16 @@
         <div class="space-30"></div>
         <div
           class="withdrawing-content-1"
-        >In order to withdraw tokens from the Cryptoraves platform, users must complete several steps.</div>
+        >Now available! Deposit & Withdrawal of $VYA and $CRYPTORAVES Tokens!</div>
         <div class="space-50"></div>
         <div
           class="withdrawing-content-1"
-        >This feature is currenly being built, & instructions will be rolled out in Q1 2020. Check back soon!</div>
+        >Visit our Step-by-Step Instructions page here, & our Web3 Portal here to guide you through the process.</div>
+        <div class="space-50"></div>
+        <div
+          class="withdrawing-content-1"
+        >Deposit & Withdrawal of personalized Cryptoraves tokens coming soon.
+        </div>
         <div class="space-30"></div>
       </div>
     </div>

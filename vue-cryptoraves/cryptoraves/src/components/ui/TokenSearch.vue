@@ -3,30 +3,19 @@
     <div class="tokensearch-shape">
       <img src="../../assets/img/searchicon.png" />
     </div>
-    <div class="tokensearch-input">
-      <input
-        id="autoTokenSelect1"
-        type="text"
-        v-model="user"
-        list="tokenlist"
-        @change="goHistory"
-        placeholder="Lookup Twitter @username"
-      />
-      <datalist id="tokenlist" v-if="user.length>1">
-        <option v-bind:key="item" v-for="item in userList" :value="item">{{item}}</option>
-      </datalist>
-    </div>
-    <div class="tokensearch-icon" @click="goHistory">
-      <i class="fa fa-search"></i>
-    </div>
+    <SearchBar :tokensearch="true"></SearchBar>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import SearchBar from "../ui/SearchBar";
 
 export default {
   name: "TokenSearch",
+  components: {
+    SearchBar
+  },
   data() {
     return {
       user: "",
@@ -152,32 +141,6 @@ export default {
   height: 70px;
   margin: auto auto auto 25px;
 }
-.tokensearch-input {
-  width: 60%;
-  margin-left: 20px;
-}
-.tokensearch-input input {
-  width: 100%;
-  height: 100%;
-  font-size: 20px;
-  font-family: "Montserrat";
-  color: black;
-  text-align: left;
-  border: none;
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  hyphens: auto;
-}
-
-.tokensearch-icon {
-  font-size: 20px;
-  color: rgb(0, 123, 255);
-  margin: auto;
-}
-.tokensearch-icon:hover {
-  cursor: pointer;
-  color: rgb(0, 38, 101);
-}
 @media only screen and (max-width: 500px) {
   ::-webkit-input-placeholder {
     /* Chrome/Opera/Safari */
@@ -221,9 +184,6 @@ export default {
     width: 50px;
     height: 50px;
     margin: auto auto auto 10px;
-  }
-  .tokensearch-input input {
-    font-size: 13px;
   }
   ::-webkit-input-placeholder {
     /* Chrome/Opera/Safari */

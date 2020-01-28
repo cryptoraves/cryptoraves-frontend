@@ -47,12 +47,7 @@
                 <i class="fa fa-telegram"></i>
               </div>
             </a>
-
-            <a href="https://discord.gg/xTgrxh3" target="_blank">
-              <div class="d-flex slideshare-gradient">
-                <i class="fa fa-slideshare"></i>
-              </div>
-            </a>
+         
           </div>
         </div>
         <div class="whitelogo d-flex col-lg-2 col-sm-12">

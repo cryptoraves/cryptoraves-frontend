@@ -26,15 +26,15 @@
                             cancelable: true,
                         }"
           >
-            <AppButton name="Get Your tokens" type2="true"></AppButton>
+            <AppButton name="Launch Your token" type2="true"></AppButton>
           </router-link>
           <span v-on:click="goFaqTop">
             <AppButton name="Learn More" type3="true"></AppButton>
           </span>
           <br />
-          <span v-on:click="goPartnership">
+          <a href="http://web3.cryptoraves.space/" target="_blank">
             <TippingButton></TippingButton>
-          </span>
+          </a>
         </div>
       </div>
     </div>
@@ -44,6 +44,7 @@
 <script>
 import AppButton from "../../components/ui/AppButton";
 import TippingButton from "../../components/ui/TippingButton";
+
 export default {
   name: "HeroSection",
   components: {
@@ -67,9 +68,6 @@ export default {
           user: "@cypher"
         }
       });
-    },
-    goPartnership: function(event) {
-      this.$router.push({ name: "PartnershipsPage" });
     }
   }
 };
