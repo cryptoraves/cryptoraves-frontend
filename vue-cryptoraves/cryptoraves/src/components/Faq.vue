@@ -1,6 +1,6 @@
 <template>
   <transition name="fade" mode="out-in">
-    <div class="container">
+    <div class="container temp">
       <div class="faq-page-template">
         <SectionHeader>FAQ</SectionHeader>
         <FaqSection>
@@ -48,9 +48,21 @@
         <FaqSection>
           <div slot="title">How do I Tip Using VAYLA Tokens?</div>
           <div slot="answer">
-            Coming soon.... Click
-            <a href target>here</a> for detailed instructions on how to tip with
+            Click
+            <a href @click="goVyaGuide">here</a> for detailed instructions on how to tip with
             VAYLA tokens.
+          </div>
+        </FaqSection>
+        <FaqSection>
+          <div slot="title">How do I Deposit or Withdraw my tokens?</div>
+          <div slot="answer">
+            The Cryptoraves platform is currently enabled to support Deposit & Withdraw of Cryptoraves official tokens ($CRYPTORAVES) and VAYLA tokens ($VYA).  Deposit & Withdraw of personalized tokens is coming soon.
+            <br>
+            <br>
+            To initiate, follow our Step-by-Step Instruction guide <a href="http://web3.cryptoraves.space/stepinstructions" target="_blank">here</a>.
+            <br>
+            <br>            
+            Or visit our <a href="http://web3.cryptoraves.space/" target="_blank">Web 3 Portal</a> to be guided through the process via user prompts.
           </div>
         </FaqSection>
         <FaqSection>
@@ -60,7 +72,8 @@
             How do I know if my transaction went through?
           </div>
           <div slot="answer">
-            For a quick token sharing guide, see <a href="/guide" target>here</a>.
+            For a quick token sharing guide, see
+            <a href="/guide" target>here</a>.
             <br />
             <br />For a more detailed, step-by-step walkthrough of our platform,
             read our
@@ -114,7 +127,7 @@
             Cryptoraves is a more decentralized option for tipping on Twitter,
             unlike most centralized tipbots currently available. All of
             Cryptoraves Twitter token transactions are recorded on the
-            blockchain. See our partnership page (COMING SOON) for more details, or contact shannon@cryptoraves.space.
+            blockchain. See our <a href="http://cryptoraves.space/partnerships" target="_blank">Partnership page</a> for more details, or contact shannon@cryptoraves.space.
           </div>
         </FaqSection>
         <FaqSection>
@@ -241,6 +254,11 @@ export default {
         }
       } while ((elem = elem.offsetParent));
       return offsetLeft;
+    },
+    goVyaGuide: function() {
+      this.$router.push({
+        name: "VYAGuidePage"        
+      });    
     }
   }
 };

@@ -13,7 +13,7 @@
         <div class="space-50"></div>
         <div
           class="withdrawing-content-1"
-        >Visit our Step-by-Step Instructions page here, & our Web3 Portal here to guide you through the process.</div>
+        >Visit our <a href="http://web3.cryptoraves.space/stepinstructions" target="_blank">Step-by-Step Instructions page here</a>, & our <a href="http://web3.cryptoraves.space/" target="_blank">Web 3 Portal</a> here to guide you through the process.</div>
         <div class="space-50"></div>
         <div
           class="withdrawing-content-1"

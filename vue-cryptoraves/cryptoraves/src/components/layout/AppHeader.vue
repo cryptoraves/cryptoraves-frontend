@@ -40,7 +40,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import AppButton from "../ui/AppButton";
 import SearchBar from "../ui/SearchBar";
 
@@ -49,6 +48,13 @@ export default {
   components: {
     AppButton,
     SearchBar
+  },
+  methods: {
+    goLeaderboard: function(event) {
+      this.$router.push({
+        name: "LeaderboardPage"
+      });
+    }
   }
 };
 </script>

@@ -1,6 +1,11 @@
 <template>
   <div class="section-header">
-    <img src="../../assets/img/cryptoraves_PNG-01.png" />
+    <img 
+      v-if="vya" 
+      src="../../assets/img/vya-icon.png" />
+    <img
+      v-else
+      src="../../assets/img/cryptoraves_PNG-01.png"/>
     <br />
     <slot></slot>
   </div>
@@ -8,7 +13,13 @@
 
 <script>
 export default {
-  name: "SectionHeader"  
+  name: "SectionHeader",
+  props: {
+    vya: {
+      type: Boolean,
+      default: false
+    }
+  }
 };
 </script>
 

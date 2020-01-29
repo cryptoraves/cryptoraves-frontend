@@ -1,5 +1,5 @@
 <template>
-  <button class="tipping-button">New! Deposit & Withdraw</button>
+  <button class="tipping-button"><span class="tipping-button-1">New!</span> Deposit & Withdraw</button>
 </template>
 
 <script>
@@ -37,7 +37,6 @@ export default {
   transition: all 200ms ease-out;
 }
 .tipping-button-1 {
-  font-size: 18px;
-  margin-right: 20px;
+  font-size: 16px;
 }
 </style>

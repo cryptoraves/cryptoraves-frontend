@@ -47,7 +47,10 @@
         <!-- ---------------------------------------------------------------------------- -->
         <!-- need to do in future -->
         <div class="space-40"></div>
-        <AppButton name="See who is trending" type4="true"></AppButton>
+        <!-- <AppButton name="See who is trending" type4="true"></AppButton> -->
+        <a href="http://web3.cryptoraves.space/" target="_blank">
+          <TippingButton></TippingButton>
+        </a>
 
         <!-- ---------------------------------------------------------------------------- -->
         <div class="checktoken-content-2">But what is the meaning (or value) behind these tokens?</div>
@@ -60,12 +63,14 @@
 import SectionHeader from "../../components/ui/SectionHeader";
 import AppButton from "../../components/ui/AppButton";
 import TokenSearch from "../../components/ui/TokenSearch";
+import TippingButton from "../../components/ui/TippingButton"
 export default {
   name: "CheckToken",
   components: {
     SectionHeader,
     AppButton,
-    TokenSearch
+    TokenSearch,
+    TippingButton
   }
 };
 </script>
