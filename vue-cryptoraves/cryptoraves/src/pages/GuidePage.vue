@@ -3,31 +3,29 @@
     <div class="container">
       <div class="guide-page-template">
         <SectionHeader>
-          Tweet Your Tokens ( with a
-          <i>brand new Tweet</i>
-           ):
+          Tweet Your Tokens (with a
+          <i>brand new Tweet</i>):
         </SectionHeader>
         <AppButton type8="true" name="Tweet"></AppButton>
         <img src="../assets/img/guide-1.png" />
 
         <SectionHeader>
-          Reply & Send Your Tokens ( with a
-          <i>Tweet Reply</i>
-           ):
+          Reply & Send Your Tokens (with a
+          <i>Tweet Reply</i>):
         </SectionHeader>
         <div class="reply-icon"></div>
         <img src="../assets/img/guide-2.png" />
 
         <SectionHeader>
-          Tweet Different Tokens Brands You Hold ( with a
-          <i>brand new Tweet</i> ):
+          Tweet Different Tokens Brands You Hold (with a
+          <i>brand new Tweet</i>):
         </SectionHeader>
         <AppButton type8="true" name="Tweet"></AppButton>
         <img src="../assets/img/guide-3.png" />
 
         <SectionHeader>
-          Reply & Send Different Token Brands You Hold ( with a
-          <i>Tweet Reply</i> ):
+          Reply & Send Different Token Brands You Hold (with a
+          <i>Tweet Reply</i>):
         </SectionHeader>
         <div class="reply-icon"></div>
         <img src="../assets/img/guide-4.png" />

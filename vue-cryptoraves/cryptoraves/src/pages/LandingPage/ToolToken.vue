@@ -32,7 +32,7 @@
           </div>
         </div>
       </div>
-      <div class="row tooltoken-footer">Interested in Partnering? The Cryptoraves platform can help grow demand for your Token. <span @click="goPartnerships">Click here.</span></div>
+      <div class="row tooltoken-footer">Want to Tip Your ERC-20 Token on Twitter? The Cryptoraves platform can help grow demand for your token. <span @click="goPartnerships">Learn more.</span></div>
     </div>
   </div>
 </template>
@@ -101,6 +101,7 @@ img {
   width: 70%;
   margin: auto;
   padding-bottom: 40px;    
+  text-align: center;
 }
 .tooltoken-footer span {
   display: contents;
