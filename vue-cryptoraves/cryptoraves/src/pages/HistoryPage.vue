@@ -238,6 +238,12 @@ export default {
       }
     },
     getHistory(user, initFlag) {
+      if (user.toLowerCase().startsWith('import')){
+        user='IMPORT'
+      }
+      if (user.toLowerCase().startsWith('export')){
+        user='EXPORT'
+      }
       this.showLoading = true;
       if (initFlag == 0) {
         axios
@@ -261,7 +267,6 @@ export default {
             this.userImageUrl = res.userImageUrl;
             this.blockexplorerUrl = res.blockexplorerUrl;
             this.showLoading = false;
-            console.log(this.tableRows)
             // localStorage.setItem("earlistData", this.earliestDatetime);
             // localStorage.setItem("latestDatetime", this.latestDatetime);
             // localStorage.setItem("transactionFlag", initFlag);
@@ -366,8 +371,6 @@ export default {
       }
     },
     getShowTweet(userFrom, userTo){
-      console.log(userFrom)
-      console.log(userTo)
       if (
         userFrom == 'Import to Cryptoraves' ||
         userFrom == 'Export To Mainnet' ||

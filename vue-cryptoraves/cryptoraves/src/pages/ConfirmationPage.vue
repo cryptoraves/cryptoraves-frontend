@@ -181,6 +181,7 @@ export default {
         });
     },
     goPortfolio(user) {
+      
       this.$root.$emit("changeUser", user);
       this.$router.push({ name: "PortfolioPage", query: { user: user } });
     },
@@ -191,6 +192,7 @@ export default {
       window.open(link);
     },
     goHistory(user) {
+      
       this.$root.$emit("changeUser", user);
       // localStorage.setItem("transactionPageNum", 0);
       // localStorage.setItem("transactionFlag", 0);
