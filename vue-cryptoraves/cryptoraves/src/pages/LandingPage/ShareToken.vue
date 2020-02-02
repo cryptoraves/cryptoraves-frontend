@@ -6,7 +6,7 @@
         <div class="col-lg-6 mt-2 d-flex">
           <img src="../../assets/img/shareimg.png" />
         </div>
-        <div class="col-lg-6 mt-5">
+        <div class="col-lg-6 mt-2">
           <div class="sharetoken-content-1">Advocate for Crypto by Sharing!</div>
           <div
             class="sharetoken-content-2"

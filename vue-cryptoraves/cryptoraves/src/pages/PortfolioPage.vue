@@ -6,7 +6,7 @@
       </div>
       <div v-else>
         <div class="portfolio-title">
-          <SectionHeader :user="this.user">{{this.user}}'s Portfolio Page</SectionHeader>
+          <SectionHeader>{{this.user}}'s Portfolio Page</SectionHeader>
           <div class="portfolio-subtitle">
             <div class="portfolio-subtitle-details">
               <div

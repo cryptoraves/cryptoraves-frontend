@@ -32,6 +32,7 @@
           </div>
         </div>
       </div>
+      <div class="row tooltoken-footer">Want to Tip Your ERC-20 Token on Twitter? The Cryptoraves platform can help grow demand for your token. <span @click="goPartnerships">Learn more.</span></div>
     </div>
   </div>
 </template>
@@ -42,6 +43,16 @@ export default {
   name: "ToolToken",
   components: {
     SectionHeader
+  },
+  methods: {
+    goPartnerships: function() {
+      this.$router.push({
+        name: "PartnershipsPage",
+        query: {
+          target: "partnerships"
+        }
+      });    
+    }
   }
 };
 </script>
@@ -55,7 +66,7 @@ img {
 }
 .tooltoken-content {
   padding-top: 40px;
-  padding-bottom: 150px;
+  padding-bottom: 40px;
   font-family: "Montserrat";
   font-size: 20px;
   color: rgb(0, 38, 101);
@@ -81,6 +92,31 @@ img {
   line-height: 1.333;
   text-align: left;
 }
+ .tooltoken-footer {
+  color: blue;
+  font-family: "Montserrat";
+  font-style: italic;
+  font-weight: bold;
+  font-size: 25px;
+  width: 70%;
+  margin: auto;
+  padding-bottom: 40px;    
+  text-align: center;
+}
+.tooltoken-footer span {
+  display: contents;
+  cursor: pointer;  
+}
+.tooltoken-footer span:hover {
+  text-decoration: underline;
+}
+
+@media only screen and (max-width: 991px) {
+  .tooltoken-footer {
+    width: 100%;
+  }
+}
+
 @media only screen and (max-width: 500px) {
   img {
     width: 300px;
@@ -96,6 +132,6 @@ img {
   }
   .tooltoken-content {
     padding-bottom: 50px;
-  }
+  } 
 }
 </style>

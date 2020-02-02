@@ -1,6 +1,11 @@
 <template>
   <div class="section-header">
-    <img src="../../assets/img/cryptoraves_PNG-01.png" />
+    <img 
+      v-if="vya" 
+      src="../../assets/img/vya-icon.png" />
+    <img
+      v-else
+      src="../../assets/img/cryptoraves_PNG-01.png"/>
     <br />
     <slot></slot>
   </div>
@@ -10,19 +15,9 @@
 export default {
   name: "SectionHeader",
   props: {
-    user: String
-  },
-  methods: {
-    goHistory(user) {
-      this.$root.$emit("changeUser", user);
-      // localStorage.setItem("transactionPageNum", 0);
-      // localStorage.setItem("transactionFlag", 0);
-      this.$router.push({
-        name: "HistoryPage",
-        query: {
-          user: user
-        }
-      });
+    vya: {
+      type: Boolean,
+      default: false
     }
   }
 };

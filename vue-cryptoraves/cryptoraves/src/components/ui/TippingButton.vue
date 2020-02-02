@@ -1,8 +1,5 @@
 <template>
-  <!--<button class="tipping-button">
-    <span class="tipping-button-1">NEW!</span>
-    TIPPING
-  </button>-->
+  <button class="tipping-button"><span class="tipping-button-1">New!</span> Deposit & Withdraw</button>
 </template>
 
 <script>
@@ -16,7 +13,7 @@ export default {
   background-color: rgb(17, 99, 206);
   width: 250px;
   height: 65px;
-  font-size: 20px;
+  font-size: 18px;
   font-family: "Roboto Condensed";
   color: #fff;
   text-transform: uppercase;
@@ -40,7 +37,6 @@ export default {
   transition: all 200ms ease-out;
 }
 .tipping-button-1 {
-  font-size: 18px;
-  margin-right: 20px;
+  font-size: 16px;
 }
 </style>

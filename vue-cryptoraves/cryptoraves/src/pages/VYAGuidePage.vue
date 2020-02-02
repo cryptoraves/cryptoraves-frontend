@@ -2,33 +2,21 @@
   <transition name="fade" mode="out-in">
     <div class="container">
       <div class="guide-page-template">
-        <SectionHeader>
-          Tweet Your Tokens (with a
-          <i>brand new Tweet</i>):
+        <SectionHeader :vya="true">
+          Tweet $VYA Tokens ( with a
+          <i>brand new Tweet</i>
+           ):
         </SectionHeader>
         <AppButton type8="true" name="Tweet"></AppButton>
-        <img src="../assets/img/guide-1.png" />
+        <img src="../assets/img/vya-1.png" />
 
-        <SectionHeader>
-          Reply & Send Your Tokens (with a
-          <i>Tweet Reply</i>):
+        <SectionHeader :vya="true">
+          Reply & Send $VYA Tokens ( with a
+          <i>Tweet Reply</i>
+           ):
         </SectionHeader>
         <div class="reply-icon"></div>
-        <img src="../assets/img/guide-2.png" />
-
-        <SectionHeader>
-          Tweet Different Tokens Brands You Hold (with a
-          <i>brand new Tweet</i>):
-        </SectionHeader>
-        <AppButton type8="true" name="Tweet"></AppButton>
-        <img src="../assets/img/guide-3.png" />
-
-        <SectionHeader>
-          Reply & Send Different Token Brands You Hold (with a
-          <i>Tweet Reply</i>):
-        </SectionHeader>
-        <div class="reply-icon"></div>
-        <img src="../assets/img/guide-4.png" />
+        <img src="../assets/img/vya-2.png" />                                
       </div>
     </div>
   </transition>
@@ -38,7 +26,7 @@
 import SectionHeader from "../components/ui/SectionHeader";
 import AppButton from "../components/ui/AppButton";
 export default {
-  name: "GuidePage",
+  name: "VYAGuidePage",
   components: {
     SectionHeader,
     AppButton

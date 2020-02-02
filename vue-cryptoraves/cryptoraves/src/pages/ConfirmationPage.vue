@@ -106,6 +106,7 @@
             >{{this.item.txnHash}}</div>
             <div class="d-flex">
               <img
+                v-if="showTweet"
                 src="../assets/img/twitter.png"
                 v-on:click="goTweet(item.linkToContent) "
                 title="Link to Tweet"
@@ -138,6 +139,7 @@ export default {
   },
   data() {
     return {
+      showTweet: true,
       txnId: "",
       txnID: "",
       tableRows: [],
@@ -167,6 +169,12 @@ export default {
           this.txnID = this.tableRows[0].txnHash;
           this.item = this.tableRows[0];
           this.showLoading = false;
+          if (
+            this.item.userFrom == 'Import to Cryptoraves' ||
+            this.item.userTo == 'Export To Mainnet'
+          ) {
+            this.showTweet = false
+          }
         })
         .catch(e => {
           console.log(e);

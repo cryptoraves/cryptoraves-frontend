@@ -14,8 +14,8 @@
         <div class="vaylatoken-content-2">
           Learn how to tip
           <a
-            href=" https://medium.com/@cryptoraves/the-cryptoraves-roadmap-vision-1a8b37fc0942"
-            target="_blank"
+            href
+            @click="goVyaGuide"            
           >here</a>.
         </div>
         <div class="space-30"></div>
@@ -37,6 +37,13 @@ export default {
   name: "VaylaToken",
   components: {
     SectionHeader
+  },
+  methods: {
+    goVyaGuide: function() {
+      this.$router.push({
+        name: "VYAGuidePage"        
+      });    
+    }
   }
 };
 </script>

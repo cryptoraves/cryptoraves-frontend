@@ -11,6 +11,7 @@ import Faq from "@/components/Faq";
 import NotFound from "@/pages/NotFound";
 import PartnershipsPage from "@/pages/PartnershipsPage/PartnershipsPage";
 import GuidePage from "@/pages/GuidePage";
+import VYAGuidePage from "@/pages/VYAGuidePage";
 
 Vue.use(Router);
 
@@ -26,7 +27,7 @@ export default new Router({
       path: "/tweetdemo/:target?",
       name: "TweetDemo",
       component: TweetDemo
-    },
+    },    
     {
       path: "/faq/:target?",
       name: "Faq",
@@ -36,6 +37,11 @@ export default new Router({
       path: "/guide",
       name: "GuidePage",
       component: GuidePage
+    },
+    {
+      path: "/vyaguide",
+      name: "VYAGuidePage",
+      component: VYAGuidePage
     },
     {
       path: "/confirmation/:txnId?",
@@ -63,7 +69,7 @@ export default new Router({
       component: HistoryPage
     },
     {
-      path: "/partnerships",
+      path: "/partnerships/:target?",
       name: "PartnershipsPage",
       component: PartnershipsPage
     },
