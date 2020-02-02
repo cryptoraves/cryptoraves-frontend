@@ -71,6 +71,7 @@
                 </td>
                 <td>
                   <img
+                    v-if="getShowTweet(item.userFrom, item.userTo)"
                     class="link"
                     src="../assets/img/twittersmall.png"
                     @click="goTweet(item.linkToContent)"
@@ -167,6 +168,7 @@ export default {
   },
   data() {
     return {
+      showTweet: true,
       user: "",
       tableRows: [],
       rowCount: 0,
@@ -259,6 +261,7 @@ export default {
             this.userImageUrl = res.userImageUrl;
             this.blockexplorerUrl = res.blockexplorerUrl;
             this.showLoading = false;
+            console.log(this.tableRows)
             // localStorage.setItem("earlistData", this.earliestDatetime);
             // localStorage.setItem("latestDatetime", this.latestDatetime);
             // localStorage.setItem("transactionFlag", initFlag);
@@ -360,6 +363,20 @@ export default {
           .catch(e => {
             console.log(e);
           });
+      }
+    },
+    getShowTweet(userFrom, userTo){
+      console.log(userFrom)
+      console.log(userTo)
+      if (
+        userFrom == 'Import to Cryptoraves' ||
+        userFrom == 'Export To Mainnet' ||
+        userTo == 'Import to Cryptoraves' ||
+        userTo == 'Export To Mainnet'
+      ) {
+        return false
+      } else {
+        return true
       }
     },
     goAnother(user) {
