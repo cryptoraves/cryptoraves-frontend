@@ -6,7 +6,6 @@
       v-bind:class="[ tokensearch ? 'token-header-searchbar' : 'app-header-searchbar']"
     >
       <input
-        id="autoTokenSelect"
         type="text"
         v-model="user"
         @input="debounceSearch"
@@ -184,7 +183,6 @@ export default {
     },
     goPortfolio: function(user) {
       if (this.userList.includes(this.user)) {
-        document.getElementById("autoTokenSelect").blur();
         this.$router.push({
           name: "PortfolioPage",
           query: {

@@ -16,6 +16,7 @@
             <div class="history-userimg">
               <img
                 :src="this.userImageUrl"
+                onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
                 title="Click to See Portfolio & Token Balance"
                 @click="goPortfolio(user)"
               />
@@ -60,10 +61,16 @@
                     v-if="!item.userFrom.includes('Official Launch')"
                     class="table-img"
                     :src="item.userFromImageUrl"
+                    onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
                     :title="item.userFrom"
                     @click="getHistory(item.userFrom, 0)"
                   />
-                  <img v-else class="launch-img" :src="item.userFromImageUrl" title="LAUNCH" />
+                  <img 
+                    v-else 
+                    class="launch-img" 
+                    :src="item.userFromImageUrl"
+                    onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
+                    title="LAUNCH" />
                 </td>
                 <td>
                   <div v-if="platformHandle === item.userFrom">Sent</div>
@@ -83,6 +90,7 @@
                     v-if="item.ticker"
                     class="table-img"
                     :src="item.tokenBrandImageUrl"
+                    onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
                     :title="item.ticker"
                     @click="getHistory(item.tokenBrand, 0)"
                   />
@@ -90,6 +98,7 @@
                     v-else
                     class="table-img"
                     :src="item.tokenBrandImageUrl"
+                    onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
                     :title="item.tokenBrand"
                     @click="getHistory(item.tokenBrand, 0)"
                   />
@@ -102,10 +111,16 @@
                     v-if="!item.userTo.includes('Export To Mainnet')"
                     class="table-img"
                     :src="item.userToImageUrl"
+                    onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
                     :title="item.userTo"
                     @click="getHistory(item.userTo, 0)"
                   />
-                  <img v-else class="launch-img" :src="item.userToImageUrl" :title="item.userTo" />
+                  <img 
+                    v-else 
+                    class="launch-img" 
+                    :src="item.userToImageUrl" 
+                    onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
+                    :title="item.userTo" />
                 </td>
                 <td>
                   <div
