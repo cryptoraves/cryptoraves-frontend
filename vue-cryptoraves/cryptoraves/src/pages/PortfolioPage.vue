@@ -131,8 +131,6 @@ export default {
       tokenBalancePercentage: 0,
       totalDistributed: 0,
       totalHoldings: 0,
-      earliestDatetime: "",
-      latestDatetime: "",
       initialPagePtr: 1,
       visibleNext: true,
       visiblePrev: true,
@@ -180,6 +178,12 @@ export default {
       }
     },
     getPortfolio(user, page) {
+      if (user.toLowerCase().startsWith('import')){
+        user='IMPORT'
+      }
+      if (user.toLowerCase().startsWith('export')){
+        user='EXPORT'
+      }
       axios
         .get(
           "https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=portfolioPage&userName=" +

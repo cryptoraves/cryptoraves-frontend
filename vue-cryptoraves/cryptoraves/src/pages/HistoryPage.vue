@@ -71,6 +71,7 @@
                 </td>
                 <td>
                   <img
+                    v-if="getShowTweet(item.userFrom, item.userTo)"
                     class="link"
                     src="../assets/img/twittersmall.png"
                     @click="goTweet(item.linkToContent)"
@@ -167,6 +168,7 @@ export default {
   },
   data() {
     return {
+      showTweet: true,
       user: "",
       tableRows: [],
       rowCount: 0,
@@ -236,6 +238,12 @@ export default {
       }
     },
     getHistory(user, initFlag) {
+      if (user.toLowerCase().startsWith('import')){
+        user='IMPORT'
+      }
+      if (user.toLowerCase().startsWith('export')){
+        user='EXPORT'
+      }
       this.showLoading = true;
       if (initFlag == 0) {
         axios
@@ -360,6 +368,18 @@ export default {
           .catch(e => {
             console.log(e);
           });
+      }
+    },
+    getShowTweet(userFrom, userTo){
+      if (
+        userFrom == 'Import to Cryptoraves' ||
+        userFrom == 'Export To Mainnet' ||
+        userTo == 'Import to Cryptoraves' ||
+        userTo == 'Export To Mainnet'
+      ) {
+        return false
+      } else {
+        return true
       }
     },
     goAnother(user) {

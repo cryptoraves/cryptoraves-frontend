@@ -187,6 +187,12 @@ export default {
       }
     },
     getHodler(user, page) {
+      if (user.toLowerCase().startsWith('import')){
+        user='IMPORT'
+      }
+      if (user.toLowerCase().startsWith('export')){
+        user='EXPORT'
+      }
       axios
         .get(
           "https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=hodlersPage&userName=" +

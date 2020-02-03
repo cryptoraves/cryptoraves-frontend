@@ -106,6 +106,7 @@
             >{{this.item.txnHash}}</div>
             <div class="d-flex">
               <img
+                v-if="showTweet"
                 src="../assets/img/twitter.png"
                 v-on:click="goTweet(item.linkToContent) "
                 title="Link to Tweet"
@@ -138,6 +139,7 @@ export default {
   },
   data() {
     return {
+      showTweet: true,
       txnId: "",
       txnID: "",
       tableRows: [],
@@ -167,12 +169,19 @@ export default {
           this.txnID = this.tableRows[0].txnHash;
           this.item = this.tableRows[0];
           this.showLoading = false;
+          if (
+            this.item.userFrom == 'Import to Cryptoraves' ||
+            this.item.userTo == 'Export To Mainnet'
+          ) {
+            this.showTweet = false
+          }
         })
         .catch(e => {
           console.log(e);
         });
     },
     goPortfolio(user) {
+      
       this.$root.$emit("changeUser", user);
       this.$router.push({ name: "PortfolioPage", query: { user: user } });
     },
@@ -183,6 +192,7 @@ export default {
       window.open(link);
     },
     goHistory(user) {
+      
       this.$root.$emit("changeUser", user);
       // localStorage.setItem("transactionPageNum", 0);
       // localStorage.setItem("transactionFlag", 0);
