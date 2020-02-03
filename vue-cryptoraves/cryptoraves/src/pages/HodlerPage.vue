@@ -40,6 +40,7 @@
             <div class="hodler-userimg">
               <img
                 :src="userImageUrl"
+                onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
                 title="Click to See Transaction History"
                 @click="goHistory(user)"
               />
@@ -67,6 +68,7 @@
                     v-if="item.ticker"
                     class="table-img"
                     :src="item.tokenBrandImageUrl"
+                    onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
                     :title="item.ticker"
                     @click="goAnother(item.hodler)"
                   />
@@ -74,6 +76,7 @@
                     v-else
                     class="table-img"
                     :src="item.tokenBrandImageUrl"
+                    onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
                     :title="item.hodler"
                     @click="goAnother(item.hodler)"
                   />

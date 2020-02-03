@@ -33,6 +33,7 @@
                   <img
                     class="table-img"
                     :src="item.tokenBrandImageUrl"
+                    onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
                     :title="item.tokenBrand"
                     @click="goPortfolio(item.tokenBrand)"
                   />

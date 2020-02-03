@@ -18,12 +18,14 @@
               <img
                 v-if="!this.item.userFromTitle"
                 :src="this.item.userFromImageUrl"
+                onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
                 :title="item.userFrom"
                 @click="goPortfolio(item.userFrom)"
               />
               <img
                 v-else
                 :src="this.item.userFromImageUrl"
+                onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
                 :title="this.item.userFromTitle"
                 @click="goPortfolio(item.userFrom)"
               />
@@ -43,7 +45,10 @@
           </div>
           <div v-else class="confirmation-fromsection col-lg-4 col-md-4 col-sm-4">
             <div class="launch-userfromimage">
-              <img :src="this.item.userFromImageUrl" :title="item.userFrom" />
+              <img 
+                :src="this.item.userFromImageUrl" 
+                onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
+                :title="item.userFrom" />
             </div>
             <div class="launch-userFromTo" :title="item.userFrom">Token Launch!</div>
           </div>
@@ -59,6 +64,7 @@
               <div class="confirmation-tokenbrandimage">
                 <img
                   :src="this.item.tokenBrandImageUrl"
+                  onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
                   @click="goPortfolio(item.tokenBrand)"
                   :title="item.tokenBrand"
                 />
@@ -74,6 +80,7 @@
             <div class="confirmation-usertoimage">
               <img
                 :src="this.item.userToImageUrl"
+                onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
                 @click="goPortfolio(item.userTo)"
                 :title="item.userTo"
               />

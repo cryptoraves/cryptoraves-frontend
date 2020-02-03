@@ -31,6 +31,7 @@
             <div class="portfolio-userimg">
               <img
                 :src="this.userImageUrl"
+                onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
                 title="Click to See Hodler's Page"
                 @click="goHodler(user)"
               />
@@ -58,14 +59,16 @@
                     v-if="item.ticker"
                     class="table-img"
                     :src="item.tokenBrandImageUrl"
+                    onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
                     :title="item.ticker"
                     @click="goAnother(item.tokenBrand)"
                   />
                   <img
                     v-else
-                    class="table-img"
+                    class="table-img"                    
                     :src="item.tokenBrandImageUrl"
-                    :title="item.tokenBrand"
+                    onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
+                    :title="item.tokenBrand"                    
                     @click="goAnother(item.tokenBrand)"
                   />
                 </td>
