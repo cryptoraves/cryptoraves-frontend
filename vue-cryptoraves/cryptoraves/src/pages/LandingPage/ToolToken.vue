@@ -59,7 +59,6 @@ export default {
 
 <style scoped>
 .tooltoken {
-  background-color: rgb(246, 250, 251);
 }
 img {
   margin: auto;
