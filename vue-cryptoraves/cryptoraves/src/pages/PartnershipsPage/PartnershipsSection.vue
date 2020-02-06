@@ -20,7 +20,7 @@
           <div class="space-20"></div>
           <div class="partnerships-section-content-4">
             <a
-              href="https://medium.com/@cryptoraves/the-cryptoraves-roadmap-vision-1a8b37fc0942"
+              href="https://medium.com/@cryptoraves/a-tale-of-two-startups-token-swaps-as-a-new-model-for-dapp-co-investing-collaboration-2b5b0ffe140c"
               target="_blank"
             >Read more</a> about innovative ways crypto projects can partner with Cryptoraves. We want to usher in a new era of crypto collaboration!
           </div>

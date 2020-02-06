@@ -21,7 +21,7 @@
         <div class="space-30"></div>
         <div class="vaylatoken-content-3">
           <a
-            href=" https://medium.com/@cryptoraves/the-cryptoraves-roadmap-vision-1a8b37fc0942"
+            href="https://medium.com/@cryptoraves/partnership-announcement-vayla-dex-cryptoraves-swap-tokens-96675e55e081"
             target="_blank"
           >Read more</a> about how the VAYLA-Cryptoraves partnership is pioneering a
           new, breakthrough way for crypto projects to collaborate!
