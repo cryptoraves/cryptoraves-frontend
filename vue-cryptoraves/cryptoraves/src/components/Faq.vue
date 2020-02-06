@@ -94,19 +94,21 @@
               href="https://loomx.io/"
               target="_blank"
             >Loom’s Layer 2 BaseChain.</a>
-            Token export is on our
+            Personalized token export is on our 
             <a
               href="https://medium.com/@cryptoraves/the-cryptoraves-roadmap-vision-1a8b37fc0942"
               target="_blank"
-            >Roadmap</a>, & is an important feature for our platform (export proof of
-            concept is already completed, see
+            >Roadmap</a>, & is an important feature for our platform (personalized token withdrawal proof of concept has been completed, see
             <a
               href="https://medium.com/@plaster1/my-native-layer-2-token-is-all-growd-up-and-listed-on-a-mainnet-exchange-e0ac2d1e64ad"
               target="_blank"
-            >here</a>). Our vision is to eventually allow your tokens to be transferred
-            across multiple platforms (Reddit, Instagram, YouTube, etc).
+            >here</a>). Our vision is to eventually allow your personalized tokens to be transferred across multiple platforms (Reddit, Instagram, YouTube, etc).
             <br />
-            <br />We are working towards open sourcing the project. Some
+            <br />
+            The Cryptoraves platform now supports deposit and withdrawal of $VYA and $CRYPTORAVES tokens. See <a href="https://cryptoraves.space/partnerships?target=partnerships">here</a> for more info.           
+            <br />
+            <br />
+            We are working towards open sourcing the project. Some
             portions are already available. You can find us
             <a
               href="https://github.com/cryptoraves"
