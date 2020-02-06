@@ -5,7 +5,6 @@
     <ShareToken></ShareToken>
     <CheckToken></CheckToken>
     <GrowToken></GrowToken>
-    <ReciproToken></ReciproToken>
     <ToolToken></ToolToken>
   </div>
 </template>
@@ -16,7 +15,6 @@ import GetToken from "./GetToken";
 import ShareToken from "./ShareToken";
 import CheckToken from "./CheckToken";
 import GrowToken from "./GrowToken";
-import ReciproToken from "./ReciproToken";
 import ToolToken from "./ToolToken";
 
 export default {
@@ -27,7 +25,6 @@ export default {
     ShareToken,
     CheckToken,
     GrowToken,
-    ReciproToken,
     ToolToken
   }
 };

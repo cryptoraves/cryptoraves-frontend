@@ -10,9 +10,7 @@
       <div id="reply">
         <ReplyToken></ReplyToken>
       </div>
-      <div id="recipro">
-        <ReciprocationToken></ReciprocationToken>
-      </div>
+     
     </div>
   </transition>
 </template>
@@ -21,15 +19,13 @@
 import DropToken from "../TweetDemoPage/DropToken";
 import TagToken from "../TweetDemoPage/TagToken";
 import ReplyToken from "../TweetDemoPage/ReplyToken";
-import ReciprocationToken from "../TweetDemoPage/ReciprocationToken";
 
 export default {
   name: "TweetDemoPage",
   components: {
     DropToken,
     TagToken,
-    ReplyToken,
-    ReciprocationToken
+    ReplyToken
   },
   mounted: function() {
     this.$nextTick(function() {
