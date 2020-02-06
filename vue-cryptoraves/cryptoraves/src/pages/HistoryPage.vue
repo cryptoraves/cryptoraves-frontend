@@ -6,7 +6,12 @@
       </div>
       <div v-else>
         <div class="history-title">
-          <SectionHeader>{{this.platformHandle}}'s Transaction History</SectionHeader>
+          <SectionHeader
+            v-if="platformHandle.toUpperCase()=='EXPORT' || platformHandle.toUpperCase()=='IMPORT' || platformHandle.toUpperCase()=='LAUNCH'"
+          >{{this.platformHandle.toLowerCase()}}s</SectionHeader>
+          <SectionHeader
+            v-else
+          >{{this.platformHandle}}'s Transaction History</SectionHeader>
           <div class="history-user">
             <div
               class="history-userlink"
