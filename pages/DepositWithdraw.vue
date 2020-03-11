@@ -682,7 +682,9 @@ export default {
         if (networkId == 4) {
           //mainnet check for live site
           if (
-            window.location.toString().includes('://dev.cryptoraves.space/')
+            window.location
+              .toString()
+              .includes('https://cryptoraves.space/')
           ) {
             alert('Please switch Metamask to Main Ethereum Network')
           }
@@ -700,7 +702,7 @@ export default {
         }
       } else {
         alert(
-          'Please switch Metamask to Rinkeby Test Network or Main Ethereum Network'
+          'Please switch Metamask Main Ethereum Network'
         )
       }
       if (web3js) {
