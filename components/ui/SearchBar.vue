@@ -77,7 +77,7 @@ export default {
     getUserList() {
       axios
         .get(
-          'https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=userListLastUpdated'
+          this.$store.state.WebsiteInterfaceUrl + '?pageType=userListLastUpdated'
         )
         .then(response => {
           // JSON responses are automatically parsed.
@@ -98,7 +98,7 @@ export default {
             )
             axios
               .get(
-                'https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=searchBar'
+                this.$store.state.WebsiteInterfaceUrl + '?pageType=searchBar'
               )
               .then(response => {
                 // JSON responses are automatically parsed.

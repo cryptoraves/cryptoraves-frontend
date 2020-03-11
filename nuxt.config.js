@@ -60,7 +60,13 @@ module.exports = {
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: ['@/plugins/dropdown', { src: '@/plugins/ga.js', mode: 'client' }],
+  plugins: ['@/plugins/dropdown', { src: '~plugins/ga.js', mode: 'client' }],
+
+  /*buildModules: [
+    ['@nuxtjs/google-analytics', {
+      id: 'UA-142913413-1' // with my real id instead
+    }]
+  ],*/
 
   /*
   ** Nuxt.js modules

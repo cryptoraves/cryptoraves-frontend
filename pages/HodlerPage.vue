@@ -153,9 +153,6 @@ export default {
       this.initialPagePtr = 1
     }
 
-    if (window.location.host.split(':')[0] == 'cryptoraves.space') {
-      this.$ga.page('/')
-    }
     this.getHodler(this.user, this.initialPagePtr)
   },
   beforeRouteUpdate(to, from, next) {
@@ -198,7 +195,7 @@ export default {
       }
       axios
         .get(
-          'https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=hodlersPage&userName=' +
+          this.$store.state.WebsiteInterfaceUrl + '?pageType=hodlersPage&userName=' +
             user +
             '&page=' +
             page

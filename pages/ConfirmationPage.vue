@@ -168,16 +168,16 @@ export default {
   },
   created() {
     this.txnId = this.$route.query.txnId
-    if (window.location.host.split(':')[0] == 'cryptoraves.space') {
+    /*if (window.location.host.split(':')[0] == 'cryptoraves.space') {
       this.$ga.page('/')
-    }
+    }*/
     this.getTransaction(this.txnId)
   },
   methods: {
     getTransaction(txnId) {
       axios
         .get(
-          'https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=confirmationPage&txnHash=' +
+          this.$store.state.WebsiteInterfaceUrl + '?pageType=confirmationPage&txnHash=' +
             txnId
         )
         .then(response => {

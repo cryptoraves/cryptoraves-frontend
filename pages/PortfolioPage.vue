@@ -155,9 +155,6 @@ export default {
       this.initialPagePtr = 1
     }
 
-    if (window.location.host.split(':')[0] == 'cryptoraves.space') {
-      this.$ga.page('/')
-    }
     this.getPortfolio(this.user, this.initialPagePtr)
   },
   beforeRouteUpdate(to, from, next) {
@@ -195,7 +192,7 @@ export default {
       }
       axios
         .get(
-          'https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=portfolioPage&userName=' +
+          this.$store.state.WebsiteInterfaceUrl + '?pageType=portfolioPage&userName=' +
             user +
             '&page=' +
             page

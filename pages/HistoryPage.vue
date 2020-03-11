@@ -238,10 +238,6 @@ export default {
       }
     }
 
-    if (window.location.host.split(':')[0] == 'cryptoraves.space') {
-      this.$ga.page('/')
-    }
-
     // this.initialPagePtr = localStorage.getItem("transactionPageNum") || 0;
     // this.initFlag = localStorage.getItem("transactionFlag") || 0;
     // this.earliestDatetime = localStorage.getItem("earliestDatetime");
@@ -278,7 +274,7 @@ export default {
       if (initFlag == 0) {
         axios
           .get(
-            'https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=transactionHistory&userName=' +
+            this.$store.state.WebsiteInterfaceUrl + '?pageType=transactionHistory&userName=' +
               user
           )
           .then(response => {
@@ -308,7 +304,7 @@ export default {
       } else if (initFlag == 1) {
         axios
           .get(
-            'https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=transactionHistory&userName=' +
+            this.$store.state.WebsiteInterfaceUrl + '?pageType=transactionHistory&userName=' +
               user +
               '&earliestDatetime=' +
               this.earliestDatetime
@@ -355,7 +351,7 @@ export default {
         // localStorage.setItem("transactionPageNum", this.initialPagePtr);
         axios
           .get(
-            'https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=transactionHistory&userName=' +
+            this.$store.state.WebsiteInterfaceUrl + '?pageType=transactionHistory&userName=' +
               user +
               '&latestDatetime=' +
               this.latestDatetime

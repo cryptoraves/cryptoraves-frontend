@@ -112,9 +112,6 @@ export default {
       this.page = 1
     }
 
-    if (window.location.host.split(':')[0] == 'cryptoraves.space') {
-      this.$ga.page('/')
-    }
     this.getLeaderboard(this.page)
   },
 
@@ -140,7 +137,7 @@ export default {
     getLeaderboard(page) {
       axios
         .get(
-          'https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod?pageType=leaderboard&page=' +
+          this.$store.state.WebsiteInterfaceUrl + '?pageType=leaderboard&page=' +
             page
         )
         .then(response => {
