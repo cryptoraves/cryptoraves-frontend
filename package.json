@@ -1,7 +1,7 @@
 {
-  "name": "web3-cryptoraves",
+  "name": "cryptoraves",
   "version": "1.0.0",
-  "description": "Cryptoraves Web3 Portal",
+  "description": "Cryptoraves Official Website",
   "author": "Ed Zynda",
   "private": true,
   "scripts": {
