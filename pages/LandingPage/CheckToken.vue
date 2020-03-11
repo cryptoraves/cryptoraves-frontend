@@ -51,7 +51,7 @@
         <div class="space-40"/>
         <!-- <AppButton name="See who is trending" type4="true"></AppButton> -->
         <a 
-          href="http://web3.cryptoraves.space/"
+          href="/DepositWithdraw"
           target="_blank">
           <TippingButton/>
         </a>

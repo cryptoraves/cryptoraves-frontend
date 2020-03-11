@@ -65,12 +65,12 @@
             <br>
             <br>
             To initiate, follow our Step-by-Step Instruction guide <a 
-              href="http://web3.cryptoraves.space/stepinstructions"
+              href="/stepinstructions"
               target="_blank">here</a>.
             <br>
             <br>            
             Or visit our <a
-              href="http://web3.cryptoraves.space/"
+              href="/DepositWithdraw"
               target="_blank">Web 3 Portal</a> to be guided through the process via user prompts.
           </div>
         </FaqSection>

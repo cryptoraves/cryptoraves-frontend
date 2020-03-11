@@ -102,7 +102,8 @@ export default {
       initialPagePtr: 0,
       visibleNext: true,
       visiblePrev: true,
-      showLoading: true
+      showLoading: true,
+      page: 1,
     }
   },
   created() {
@@ -112,7 +113,7 @@ export default {
       this.page = 1
     }
 
-    this.getLeaderboard(this.page)
+    this.getLeaderboard()
   },
 
   methods: {
@@ -134,17 +135,17 @@ export default {
       handle = handle.replace('@', '')
       window.open('https://twitter.com/' + handle)
     },
-    getLeaderboard(page) {
+    getLeaderboard() {
       axios
         .get(
           this.$store.state.WebsiteInterfaceUrl + '?pageType=leaderboard&page=' +
-            page
+            this.page
         )
         .then(response => {
           this.$router.push({
             path: 'LeaderboardPage',
             query: {
-              page: page
+              page: this.page
             }
           })
           // JSON responses are automatically parsed.
@@ -152,7 +153,7 @@ export default {
           this.tableRows = _.cloneDeep(res.tableRows)
           this.rowCount = res.rowCount
 
-          this.initialPagePtr = page
+          this.initialPagePtr = this.page
           this.visiblePrev = res.prev ? true : false
           this.visibleNext = res.next ? true : false
           this.showLoading = false

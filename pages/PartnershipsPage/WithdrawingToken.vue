@@ -14,9 +14,9 @@
         <div
           class="withdrawing-content-1"
         >Visit our <a 
-          href="http://web3.cryptoraves.space/stepinstructions" 
+          href="/stepinstructions" 
           target="_blank">Step-by-Step Instructions page here</a>, & our <a 
-            href="http://web3.cryptoraves.space/" 
+            href="/DepositWithdraw" 
             target="_blank">Web 3 Portal</a> here to guide you through the process.</div>
         <div class="space-50"/>
         <div

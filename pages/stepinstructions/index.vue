@@ -26,7 +26,7 @@
           <template v-slot:step3>
             <div><span>Step 3:</span> Once Reply received, you have successfully initiated the process for Deposit & Withdrawal from the Cryptoraves platform.  Please proceed to the Cryptoraves Web 3 Portal using the link sent in the Tweet reply to complete the Initial Set Up (Part 1b).  Or you can go directly to the 
               <a 
-                href="http://web3.cryptoraves.space/" 
+                href="/DepositWithdraw" 
                 target="_blank">Cryptoraves Web 3 Portal</a>.</div>
           </template>          
         </InstructionSection>
@@ -44,7 +44,7 @@
           <template v-slot:step1>
             <div><span>Step 1:</span> Follow the link from the Cryptoraves Twitter Reply received above, or go directly to the 
               <a 
-                href="http://web3.cryptoraves.space/" 
+                href="/DepositWithdraw" 
                 target="_blank">Cryptoraves Web 3 Portal</a>.<br><br></div>          
           </template>
           <template v-slot:step2>

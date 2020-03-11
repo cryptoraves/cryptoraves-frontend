@@ -7,7 +7,7 @@
           <div class="modal-custom-header">
             Metamask Not Enabled. What is this?<br>
             Please follow the 
-            <a href="http://web3.cryptoraves.space/stepinstructions">Step-by-Step Instructions</a> to link your wallet and enable Deposit & Withdrawal.            
+            <a href="/stepinstructions">Step-by-Step Instructions</a> to link your wallet and enable Deposit & Withdrawal.            
           </div>                    
           <div class="modal-footer">
             <slot name="footer">

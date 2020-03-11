@@ -307,7 +307,10 @@ export default {
         this.forceLive = true
       }
     } catch (e) {}
-    await this.initWeb3()
+    var res = await this.initWeb3()
+    if (!res) {
+      return false
+    }
     await this.loadWebData()
     await this.initLoom()
     if (!this.user) {
@@ -676,8 +679,14 @@ export default {
       } else {
         // throw new Error('Please enable Metamask and refresh.')
         this.showEnableMetaMask = true
+        return false
       }
-      var networkId = await web3js.eth.net.getId()
+      let networkId
+      try {
+        networkId = await web3js.eth.net.getId()
+      } catch(e) {
+        console.log(e)
+      }
       if ([1, 4].includes(networkId)) {
         if (networkId == 4) {
           //mainnet check for live site
@@ -701,9 +710,7 @@ export default {
           }
         }
       } else {
-        alert(
-          'Please switch Metamask Main Ethereum Network'
-        )
+        this.showEnableMetaMask = true
       }
       if (web3js) {
         this.web3js = web3js

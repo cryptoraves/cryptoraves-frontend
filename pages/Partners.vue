@@ -152,7 +152,7 @@ export default {
         this.live = true
       } else {
         this.live = false
-        if (window.location.toString().includes('://web3.cryptoraves.space/')) {
+        if (window.location.toString().includes('://cryptoraves.space/')) {
           alert('Please switch Metamask to Main Ethereum Network')
         }
       }
