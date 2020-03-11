@@ -93,7 +93,6 @@ module.exports = {
 
   router: {
     scrollBehavior: async (to, from, savedPosition) => {
-      console.log(to, savedPosition)
       if (savedPosition) {
         return savedPosition
       }
