@@ -1,6 +1,6 @@
-# Cryptoraves Web3 Portal
+# cryptoraves
 
-> Cryptoraves Web3 Portal
+> Cryptoraves Official Website
 
 ## Build Setup
 
@@ -20,4 +20,4 @@ $ yarn run generate
 ```
 
 For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
-# web3-cryptoraves
+# cryptoraves
