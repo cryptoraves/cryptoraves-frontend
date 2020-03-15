@@ -50,14 +50,14 @@
             </a>
 
             <a
-              href="https://www.linkedin.com/company/cryptoraves"
+              href="https://github.com/cryptoraves"
               target="_blank"
             >
               <div class="d-flex linkedin-gradient">
-                <i class="fa fa-linkedin"/>
+                <i class="fa fa-github"/>
               </div>
             </a>
-
+            
             <a
               href="https://t.me/cryptoraves1"
               target="_blank"

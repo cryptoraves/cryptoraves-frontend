@@ -108,7 +108,6 @@ export default {
   },
   created() {
     this.page = parseInt(this.$route.query.page)
-
     if (!this.page) {
       this.page = 1
     }
