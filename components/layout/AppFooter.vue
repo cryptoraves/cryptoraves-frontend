@@ -66,7 +66,7 @@
                 <i class="fa fa-telegram"/>
               </div>
             </a>
-         
+
           </div>
         </div>
         <div class="whitelogo d-flex col-lg-2 col-sm-12">
