@@ -309,7 +309,7 @@ export default {
     } catch (e) {}
     var res = await this.initWeb3()
     if (!res) {
-      return false
+      console.log('no results')
     }
     await this.loadWebData()
     await this.initLoom()
