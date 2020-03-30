@@ -117,10 +117,13 @@
         </div>
         <div class="row">
           <div class="confirmation-link col-lg-12 col-md-12 col-sm-12">
-            <div
+            <!--div
               title="Link to Loom's Block Explorer"
               class="confirmation-blockurl"
               @click="goBlock(item.blockexplorerUrl + item.txnHash)"
+            -->
+            <div
+              title="Transaction Hash" 
             >{{ item.txnHash }}</div>
             <div class="d-flex">
               <img
@@ -168,9 +171,6 @@ export default {
   },
   created() {
     this.txnId = this.$route.query.txnId
-    /*if (window.location.host.split(':')[0] == 'cryptoraves.space') {
-      this.$ga.page('/')
-    }*/
     this.getTransaction(this.txnId)
   },
   methods: {

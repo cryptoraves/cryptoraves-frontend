@@ -47,7 +47,7 @@
             too.
           </div>
         </FaqSection>
-        <FaqSection>
+        <!-- FaqSection>
           <div slot="title">How do I Tip Using VAYLA Tokens?</div>
           <div slot="answer">
             Click
@@ -73,7 +73,7 @@
               href="/DepositWithdraw"
               target="_blank">Web 3 Portal</a> to be guided through the process via user prompts.
           </div>
-        </FaqSection>
+        </FaqSection -->
         <FaqSection>
           <div slot="title">
             I need more details on how to do this... How do I share tokens &
@@ -89,7 +89,7 @@
             <br>For a more detailed, step-by-step walkthrough of our platform,
             read our
             <a
-              href="https://medium.com/p/2710f70e8d38/edit"
+              href="https://medium.com/@cryptoraves/cryptoraves-usage-guidelines-the-complete-how-to-2710f70e8d38"
               target="_blank"
             >Cryptoraves Usage Guidelines, The Complete How-To.</a>
           </div>
@@ -116,7 +116,7 @@
             >here</a>). Our vision is to eventually allow your personalized tokens to be transferred across multiple platforms (Reddit, Instagram, YouTube, etc).
             <br>
             <br>
-            The Cryptoraves platform now supports deposit and withdrawal of $VYA and $CRYPTORAVES tokens. See <a href="https://cryptoraves.space/partnerships?target=partnerships">here</a> for more info.           
+            The Cryptoraves platform now supports deposit and withdrawal of $VYA and $CRYPTORAVES tokens. See <a href="https://cryptoraves.space/partnershipsPage?target=partnerships">here</a> for more info.           
             <br>
             <br>
             We are working towards open sourcing the project. Some
@@ -141,7 +141,7 @@
             unlike most centralized tipbots currently available. All of
             Cryptoraves Twitter token transactions are recorded on the
             blockchain. See our <a
-              href="http://cryptoraves.space/partnerships"
+              href="http://cryptoraves.space/PartnershipsPage"
               target="_blank">Partnership page</a> for more details, or contact shannon@cryptoraves.space.
           </div>
         </FaqSection>

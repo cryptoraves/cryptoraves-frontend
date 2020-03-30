@@ -109,6 +109,9 @@
       :maxamount="ethereumBalance.toString()"
       @deposit="onDeposit"
       @closeDeposit="showDepoistModal=false"/>
+    <ShowBackburnerNoticeModal
+      v-if="showBackburnerNoticeModal"
+    />
     <ConfirmModal
       v-if="showConfirmModal"
       :imageurl="TOKEN_IMAGE_URL"
@@ -207,6 +210,8 @@ import CompleteModal from '../components/CompleteModal'
 import WithdrawModal from '../components/WithdrawModal'
 import TransferStatus from '../components/TransferStatus'
 import ConfirmWithdraw from '../components/ConfirmWithdraw'
+import ShowBackburnerNoticeModal from '../components/ShowBackburnerNoticeModal'
+
 import ConfirmWithdrawComplete from '../components/ConfirmWithdrawComplete'
 import SignForeign from '../components/SignForeign'
 import WaitMappingConfirm from '../components/WaitMappingConfirm'
@@ -226,6 +231,7 @@ export default {
     ConfirmWithdraw,
     ConfirmWithdrawComplete,
     SignForeign,
+    ShowBackburnerNoticeModal,
     WaitMappingConfirm,
     RegisterWallet,
     StuckModal,
@@ -242,6 +248,7 @@ export default {
       showConfirmModal: false,
       showCompleteModal: false,
       showWithdrawModal: false,
+      showBackburnerNoticeModal: true,
       showTransferStatus: false,
       showConfirmWithdraw: false,
       showConfirmWithdrawComplete: false,
@@ -307,6 +314,7 @@ export default {
         this.forceLive = true
       }
     } catch (e) {}
+    /*
     var res = await this.initWeb3()
     if (!res) {
       console.log('no results')
@@ -324,6 +332,7 @@ export default {
     await this.addEventListeners()
     await this.updateBalances()
     this.ready = true
+    */
     //await this.checkContractMapping()
   },
 

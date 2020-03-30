@@ -32,7 +32,7 @@
           </div>
         </div>
       </div>
-      <div class="row tooltoken-footer">Want to Tip Your ERC-20 Token on Twitter? The Cryptoraves platform can help grow demand for your token. <span @click="goPartnerships">Learn more.</span></div>
+      
     </div>
   </div>
 </template>

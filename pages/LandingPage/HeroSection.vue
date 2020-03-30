@@ -35,13 +35,6 @@
               name="Learn More" 
               type3="true"/>
           </span>
-          <br>
-          <a 
-            target="_blank"
-            @click="goDepWithd" 
-          >
-            <TippingButton/>
-          </a>
         </div>
       </div>
     </div>
