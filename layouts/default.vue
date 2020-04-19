@@ -67,14 +67,14 @@ export default {
       }
 
       //if yes go to user's portfolio page
-      if (this.userName) {
+      /*if (this.userName) {
         this.$router.push({
           name: 'PortfolioPage',
           query: {
             user: this.userName
           }
         })
-      }
+      }*/
     }
   },
   created() {

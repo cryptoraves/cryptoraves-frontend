@@ -90,7 +90,7 @@ import _ from 'lodash'
 import SectionHeader from '../components/ui/SectionHeader'
 
 export default {
-  name: 'PortfolioPage',
+  name: 'LeaderboardPage',
   components: {
     SectionHeader
   },
@@ -141,21 +141,22 @@ export default {
             this.page
         )
         .then(response => {
+          console.log('here')
           this.$router.push({
-            path: 'LeaderboardPage',
-            query: {
-              page: this.page
-            }
+            path: '/LeaderboardPage?page=' + this.page
           })
+          console.log('here1')
           // JSON responses are automatically parsed.
           let res = response.data
           this.tableRows = _.cloneDeep(res.tableRows)
           this.rowCount = res.rowCount
-
+          console.log('here2')
           this.initialPagePtr = this.page
           this.visiblePrev = res.prev ? true : false
           this.visibleNext = res.next ? true : false
+          console.log('here3')
           this.showLoading = false
+          console.log('here4')
         })
         .catch(e => {
           console.log(e)
