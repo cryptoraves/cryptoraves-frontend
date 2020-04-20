@@ -111,7 +111,6 @@ export default {
     if (!this.page) {
       this.page = 1
     }
-
     this.getLeaderboard()
   },
 
@@ -134,17 +133,17 @@ export default {
       handle = handle.replace('@', '')
       window.open('https://twitter.com/' + handle)
     },
-    getLeaderboard() {
-      axios
+    async getLeaderboard() {
+      this.$router.push({
+        name: 'LeaderboardPage',
+        query: { page: this.page }
+      })
+      await axios
         .get(
           this.$store.state.WebsiteInterfaceUrl + '?pageType=leaderboard&page=' +
             this.page
         )
         .then(response => {
-          this.$router.push({
-            name: 'LeaderboardPage',
-            query: { page: this.page }
-          })
           // JSON responses are automatically parsed.
           let res = response.data
           this.tableRows = _.cloneDeep(res.tableRows)
