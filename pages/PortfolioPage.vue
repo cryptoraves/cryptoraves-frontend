@@ -174,13 +174,13 @@ export default {
     goNext() {
       if (this.visibleNext) {
         this.showLoading = true
-        this.getPortfolio(this.user, this.initialPagePtr + 1)
+        this.getPortfolio(this.user, parseInt(this.initialPagePtr) + 1)
       }
     },
     goPrev() {
       if (this.visiblePrev) {
         this.showLoading = true
-        this.getPortfolio(this.user, this.initialPagePtr - 1)
+        this.getPortfolio(this.user, parseInt(this.initialPagePtr) - 1)
       }
     },
     getPortfolio(user, page) {
