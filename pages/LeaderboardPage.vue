@@ -135,8 +135,7 @@ export default {
     },
     async getLeaderboard() {
       this.$router.push({
-        name: 'LeaderboardPage',
-        query: { page: this.page }
+        path: 'leaderboardPage?page='+this.page
       })
       await axios
         .get(
