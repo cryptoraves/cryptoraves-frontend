@@ -135,17 +135,17 @@ export default {
       window.open('https://twitter.com/' + handle)
     },
     getLeaderboard() {
+      this.$router.push({
+        name: 'LeaderboardPage',
+        query: { page: this.page }
+      })
       axios
         .get(
           this.$store.state.WebsiteInterfaceUrl + '?pageType=leaderboard&page=' +
             this.page
         )
         .then(response => {
-          this.$router.push({
-            name: 'LeaderboardPage',
-            query: { page: this.page },
-            mode: 'history'
-          })
+    
           // JSON responses are automatically parsed.
           let res = response.data
           this.tableRows = _.cloneDeep(res.tableRows)
