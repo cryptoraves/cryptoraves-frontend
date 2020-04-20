@@ -184,6 +184,9 @@ export default {
       }
     },
     getPortfolio(user, page) {
+      this.$router.push({
+        path: 'portfolioPage?user='+user+'&page='+page 
+      })
       if (user.toLowerCase().startsWith('import')) {
         user = 'IMPORT'
       }
