@@ -142,10 +142,8 @@ export default {
         )
         .then(response => {
           this.$router.push({
-            path: 'LeaderboardPage',
-            query: {
-              page: this.page
-            }
+            name: 'LeaderboardPage',
+            query: { page: this.page }
           })
           // JSON responses are automatically parsed.
           let res = response.data
