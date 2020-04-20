@@ -175,6 +175,9 @@ export default {
   },
   methods: {
     getTransaction(txnId) {
+      this.$router.push({
+        path: 'confirmationPage?txnId='+txnId
+      })
       axios
         .get(
           this.$store.state.WebsiteInterfaceUrl + '?pageType=confirmationPage&txnHash=' +
