@@ -314,15 +314,10 @@ export default {
 
             if (this.initialPagePtr) {
               this.$router.push({
-                path: 'history',
-                query: {
-                  user: user,
-                  earliestDatetime: this.earliestDatetime,
-                  page: this.initialPagePtr + 1
-                }
+                path: 'historyPage?user='+user + '&earliestDatetime=' + this.earliestDatetime + '&page=' + (parseInt(this.initialPagePtr) + 1)
               })
             } else {
-              this.$router.push({ path: 'history', query: { user: user } })
+              this.$router.push({ path: 'historyPage?user='+user })
             }
             // JSON responses are automatically parsed.
             this.user = user
@@ -361,15 +356,10 @@ export default {
 
             if (this.initialPagePtr) {
               this.$router.push({
-                path: 'history',
-                query: {
-                  user: user,
-                  latestDatetime: this.latestDatetime,
-                  page: this.initialPagePtr + 1
-                }
+                path: 'historyPage?user='+user + '&latestDatetime=' + this.latestDatetime + '&page=' + (parseInt(this.initialPagePtr) + 1)
               })
             } else {
-              this.$router.push({ path: 'history', query: { user: user } })
+              this.$router.push({ path: 'historyPage?user='+user })
             }
             // JSON responses are automatically parsed.
             this.user = user
@@ -408,7 +398,7 @@ export default {
     goAnother(user) {
       this.$root.$emit('changeUser', user)
       this.$router.push({
-        name: 'History',
+        name: 'HistoryPage',
         query: {
           user: user
         }

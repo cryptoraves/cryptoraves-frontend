@@ -177,16 +177,19 @@ export default {
     goNext() {
       if (this.visibleNext) {
         this.showLoading = true
-        this.getHodler(this.user, this.initialPagePtr + 1)
+        this.getHodler(this.user, parseInt(this.initialPagePtr) + 1)
       }
     },
     goPrev() {
       if (this.visiblePrev) {
         this.showLoading = true
-        this.getHodler(this.user, this.initialPagePtr - 1)
+        this.getHodler(this.user, parseInt(this.initialPagePtr) - 1)
       }
     },
     getHodler(user, page) {
+      this.$router.push({
+        path: 'hodlerPage?user='+user+'&page='+page 
+      })
       if (user.toLowerCase().startsWith('import')) {
         user = 'IMPORT'
       }
