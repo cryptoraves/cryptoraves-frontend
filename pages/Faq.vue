@@ -83,13 +83,13 @@
           <div slot="answer">
             For a quick token sharing guide, see
             <a
-              href="/guide"
+              @click="goVyaGuide"
               target>here</a>.
             <br>
             <br>For a more detailed, step-by-step walkthrough of our platform,
             read our
             <a
-              href="https://medium.com/p/2710f70e8d38/edit"
+              href="https://medium.com/p/2710f70e8d38"
               target="_blank"
             >Cryptoraves Usage Guidelines, The Complete How-To.</a>
           </div>
@@ -116,7 +116,7 @@
             >here</a>). Our vision is to eventually allow your personalized tokens to be transferred across multiple platforms (Reddit, Instagram, YouTube, etc).
             <br>
             <br>
-            The Cryptoraves platform now supports deposit and withdrawal of $VYA and $CRYPTORAVES tokens. See <a href="https://cryptoraves.space/partnerships?target=partnerships">here</a> for more info.           
+            The Cryptoraves platform now supports deposit and withdrawal of $VYA and $CRYPTORAVES tokens. See <a href="https://cryptoraves.space/partnershipsPage?target=partnerships">here</a> for more info.           
             <br>
             <br>
             We are working towards open sourcing the project. Some
@@ -141,7 +141,7 @@
             unlike most centralized tipbots currently available. All of
             Cryptoraves Twitter token transactions are recorded on the
             blockchain. See our <a
-              href="http://cryptoraves.space/partnerships"
+              href="https://cryptoraves.space/partnershipsPage"
               target="_blank">Partnership page</a> for more details, or contact shannon@cryptoraves.space.
           </div>
         </FaqSection>
