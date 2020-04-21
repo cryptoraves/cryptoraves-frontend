@@ -47,7 +47,7 @@
             too.
           </div>
         </FaqSection>
-        <!-- FaqSection>
+        <FaqSection>
           <div slot="title">How do I Tip Using VAYLA Tokens?</div>
           <div slot="answer">
             Click
@@ -73,7 +73,7 @@
               href="/DepositWithdraw"
               target="_blank">Web 3 Portal</a> to be guided through the process via user prompts.
           </div>
-        </FaqSection -->
+        </FaqSection>
         <FaqSection>
           <div slot="title">
             I need more details on how to do this... How do I share tokens &
@@ -83,13 +83,13 @@
           <div slot="answer">
             For a quick token sharing guide, see
             <a
-              href="/guide"
+              @click="goVyaGuide"
               target>here</a>.
             <br>
             <br>For a more detailed, step-by-step walkthrough of our platform,
             read our
             <a
-              href="https://medium.com/@cryptoraves/cryptoraves-usage-guidelines-the-complete-how-to-2710f70e8d38"
+              href="https://medium.com/p/2710f70e8d38"
               target="_blank"
             >Cryptoraves Usage Guidelines, The Complete How-To.</a>
           </div>
@@ -141,7 +141,7 @@
             unlike most centralized tipbots currently available. All of
             Cryptoraves Twitter token transactions are recorded on the
             blockchain. See our <a
-              href="http://cryptoraves.space/PartnershipsPage"
+              href="https://cryptoraves.space/partnershipsPage"
               target="_blank">Partnership page</a> for more details, or contact shannon@cryptoraves.space.
           </div>
         </FaqSection>
