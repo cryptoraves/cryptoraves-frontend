@@ -703,8 +703,7 @@ export default {
           if (
             !window.location
               .toString()
-              .includes('https://cryptoraves.space/') &&
-            !this.forceLive
+              .includes('https://cryptoraves.space/') 
           ) {
             alert('Please switch Metamask to Rinkeby Test Network')
           }
