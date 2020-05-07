@@ -309,7 +309,7 @@ export default {
     } catch (e) {}
     var res = await this.initWeb3()
     if (!res) {
-      console.log('no results')
+      //console.log('no results')
     }
     await this.loadWebData()
     await this.initLoom()
@@ -688,7 +688,6 @@ export default {
         console.log(e)
       }
       if ([1, 4].includes(networkId)) {
-        console.log(window.location.toString())
         if (networkId == 4) {
           //mainnet check for live site
           if (
