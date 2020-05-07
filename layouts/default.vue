@@ -52,7 +52,7 @@ export default {
   async mounted() {
     //this.web3Login=this.$store.state.web3Login
     if (!this.web3Login) {
-      this.web3Login = await this.initWeb3()
+      //this.web3Login = await this.initWeb3()
     }
     
     if (this.ethereumAddress) {

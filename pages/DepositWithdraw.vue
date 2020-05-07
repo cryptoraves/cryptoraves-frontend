@@ -688,6 +688,7 @@ export default {
         console.log(e)
       }
       if ([1, 4].includes(networkId)) {
+        console.log(window.location.toString())
         if (networkId == 4) {
           //mainnet check for live site
           if (
@@ -703,7 +704,7 @@ export default {
           if (
             !window.location
               .toString()
-              .includes('https://cryptoraves.space/') 
+              .includes('https://cryptoraves.space/')
           ) {
             alert('Please switch Metamask to Rinkeby Test Network')
           }
