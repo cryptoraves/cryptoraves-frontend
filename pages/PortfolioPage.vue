@@ -154,18 +154,7 @@ export default {
     } else {
       this.initialPagePtr = 1
     }
-
     this.getPortfolio(this.user, this.initialPagePtr)
-  },
-  beforeRouteUpdate(to, from, next) {
-    // just use `this`
-    this.user = to.query.user
-
-    if (from.query.user != this.user) {
-      this.getPortfolio(this.user, 0)
-    }
-
-    next()
   },
   methods: {
     getTitle() {
@@ -184,6 +173,7 @@ export default {
       }
     },
     getPortfolio(user, page) {
+      
       this.$router.push({
         path: 'portfolioPage?user='+user+'&page='+page 
       })
