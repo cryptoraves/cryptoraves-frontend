@@ -157,16 +157,6 @@ export default {
 
     this.getPortfolio(this.user, this.initialPagePtr)
   },
-  beforeRouteUpdate(to, from, next) {
-    // just use `this`
-    this.user = to.query.user
-
-    if (from.query.user != this.user) {
-      this.getPortfolio(this.user, 0)
-    }
-
-    next()
-  },
   methods: {
     getTitle() {
       return this.tokenBalancePercentage + '% left to share'
