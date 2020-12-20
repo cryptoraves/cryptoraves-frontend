@@ -200,7 +200,6 @@ import EnableMetaMask from '../components/EnableMetaMask'
 import MetamaskHandler from "../assets/js/metamaskHandler"
 
 export default {
-  extends: MetamaskHandler,
   components: {
     SectionHeader,
     BalancePanel,
@@ -272,7 +271,6 @@ export default {
       forceLive: false
     }
   },
-
   async mounted() {
     try {
       if (this.$route.query.resumeWithdrawalNeeded) {
@@ -295,7 +293,8 @@ export default {
       }
     } catch (e) {}
 
-    
+    await this.initWeb3()
+    await this.loadWebData()
     /*var res = await this.initWeb3()
     if (!res) {
       console.log('no results')
@@ -317,7 +316,7 @@ export default {
     
     //await this.checkContractMapping()
   },
-
+  mixins: [MetamaskHandler],
   methods: {
     toggle: function() {
       this.isOpen = !this.isOpen
