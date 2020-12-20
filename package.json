@@ -13,12 +13,13 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
+    "@babel/preset-env": "7.9.0",
+    "axios": "^0.21.0",
     "bootstrap": "^4.3.1",
     "cross-env": "^5.2.0",
     "ethers": "^4.0.45",
     "hsy-vue-dropdown": "^0.0.5",
     "human-standard-token-abi": "^2.0.0",
-    "loom-js": "^1.72.0",
     "node-sass": "^4.13.1",
     "nuxt": "^2.0.0",
     "scss": "^0.2.4",

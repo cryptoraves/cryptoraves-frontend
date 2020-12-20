@@ -3,12 +3,13 @@
     <div 
       v-if="type" 
       class="balancepanel-title">
-      Your Cryptoraves {{ selectedTicker }} Balance
+      Your Balance on Cryptoraves
     </div>
     <div
       v-else
-      class="balancepanel-title">
-      Your Wallet {{ selectedTicker }} Balance
+      class="balancepanel-title"
+      title="Link to Layer 2 Block Explorer">
+      Your Balance On Layer One
     </div>
     <img 
       v-if="type"
@@ -20,7 +21,7 @@
       src="../assets/metamask.png">
     <div 
       v-if="type"
-      title="Link to Loomnetwork's Block Explorer"
+      title="Link to Layer 2 Block Explorer"
       class="address-link"
       @click="goBlockExplorer(url)">
       {{ address }}
@@ -28,8 +29,7 @@
     <div
       v-else
       title="Link to Etherscan.io"
-      class="address-link"
-      @click="goBlockExplorer(url)">
+      class="address-link">
       {{ address }}
     </div>
     <div class="balancepanel-balance">

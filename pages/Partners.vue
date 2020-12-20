@@ -82,15 +82,7 @@ import PartnersPanel from '../components/PartnersPanel'
 
 import axios from 'axios'
 import Web3 from 'web3'
-import {
-  Address,
-  Client,
-  Contracts,
-  CryptoUtils,
-  EthersSigner,
-  LocalAddress,
-  soliditySha3
-} from 'loom-js'
+
 import { ethers } from 'ethers'
 
 export default {

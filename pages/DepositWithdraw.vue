@@ -1,13 +1,5 @@
 <template lang="html">
   <div v-if="user">
-    <div class="user-title">
-      <div class="user-title-1">Withdrawal of $VYA & $CRYPTORAVES Tokens Now Available!</div>
-      <a 
-        class="user-title-link" 
-        href="https://cryptoraves.space/partnerships?target=withdraw" 
-        target="_blank">
-        What about my personalized tokens?</a>
-    </div>
     <div class="container">
       <div class="portfolio-user">
         <div
@@ -41,8 +33,8 @@
         <div class="col-lg-4 col-md-12">
           <BalancePanel
             :selected-ticker="ticker" 
-            :address="loomWalletAddr"
-            :url="loomBlockexplorerUrl"
+            :address="ethereumAddress"
+            :url="l2BlockExplorerUrl"
             :balance="loomBalance"
             :type="true"/>
         </div>
@@ -78,7 +70,7 @@
           <BalancePanel 
             :selected-ticker="ticker"
             :address="ethereumAddress"
-            :url="ethBlockexplorerUrl"
+            :url="l1BlockExplorerUrl"
             :balance="ethereumBalance"/>                        
         </div>
       </div>
@@ -178,30 +170,15 @@
       v-if="showRegisterWallet"
       :address="ethereumAddress"
       @registerwallet="onRegisterWallet"/>
-  </div>      
+  </div> 
+
 </template>
 
 <script>
 import axios from 'axios'
 import Web3 from 'web3'
-import {
-  Address,
-  Client,
-  Contracts,
-  CryptoUtils,
-  EthersSigner,
-  LocalAddress,
-  LoomProvider,
-  NonceTxMiddleware,
-  SignedEthTxMiddleware,
-  createEthereumGatewayAsync,
-  createDefaultTxMiddleware,
-  getMetamaskSigner,
-  soliditySha3
-} from 'loom-js'
 import { ethers } from 'ethers'
 import BN from 'bn.js'
-import { AddressMapper } from 'loom-js/dist/contracts'
 import SectionHeader from '../components/SectionHeader'
 import BalancePanel from '../components/BalancePanel'
 import DepositModal from '../components/DepositModal'
@@ -219,7 +196,11 @@ import RegisterWallet from '../components/RegisterWallet'
 import StuckModal from '../components/StuckModal'
 import EnableMetaMask from '../components/EnableMetaMask'
 
+
+import MetamaskHandler from "../assets/js/metamaskHandler"
+
 export default {
+  extends: MetamaskHandler,
   components: {
     SectionHeader,
     BalancePanel,
@@ -248,7 +229,7 @@ export default {
       showConfirmModal: false,
       showCompleteModal: false,
       showWithdrawModal: false,
-      showBackburnerNoticeModal: true,
+      showBackburnerNoticeModal: false,
       showTransferStatus: false,
       showConfirmWithdraw: false,
       showConfirmWithdrawComplete: false,
@@ -268,7 +249,6 @@ export default {
       ethereumProvider: null,
       ethereumToken: null,
       ethereumGateway: null,
-      ethereumAddress: null,
       ethereumBalance: 0,
       loomClient: null,
       loomProvider: null,
@@ -314,25 +294,27 @@ export default {
         this.forceLive = true
       }
     } catch (e) {}
-    /*
-    var res = await this.initWeb3()
+
+    
+    /*var res = await this.initWeb3()
     if (!res) {
       console.log('no results')
     }
-    await this.loadWebData()
+    
     await this.initLoom()
+    */
     if (!this.user) {
       return 0
     }
     if (!this.loomWalletAddr) {
       return 0
     }
-    await this.initContracts()
+    //await this.initContracts()
     //await this.mapAddresses()
-    await this.addEventListeners()
-    await this.updateBalances()
+    //await this.addEventListeners()
+    //await this.updateBalances()
     this.ready = true
-    */
+    
     //await this.checkContractMapping()
   },
 
@@ -675,67 +657,6 @@ export default {
         console.error(e)
       }
       return false
-    },
-    async initWeb3() {
-      let web3js
-      if (window.ethereum) {
-        window.web3 = new Web3(ethereum)
-        web3js = new Web3(ethereum)
-        await ethereum.enable()
-      } else if (window.web3) {
-        window.web3 = new Web3(window.web3.currentProvider)
-        web3js = new Web3(window.web3.currentProvider)
-      } else {
-        // throw new Error('Please enable Metamask and refresh.')
-        this.showEnableMetaMask = true
-        return false
-      }
-      let networkId
-      try {
-        networkId = await web3js.eth.net.getId()
-      } catch(e) {
-        console.log(e)
-      }
-      if ([1, 4].includes(networkId)) {
-        if (networkId == 4) {
-          //mainnet check for live site
-          if (
-            window.location
-              .toString()
-              .includes('https://cryptoraves.space/')
-          ) {
-            alert('Please switch Metamask to Main Ethereum Network')
-          }
-        }
-        if (networkId == 1) {
-          //mainnet check for live site
-          if (
-            !window.location
-              .toString()
-              .includes('https://cryptoraves.space/') &&
-            !this.forceLive
-          ) {
-            alert('Please switch Metamask to Rinkeby Test Network')
-          }
-        }
-      } else {
-        this.showEnableMetaMask = true
-      }
-      if (web3js) {
-        this.web3js = web3js
-        this.ethereumProvider = new ethers.providers.Web3Provider(
-          web3js.currentProvider
-        )
-        this.ethereumAddress = (await this.ethereumProvider.listAccounts())[0]
-
-        window.ethereum.on('accountsChanged', function() {
-          const sleep = milliseconds => {
-            return new Promise(resolve => setTimeout(resolve, milliseconds))
-          }
-          sleep(1000)
-          location.reload()
-        })
-      }
     },
 
     async initLoom() {
