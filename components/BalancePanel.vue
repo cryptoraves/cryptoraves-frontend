@@ -3,13 +3,13 @@
     <div 
       v-if="type" 
       class="balancepanel-title">
-      Your Balance on Cryptoraves
+      Your Balance on Cryptoraves ({{ l2NetworkType }})
     </div>
     <div
       v-else
       class="balancepanel-title"
       title="Link to Layer 2 Block Explorer">
-      Your Balance On {{ networkType }}
+      Your Balance On {{ l1NetworkType }}
     </div>
     <img 
       v-if="type"
@@ -63,7 +63,11 @@ export default {
       type: String,
       default: ''
     },
-    networkType: {
+    l1NetworkType: {
+      type: String,
+      default: ''
+    },
+    l2NetworkType: {
       type: String,
       default: ''
     },

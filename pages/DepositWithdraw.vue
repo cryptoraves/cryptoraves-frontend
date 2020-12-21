@@ -37,7 +37,8 @@
             :l1BlockExplorerUrl="l1BlockExplorerUrl"
             :l2BlockExplorerUrl="l2BlockExplorerUrl"
             :balance="loomBalance"
-            :networkType="l1NetworkType"
+            :l1NetworkType="l1NetworkType"
+            :l2NetworkType="l2NetworkType"
             :type="true"/>
         </div>
         <div class="user-transaction-section-buttons col-lg-4 col-md-12">
@@ -75,7 +76,8 @@
             :l1BlockExplorerUrl="l1BlockExplorerUrl"
             :l2BlockExplorerUrl="l2BlockExplorerUrl"
             :balance="ethereumBalance"
-            :networkType="l2NetworkType"/>                        
+            :l1NetworkType="l1NetworkType"
+            :l2NetworkType="l2NetworkType"/>                        
         </div>
       </div>
       <div class="link instruction-link"><nuxt-link to="/stepinstructions">Step-by-Step Instructions</nuxt-link></div>
@@ -255,7 +257,7 @@ export default {
       ethereumBalance: 0,
       loomClient: null,
       loomProvider: null,
-      loomToken: null,
+      layer2Token: null,
       loomGateway: null,
       loomWalletAddr: null,
       loomBalance: 0,
@@ -700,7 +702,7 @@ export default {
         console.log(e)
         window.location.reload(true)
       }
-      this.loomToken = new ethers.Contract(
+      this.layer2Token = new ethers.Contract(
         this.LOOM_CONTRACT_ADDR,
         tokenABI,
         this.loomProvider.getSigner()
@@ -847,11 +849,11 @@ export default {
         this.updateBalances()
       })
 
-      let loomReceiveFilter = this.loomToken.filters.Transfer(
+      let loomReceiveFilter = this.layer2Token.filters.Transfer(
         null,
         this.loomWalletAddr
       )
-      this.loomToken.on(loomReceiveFilter, () => {
+      this.layer2Token.on(loomReceiveFilter, () => {
         this.updateBalances()
         this.showCompleteModal = false
         if (this.depositHash) {
@@ -859,11 +861,11 @@ export default {
           this.depositHash = null
         }
       })
-      let loomSendFilter = this.loomToken.filters.Transfer(
+      let loomSendFilter = this.layer2Token.filters.Transfer(
         this.loomWalletAddr,
         null
       )
-      this.loomToken.on(loomSendFilter, () => {
+      this.layer2Token.on(loomSendFilter, () => {
         this.updateBalances()
       })
     },
@@ -876,7 +878,7 @@ export default {
       this.ethereumBalance = Number(
         ethers.utils.formatUnits(ethereumBalance.toString(), this.NUM_DECIMALS)
       )
-      const loomBalance = await this.loomToken.balanceOf(this.loomWalletAddr)
+      const loomBalance = await this.layer2Token.balanceOf(this.loomWalletAddr)
       this.loomBalance = Number(
         ethers.utils.formatUnits(loomBalance.toString(), this.NUM_DECIMALS)
       )
@@ -978,7 +980,7 @@ export default {
       )
 
       console.log('Approving Loom Transfer Gateway to take the coins.')
-      var res = await this.loomToken.approve(dAppChainGatewayAddr, amountInWei)
+      var res = await this.layer2Token.approve(dAppChainGatewayAddr, amountInWei)
       this.withdrawalHash = res.hash
       const timeout = 60 * 5000
       const loomCoinContractAddress = this.LOOM_CONTRACT_ADDR
