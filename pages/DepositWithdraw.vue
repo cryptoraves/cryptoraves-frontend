@@ -37,6 +37,7 @@
             :l1BlockExplorerUrl="l1BlockExplorerUrl"
             :l2BlockExplorerUrl="l2BlockExplorerUrl"
             :balance="loomBalance"
+            :networkType="l1NetworkType"
             :type="true"/>
         </div>
         <div class="user-transaction-section-buttons col-lg-4 col-md-12">
@@ -73,7 +74,8 @@
             :address="ethereumAddress"
             :l1BlockExplorerUrl="l1BlockExplorerUrl"
             :l2BlockExplorerUrl="l2BlockExplorerUrl"
-            :balance="ethereumBalance"/>                        
+            :balance="ethereumBalance"
+            :networkType="l2NetworkType"/>                        
         </div>
       </div>
       <div class="link instruction-link"><nuxt-link to="/stepinstructions">Step-by-Step Instructions</nuxt-link></div>

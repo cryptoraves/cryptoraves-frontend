@@ -9,7 +9,7 @@
       v-else
       class="balancepanel-title"
       title="Link to Layer 2 Block Explorer">
-      Your Balance On Layer One
+      Your Balance On {{ networkType }}
     </div>
     <img 
       v-if="type"
@@ -60,6 +60,10 @@ export default {
       default: ''
     },
     l2BlockExplorerUrl: {
+      type: String,
+      default: ''
+    },
+    networkType: {
       type: String,
       default: ''
     },
