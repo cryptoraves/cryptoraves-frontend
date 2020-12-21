@@ -34,7 +34,8 @@
           <BalancePanel
             :selected-ticker="ticker" 
             :address="ethereumAddress"
-            :url="l2BlockExplorerUrl"
+            :l1BlockExplorerUrl="l1BlockExplorerUrl"
+            :l2BlockExplorerUrl="l2BlockExplorerUrl"
             :balance="loomBalance"
             :type="true"/>
         </div>
@@ -70,7 +71,8 @@
           <BalancePanel 
             :selected-ticker="ticker"
             :address="ethereumAddress"
-            :url="l1BlockExplorerUrl"
+            :l1BlockExplorerUrl="l1BlockExplorerUrl"
+            :l2BlockExplorerUrl="l2BlockExplorerUrl"
             :balance="ethereumBalance"/>                        
         </div>
       </div>

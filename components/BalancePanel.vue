@@ -23,13 +23,14 @@
       v-if="type"
       title="Link to Layer 2 Block Explorer"
       class="address-link"
-      @click="goBlockExplorer(url)">
+      @click="goBlockExplorer(l2BlockExplorerUrl)">
       {{ address }}
     </div>
     <div
       v-else
       title="Link to Etherscan.io"
-      class="address-link">
+      class="address-link"
+      @click="goBlockExplorer(l1BlockExplorerUrl)">
       {{ address }}
     </div>
     <div class="balancepanel-balance">
@@ -54,7 +55,11 @@ export default {
       type: String,
       default: ''
     },
-    url: {
+    l1BlockExplorerUrl: {
+      type: String,
+      default: ''
+    },
+    l2BlockExplorerUrl: {
       type: String,
       default: ''
     },
@@ -65,7 +70,7 @@ export default {
   },
   methods: {
     async goBlockExplorer(link) {
-      window.open(link)
+      window.open(link+'address/'+this.address)
     }
   }
 }
