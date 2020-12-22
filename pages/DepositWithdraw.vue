@@ -36,7 +36,7 @@
             :address="ethereumAddress"
             :l1BlockExplorerUrl="l1BlockExplorerUrl"
             :l2BlockExplorerUrl="l2BlockExplorerUrl"
-            :balance="loomBalance"
+            :balance="layer2Balance"
             :l1NetworkType="l1NetworkType"
             :l2NetworkType="l2NetworkType"
             :type="true"/>
@@ -127,7 +127,7 @@
       v-if="showWithdrawModal"
       :imageurl="TOKEN_IMAGE_URL"
       :imagetitle="ticker"
-      :maxamount="loomBalance"
+      :maxamount="layer2Balance"
       @withdraw="onWithdraw"
       @closeWithdraw="showWithdrawModal=false"/>
     <TransferStatus 
@@ -204,6 +204,7 @@ import EnableMetaMask from '../components/EnableMetaMask'
 
 
 import MetamaskHandler from "../assets/js/metamaskHandler"
+import networkData from "../assets/js/networkData"
 
 export default {
   components: {
@@ -260,7 +261,7 @@ export default {
       layer2Token: null,
       loomGateway: null,
       loomWalletAddr: null,
-      loomBalance: 0,
+      layer2Balance: 0,
       busy: false,
       hasContractMapping: false,
       eth2loomGatewayAddress: null,
@@ -274,10 +275,17 @@ export default {
       coinMultiplier: 0,
       resumeWithdrawalNeeded: false,
       enableDiagnostics: false,
-      forceLive: false
+      forceLive: false,
+      ERC20ABI: [
+        'function balanceOf(address who) external view returns (uint256)',
+        'function approve(address spender, uint256 value) external returns (bool) @50000',
+        'function transfer(address to, uint256 value) external returns (bool) @30000',
+        'event Transfer(address indexed from, address indexed to, uint256 value)'
+      ]
     }
   },
   async mounted() {
+
     try {
       if (this.$route.query.resumeWithdrawalNeeded) {
         this.resumeWithdrawalNeeded = true
@@ -301,6 +309,7 @@ export default {
 
     await this.initWeb3()
     await this.loadWebData()
+    await this.getBalances()
     /*var res = await this.initWeb3()
     if (!res) {
       console.log('no results')
@@ -322,7 +331,7 @@ export default {
     
     //await this.checkContractMapping()
   },
-  mixins: [MetamaskHandler],
+  mixins: [MetamaskHandler,networkData],
   methods: {
     toggle: function() {
       this.isOpen = !this.isOpen
@@ -336,6 +345,50 @@ export default {
       if (this.amount > 0) {
         this.deposit()
       }
+    },
+    async getBalances(){
+      try {
+        this.tokenManagement = new ethers.Contract(
+          this.contractAddresses[this.l2NetworkType]['TokenManagementContractAddress'],
+          this.tokenManagementABI,
+          this.l2Provider
+        )
+      } catch (e) {
+        console.log(e)
+      }
+
+      try {
+        this.layer2Token = new ethers.Contract(
+          this.contractAddresses[this.l2NetworkType]['CryptoravesTokenContractAddress'],
+          this.cryptoravesTokenABI,
+          this.l2Provider
+        )
+      } catch (e) {
+        console.log(e)
+      }
+
+      if (this.tokenManagement && this.layer2Token ){
+        let tickerContractAddress = await this.tokenManagement.getAddressBySymbol('TSTX')
+        console.log('Ticker contract address:',tickerContractAddress)
+
+        let tokenId = await this.tokenManagement.getManagedTokenIdByAddress(tickerContractAddress)
+
+        let balanceOf = await this.layer2Token.balanceOf(this.ethereumAddress, tokenId)
+        
+        this.layer2Balance = parseFloat(this.ethers.utils.formatUnits(balanceOf.toString(), 18))
+      }
+
+      /*
+      if( this.layer2Token ){
+
+        let res = await this.layer2Token.getHeldTokenBalances(this.ethereumAddress)
+        console.log(res)
+
+        res = await this.layer2Token.getHeldTokenIds(this.ethereumAddress)
+        console.log(res)
+        //res.forEach(element => console.log(element))
+      }*/
+      
     },
     async onConfirm() {
       this.showConfirmModal = false
@@ -878,9 +931,9 @@ export default {
       this.ethereumBalance = Number(
         ethers.utils.formatUnits(ethereumBalance.toString(), this.NUM_DECIMALS)
       )
-      const loomBalance = await this.layer2Token.balanceOf(this.loomWalletAddr)
-      this.loomBalance = Number(
-        ethers.utils.formatUnits(loomBalance.toString(), this.NUM_DECIMALS)
+      const layer2Balance = await this.layer2Token.balanceOf(this.loomWalletAddr)
+      this.layer2Balance = Number(
+        ethers.utils.formatUnits(layer2Balance.toString(), this.NUM_DECIMALS)
       )
     },
     async deposit() {
