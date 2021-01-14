@@ -185,6 +185,7 @@ import axios from 'axios'
 import Web3 from 'web3'
 import { ethers } from 'ethers'
 import BN from 'bn.js'
+
 import SectionHeader from '../components/SectionHeader'
 import BalancePanel from '../components/BalancePanel'
 import DepositModal from '../components/DepositModal'
@@ -194,14 +195,12 @@ import WithdrawModal from '../components/WithdrawModal'
 import TransferStatus from '../components/TransferStatus'
 import ConfirmWithdraw from '../components/ConfirmWithdraw'
 import ShowBackburnerNoticeModal from '../components/ShowBackburnerNoticeModal'
-
 import ConfirmWithdrawComplete from '../components/ConfirmWithdrawComplete'
 import SignForeign from '../components/SignForeign'
 import WaitMappingConfirm from '../components/WaitMappingConfirm'
 import RegisterWallet from '../components/RegisterWallet'
 import StuckModal from '../components/StuckModal'
 import EnableMetaMask from '../components/EnableMetaMask'
-
 
 import MetamaskHandler from "../assets/js/metamaskHandler"
 import networkData from "../assets/js/networkData"
@@ -310,6 +309,7 @@ export default {
     await this.initWeb3()
     await this.loadWebData()
     await this.getBalances()
+    
     /*var res = await this.initWeb3()
     if (!res) {
       console.log('no results')
@@ -346,6 +346,7 @@ export default {
         this.deposit()
       }
     },
+    
     async getBalances(){
       try {
         this.tokenManagement = new ethers.Contract(
@@ -369,7 +370,7 @@ export default {
 
       if (this.tokenManagement && this.layer2Token ){
         let tickerContractAddress = await this.tokenManagement.getAddressBySymbol('TSTX')
-        console.log('Ticker contract address:',tickerContractAddress)
+        //console.log('Ticker contract address:',tickerContractAddress)
 
         let tokenId = await this.tokenManagement.getManagedTokenIdByAddress(tickerContractAddress)
 

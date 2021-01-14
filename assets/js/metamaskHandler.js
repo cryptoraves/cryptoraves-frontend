@@ -12,6 +12,7 @@ export default {
       l2NetworkType: null,
       l2BlockExplorerUrl: null,
       l2Provider:null,
+      signer: null
     }
   },
   methods: {
@@ -71,7 +72,7 @@ export default {
         this.l2Provider = this.ethereumProvider
       } else if (networkId==80001){
         this.l2NetworkType = 'Matic Testnet'
-        this.l2BlockExplorerUrl = 'https://explorer.testnet2.matic.network/'
+        this.l2BlockExplorerUrl = 'https://explorer-mumbai.maticvigil.com//'
         this.l1BlockExplorerUrl = 'https://goerli.etherscan.io/'
         this.l1NetworkType = 'goerli'
         this.l2Provider = this.ethereumProvider
