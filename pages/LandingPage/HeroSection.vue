@@ -15,26 +15,7 @@
       </div>
       <div class="row">
         <div class="land-hero-cover">
-          <router-link
-            v-scroll-to="{
-              el: '#getToken',
-              duration: 500,
-              easing: 'linear',
-              offset: -240,
-              force: true,
-              cancelable: true,
-            }"
-            to="/"
-          >
-            <AppButton 
-              name="Launch Your token" 
-              type2="true"/>
-          </router-link>
-          <span @click="goFaqTop">
-            <AppButton 
-              name="Learn More" 
-              type3="true"/>
-          </span>
+          <SearchBar :tokensearch="false" />
         </div>
       </div>
     </div>
@@ -44,12 +25,15 @@
 <script>
 import AppButton from '../../components/ui/AppButton'
 import TippingButton from '../../components/ui/TippingButton'
+import SearchBar from '../../components/ui/SearchBar'
+
 
 export default {
   name: 'HeroSection',
   components: {
     AppButton,
-    TippingButton
+    TippingButton,
+    SearchBar
   },
   methods: {
     goDepWithd: function() {

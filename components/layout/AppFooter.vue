@@ -8,7 +8,7 @@
             href="http://ethereum.org/beginners/" 
             target="_blank"
           >
-            <img src="../../assets/img/ethereum1.png" >
+            <!-- <img src="../../assets/img/ethereum1.png" > -->
           </a>
         </div>
         <div class="col-lg-8 d-flex">
@@ -74,7 +74,7 @@
             class="d-flex"
             href="/"
           >
-            <img src="../../assets/img/whitelogo.png">
+            <!-- <img src="../../assets/img/whitelogo.png"> -->
           </a>
         </div>
       </div>

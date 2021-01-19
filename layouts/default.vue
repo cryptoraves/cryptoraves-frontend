@@ -1,18 +1,26 @@
 <template>
   <div id="app">
-    <AppHeader/>
+    <AppHeader 
+      v-on:userLogin="handleUserLogin(user)"
+      :user="user"
+      :goPortfolio="this.goPortfolio"
+      :initWeb3="this.initWeb3"
+      :loadUserFromAddress="this.loadUserFromAddress"
+      :ethereumAddress="ethereumAddress"
+    />
     <nuxt />
     <AppFooter/>  
   </div>
 </template>
+<app-header  />
 <script>
 import AppHeader from '../components/layout/AppHeader'
 import AppFooter from '../components/layout/AppFooter'
 import Vue from 'vue'
 
-import { ethers } from 'ethers'
-import Web3 from 'web3'
 import axios from 'axios'
+
+import MetamaskHandler from "../assets/js/metamaskHandler"
 
 Vue.filter('truncate', function(value) {
   if (!value) return ''
@@ -31,7 +39,8 @@ Vue.filter('comma', function(value) {
 export default {
   components: {
     AppHeader,
-    AppFooter
+    AppFooter,
+    MetamaskHandler
   },
   props: {
     source: {
@@ -40,20 +49,19 @@ export default {
     }
   },
   data: () => ({
+    userName: null,
     drawer: null,
     currentScroll: 0,
     web3Login: false,
     ethereumProvider: null,
     web3js: null,
     ethereumAddress: null,
-    userName: null,
+    user: null,
     referrer: null
   }),
+  mixins: [MetamaskHandler],
   async mounted() {
-    //this.web3Login=this.$store.state.web3Login
-    if (!this.web3Login) {
-      //this.web3Login = await this.initWeb3()
-    }
+    //alert(this.$store.state.ethereumAddress)
     
     if (this.ethereumAddress) {
       //check for user
@@ -66,18 +74,14 @@ export default {
         return 0
       }
 
-      //if yes go to user's portfolio page
-      if (this.userName) {
-        this.$router.push({
-          name: 'PortfolioPage',
-          query: {
-            user: this.userName
-          }
-        })
-      }
+    } else {
+      
+      //await this.initWeb3()
+      //alert(this.ethereumAddress)
     }
   },
   created() {
+    alert(this.userName)
     window.addEventListener('scroll', this.handleScroll)
   },
   destroyed() {
@@ -92,6 +96,7 @@ export default {
           '?pageType=getweb3PortalData&ethAddress=' +
           this.ethereumAddress
         response = await axios.get(webDataUrl)
+        this.user = response.data.user
       } catch(e) {
         throw new Error(e)
       }
@@ -103,36 +108,6 @@ export default {
         return null
       }
     },
-    async initWeb3() {
-        let web3js
-        if (window.ethereum) {
-          window.web3 = new Web3(ethereum)
-          web3js = new Web3(ethereum)
-          await ethereum.enable()
-        } else if (window.web3) {
-          window.web3 = new Web3(window.web3.currentProvider)
-          web3js = new Web3(window.web3.currentProvider)
-        }
-        if (web3js) {
-          this.web3js = web3js
-          this.ethereumProvider = new ethers.providers.Web3Provider(
-            web3js.currentProvider
-          )
-          this.ethereumAddress = (await this.ethereumProvider.listAccounts())[0]
-
-          window.ethereum.on('accountsChanged', function() {
-            const sleep = milliseconds => {
-              return new Promise(resolve => setTimeout(resolve, milliseconds))
-            }
-            sleep(1000)
-            location.reload()
-          })
-
-          return true
-        } else {
-          return false
-        }
-      },
     handleScroll(e) {
       // Any code to be executed when the window is scrolled
       if (this.currentScroll > e.srcElement.scrollingElement.scrollTop) {
@@ -147,6 +122,14 @@ export default {
         }
       }
       this.currentScroll = e.srcElement.scrollingElement.scrollTop
+    },
+    handleUserLogin(user){
+      this.user=user
+      this.userName = user.platformHandle
+      this.goPortfolio(this.userName)
+    },
+    goPortfolio(user) {
+      this.$router.push({ name: 'PortfolioPage', query: { user: user } })
     }
   }
 }

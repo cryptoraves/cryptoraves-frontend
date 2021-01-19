@@ -4,41 +4,46 @@
       <div class="row">
         <div class="d-flex col-sm-12 col-lg-2">
           <div class="app-header-logoarea">
-            <a href="/">
+            
               <img 
                 src="../../assets/img/cryptoraves_Horozontal Alignment_Full Color_JPG.png" 
+                style="cursor: pointer"
                 alt 
+                @click="goHome()"
               >
-            </a>
+            
           </div>
+         
         </div>
         <div class="d-flex d-flex-right col-lg-4 col-sm-12">
-          <!-- ---------------------------------------------------------------------------------------- -->
-          <!-- LeaderBoard after Date Ready -->
-          <div 
-            class="app-header-leaderboard" 
-            @click="goLeaderboard"
-          >LEADERBOARD</div>
-          <!-- ---------------------------------------------------------------------------------------- -->
+          
         </div>
         <div class="col-lg-6 col-sm-12 text-right">
           <div class="d-flex d-flex-right form-group mt-3">
-            <SearchBar :tokensearch="false" />
-            <router-link
-              v-scroll-to="{
-                el: '#getToken',
-                duration: 500,
-                easing: 'linear',
-                offset: -200,
-                force: true,
-                cancelable: true
-              }"
-              to="/"
-            >
-              <AppButton
-                name="LAUNCH YOUR TOKEN"
-                type1="true" />
-            </router-link>
+
+            <div v-if="userName">
+              <img
+                
+                class="table-img"
+                :src="user.imgUrl"
+                :title="userName"
+                @click="goPortfolio(userName)"
+
+              >
+              {{ userName }}
+            </div>
+            <div v-else>
+              <div>
+                <img
+                  class="table-img"
+                  src="../../assets/metamask.png"
+                  title="Connect Your Wallet To Login"
+                  @click="connectWallet()"
+                >
+                Connect Your Wallet
+              </div>
+            </div>
+            
           </div>
         </div>
       </div>
@@ -47,20 +52,32 @@
 </template>
 
 <script>
-import AppButton from '../ui/AppButton'
-import SearchBar from '../ui/SearchBar'
-
 export default {
   name: 'AppHeader',
-  components: {
-    AppButton,
-    SearchBar
-  },
+  components: {},
+  //props: ['user']
+  props: {
+    user: {type: Object},
+    goPortfolio: {type: Function},
+    initWeb3: {type: Function},
+    ethereumAddress: {type: String},
+    loadUserFromAddress: {type: Function}
+  }, 
+  data: () => ({
+    userName: null,
+  }),
   methods: {
-    goLeaderboard: function() {
-      this.$router.push({
-        name: 'LeaderboardPage'
-      })
+
+    goHome(){
+      this.$router.push('/')
+    },
+    async connectWallet(){
+      await this.initWeb3()
+      this.userName = await this.loadUserFromAddress()
+
+      this.$emit('userLogin', this.user)
+      
+      
     }
   }
 }
@@ -118,6 +135,28 @@ img {
 @media only screen and (min-width: 0px) and (max-width: 767px) {
   .app-header-logoarea {
     text-align: center;
+  }
+}
+.table-img {
+  border: 2px solid white;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  -webkit-box-shadow: 0px 0px 15px 5px rgba(8, 169, 255, 0.3);
+  -moz-box-shadow: 0px 0px 15px 5px rgba(8, 169, 255, 0.3);
+  box-shadow: 0px 0px 15px 5px rgba(8, 169, 255, 0.3);
+}
+.table-img:hover {
+  cursor: pointer;
+  opacity: 0.7;
+  animation: avatar-from-effect 1s infinite;
+}
+@keyframes avatar-from-effect {
+  0% {
+    box-shadow: 0 0 0 0px rgba(205, 136, 57, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 0 15px rgba(205, 136, 57, 0);
   }
 }
 </style>
