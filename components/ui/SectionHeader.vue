@@ -1,11 +1,11 @@
 <template>
   <div class="section-header">
-    <img 
+    <!--img 
       v-if="vya" 
       src="../../assets/img/vya-icon.png" >
     <img
       v-else
-      src="../../assets/img/cryptoraves_PNG-01.png">
+      src="../../assets/img/cryptoraves_PNG-01.png"-->
     <br>
     <slot/>
   </div>

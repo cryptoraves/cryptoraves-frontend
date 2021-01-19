@@ -3,6 +3,7 @@
     <AppHeader 
       v-on:userLogin="handleUserLogin(user)"
       :user="user"
+      :userName="userName"
       :goPortfolio="this.goPortfolio"
       :initWeb3="this.initWeb3"
       :loadUserFromAddress="this.loadUserFromAddress"
@@ -63,25 +64,20 @@ export default {
   async mounted() {
     //alert(this.$store.state.ethereumAddress)
     
-    if (this.ethereumAddress) {
-      //check for user
-      this.userName = await this.loadUserFromAddress()
-
-      //check if referrer is outside cryptoraves
-      if (document.referrer.indexOf(
-        window.location.hostname
-      ) >= 0) {
-        return 0
-      }
-
-    } else {
-      
-      //await this.initWeb3()
-      //alert(this.ethereumAddress)
+    
+    this.ethereumAddress = localStorage.getItem('ethereumAddress')
+    //await this.initWeb3()
+    
+    
+    this.user = JSON.parse(localStorage.getItem('user'))
+    if(this.user){
+      this.userName = this.user.platformHandle
     }
+      
+    
   },
   created() {
-    alert(this.userName)
+
     window.addEventListener('scroll', this.handleScroll)
   },
   destroyed() {
@@ -124,9 +120,19 @@ export default {
       this.currentScroll = e.srcElement.scrollingElement.scrollTop
     },
     handleUserLogin(user){
-      this.user=user
-      this.userName = user.platformHandle
-      this.goPortfolio(this.userName)
+      if(user){
+        this.user=user
+        //this.$store.commit('setUserData',this.user)
+        localStorage.setItem(
+          'user',
+          JSON.stringify(user)
+        )
+        localStorage.setItem('ethereumAddress',this.ethereumAddress)
+        this.userName = user.platformHandle
+        this.goPortfolio(this.userName)
+      } else {
+        alert('user not registered. Show modal for registration instructions')
+      }
     },
     goPortfolio(user) {
       this.$router.push({ name: 'PortfolioPage', query: { user: user } })

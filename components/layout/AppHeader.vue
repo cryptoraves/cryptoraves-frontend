@@ -26,7 +26,7 @@
                 
                 class="table-img"
                 :src="user.imgUrl"
-                :title="userName"
+                :title="'Welcome '+userName+' -- Click To See Your Portfolio'"
                 @click="goPortfolio(userName)"
 
               >
@@ -57,15 +57,13 @@ export default {
   components: {},
   //props: ['user']
   props: {
+    userName: {type: String},
     user: {type: Object},
     goPortfolio: {type: Function},
     initWeb3: {type: Function},
     ethereumAddress: {type: String},
     loadUserFromAddress: {type: Function}
   }, 
-  data: () => ({
-    userName: null,
-  }),
   methods: {
 
     goHome(){

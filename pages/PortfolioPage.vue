@@ -15,15 +15,15 @@
             <div class="portfolio-subtitle-details">
               <div
                 title="The sum of jointly-held tokens between this user and others."
-              >Total Reciprocated: {{ totalReciprocated | comma }}</div>
+              >Total Value: ${{ totalHoldings | comma }}</div>
             </div>
             <div
               class="portfolio-subtitle-holding"
               title="Total tokens from others held in this portfolio."
             >
-              <span>
+              <!--span>
                 <b>TOTAL Token Holdings: {{ totalHoldings | comma }}</b>
-              </span>
+              </span-->
             </div>
           </div>
           <div class="portfolio-user">

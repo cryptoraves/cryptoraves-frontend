@@ -16,7 +16,7 @@
               <div
                 class="hodler-subtitle-details-link"
                 @click="goHodlerFaq"
-              >What the heck is a hodler, anyway?</div>
+              ></div>
               <!-- <div
                 title="The sum of jointly-held tokens between this user and others."
               >
@@ -27,12 +27,13 @@
               class="hodler-subtitle-holding"
               title="Total tokens from others held in this portfolio."
             >
-              <span>
+              <!--span>
                 <b>
                   TOTAL {{ user }}’s Tokens Distributed:
                   {{ totalDistributed | comma }}
                 </b>
-              </span>
+              </span-->
+              <br><br><br><br>
             </div>
           </div>
           <div class="hodler-user">

@@ -1,6 +1,6 @@
 <template>
   <div class="section-header">
-    <img src="../assets/cryptoraves_PNG-01.png" >
+    <!--img src="../assets/cryptoraves_PNG-01.png" -->
     <br >
     <slot/>
   </div>

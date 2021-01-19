@@ -41,7 +41,7 @@ export default {
         this.signer = this.ethereumProvider.getSigner(0)
         this.ethereumAddress = (await this.ethereumProvider.listAccounts())[0]
 
-        //this.$store.commit('setEthereumAddress',this.ethereumAddress)
+        
         
         window.ethereum.on('accountsChanged', function() {
           const sleep = milliseconds => {
