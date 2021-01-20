@@ -80,7 +80,7 @@ export default {
     },
     async connectWallet(){
       await this.initWeb3()
-      this.userName = await this.loadUserFromAddress()
+      await this.loadUserFromAddress()
 
       this.$emit('userLogin', this.user)
       
