@@ -6,13 +6,13 @@
 </template>
 <script>
 import HeroSection from './HeroSection'
-import GetToken from './GetToken'
+//import GetToken from './GetToken'
 
 export default {
   name: 'LandingPage',
   components: {
     HeroSection,
-    GetToken
+    //GetToken
   }
 }
 </script>

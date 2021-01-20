@@ -18,11 +18,7 @@
             v-else
           >{{ platformHandle }}'s Transaction History</SectionHeader>
           <div class="history-user">
-            <div
-              class="history-userlink"
-              title="Click to See Portfolio & Token Balance"
-              @click="goPortfolio(user)"
-            >Click for Portfolio Page</div>
+            
             <div class="history-userimg">
               <img
                 :src="userImageUrl"
@@ -32,6 +28,7 @@
               >
             </div>
           </div>
+          <br><br>
           <div class="elastic-arrow">
             <img 
               src="../assets/gif/elasticrightarrow.gif"
@@ -48,6 +45,7 @@
                 <th scope="col">Tweet</th>
                 <th scope="col">Token Brand</th>
                 <th scope="col">Amount</th>
+                <th scope="col">Value</th>
                 <th scope="col">To</th>
                 <th scope="col">Date</th>
               </tr>
@@ -123,6 +121,9 @@
                   <div>{{ item.amount | comma }}</div>
                 </td>
                 <td>
+                  <div>${{ Math.round(item.amount * .1 * Math.random()) | comma }}</div>
+                </td>
+                <td>
                   <img
                     v-if="!item.userTo.includes('Export To Mainnet')"
                     :title="item.userTo"
@@ -177,7 +178,7 @@
           <div
             class="portfolio-link"
             @click="goPortfolio(user)"
-          >Link to {{ platformHandle }}'s Portfolio Page.</div>
+          >Click to see {{ platformHandle }}'s Portfolio Page.</div>
         </div>
       </div>
     </div>
@@ -489,11 +490,6 @@ export default {
   }
 }
 
-.history-userimg:hover {
-  cursor: pointer;
-  transition: all 0.5s ease-out;
-  transform: translateY(-0.5em);
-}
 
 .history-userimg:active {
   transform: translateY(0.5em);
@@ -506,10 +502,6 @@ export default {
   margin: auto;
 }
 
-.history-userimg img:hover {
-  opacity: 0.8;
-  cursor: pointer;
-}
 
 .history-pagination {
   margin: 10px auto 50px auto;

@@ -1,17 +1,7 @@
 <template lang="html">
   <div v-if="user">
     <div class="container">
-      <div class="portfolio-user">
-        <div
-          class="portfolio-userwelcome"
-        >Welcome {{ user.platformHandle }}</div>
-        <div class="portfolio-userimg">
-          <img
-            :src="user.imgUrl"
-            :title="user.platformHandle"
-          >
-        </div>
-      </div>
+    
       <div class="token-list-title">Token for Deposit/Withdrawal</div>
       <div 
         class="token-list"
@@ -82,7 +72,7 @@
       </div>
       <div class="link instruction-link"><nuxt-link to="/stepinstructions">Step-by-Step Instructions</nuxt-link></div>
       <br>
-      <div class="link stuck-link"><nuxt-link to="/stepinstructions/stuck">Is Your Withdrawal Stuck?</nuxt-link></div>
+      <!--div class="link stuck-link"><nuxt-link to="/stepinstructions/stuck">Is Your Withdrawal Stuck?</nuxt-link></div-->
       <div
         v-if="enableDiagnostics"
       >

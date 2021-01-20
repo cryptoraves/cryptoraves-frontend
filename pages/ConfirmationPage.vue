@@ -136,10 +136,10 @@
           </div>
         </div>
         <div class="row">
-          <div class="confirmation-bottom">
+          <!--div class="confirmation-bottom">
             You + (Being Awesome) = (Token Value)
             <sup>2</sup>
-          </div>
+          </div-->
         </div>
       </div>
     </div>

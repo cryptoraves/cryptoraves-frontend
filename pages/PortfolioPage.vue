@@ -10,7 +10,7 @@
       </div>
       <div v-else>
         <div class="portfolio-title">
-          <SectionHeader>{{ user }}'s Portfolio Page</SectionHeader>
+          <SectionHeader>{{ user == loggedInUser ? "Your" : user+"'s" }} Portfolio Page</SectionHeader>
           <div class="portfolio-subtitle">
             <div class="portfolio-subtitle-details">
               <div
@@ -27,17 +27,13 @@
             </div>
           </div>
           <div class="portfolio-user">
-            <div
-              class="portfolio-userlink"
-              title="Click to See Hodler's Page"
-              @click="goHodler(user)"
-            >Click for Hodler's Page</div>
+            
             <div class="portfolio-userimg">
               <img
                 :src="userImageUrl"
                 onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
-                title="Click to See Hodler's Page"
-                @click="goHodler(user)"
+                
+                
               >
             </div>
           </div>
@@ -49,6 +45,8 @@
               <tr>
                 <th scope="col">Token Brand</th>
                 <th scope="col">Token Balance</th>
+                <th scope="col">Value</th>
+                <th v-if="user == loggedInUser" scope="col"></th>
               </tr>
             </thead>
             <tbody>
@@ -56,7 +54,7 @@
                 v-for="(item,index) in tableRows"
                 :index="index"
                 :key="item.txnId"
-                :class="[user === item.tokenBrand? 'tr-lightblue-color':'']"
+                
               >
                 <td width="50%">
                   <img
@@ -81,12 +79,17 @@
                   width="50%"
                 >
                   <div>{{ item.balance | comma }}</div>
-                  <div
-                    v-if="user === item.tokenBrand"
-                    :title="getTitle()"
-                    class="td-position-absolute"
-                  >{{ tokenBalancePercentage }}%</div>
+                  
                 </td>
+                <td>
+                  <div>${{ Math.round(item.balance * .1 * Math.random()) | comma }}</div>
+                </td>
+                <td 
+                  v-if="user == loggedInUser"
+                  @click="goWithdraw(item.tokenBrand)"
+                  class="depositWithdrawLink"
+                  title="Withdraw to your mainnet wallet"
+                >Withdraw</td>
               </tr>
             </tbody>
           </table>
@@ -112,8 +115,8 @@
         <div class="row">
           <div
             class="history-link"
-            @click="goHodler(user)"
-          >Link to {{ user }}'s Hodler's Page.</div>
+            @click="goHistory(user)"
+          >Click to see {{ user == loggedInUser ? "Your" : user+"'s"  }} Transaction History.</div>
         </div>
       </div>
     </div>
@@ -132,6 +135,8 @@ export default {
   },
   data() {
     return {
+      loggedInUser: 'N / A',
+      userData: '',
       user: '',
       tableRows: [],
       rowCount: 0,
@@ -156,6 +161,11 @@ export default {
     }
 
     this.getPortfolio(this.user, this.initialPagePtr)
+
+    this.userData = JSON.parse(localStorage.getItem('user'))
+    if(this.userData){
+      this.loggedInUser = this.userData.platformHandle
+    }
   },
   methods: {
     getTitle() {
@@ -212,11 +222,7 @@ export default {
           console.log(e)
         })
     },
-    goHodler(user) {
-      this.$root.$emit('changeUser', user)
-      // this.$root.$emit("sendReciprocated", this.totalReciprocated);
-      this.$router.push({ name: 'HodlerPage', query: { user: user } })
-    },
+    
     goAnother(user) {
       if (this.user !== user) {
         this.showLoading = true
@@ -235,6 +241,14 @@ export default {
         name: 'HistoryPage',
         query: {
           user: user
+        }
+      })
+    },
+    goWithdraw(ticker){
+      this.$router.push({
+        name: 'DepositWithdraw',
+        query: {
+          ticker: ticker
         }
       })
     }
@@ -297,6 +311,9 @@ export default {
 .portfolio-userlink:hover {
   cursor: pointer;
 }
+.depositWithdrawLink:hover{
+  cursor: pointer;
+}
 .portfolio-userimg {
   background: white;
   display: flex;
@@ -317,11 +334,6 @@ export default {
   }
 }
 
-.portfolio-userimg:hover {
-  cursor: pointer;
-  transition: all 0.5s ease-out;
-  transform: translateY(-0.5em);
-}
 
 .portfolio-userimg:active {
   transform: translateY(0.5em);
@@ -333,10 +345,7 @@ export default {
   border-radius: 50%;
   margin: auto;
 }
-.portfolio-userimg img:hover {
-  opacity: 0.7;
-  cursor: pointer;
-}
+
 
 .table-section {
   margin: 100px auto 0px auto;

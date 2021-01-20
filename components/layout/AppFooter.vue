@@ -79,9 +79,9 @@
         </div>
       </div>
       <div class="app-footer-email">
-        <a
+        <!--a
           href="mailto:info@cryptoraves.space">info@cryptoraves.space
-        </a>|
+        </a>| -->
         <span @click="goFaqTop">FAQs</span>
       </div>
     </div>
