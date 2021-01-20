@@ -1,20 +1,18 @@
 <template>
   <div>
     <HeroSection/>
-
+    <GetToken/>
   </div>
 </template>
 <script>
 import HeroSection from './HeroSection'
 import GetToken from './GetToken'
-import ShareToken from './ShareToken'
 
 export default {
   name: 'LandingPage',
   components: {
     HeroSection,
-    GetToken,
-    ShareToken
+    GetToken
   }
 }
 </script>

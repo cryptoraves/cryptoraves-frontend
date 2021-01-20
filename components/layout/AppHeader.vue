@@ -21,7 +21,7 @@
         <div class="col-lg-6 col-sm-12 text-right">
           <div class="d-flex d-flex-right form-group mt-3">
 
-            <div v-if="userName">
+            <div v-if="userName" >
               <img
                 
                 class="table-img"
@@ -30,17 +30,26 @@
                 @click="goPortfolio(userName)"
 
               >
-              {{ userName }}
+              <a  
+                class='avatar-space'
+                @click='logOut()'
+              >Log Out</a>
             </div>
-            <div v-else>
+            <div 
+              v-else
+              @click="connectWallet()"
+            >
               <div>
                 <img
                   class="table-img"
                   src="../../assets/metamask.png"
                   title="Connect Your Wallet To Login"
-                  @click="connectWallet()"
+                  
                 >
-                Connect Your Wallet
+                <!--a  
+                  class='avatar-space'
+                >Connect Your Wallet</a-->
+                
               </div>
             </div>
             
@@ -76,6 +85,11 @@ export default {
       this.$emit('userLogin', this.user)
       
       
+    },
+    logOut(){
+      localStorage.removeItem('ethereumAddress')
+      localStorage.removeItem('user')
+      window.location = '/'
     }
   }
 }
@@ -99,6 +113,10 @@ img {
   width: 270px;
   height: 70px;
   margin: auto;
+}
+a.avatar-space {
+  color:rgb(0, 38, 101);
+  cursor: pointer;
 }
 .app-header-leaderboard {
   font-size: 14px;
