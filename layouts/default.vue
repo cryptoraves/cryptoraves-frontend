@@ -9,6 +9,10 @@
       :loadUserFromAddress="this.loadUserFromAddress"
       :ethereumAddress="ethereumAddress"
     />
+    <RegisterAddressModal
+      v-if="showRegisterAddressModal"
+      @confirm="onConfirm"
+    />
     <nuxt />
     <AppFooter/>  
   </div>
@@ -22,6 +26,8 @@ import Vue from 'vue'
 import axios from 'axios'
 
 import MetamaskHandler from "../assets/js/metamaskHandler"
+
+import RegisterAddressModal from '../components/RegisterAddressModal'
 
 Vue.filter('truncate', function(value) {
   if (!value) return ''
@@ -41,7 +47,8 @@ export default {
   components: {
     AppHeader,
     AppFooter,
-    MetamaskHandler
+    MetamaskHandler,
+    RegisterAddressModal
   },
   props: {
     source: {
@@ -50,6 +57,7 @@ export default {
     }
   },
   data: () => ({
+    showRegisterAddressModal: false,
     userName: null,
     drawer: null,
     currentScroll: 0,
@@ -131,11 +139,14 @@ export default {
         this.userName = user.platformHandle
         this.goPortfolio(this.userName)
       } else {
-        alert('user not registered. Show modal for registration instructions')
+        this.showRegisterAddressModal = true
       }
     },
     goPortfolio(user) {
       this.$router.push({ name: 'PortfolioPage', query: { user: user } })
+    },
+    onConfirm() {
+      this.showRegisterAddressModal = false
     }
   }
 }
