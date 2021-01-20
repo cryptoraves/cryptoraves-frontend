@@ -37,6 +37,16 @@
               >
             </div>
           </div>
+           <div class="deposit-button">
+            
+            <div class="deposit-buttonimg">
+              <img
+                src=https://sample-imgs.s3.amazonaws.com/depositExample.png
+                title="Click to deposit crypto from you mainnet wallet"
+                @click="goDepositWithdraw('', 'deposit')"
+              >
+            </div>
+          </div>
         </div>
 
         <div class="table-section row">
@@ -86,7 +96,7 @@
                 </td>
                 <td 
                   v-if="user == loggedInUser"
-                  @click="goWithdraw(item.tokenBrand)"
+                  @click="goDepositWithdraw(item.tokenBrand, 'withdraw')"
                   class="depositWithdrawLink"
                   title="Withdraw to your mainnet wallet"
                 >Withdraw</td>
@@ -244,11 +254,12 @@ export default {
         }
       })
     },
-    goWithdraw(ticker){
+    goDepositWithdraw(ticker, depWdr){
       this.$router.push({
         name: 'DepositWithdraw',
         query: {
-          ticker: ticker
+          ticker: ticker,
+          txnType: depWdr
         }
       })
     }
@@ -325,6 +336,17 @@ export default {
   animation: avatar-from-effect 2s infinite;
   transition: all 0.5s ease-out;
 }
+.deposit-buttonimg {
+  background: white;
+  display: flex;
+  margin: auto;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 1px solid lightgrey;
+  animation: avatar-from-effect 2s infinite;
+  transition: all 0.5s ease-out;
+}
 @keyframes avatar-from-effect {
   0% {
     box-shadow: 0 0 0 0px rgb(43, 96, 222, 0.8);
@@ -340,6 +362,16 @@ export default {
 }
 
 .portfolio-userimg img {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  margin: auto;
+}
+.deposit-buttonimg:active {
+  transform: translateY(0.5em);
+}
+
+.deposit-buttonimg img {
   width: 110px;
   height: 110px;
   border-radius: 50%;
@@ -449,6 +481,11 @@ table tbody tr:nth-child(even) {
 }
 @media only screen and (max-width: 767px) {
   .portfolio-user {
+    position: relative;
+    margin-bottom: -40px;
+    z-index: 2;
+  }
+  .deposit-button {
     position: relative;
     margin-bottom: -40px;
     z-index: 2;

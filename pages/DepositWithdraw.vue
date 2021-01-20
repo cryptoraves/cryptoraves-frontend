@@ -33,7 +33,7 @@
         </div>
         <div class="user-transaction-section-buttons col-lg-4 col-md-12">
           <button
-            v-if="!resumeWithdrawalNeeded"
+            v-if="!resumeWithdrawalNeeded && !depositParam"
             type="button"
             class="btn btn-danger btn-arrow-right"
             @click="showWithdraw">
@@ -52,7 +52,7 @@
               :title="ticker">
           </div>
           <button 
-            v-if="!resumeWithdrawalNeeded"
+            v-if="!resumeWithdrawalNeeded && !withdrawParam"
             type="button"
             class="btn btn-success btn-arrow-left"
             @click="showDeposit">
@@ -265,6 +265,8 @@ export default {
       resumeWithdrawalNeeded: false,
       enableDiagnostics: false,
       forceLive: false,
+      withdrawParam: false,
+      depositParam: false,
       ERC20ABI: [
         'function balanceOf(address who) external view returns (uint256)',
         'function approve(address spender, uint256 value) external returns (bool) @50000',
@@ -283,6 +285,16 @@ export default {
     try {
       if (this.$route.query.ticker) {
         this.ticker = this.$route.query.ticker
+      }
+    } catch (e) {}
+    try {
+      if (this.$route.query.txnType == 'deposit') {
+        this.depositParam = true
+      }
+    } catch (e) {}
+    try {
+      if (this.$route.query.txnType == 'withdraw') {
+        this.withdrawParam = true
       }
     } catch (e) {}
     try {
