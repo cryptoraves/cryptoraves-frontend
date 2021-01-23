@@ -43,9 +43,9 @@
                 <th scope="col">From</th>
                 <th scope="col">Sent/Received</th>
                 <th scope="col">Tweet</th>
-                <th scope="col">Token Brand</th>
+                <th scope="col">Token</th>
                 <th scope="col">Amount</th>
-                <th scope="col">Value</th>
+                <th scope="col">Value $</th>
                 <th scope="col">To</th>
                 <th scope="col">Date</th>
               </tr>

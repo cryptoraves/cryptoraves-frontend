@@ -55,9 +55,9 @@
           <table>
             <thead>
               <tr>
-                <th scope="col">Token Brand</th>
-                <th scope="col">Token Balance</th>
-                <th scope="col">Value</th>
+                <th scope="col">Token</th>
+                <th scope="col">Balance</th>
+                <th scope="col">Value $</th>
                 <th v-if="user == loggedInUser" scope="col"></th>
               </tr>
             </thead>
