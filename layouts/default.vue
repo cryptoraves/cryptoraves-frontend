@@ -1,13 +1,10 @@
 <template>
   <div id="app">
     <AppHeader 
-      v-on:userLogin="handleUserLogin(user)"
-      :user="user"
-      :userName="userName"
+      v-on:userLogin="handleUserLogin()"
       :goPortfolio="this.goPortfolio"
-      :initWeb3="this.initWeb3"
-      :loadUserFromAddress="this.loadUserFromAddress"
-      :ethereumAddress="ethereumAddress"
+      :webData="webData"
+      :userName="userName"
     />
     <RegisterAddressModal
       v-if="showRegisterAddressModal"
@@ -22,10 +19,6 @@
 import AppHeader from '../components/layout/AppHeader'
 import AppFooter from '../components/layout/AppFooter'
 import Vue from 'vue'
-
-import axios from 'axios'
-
-import MetamaskHandler from "../assets/js/metamaskHandler"
 
 import RegisterAddressModal from '../components/RegisterAddressModal'
 
@@ -47,7 +40,6 @@ export default {
   components: {
     AppHeader,
     AppFooter,
-    MetamaskHandler,
     RegisterAddressModal
   },
   props: {
@@ -58,30 +50,23 @@ export default {
   },
   data: () => ({
     showRegisterAddressModal: false,
-    userName: null,
-    drawer: null,
     currentScroll: 0,
-    web3Login: false,
-    ethereumProvider: null,
     web3js: null,
     ethereumAddress: null,
-    user: null,
-    referrer: null
+    webData: null,
+    userName: ''
   }),
-  mixins: [MetamaskHandler],
   async mounted() {
-    //alert(this.$store.state.ethereumAddress)
     
+   
     
-    this.ethereumAddress = localStorage.getItem('ethereumAddress')
-    //await this.initWeb3()
-    
-    
-    this.user = JSON.parse(localStorage.getItem('user'))
-    if(this.user){
-      this.userName = this.user.platformHandle
+    this.web3Data = JSON.parse(localStorage.getItem('web3Data'))
+    this.webData = JSON.parse(localStorage.getItem('webData'))
+
+    if(this.webData){
+      this.userName = this.webData.platformHandle
     }
-      
+    
     
   },
   created() {
@@ -92,26 +77,7 @@ export default {
     window.removeEventListener('scroll', this.handleScroll)
   },
   methods: {
-    async loadUserFromAddress() {
-      var response = null
-      try {
-        var webDataUrl =
-          this.$store.state.WebsiteInterfaceUrl +
-          '?pageType=getweb3PortalData&ethAddress=' +
-          this.ethereumAddress
-        response = await axios.get(webDataUrl)
-        this.user = response.data.user
-      } catch(e) {
-        throw new Error(e)
-      }
-
-      try {
-        return response.data.user['platformHandle']
-      } catch(e) {
-        //console.log('No record for wallet address '+this.ethereumAddress)
-        return null
-      }
-    },
+    
     handleScroll(e) {
       // Any code to be executed when the window is scrolled
       if (this.currentScroll > e.srcElement.scrollingElement.scrollTop) {
@@ -127,23 +93,22 @@ export default {
       }
       this.currentScroll = e.srcElement.scrollingElement.scrollTop
     },
-    handleUserLogin(user){
-      if(user){
-        this.user=user
-        //this.$store.commit('setUserData',this.user)
-        localStorage.setItem(
-          'user',
-          JSON.stringify(user)
-        )
-        localStorage.setItem('ethereumAddress',this.ethereumAddress)
-        this.userName = user.platformHandle
-        this.goPortfolio(this.userName)
+    handleUserLogin(){
+      this.webData = JSON.parse(localStorage.getItem('webData'))
+      if(!this.userName){
+        try {
+          this.userName = this.webData.user.platformHandle
+        }catch(e){}
+      } 
+      if(this.userName) {
+        
+        this.goPortfolio()
       } else {
         this.showRegisterAddressModal = true
       }
     },
-    goPortfolio(user) {
-      this.$router.push({ name: 'PortfolioPage', query: { user: user } })
+    goPortfolio() {
+      this.$router.push({ name: 'PortfolioPage', query: { user: this.userName } })
     },
     onConfirm() {
       this.showRegisterAddressModal = false

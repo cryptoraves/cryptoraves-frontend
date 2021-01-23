@@ -25,7 +25,7 @@
               <img
                 
                 class="table-img"
-                :src="user.imgUrl"
+                :src="webData.user.imgUrl"
                 :title="'Welcome '+userName+' -- Click To See Your Portfolio'"
                 @click="goPortfolio(userName)"
 
@@ -61,34 +61,51 @@
 </template>
 
 <script>
+
+import MetamaskHandler from "../../assets/js/metamaskHandler"
+import NetworkData from "../../assets/js/networkData"
+
 export default {
   name: 'AppHeader',
-  components: {},
+  components: {MetamaskHandler},
   //props: ['user']
   props: {
     userName: {type: String},
-    user: {type: Object},
+    webData: {type: Object},
     goPortfolio: {type: Function},
-    initWeb3: {type: Function},
-    ethereumAddress: {type: String},
-    loadUserFromAddress: {type: Function}
   }, 
+  mixins: [MetamaskHandler, NetworkData],
   methods: {
 
     goHome(){
       this.$router.push('/')
     },
     async connectWallet(){
-      await this.initWeb3()
-      await this.loadUserFromAddress()
+      this.web3Data = await this.initWeb3()
 
-      this.$emit('userLogin', this.user)
+      let res = await this.loadWebDataFromAddress(this.web3Data.ethereumAddress)
+      localStorage.setItem(
+        'webData',
+        JSON.stringify(res)
+      )
+
+      this.web3Data['contractAddresses'] = this.contractAddresses
+      this.web3Data['cryptoravesTokenABI'] = this.cryptoravesTokenABI
+      this.web3Data['tokenManagementABI'] = this.tokenManagementABI
+
+      localStorage.setItem(
+        'web3Data',
+        JSON.stringify(this.web3Data)
+      )
+      localStorage.setItem('ethereumAddress',this.web3Data.ethereumAddress)
+      this.$emit('userLogin', res)
       
       
     },
     logOut(){
       localStorage.removeItem('ethereumAddress')
-      localStorage.removeItem('user')
+      localStorage.removeItem('webData')
+      localStorage.removeItem('web3Data')
       window.location = '/'
     }
   }

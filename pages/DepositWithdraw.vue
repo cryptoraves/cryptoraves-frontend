@@ -1,5 +1,5 @@
 <template lang="html">
-  <div v-if="user">
+  <div v-if="webData">
     <div class="container">
     
       <div class="token-list-title">Token for Deposit/Withdrawal</div>
@@ -23,12 +23,12 @@
         <div class="col-lg-4 col-md-12">
           <BalancePanel
             :selected-ticker="ticker" 
-            :address="ethereumAddress"
-            :l1BlockExplorerUrl="l1BlockExplorerUrl"
-            :l2BlockExplorerUrl="l2BlockExplorerUrl"
+            :address="web3Data.ethereumAddress"
+            :l1BlockExplorerUrl="web3Data.l1BlockExplorerUrl"
+            :l2BlockExplorerUrl="web3Data.l2BlockExplorerUrl"
             :balance="layer2Balance"
-            :l1NetworkType="l1NetworkType"
-            :l2NetworkType="l2NetworkType"
+            :l1NetworkType="web3Data.l1NetworkType"
+            :l2NetworkType="web3Data.l2NetworkType"
             :type="true"/>
         </div>
         <div class="user-transaction-section-buttons col-lg-4 col-md-12">
@@ -62,12 +62,12 @@
         <div class="col-lg-4 col-md-12">
           <BalancePanel 
             :selected-ticker="ticker"
-            :address="ethereumAddress"
-            :l1BlockExplorerUrl="l1BlockExplorerUrl"
-            :l2BlockExplorerUrl="l2BlockExplorerUrl"
+            :address="web3Data.ethereumAddress"
+            :l1BlockExplorerUrl="web3Data.l1BlockExplorerUrl"
+            :l2BlockExplorerUrl="web3Data.l2BlockExplorerUrl"
             :balance="ethereumBalance"
-            :l1NetworkType="l1NetworkType"
-            :l2NetworkType="l2NetworkType"/>                        
+            :l1NetworkType="web3Data.l1NetworkType"
+            :l2NetworkType="web3Data.l2NetworkType"/>                        
         </div>
       </div>
       <div class="link instruction-link"><nuxt-link to="/stepinstructions">Step-by-Step Instructions</nuxt-link></div>
@@ -146,13 +146,13 @@
       @stuck="onStuck"/>
     <SignForeign
       v-if="showSignForeign"
-      :username="user.platformHandle"
-      :imageurl="user.imgUrl"
+      :username="userName"
+      :imageurl="webData.user.imgUrl"
       @signforeign="onSignForeign"/>      
     <WaitMappingConfirm
       v-if="showWaitMappingConfirm"
-      :username="user.platformHandle"
-      :imageurl="user.imgUrl"
+      :username="userName"
+      :imageurl="webData.user.imgUrl"
       :stillbusy.sync="busy"
       @mappingconfirm="onMappingConfirm"/>
     <EnableMetaMask
@@ -174,7 +174,8 @@
 import axios from 'axios'
 import Web3 from 'web3'
 import { ethers } from 'ethers'
-import BN from 'bn.js'
+
+import MetamaskHandler from "../assets/js/metamaskHandler"
 
 import SectionHeader from '../components/SectionHeader'
 import BalancePanel from '../components/BalancePanel'
@@ -190,13 +191,11 @@ import SignForeign from '../components/SignForeign'
 import WaitMappingConfirm from '../components/WaitMappingConfirm'
 import RegisterWallet from '../components/RegisterWallet'
 import StuckModal from '../components/StuckModal'
-import EnableMetaMask from '../components/EnableMetaMask'
 
-import MetamaskHandler from "../assets/js/metamaskHandler"
-import networkData from "../assets/js/networkData"
 
 export default {
   components: {
+    MetamaskHandler,
     SectionHeader,
     BalancePanel,
     DepositModal,
@@ -211,8 +210,8 @@ export default {
     WaitMappingConfirm,
     RegisterWallet,
     StuckModal,
-    EnableMetaMask
   },
+  
   data() {
     return {
       I_WANT_TO: this.$route.query['iWantTo'],
@@ -233,7 +232,6 @@ export default {
       showRegisterWallet: false,
       showStuckModal: false,
       showEnableMetaMask: false,
-      user: {},
       tickers: [],
       balances: [],
       ticker: null,
@@ -273,9 +271,15 @@ export default {
         'function transfer(address to, uint256 value) external returns (bool) @30000',
         'event Transfer(address indexed from, address indexed to, uint256 value)'
       ]
-    }
+    } 
   },
-  async mounted() {
+  mixins: [MetamaskHandler],
+  created() {
+    this.webData = JSON.parse(localStorage.getItem('webData'))
+    if(this.webData){
+      this.userName = this.webData.platformHandle
+    }
+    this.web3Data = JSON.parse(localStorage.getItem('web3Data'))
 
     try {
       if (this.$route.query.resumeWithdrawalNeeded) {
@@ -285,6 +289,7 @@ export default {
     try {
       if (this.$route.query.ticker) {
         this.ticker = this.$route.query.ticker
+        this.tickerSelect(this.ticker)
       }
     } catch (e) {}
     try {
@@ -308,20 +313,11 @@ export default {
       }
     } catch (e) {}
 
-    await this.initWeb3()
-    await this.loadWebData()
-    await this.getBalances()
     
-    /*var res = await this.initWeb3()
-    if (!res) {
-      console.log('no results')
-    }
-    
-    await this.initLoom()
-    */
     if (!this.user) {
       return 0
     }
+      
     if (!this.loomWalletAddr) {
       return 0
     }
@@ -330,10 +326,13 @@ export default {
     //await this.addEventListeners()
     //await this.updateBalances()
     this.ready = true
+
     
     //await this.checkContractMapping()
   },
-  mixins: [MetamaskHandler,networkData],
+  async mounted(){
+    await this.getBalances()
+  },
   methods: {
     toggle: function() {
       this.isOpen = !this.isOpen
@@ -350,11 +349,12 @@ export default {
     },
     
     async getBalances(){
+      this.ethers = this.getEthers()
       try {
-        this.tokenManagement = new ethers.Contract(
-          this.contractAddresses[this.l2NetworkType]['TokenManagementContractAddress'],
-          this.tokenManagementABI,
-          this.l2Provider
+        this.tokenManagement = new this.ethers.Contract(
+          this.web3Data.contractAddresses[this.web3Data.l2NetworkType]['TokenManagementContractAddress'],
+          this.web3Data.tokenManagementABI,
+          await this.getProvider()
         )
       } catch (e) {
         console.log(e)
@@ -362,9 +362,9 @@ export default {
 
       try {
         this.layer2Token = new ethers.Contract(
-          this.contractAddresses[this.l2NetworkType]['CryptoravesTokenContractAddress'],
-          this.cryptoravesTokenABI,
-          this.l2Provider
+          this.web3Data.contractAddresses[this.web3Data.l2NetworkType]['CryptoravesTokenContractAddress'],
+          this.web3Data.cryptoravesTokenABI,
+          await this.getProvider()
         )
       } catch (e) {
         console.log(e)
@@ -376,7 +376,7 @@ export default {
 
         let tokenId = await this.tokenManagement.getManagedTokenIdByAddress(tickerContractAddress)
 
-        let balanceOf = await this.layer2Token.balanceOf(this.ethereumAddress, tokenId)
+        let balanceOf = await this.layer2Token.balanceOf(this.web3Data.ethereumAddress, tokenId)
         
         this.layer2Balance = parseFloat(this.ethers.utils.formatUnits(balanceOf.toString(), 18))
       }
@@ -384,10 +384,10 @@ export default {
       /*
       if( this.layer2Token ){
 
-        let res = await this.layer2Token.getHeldTokenBalances(this.ethereumAddress)
+        let res = await this.layer2Token.getHeldTokenBalances(this.web3Data.ethereumAddress)
         console.log(res)
 
-        res = await this.layer2Token.getHeldTokenIds(this.ethereumAddress)
+        res = await this.layer2Token.getHeldTokenIds(this.web3Data.ethereumAddress)
         console.log(res)
         //res.forEach(element => console.log(element))
       }*/
@@ -437,10 +437,10 @@ export default {
         },
         {
           type: 'address',
-          value: this.ethereumAddress.slice(2)
+          value: this.web3Data.ethereumAddress.slice(2)
         }
       )
-      //console.log(this.ethereumAddress + ' <-- Ethereum Address')
+      //console.log(this.web3Data.ethereumAddress + ' <-- Ethereum Address')
       //console.log(this.user.dappchainAddress + ' <-- Loom Address')
       //console.log(hash + ' <-- hash produced from addresses')
       //console.log('PlasmaEthSigner containing the current Ethereum address:')
@@ -497,7 +497,7 @@ export default {
       var webDataUrl =
         this.$store.state.WebsiteInterfaceUrl +
         '?pageType=pingForLocalMappingConfirmation&ethAddress=' +
-        this.ethereumAddress
+        this.web3Data.ethereumAddress
       axios
         .get(webDataUrl)
         .then(response => {
@@ -609,7 +609,7 @@ export default {
     },
     async manageAccountMappingOld() {
       const signer = getMetamaskSigner(this.web3js.currentProvider)
-      const ethereumAddress = Address.fromString(`eth:${this.ethereumAddress}`)
+      const ethereumAddress = Address.fromString(`eth:${this.web3Data.ethereumAddress}`)
       const plasmaEthSigner = new EthersSigner(signer)
       const privateKey = CryptoUtils.generatePrivateKey()
       const publicKey = CryptoUtils.publicKeyFromPrivateKey(privateKey)
@@ -686,7 +686,7 @@ export default {
       }
     },
     async checkAccountMappingButton() {
-      const ethereumAddress = Address.fromString(`eth:${this.ethereumAddress}`)
+      const ethereumAddress = Address.fromString(`eth:${this.web3Data.ethereumAddress}`)
       const loomWalletAddr = new Address(
         this.loomClient.chainId,
         this.loomWalletAddr
@@ -766,7 +766,7 @@ export default {
       this.ethereumGateway = await this.getEthereumGatewayContract()
       this.loomGateway = await Contracts.TransferGateway.createAsync(
         this.loomClient,
-        Address.fromString('eth:' + this.ethereumAddress)
+        Address.fromString('eth:' + this.web3Data.ethereumAddress)
       )
     },
     async transportIndicator(verified) {
@@ -784,50 +784,22 @@ export default {
           throw new Error(e)
         })
     },
-    async loadWebData() {
-      var webDataUrl =
-        this.$store.state.WebsiteInterfaceUrl +
-        '?pageType=getweb3PortalData&ethAddress=' +
-        this.ethereumAddress
-      axios
-        .get(webDataUrl)
-        .then(response => {
-          let res = response.data
-          // JSON responses are automatically parsed.
-          this.user = res.user
-          if (!this.user) {
-            this.showRegisterWallet = true
-            return 0
-          }
-          this.balances = res.balances
-          this.tickers = res.tickers
-          if (this.tickers) {
-            if (!this.tickers.includes(this.ticker)) {
-              this.ticker = this.tickers[0]
-            }
-            this.tickerSelect(this.ticker)
-          }
-        })
-        .catch(e => {
-          throw new Error(e)
-        })
-    },
     async tickerSelect(option) {
       try {
         event.stopPropagation()
       } catch (e) {}
       this.isOpen = false
       this.ticker = option
-      for (var i = 0; i < this.tickers.length; i++) {
-        if (this.balances[i].ticker == this.ticker) {
-          this.ETHEREUM_CONTRACT_ADDR = this.balances[i].ethContractAddress
-          this.ETHEREUM_CONTRACT_OWNER_ADDR = this.balances[
+      for (var i = 0; i < this.webData.tickers.length; i++) {
+        if (this.webData.balances[i].ticker == this.ticker) {
+          this.ETHEREUM_CONTRACT_ADDR = this.webData.balances[i].ethContractAddress
+          this.ETHEREUM_CONTRACT_OWNER_ADDR = this.webData.balances[
             i
           ].ethContractOwnerAddress
-          this.LOOM_CONTRACT_ADDR = this.balances[i].loomContractAddress
-          this.NUM_DECIMALS = this.balances[i].decimals
-          this.TOTAL_SUPPLY = this.balances[i].totalSupply
-          this.TOKEN_IMAGE_URL = this.balances[i].tokenImgUrl
+          this.LOOM_CONTRACT_ADDR = this.webData.balances[i].loomContractAddress
+          this.NUM_DECIMALS = this.webData.balances[i].decimals
+          this.TOTAL_SUPPLY = this.webData.balances[i].totalSupply
+          this.TOKEN_IMAGE_URL = this.webData.balances[i].tokenImgUrl
           this.coinMultiplier = new BN(10).pow(new BN(this.NUM_DECIMALS))
           if (this.ready) {
             await this.initContracts()
@@ -848,7 +820,7 @@ export default {
           this.eth2loomGatewayAddress =
             '0xe080079ac12521d57573f39543e1725ea3e16dcc'
           this.ethBlockexplorerUrl =
-            'https://etherscan.io/address/' + this.ethereumAddress
+            'https://etherscan.io/address/' + this.web3Data.ethereumAddress
           this.loomBlockexplorerUrl =
             'https://basechain-blockexplorer.dappchains.com/address/' +
             this.loomWalletAddr +
@@ -860,7 +832,7 @@ export default {
           this.eth2loomGatewayAddress =
             '0x9c67fD4eAF0497f9820A3FBf782f81D6b6dC4Baa'
           this.ethBlockexplorerUrl =
-            'https://rinkeby.etherscan.io/address/' + this.ethereumAddress
+            'https://rinkeby.etherscan.io/address/' + this.web3Data.ethereumAddress
           this.loomBlockexplorerUrl =
             'https://extdev-blockexplorer.dappchains.com/address/' +
             this.loomWalletAddr +
@@ -887,7 +859,7 @@ export default {
     async addEventListeners() {
       let ethereumReceiveFilter = this.ethereumToken.filters.Transfer(
         null,
-        this.ethereumAddress
+        this.web3Data.ethereumAddress
       )
       this.ethereumToken.on(ethereumReceiveFilter, () => {
         this.updateBalances()
@@ -898,7 +870,7 @@ export default {
       })
 
       let ethereumSendFilter = this.ethereumToken.filters.Transfer(
-        this.ethereumAddress,
+        this.web3Data.ethereumAddress,
         null
       )
       this.ethereumToken.on(ethereumSendFilter, () => {
@@ -928,8 +900,8 @@ export default {
 
     async updateBalances() {
       const ethereumBalance = await this.ethereumToken.balanceOf(
-        this.ethereumAddress,
-        { from: this.ethereumAddress }
+        this.web3Data.ethereumAddress,
+        { from: this.web3Data.ethereumAddress }
       )
       this.ethereumBalance = Number(
         ethers.utils.formatUnits(ethereumBalance.toString(), this.NUM_DECIMALS)
@@ -994,7 +966,7 @@ export default {
       const EthCoin = Contracts.EthCoin
       this.ethCoin = await EthCoin.createAsync(
         this.loomClient,
-        Address.fromString('eth:' + this.ethereumAddress)
+        Address.fromString('eth:' + this.web3Data.ethereumAddress)
       )
       await this.ethCoin.approveAsync(
         this.loomGateway.address,
@@ -1028,7 +1000,7 @@ export default {
         .parseUnits(amount.toString(), this.NUM_DECIMALS)
         .toString()
 
-      const ethAddress = this.ethereumAddress
+      const ethAddress = this.web3Data.ethereumAddress
       const ownerMainnetAddr = Address.fromString('eth:' + ethAddress)
       var gatewayContract = this.loomGateway
       const dAppChainGatewayAddr = this.web3Loom.utils.toChecksumAddress(

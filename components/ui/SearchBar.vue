@@ -8,7 +8,7 @@
       <input
         v-model="user"
         :class="[ tokensearch ? 'token-header-input' : 'app-header-input']"
-        placeholder="Lookup Twitter @username"
+        placeholder="Lookup Twitter @username, $TICKER, or FAQ"
         type="text"
         @input="debounceSearch"
         @keyup.enter="onEnter"
@@ -212,7 +212,7 @@ export default {
   position: relative;
 }
 .app-container {
-  width: 280px;
+  width: 400px;
   border: 1px solid #d7d7d7;
   background-color: white;
   border-radius: 50px;
@@ -236,7 +236,7 @@ export default {
   width: 100%;
 }
 .app-header-input {
-  min-width: 230px !important;
+  min-width: 350px !important;
   height: 50px;
   border: none;
   border-radius: 10px;

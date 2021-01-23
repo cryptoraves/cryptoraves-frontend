@@ -39,7 +39,9 @@
           </div>
            <div class="deposit-button">
             
-            <div class="deposit-buttonimg">
+            <div 
+                v-if="user == loggedInUser"
+                class="deposit-buttonimg">
               <img
                 src=https://sample-imgs.s3.amazonaws.com/depositExample.png
                 title="Click to deposit crypto from you mainnet wallet"
@@ -172,7 +174,7 @@ export default {
 
     this.getPortfolio(this.user, this.initialPagePtr)
 
-    this.userData = JSON.parse(localStorage.getItem('user'))
+    this.userData = JSON.parse(localStorage.getItem('webData')).user
     if(this.userData){
       this.loggedInUser = this.userData.platformHandle
     }
@@ -325,6 +327,34 @@ export default {
 .depositWithdrawLink:hover{
   cursor: pointer;
 }
+
+.deposit-buttonimg {
+  background: white;
+  display: flex;
+  margin: auto;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 1px solid lightgrey;
+  animation: avatar-from-effect 2s infinite;
+  transition: all 0.5s ease-out;
+  cursor: pointer;
+}
+.deposit-buttonimg img {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  margin: auto;
+}
+@keyframes avatar-from-effect {
+  0% {
+    box-shadow: 0 0 0 0px rgb(43, 96, 222, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 0 15px rgb(43, 96, 222, 0);
+  }
+}
+
 .portfolio-userimg {
   background: white;
   display: flex;
@@ -336,27 +366,6 @@ export default {
   animation: avatar-from-effect 2s infinite;
   transition: all 0.5s ease-out;
 }
-.deposit-buttonimg {
-  background: white;
-  display: flex;
-  margin: auto;
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  border: 1px solid lightgrey;
-  animation: avatar-from-effect 2s infinite;
-  transition: all 0.5s ease-out;
-}
-@keyframes avatar-from-effect {
-  0% {
-    box-shadow: 0 0 0 0px rgb(43, 96, 222, 0.8);
-  }
-  100% {
-    box-shadow: 0 0 0 15px rgb(43, 96, 222, 0);
-  }
-}
-
-
 .portfolio-userimg:active {
   transform: translateY(0.5em);
 }
@@ -367,17 +376,6 @@ export default {
   border-radius: 50%;
   margin: auto;
 }
-.deposit-buttonimg:active {
-  transform: translateY(0.5em);
-}
-
-.deposit-buttonimg img {
-  width: 110px;
-  height: 110px;
-  border-radius: 50%;
-  margin: auto;
-}
-
 
 .table-section {
   margin: 100px auto 0px auto;

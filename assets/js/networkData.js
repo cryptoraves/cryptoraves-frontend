@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 export default {
   components: {},
   data() {
@@ -13,5 +15,27 @@ export default {
         'function getManagedTokenIdByAddress(address) external view returns(uint256)'
       ]
     }
+  },
+  methods: {
+    async loadWebDataFromAddress( ethAddr) {
+      var response = null
+      try {
+        var webDataUrl =
+          this.$store.state.WebsiteInterfaceUrl +
+          '?pageType=getweb3PortalData&ethAddress=' +
+          ethAddr
+        response = await axios.get(webDataUrl)
+        
+      } catch(e) {
+        throw new Error(e)
+      }
+
+      try {
+        return response.data
+      } catch(e) {
+        //console.log('No record for wallet address '+ethAddr)
+        return null
+      }
+    },
   }
 }

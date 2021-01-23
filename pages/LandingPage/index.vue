@@ -1,7 +1,7 @@
 <template>
   <div>
     <HeroSection/>
-    <GetToken/>
+    <!--GetToken/-->
   </div>
 </template>
 <script>
