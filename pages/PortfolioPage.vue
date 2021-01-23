@@ -32,19 +32,18 @@
               <img
                 :src="userImageUrl"
                 onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
-                
-                
+                title="Click to see transaction history"
+                @click="goHistory(user)"
               >
             </div>
           </div>
            <div class="deposit-button">
-            
             <div 
                 v-if="user == loggedInUser"
                 class="deposit-buttonimg">
               <img
                 src=https://sample-imgs.s3.amazonaws.com/depositExample.png
-                title="Click to deposit crypto from you mainnet wallet"
+                title="Click to deposit crypto from your mainnet wallet"
                 @click="goDepositWithdraw('', 'deposit')"
               >
             </div>
@@ -314,6 +313,12 @@ export default {
   left: 0;
   text-align: center;
 }
+.deposit-button {
+  position: absolute;
+  top: 70px;
+  right: 0;
+  text-align: center;
+}
 .portfolio-userlink {
   margin: 10px auto 10px auto;
   font-family: 'Montserrat';
@@ -336,7 +341,7 @@ export default {
   height: 120px;
   border-radius: 50%;
   border: 1px solid lightgrey;
-  animation: avatar-from-effect 2s infinite;
+  
   transition: all 0.5s ease-out;
   cursor: pointer;
 }
@@ -365,6 +370,7 @@ export default {
   border: 1px solid lightgrey;
   animation: avatar-from-effect 2s infinite;
   transition: all 0.5s ease-out;
+  cursor: pointer;
 }
 .portfolio-userimg:active {
   transform: translateY(0.5em);
@@ -487,6 +493,7 @@ table tbody tr:nth-child(even) {
     position: relative;
     margin-bottom: -40px;
     z-index: 2;
+
   }
   .portfolio-subtitle-holding {
     margin-top: 30px;

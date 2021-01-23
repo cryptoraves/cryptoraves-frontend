@@ -23,7 +23,7 @@
               <img
                 :src="userImageUrl"
                 onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
-                title="Click to See Portfolio & Token Balance"
+                title="Click to See Portfolio"
                 @click="goPortfolio(user)"
               >
             </div>
@@ -479,6 +479,7 @@ export default {
   border: 1px solid lightgrey;
   animation: avatar-from-effect 2s infinite;
   transition: all 0.5s ease-out;
+  cursor: pointer;
 }
 
 @keyframes avatar-from-effect {
