@@ -4,12 +4,12 @@
       <div class="row">
         <div class="land-hero-cover">
           <div class="land-hero-cover-title">
-            You + (Being Awesome) = (Token Value)
-            <sup>2</sup>
+            Tweet Tokens, On-Chain
+            <!--sup>2</sup-->
           </div>
           <div class="land-hero-cover-content">
-            They’re Personalized Tokens You Can Tweet, For FUN!
-            <br>Test Drive Your Own Token Economy. Right On Twitter.
+            Coming soon... Re-launch with SKALE!
+            
           </div>
         </div>
       </div>
@@ -26,9 +26,9 @@
             }"
             to="/"
           >
-            <AppButton 
+            <!--AppButton 
               name="Launch Your token" 
-              type2="true"/>
+              type2="true"/-->
           </router-link>
           <span @click="goFaqTop">
             <AppButton 
@@ -36,12 +36,12 @@
               type3="true"/>
           </span>
           <br>
-          <a 
+          <!--a 
             target="_blank"
             @click="goDepWithd" 
           >
             <TippingButton/>
-          </a>
+          </a-->
         </div>
       </div>
     </div>
@@ -66,6 +66,9 @@ export default {
           ticker: '$VYA'
         }
       })
+    },
+    goBlog: function() {
+      window.location='https://google.com'
     },
     goFaqTop: function() {
       this.$router.push({
