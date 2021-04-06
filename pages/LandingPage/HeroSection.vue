@@ -30,7 +30,7 @@
               name="Launch Your token" 
               type2="true"/-->
           </router-link>
-          <span @click="goFaqTop">
+          <span @click="goBlog">
             <AppButton 
               name="Learn More" 
               type3="true"/>
@@ -68,7 +68,7 @@ export default {
       })
     },
     goBlog: function() {
-      window.location='https://google.com'
+      window.location='https://skale.network/blog/skale-cryptoraves'
     },
     goFaqTop: function() {
       this.$router.push({
