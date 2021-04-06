@@ -210,6 +210,8 @@ export default {
       visibleNext: true,
       visiblePrev: true,
       platformHandle: '',
+      platformId: '',
+      cryptoravesAddress: '',
       userImageUrl: '',
       blockexplorerUrl: '',
       showLoading: true
@@ -264,7 +266,7 @@ export default {
         this.getHistory(this.user, 2)
       }
     },
-    getHistory(user, initFlag) {
+    async getHistory(user, initFlag) {
       if (user.toLowerCase().startsWith('import')) {
         user = 'IMPORT'
       }
@@ -273,6 +275,45 @@ export default {
       }
       this.showLoading = true
       if (initFlag == 0) {
+
+        await axios.post(
+          'http://127.0.0.1:8000/subgraphs/name/cryptoraves/cryptoraves-subgraph', {
+            query: '{ usernameChanges(first: 1, where: {userName: "'+user.replace('@','')+'"}, orderBy: blockNumber, orderDirection: desc){ userId userName} }'
+          }
+        ).then(response => {
+          console.log(response.data.data.usernameChanges[0])
+          this.platformHandle = response.data.data.usernameChanges[0].userName
+          this.platformId = response.data.data.usernameChanges[0].userId
+
+        }).catch(e => {
+          console.log(e)
+        })
+
+        await axios.post(
+          'http://127.0.0.1:8000/subgraphs/name/cryptoraves/cryptoraves-subgraph', {
+            query: '{ newUsers(first: 1, where: {userId: "'+this.platformId+'"}){ id userId userName cryptoravesAddress imageUrl} }'
+          }
+        ).then(response => {
+          console.log(response.data.data.newUsers[0].cryptoravesAddress)
+          this.cryptoravesAddress = response.data.data.newUsers[0].cryptoravesAddress
+        }).catch(e => {
+          console.log(e)
+        })
+        await axios.post(
+          'http://127.0.0.1:8000/subgraphs/name/cryptoraves/cryptoraves-subgraph', {
+            query: '{ transfers(where: {fromTo_contains: "'+this.cryptoravesAddress+'"}){ id from to amount tokenId tweetId })'
+          }
+        ).then(response => {
+          console.log(response.data.data.transfers)
+          console.log(response.data.data.transfers.length)
+        }).catch(e => {
+          console.log(e)
+        }) 
+
+
+
+
+
         axios
           .get(
             this.$store.state.WebsiteInterfaceUrl + '?pageType=transactionHistory&userName=' +
@@ -290,7 +331,6 @@ export default {
             this.initialPagePtr = 0
             this.visiblePrev = false
             this.visibleNext = res.next ? true : false
-            this.platformHandle = res.platformHandle
             this.userImageUrl = res.userImageUrl
             this.blockexplorerUrl = res.blockexplorerUrl
             this.showLoading = false
