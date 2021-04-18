@@ -101,20 +101,20 @@
                 </td>
                 <td>
                   <img
-                    v-if="item.ticker"
-                    :title="item.ticker"
+                    v-if="item.token.symbol"
+                    :title="item.token.symbol"
                     :src="item.tokenBrandImageUrl"
                     class="table-img"
                     onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
-                    @click="getHistory(item.tokenBrand, 0)"
+                    @click="getHistory(item.token.name)"
                   >
                   <img
                     v-else
-                    :title="item.tokenBrand"
-                    :src="item.tokenBrandImageUrl"
+                    :title="item.token.name"
+                    :src="item.token.name"
                     class="table-img"
                     onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
-                    @click="getHistory(item.tokenBrand, 0)"
+                    @click="getHistory(item.token.name)"
                   >
                 </td>
                 <td>
@@ -164,7 +164,7 @@
             >
               <i class="fa fa-angle-left"/>
             </span>
-            Page {{ currentPage + 1 }}
+            Page {{ currentPage }}
             <span
               href="#"
               class="btn btnpagination [visibleNext ? '' : 'disabledbtn']"
@@ -228,9 +228,6 @@ export default {
   beforeRouteUpdate(to, from, next) {
     // just use `this`
     this.user = to.query.user
-    if (from.query.user != this.user) {
-      this.getHistory(this.user)
-    }
     next()
   },
   methods: {
@@ -247,7 +244,15 @@ export default {
       }
     },
     async getHistory(user) {
-     
+      
+      this.$router.push({
+        path: 'HistoryPage',
+        query: {
+          user: user,
+          page: this.currentPage
+        }
+      })
+      console.log(user)
       this.user = user
       if (this.user.toLowerCase().startsWith('import')) {
         this.user = 'IMPORT'
@@ -257,13 +262,11 @@ export default {
       }
       this.showLoading = true
 
-      if(this.currentPage > 0){
+      if(this.currentPage > 1){
         this.visiblePrev = true
       } else {
         this.visiblePrev = false
       }
-
-
       
       //1. Get end user data
       await axios.post(
