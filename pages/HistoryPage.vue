@@ -54,49 +54,49 @@
               <tr
                 v-for="(item,index) in tableRows"
                 :index="index"
-                :key="item.txnId"
-                :class="[platformHandle === item.userFrom? 'tr-orange-color' : 'tr-green-color']"
+                :key="item.id"
+                :class="[platformHandle === item.from.userName? 'tr-orange-color' : 'tr-green-color']"
               >
                 <td>
                   <div 
-                    v-if="item.txnHash=='Error'"
+                    v-if="item.id=='Error'"
                     title="Pending">Pend...
                   </div>
                   <div
                     v-else
                     title="Link to Confirmation"
                     class="link"
-                    @click="goTransaction(item.txnHash)"
-                  >{{ item.txnHash.substring(0,3)+"..." }}</div>
+                    @click="goTransaction(item.id)"
+                  >{{ item.id.substring(0,3)+"..." }}</div>
                 </td>
                 <td>
                   <img
-                    v-if="!item.userFrom.includes('Official Launch')"
-                    :title="item.userFrom"
-                    :src="item.userFromImageUrl"
+                    v-if="!item.from.userName.includes('Official Launch')"
+                    :title="item.from.userName"
+                    :src="item.from.imageUrl"
                     class="table-img"
                     onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
-                    @click="getHistory(item.userFrom, 0)"
+                    @click="getHistory(item.from.userName)"
                   >
                   <img 
                     v-else
-                    :src="item.userFromImageUrl"
+                    :src="item.from.imageUrl"
                     title="LAUNCH"
                     class="launch-img" 
                     onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
                   >
                 </td>
                 <td>
-                  <div v-if="platformHandle === item.userFrom">Sent</div>
+                  <div v-if="platformHandle === item.from.userName">Sent</div>
                   <div v-else>Received</div>
                 </td>
                 <td>
                   <img
-                    v-if="getShowTweet(item.userFrom, item.userTo)"
+                    v-if="getShowTweet(item.from.userName, item.to.userName)"
                     title="Link to Tweet"
                     src="../assets/img/twittersmall.png"
                     class="link"
-                    @click="goTweet(item.linkToContent)"
+                    @click="goTweet(item.tweetId)"
                   >
                 </td>
                 <td>
@@ -125,17 +125,17 @@
                 </td>
                 <td>
                   <img
-                    v-if="!item.userTo.includes('Export To Mainnet')"
-                    :title="item.userTo"
-                    :src="item.userToImageUrl"
+                    v-if="!item.to.userName.includes('Export To Mainnet')"
+                    :title="item.to.userName"
+                    :src="item.to.imageUrl"
                     class="table-img"
                     onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
-                    @click="getHistory(item.userTo, 0)"
+                    @click="getHistory(item.to.userName, 0)"
                   >
                   <img 
                     v-else
-                    :title="item.userTo"
-                    :src="item.userToImageUrl" 
+                    :title="item.to.userName"
+                    :src="item.to.imageUrl" 
                     class="launch-img" 
                     onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
                   >
@@ -144,13 +144,13 @@
                   <div
                     v-if="item.txnHash=='Error'"
                     title="Pending"
-                  >{{ item.date.substring(0,item.date.length-3) }}</div>
+                  ><!-- {{ item.date.substring(0,item.date.length-3) }} --> </div>
                   <div
                     v-else
                     title="Link to Confirmation"
                     class="link"
                     @click="goTransaction(item.txnHash)"
-                  >{{ item.date.substring(0,item.date.length-3) }}</div>
+                  ><!-- {{ item.date.substring(0,item.date.length-3) }} --></div>
                 </td>
               </tr>
             </tbody>
@@ -164,7 +164,7 @@
             >
               <i class="fa fa-angle-left"/>
             </span>
-            Page {{ initialPagePtr + 1 }}
+            Page {{ currentPage + 1 }}
             <span
               href="#"
               class="btn btnpagination [visibleNext ? '' : 'disabledbtn']"
@@ -187,7 +187,7 @@
 
 <script>
 import axios from 'axios'
-import _ from 'lodash'
+//import _ from 'lodash'
 import SectionHeader from '../components/ui/SectionHeader'
 import AnimatedArrow from '../components/ui/AnimatedArrow'
 
@@ -201,12 +201,13 @@ export default {
     return {
       showTweet: true,
       user: '',
+      currentPage: 1,
       tableRows: [],
       rowCount: 0,
+      rowsPerPage: 20,
       tokenBalance: '0',
       earliestDatetime: '',
       latestDatetime: '',
-      initialPagePtr: 0,
       visibleNext: true,
       visiblePrev: true,
       platformHandle: '',
@@ -219,102 +220,108 @@ export default {
   },
   created() {
     this.user = this.$route.query.user
-
-    this.earliestDatetime = this.$route.query.earliestDatetime
-    this.latestDatetime = this.$route.query.latestDatetime
-    this.initFlag = 0
-
-    if (this.earliestDatetime) {
-      this.initFlag = 1
+    if (this.$route.query.page){
+      this.currentPage = this.$route.query.page
     }
-
-    if (this.latestDatetime) {
-      this.initFlag = 2
-    }
-
-    if (this.$route.query.page && this.initFlag) {
-      if (this.initFlag == 1) {
-        this.initialPagePtr = this.$route.query.page - 2
-      }
-      if (this.initFlag == 2) {
-        this.initialPagePtr = this.$route.query.page
-      }
-    }
-
-    // this.initialPagePtr = localStorage.getItem("transactionPageNum") || 0;
-    // this.initFlag = localStorage.getItem("transactionFlag") || 0;
-    // this.earliestDatetime = localStorage.getItem("earliestDatetime");
-    // this.latestDatetime = localStorage.getItem("latestDatetime");
-    this.getHistory(this.user, this.initFlag)
+    this.getHistory(this.user)
   },
   beforeRouteUpdate(to, from, next) {
     // just use `this`
     this.user = to.query.user
     if (from.query.user != this.user) {
-      this.getHistory(this.user, 0)
+      this.getHistory(this.user)
     }
     next()
   },
   methods: {
     goNext() {
       if (this.visibleNext) {
-        this.getHistory(this.user, 1)
+        this.currentPage++
+        this.getHistory(this.user)
       }
     },
     goPrev() {
       if (this.visiblePrev) {
-        this.getHistory(this.user, 2)
+        this.currentPage--
+        this.getHistory(this.user)
       }
     },
-    async getHistory(user, initFlag) {
-      if (user.toLowerCase().startsWith('import')) {
-        user = 'IMPORT'
+    async getHistory(user) {
+     
+      this.user = user
+      if (this.user.toLowerCase().startsWith('import')) {
+        this.user = 'IMPORT'
       }
-      if (user.toLowerCase().startsWith('export')) {
-        user = 'EXPORT'
+      if (this.user.toLowerCase().startsWith('export')) {
+        this.user = 'EXPORT'
       }
       this.showLoading = true
-      if (initFlag == 0) {
 
-        await axios.post(
-          'http://127.0.0.1:8000/subgraphs/name/cryptoraves/cryptoraves-subgraph', {
-            query: '{ usernameChanges(first: 1, where: {userName: "'+user.replace('@','')+'"}, orderBy: blockNumber, orderDirection: desc){ userId userName} }'
-          }
-        ).then(response => {
-          console.log(response.data.data.usernameChanges[0])
-          this.platformHandle = response.data.data.usernameChanges[0].userName
-          this.platformId = response.data.data.usernameChanges[0].userId
-
-        }).catch(e => {
-          console.log(e)
-        })
-
-        await axios.post(
-          'http://127.0.0.1:8000/subgraphs/name/cryptoraves/cryptoraves-subgraph', {
-            query: '{ newUsers(first: 1, where: {userId: "'+this.platformId+'"}){ id userId userName cryptoravesAddress imageUrl} }'
-          }
-        ).then(response => {
-          console.log(response.data.data.newUsers[0].cryptoravesAddress)
-          this.cryptoravesAddress = response.data.data.newUsers[0].cryptoravesAddress
-        }).catch(e => {
-          console.log(e)
-        })
-        await axios.post(
-          'http://127.0.0.1:8000/subgraphs/name/cryptoraves/cryptoraves-subgraph', {
-            query: '{ transfers(where: {fromTo_contains: "'+this.cryptoravesAddress+'"}){ id from to amount tokenId tweetId })'
-          }
-        ).then(response => {
-          console.log(response.data.data.transfers)
-          console.log(response.data.data.transfers.length)
-        }).catch(e => {
-          console.log(e)
-        }) 
+      if(this.currentPage > 0){
+        this.visiblePrev = true
+      } else {
+        this.visiblePrev = false
+      }
 
 
+      
+      //1. Get end user data
+      await axios.post(
+        'http://127.0.0.1:8000/subgraphs/name/cryptoraves/cryptoraves-subgraph', {
+          query: '{ userDatas(first: 1, where: {userName: "'+this.user+'"}){ id twitterUserId userName cryptoravesAddress imageUrl } }'
+        }
+      ).then(response => {
+        this.cryptoravesAddress = response.data.data.userDatas[0].cryptoravesAddress
+        this.userImageUrl = response.data.data.userDatas[0].imageUrl
+        this.platformId = response.data.data.userDatas[0].twitterUserId
+        this.platformHandle = response.data.data.userDatas[0].userName
 
 
+      }).catch(e => {
+        console.log(e)
+      }) 
 
-        axios
+      let paginationQueryStringSegment = 'first: '+(this.rowsPerPage+1)+', skip: '+((this.currentPage - 1) * this.rowsPerPage)
+      
+
+      await axios.post(
+        'http://127.0.0.1:8000/subgraphs/name/cryptoraves/cryptoraves-subgraph', {
+          query: '{ transfers('+paginationQueryStringSegment+', where: {fromTo_contains: "'+this.cryptoravesAddress+'"}){ id from { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address } to { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address } amount tokenId tweetId fromTo} }'
+        }
+      ).then(response => {
+        this.rowCount = response.data.data.transfers.length
+        this.tableRows = response.data.data.transfers  //match graph schema to fit as best as possible the original format below?
+
+        if(this.rowCount > this.rowsPerPage){
+          this.visibleNext = true
+        } else {
+          this.visibleNext = false
+        }
+        console.log(this.tableRows)
+        console.log(this.tableRows[0].from.imageUrl)
+
+        this.showLoading = false
+
+
+                        /*amount: "18000"
+                        date: (...)
+                        inOut: (...)
+                        linkToContent: (...)
+                        ticker: (...)
+                        tokenBrand: (...)
+                        tokenBrandImageUrl: (...)
+                        txnHash: (...)
+                        txnId: (...)
+                        userFrom: "@steveharrington"
+                        userFromImageUrl: "https://sample-imgs.s3.amazonaws.com/steveHarrington.png"
+                        userTo: "@spock"
+                        userToImageUrl: "https://sample-imgs.s3.amazonaws.com/spock.png"*/
+      }).catch(e => {
+        console.log(e)
+      }) 
+
+      /*
+        await axios
           .get(
             this.$store.state.WebsiteInterfaceUrl + '?pageType=transactionHistory&userName=' +
               user
@@ -322,28 +329,26 @@ export default {
           .then(response => {
             // JSON responses are automatically parsed.
             let res = response.data
-            this.user = user
             this.tableRows = _.cloneDeep(res.tableRows)
             this.rowCount = res.rowCount
             this.tokenBalance = res.tokenBalance
             this.earliestDatetime = res.earliestDatetime
             this.latestDatetime = res.latestDatetime
-            this.initialPagePtr = 0
+            this.currentPage = 0
             this.visiblePrev = false
             this.visibleNext = res.next ? true : false
-            this.userImageUrl = res.userImageUrl
             this.blockexplorerUrl = res.blockexplorerUrl
             this.showLoading = false
             // localStorage.setItem("earlistData", this.earliestDatetime);
             // localStorage.setItem("latestDatetime", this.latestDatetime);
             // localStorage.setItem("transactionFlag", initFlag);
-            // localStorage.setItem("transactionPageNum", this.initialPagePtr);
+            // localStorage.setItem("transactionPageNum", this.currentPage);
           })
           .catch(e => {
             console.log(e)
           })
       } else if (initFlag == 1) {
-        axios
+        await axios
           .get(
             this.$store.state.WebsiteInterfaceUrl + '?pageType=transactionHistory&userName=' +
               user +
@@ -351,15 +356,15 @@ export default {
               this.earliestDatetime
           )
           .then(response => {
-            this.initialPagePtr++
+            this.currentPage++
 
-            if (this.initialPagePtr) {
+            if (this.currentPage) {
               this.$router.push({
                 path: 'history',
                 query: {
                   user: user,
                   earliestDatetime: this.earliestDatetime,
-                  page: this.initialPagePtr + 1
+                  page: this.currentPage + 1
                 }
               })
             } else {
@@ -389,8 +394,8 @@ export default {
           })
       } else {
         // localStorage.setItem("latestDatetime", this.latestDatetime);
-        // localStorage.setItem("transactionPageNum", this.initialPagePtr);
-        axios
+        // localStorage.setItem("transactionPageNum", this.currentPage);
+        await axios
           .get(
             this.$store.state.WebsiteInterfaceUrl + '?pageType=transactionHistory&userName=' +
               user +
@@ -398,15 +403,15 @@ export default {
               this.latestDatetime
           )
           .then(response => {
-            this.initialPagePtr--
+            this.currentPage--
 
-            if (this.initialPagePtr) {
+            if (this.currentPage) {
               this.$router.push({
                 path: 'history',
                 query: {
                   user: user,
                   latestDatetime: this.latestDatetime,
-                  page: this.initialPagePtr + 1
+                  page: this.currentPage + 1
                 }
               })
             } else {
@@ -422,7 +427,7 @@ export default {
             this.earliestDatetime = res.earliestDatetime
 
             this.visiblePrev =
-              res.prev && this.initialPagePtr > 0 ? true : false
+              res.prev && this.currentPage > 0 ? true : false
             this.visibleNext = true
             this.platformHandle = res.platformHandle
             this.userImageUrl = res.userImageUrl
@@ -432,7 +437,7 @@ export default {
           .catch(e => {
             console.log(e)
           })
-      }
+      }*/
     },
     getShowTweet(userFrom, userTo) {
       if (

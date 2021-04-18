@@ -174,12 +174,42 @@ export default {
     this.getTransaction(this.txnId)
   },
   methods: {
-    getTransaction(txnId) {
+    async getTransaction(txnId) {
       this.$router.push({
         path: 'confirmationPage?txnId='+txnId
       })
-      axios
-        .get(
+
+      await axios.post(
+          'http://127.0.0.1:8000/subgraphs/name/cryptoraves/cryptoraves-subgraph', {
+            query: '{ transfers(where: {id: "'+txnId+'"}){ id from to amount tokenId tweetId } }'
+          }
+        ).then(response => {
+          console.log(response.data.data.transfers[0])
+          this.item = {}
+          this.txnID = this.item.txnHash = this.item.txnID = response.data.data.transfers[0].id
+          
+          /* item.
+            amount: (...)
+            blockexplorerUrl: (...)
+            date: (...)
+            linkToContent: (...)
+            ticker: (...)
+            tokenBrand: (...)
+            tokenBrandImageUrl: (...)
+            transactionStatus: (...)
+            -txnHash: (...)
+            -txnId: (...)
+            userFrom: (...)
+            userFromImageUrl: (...)
+            userTo: (...)
+            userToImageUrl: (...)
+          */
+        }).catch(e => {
+          console.log(e)
+        })
+
+      if( !this.txnID ){
+        axios.get(
           this.$store.state.WebsiteInterfaceUrl + '?pageType=confirmationPage&txnHash=' +
             txnId
         )
@@ -187,6 +217,7 @@ export default {
           // JSON responses are automatically parsed.
           let res = response.data
           this.tableRows = res.tableRows
+          console.log (this.tableRows)
           this.txnID = this.tableRows[0].txnHash
           this.item = this.tableRows[0]
           this.showLoading = false
@@ -200,6 +231,8 @@ export default {
         .catch(e => {
           console.log(e)
         })
+      }
+
     },
     goPortfolio(user) {
       this.$root.$emit('changeUser', user)
