@@ -289,9 +289,10 @@ export default {
 
       await axios.post(
         'http://127.0.0.1:8000/subgraphs/name/cryptoraves/cryptoraves-subgraph', {
-          query: '{ transfers('+paginationQueryStringSegment+', where: {fromTo_contains: "'+this.cryptoravesAddress+'"}){ id from { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address } to { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address } amount tokenId tweetId fromTo} }'
+          query: '{ transfers('+paginationQueryStringSegment+', where: {fromTo_contains: "'+this.cryptoravesAddress+'"}){ id from { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address } to { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address } amount token {id cryptoravesTokenId isManagedToken ercType totalSupply name symbol decimals emoji } tweetId fromTo} }'
         }
       ).then(response => {
+        
         this.rowCount = response.data.data.transfers.length
         this.tableRows = response.data.data.transfers  //match graph schema to fit as best as possible the original format below?
 
@@ -301,7 +302,7 @@ export default {
           this.visibleNext = false
         }
         console.log(this.tableRows)
-        console.log(this.tableRows[0].from.imageUrl)
+        console.log(this.tableRows[0].token.ercType)
 
         this.showLoading = false
 
