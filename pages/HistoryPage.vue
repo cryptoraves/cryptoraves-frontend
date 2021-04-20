@@ -76,7 +76,7 @@
                     :src="item.from.imageUrl"
                     class="table-img"
                     onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
-                    @click="$router.push({name: 'HistoryPage',query: {user: item.from.userName}})"
+                    @click="item.from.userName != user ? $router.push({name: 'HistoryPage',query: {user: item.from.userName}}) : ''"
                   >
                   <img 
                     v-else
@@ -130,7 +130,7 @@
                     :src="item.to.imageUrl"
                     class="table-img"
                     onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
-                    @click="$router.push({path: 'HistoryPage',query: {user: item.to.userName}})"
+                    @click="item.to.userName != user ? $router.push({path: 'HistoryPage',query: {user: item.to.userName}}) : ''"
                   >
                   <img 
                     v-else
