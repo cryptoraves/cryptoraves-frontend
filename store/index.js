@@ -5,6 +5,7 @@ export const state = () => ({
     ? 'https://4mjt8xbsni.execute-api.us-east-1.amazonaws.com/prod'
     : 'https://o6g9vt8lv9.execute-api.us-east-1.amazonaws.com/prod',
   web3Login: false,
+  subgraphUrl: 'http://127.0.0.1:8000/subgraphs/name/cryptoraves/cryptoraves-subgraph',
   user: {}
 })
 export const mutations = {

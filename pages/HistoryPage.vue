@@ -76,7 +76,7 @@
                     :src="item.from.imageUrl"
                     class="table-img"
                     onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
-                    @click="getHistory(item.from.userName)"
+                    @click="$router.push({name: 'HistoryPage',query: {user: item.from.userName}})"
                   >
                   <img 
                     v-else
@@ -106,7 +106,7 @@
                     :src="item.token.tokenBrandImageUrl"
                     class="table-img"
                     onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
-                    @click="getHistory(item.token.name)"
+                    @click="$router.push({name: 'TokenPage',query: {token: item.token.name}})"
                   >
                   <img
                     v-else
@@ -114,7 +114,7 @@
                     :src="item.token.name"
                     class="table-img"
                     onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
-                    @click="getHistory(item.token.name)"
+                    @click="$router.push({name: 'TokenPage',query: {token: item.token.name}})"
                   >
                 </td>
                 <td>
@@ -130,7 +130,7 @@
                     :src="item.to.imageUrl"
                     class="table-img"
                     onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
-                    @click="getHistory(item.to.userName, 0)"
+                    @click="$router.push({path: 'HistoryPage',query: {user: item.to.userName}})"
                   >
                   <img 
                     v-else
@@ -201,6 +201,16 @@ export default {
     SectionHeader,
     AnimatedArrow
   },
+  watch:{
+      $route (){
+          if (this.$route.query.page){
+            this.currentPage = this.$route.query.page
+          } else {
+            this.currentPage = 1
+          }
+          this.getHistory(this.$route.query.user,this.currentPage)
+      }
+  },
   data() {
     return {
       showTweet: true,
@@ -223,41 +233,53 @@ export default {
     }
   },
   created() {
-    this.user = this.$route.query.user
     if (this.$route.query.page){
       this.currentPage = this.$route.query.page
     }
-    this.getHistory(this.user)
+    this.getHistory(this.$route.query.user, this.currentPage)
   },
-  beforeRouteUpdate(to, from, next) {
+  /*beforeRouteUpdate(to, from, next) {
     // just use `this`
     this.user = to.query.user
+    
     next()
-  },
+  },*/
   methods: {
+
     goNext() {
       if (this.visibleNext) {
         this.currentPage++
-        this.getHistory(this.user)
+        this.$router.push({
+          name: 'HistoryPage',
+          query: {
+            user: this.user,
+            page: this.currentPage
+          }
+        })
+        
       }
     },
     goPrev() {
       if (this.visiblePrev) {
         this.currentPage--
-        this.getHistory(this.user)
+        this.$router.push({
+          name: 'HistoryPage',
+          query: {
+            user: this.user,
+            page: this.currentPage
+          }
+        })
       }
     },
-    async getHistory(user) {
+    async getHistory(user, page) {
       
-      this.$router.push({
-        path: 'HistoryPage',
-        query: {
-          user: user,
-          page: this.currentPage
-        }
-      })
-      console.log(user)
+      if(page){
+        this.currentPage = page
+      }
       this.user = user
+      
+      this.$root.$emit('changeUser', page)
+      
       if (this.user.toLowerCase().startsWith('import')) {
         this.user = 'IMPORT'
       }
@@ -271,10 +293,9 @@ export default {
       } else {
         this.visiblePrev = false
       }
-      
       //1. Get end user data
       await axios.post(
-        'http://127.0.0.1:8000/subgraphs/name/cryptoraves/cryptoraves-subgraph', {
+         this.$store.state.subgraphUrl, {
           query: '{ userDatas(first: 1, where: {userName: "'+this.user+'"}){ id twitterUserId userName cryptoravesAddress imageUrl } }'
         }
       ).then(response => {
@@ -292,7 +313,7 @@ export default {
       
 
       await axios.post(
-        'http://127.0.0.1:8000/subgraphs/name/cryptoraves/cryptoraves-subgraph', {
+        this.$store.state.subgraphUrl, {
           query: '{ transfers('+paginationQueryStringSegment+', where: {fromTo_contains: "'+this.cryptoravesAddress+'"}){ id from { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address } to { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address } amount token {id cryptoravesTokenId isManagedToken ercType totalSupply name symbol decimals emoji tokenBrandImageUrl } tweetId fromTo} }'
         }
       ).then(response => {
@@ -302,6 +323,7 @@ export default {
 
         if(this.rowCount > this.rowsPerPage){
           this.visibleNext = true
+          this.tableRows.pop()
         } else {
           this.visibleNext = false
         }
@@ -325,125 +347,6 @@ export default {
       }).catch(e => {
         console.log(e)
       }) 
-
-      /*
-        await axios
-          .get(
-            this.$store.state.WebsiteInterfaceUrl + '?pageType=transactionHistory&userName=' +
-              user
-          )
-          .then(response => {
-            // JSON responses are automatically parsed.
-            let res = response.data
-            this.tableRows = _.cloneDeep(res.tableRows)
-            this.rowCount = res.rowCount
-            this.tokenBalance = res.tokenBalance
-            this.earliestDatetime = res.earliestDatetime
-            this.latestDatetime = res.latestDatetime
-            this.currentPage = 0
-            this.visiblePrev = false
-            this.visibleNext = res.next ? true : false
-            this.blockexplorerUrl = res.blockexplorerUrl
-            this.showLoading = false
-            // localStorage.setItem("earlistData", this.earliestDatetime);
-            // localStorage.setItem("latestDatetime", this.latestDatetime);
-            // localStorage.setItem("transactionFlag", initFlag);
-            // localStorage.setItem("transactionPageNum", this.currentPage);
-          })
-          .catch(e => {
-            console.log(e)
-          })
-      } else if (initFlag == 1) {
-        await axios
-          .get(
-            this.$store.state.WebsiteInterfaceUrl + '?pageType=transactionHistory&userName=' +
-              user +
-              '&earliestDatetime=' +
-              this.earliestDatetime
-          )
-          .then(response => {
-            this.currentPage++
-
-            if (this.currentPage) {
-              this.$router.push({
-                path: 'history',
-                query: {
-                  user: user,
-                  earliestDatetime: this.earliestDatetime,
-                  page: this.currentPage + 1
-                }
-              })
-            } else {
-              this.$router.push({ path: 'history', query: { user: user } })
-            }
-            // JSON responses are automatically parsed.
-            this.user = user
-            let res = response.data
-            this.tableRows = _.cloneDeep(res.tableRows)
-            this.rowCount = res.rowCount
-            this.tokenBalance = res.tokenBalance
-            this.latestDatetime = res.latestDatetime
-            this.earliestDatetime = res.earliestDatetime
-
-            this.visiblePrev = true
-            this.visibleNext = res.next ? true : false
-            this.platformHandle = res.platformHandle
-            this.userImageUrl = res.userImageUrl
-            this.blockexplorerUrl = res.blockexplorerUrl
-            this.showLoading = false
-            // localStorage.setItem("latestDatetime", this.latestDatetime);
-            // localStorage.setItem("transactionFlag", initFlag);
-
-          })
-          .catch(e => {
-            console.log(e)
-          })
-      } else {
-        // localStorage.setItem("latestDatetime", this.latestDatetime);
-        // localStorage.setItem("transactionPageNum", this.currentPage);
-        await axios
-          .get(
-            this.$store.state.WebsiteInterfaceUrl + '?pageType=transactionHistory&userName=' +
-              user +
-              '&latestDatetime=' +
-              this.latestDatetime
-          )
-          .then(response => {
-            this.currentPage--
-
-            if (this.currentPage) {
-              this.$router.push({
-                path: 'history',
-                query: {
-                  user: user,
-                  latestDatetime: this.latestDatetime,
-                  page: this.currentPage + 1
-                }
-              })
-            } else {
-              this.$router.push({ path: 'history', query: { user: user } })
-            }
-            // JSON responses are automatically parsed.
-            this.user = user
-            let res = response.data
-            this.tableRows = _.cloneDeep(res.tableRows)
-            this.rowCount = res.rowCount
-            this.tokenBalance = res.tokenBalance
-            this.latestDatetime = res.latestDatetime
-            this.earliestDatetime = res.earliestDatetime
-
-            this.visiblePrev =
-              res.prev && this.currentPage > 0 ? true : false
-            this.visibleNext = true
-            this.platformHandle = res.platformHandle
-            this.userImageUrl = res.userImageUrl
-            this.blockexplorerUrl = res.blockexplorerUrl
-            this.showLoading = false
-          })
-          .catch(e => {
-            console.log(e)
-          })
-      }*/
     },
     getShowTweet(userFrom, userTo) {
       if (
