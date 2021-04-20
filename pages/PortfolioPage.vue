@@ -113,7 +113,7 @@
             >
               <i class="fa fa-angle-left"/>
             </span>
-            Page {{ initialPagePtr }}
+            Page {{ currentPage }}
             <span
               href="#"
               class="btn btnpagination [visibleNext ? '' : 'disabledbtn']"
@@ -136,13 +136,22 @@
 
 <script>
 import axios from 'axios'
-import _ from 'lodash'
 import SectionHeader from '../components/ui/SectionHeader'
 
 export default {
   name: 'PortfolioPage',
   components: {
     SectionHeader
+  },
+  watch:{
+      $route (){
+          if (this.$route.query.page){
+            this.currentPage = this.$route.query.page
+          } else {
+            this.currentPage = 1
+          }
+          this.getHistory(this.$route.query.user,this.currentPage)
+      }
   },
   data() {
     return {
@@ -156,7 +165,7 @@ export default {
       tokenBalancePercentage: 0,
       totalDistributed: 0,
       totalHoldings: 0,
-      initialPagePtr: 1,
+      currentPage: 1,
       visibleNext: true,
       visiblePrev: true,
       showLoading: true,
@@ -166,12 +175,12 @@ export default {
   created() {
     this.user = this.$route.query.user
     if (this.$route.query.page) {
-      this.initialPagePtr = this.$route.query.page
+      this.currentPage = this.$route.query.page
     } else {
-      this.initialPagePtr = 1
+      this.currentPage = 1
     }
 
-    this.getPortfolio(this.user, this.initialPagePtr)
+    this.getPortfolio(this.user, this.currentPage)
 
     this.userData = JSON.parse(localStorage.getItem('webData')).user
     if(this.userData){
@@ -179,31 +188,63 @@ export default {
     }
   },
   methods: {
-    getTitle() {
-      return this.tokenBalancePercentage + '% left to share'
-    },
     goNext() {
       if (this.visibleNext) {
         this.showLoading = true
-        this.getPortfolio(this.user, parseInt(this.initialPagePtr) + 1)
+        this.currentPage++
+        this.$router.push({
+          name: 'PortfolioPage',
+          query: {
+            user: this.user,
+            page: this.currentPage
+          }
+        })
       }
     },
     goPrev() {
       if (this.visiblePrev) {
         this.showLoading = true
-        this.getPortfolio(this.user, parseInt(this.initialPagePtr) - 1)
+        this.$router.push({
+          name: 'PortfolioPage',
+          query: {
+            user: this.user,
+            page: this.currentPage
+          }
+        })
       }
     },
-    getPortfolio(user, page) {
-      this.$router.push({
-        path: 'portfolioPage?user='+user+'&page='+page 
-      })
+    async getPortfolio(user, page) {
+      if(page){
+        this.currentPage = page
+      }
+      this.user = user
+
       if (user.toLowerCase().startsWith('import')) {
         user = 'IMPORT'
       }
       if (user.toLowerCase().startsWith('export')) {
         user = 'EXPORT'
       }
+
+      //1. Get end user data
+      await axios.post(
+         this.$store.state.subgraphUrl, {
+          query: '{ userDatas(first: 1, where: {userName: "'+this.user+'"}){ id twitterUserId userName cryptoravesAddress imageUrl } }'
+        }
+      ).then(response => {
+        this.cryptoravesAddress = response.data.data.userDatas[0].cryptoravesAddress
+        this.userImageUrl = response.data.data.userDatas[0].imageUrl
+        this.platformId = response.data.data.userDatas[0].twitterUserId
+        this.platformHandle = response.data.data.userDatas[0].userName
+
+      }).catch(e => {
+        console.log(e)
+      }) 
+
+
+
+      this.showLoading = false
+      /*
       axios
         .get(
           this.$store.state.WebsiteInterfaceUrl + '?pageType=portfolioPage&userName=' +
@@ -223,7 +264,7 @@ export default {
           this.totalReciprocated = res.totalReciprocated
           this.tokenBalancePercentage = res.tokenBalancePercentage
           this.totalHoldings = res.totalHoldings
-          this.initialPagePtr = page
+          this.currentPage = page
           this.visiblePrev = res.prev ? true : false
           this.visibleNext = res.next ? true : false
           this.userImageUrl = res.userImageUrl
@@ -231,7 +272,7 @@ export default {
         })
         .catch(e => {
           console.log(e)
-        })
+        })*/
     },
     
     goAnother(user) {
@@ -247,7 +288,6 @@ export default {
       }
     },
     goHistory(user) {
-      this.$root.$emit('changeUser', user)
       this.$router.push({
         name: 'HistoryPage',
         query: {

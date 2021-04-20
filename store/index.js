@@ -6,6 +6,7 @@ export const state = () => ({
     : 'https://o6g9vt8lv9.execute-api.us-east-1.amazonaws.com/prod',
   web3Login: false,
   subgraphUrl: 'http://127.0.0.1:8000/subgraphs/name/cryptoraves/cryptoraves-subgraph',
+  blockExplorerUrl: 'https://etherscan.io/tx/',
   user: {}
 })
 export const mutations = {

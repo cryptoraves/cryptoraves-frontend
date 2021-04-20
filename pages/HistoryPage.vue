@@ -106,7 +106,7 @@
                     :src="item.token.tokenBrandImageUrl"
                     class="table-img"
                     onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
-                    @click="$router.push({name: 'TokenPage',query: {token: item.token.name}})"
+                    @click="$router.push({name: 'TokenPage',query: {token: item.token.symbol}})"
                   >
                   <img
                     v-else
@@ -114,7 +114,7 @@
                     :src="item.token.name"
                     class="table-img"
                     onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
-                    @click="$router.push({name: 'TokenPage',query: {token: item.token.name}})"
+                    @click="$router.push({name: 'TokenPage',query: {token: item.token.symbol}})"
                   >
                 </td>
                 <td>
@@ -238,6 +238,7 @@ export default {
   methods: {
     goNext() {
       if (this.visibleNext) {
+        this.showLoading = true
         this.currentPage++
         this.$router.push({
           name: 'HistoryPage',
@@ -250,6 +251,7 @@ export default {
     },
     goPrev() {
       if (this.visiblePrev) {
+        this.showLoading = true
         this.currentPage--
         this.$router.push({
           name: 'HistoryPage',

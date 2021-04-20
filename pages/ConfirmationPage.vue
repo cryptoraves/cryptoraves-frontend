@@ -11,61 +11,61 @@
       <div v-else>
         <SectionHeader>Transaction Confirmed!</SectionHeader>
         <div class="d-flex">
-          <div class="res-confirmation-amount">{{ item.amount | comma }}</div>
+          <div class="res-confirmation-amount">{{ Math.round(item.amount / Math.pow(10, item.token.decimals)) | comma }}</div>
         </div>
         <div class="row">
           <div
-            v-if="!item.userFrom.includes('Token Launch')"
+            v-if="!item.from.userName.includes('Token Launch')"
             class="confirmation-fromsection col-lg-4 col-md-4 col-sm-4"
           >
             <div class="confirmation-userfromimage">
               <img
-                v-if="!item.userFromTitle"
-                :src="item.userFromImageUrl"
-                :title="item.userFrom"
+                v-if="!item.from.userName"
+                :src="item.from.imageUrl"
+                :title="item.from.userName"
                 onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
-                @click="goPortfolio(item.userFrom)"
+                @click="goPortfolio(item.from.userName)"
               >
               <img
                 v-else
-                :src="item.userFromImageUrl"
-                :title="item.userFromTitle"
+                :src="item.from.imageUrl"
+                :title="item.from.userName"
                 onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
-                @click="goPortfolio(item.userFrom)"
+                @click="goPortfolio(item.from.userName)"
               >
             </div>
             <div
-              v-if="!item.userFromTitle"
-              :title="item.userFrom"
+              v-if="!item.from.userName"
+              :title="item.from.userName"
               class="confirmation-userFromTo"
-              @click="goPortfolio(item.userFrom)"
-            >{{ item.userFrom }}</div>
+              @click="goPortfolio(item.from.userName)"
+            >{{ item.from.userName }}</div>
             <div
               v-else
-              :title="item.userFromTitle"
+              :title="item.from.userName"
               class="confirmation-userFromTo"
-              @click="goPortfolio(item.userFrom)"
-            >{{ item.userFromTitle }}</div>
+              @click="goPortfolio(item.from.userName)"
+            >{{ item.from.userName }}</div>
           </div>
           <div 
             v-else
             class="confirmation-fromsection col-lg-4 col-md-4 col-sm-4">
             <div class="launch-userfromimage">
               <img
-                :src="item.userFromImageUrl"
-                :title="item.userFrom"
+                :src="item.from.imageUrl"
+                :title="item.from.userName"
                 onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
               >
             </div>
             <div
-              :title="item.userFrom"
+              :title="item.from.userName"
               class="launch-userFromTo"
             >Token Launch!
             </div>
           </div>
           <div class="col-lg-4 col-md-4 col-sm-4">
             <div class="d-flex">
-              <div class="confirmation-amount">{{ item.amount | comma }}</div>
+              <div class="confirmation-amount">{{ Math.round(item.amount / Math.pow(10, item.token.decimals)) | comma }}</div>
             </div>
 
             <div class="d-flex">
@@ -74,24 +74,24 @@
             <div>
               <div class="confirmation-tokenbrandimage">
                 <img
-                  :src="item.tokenBrandImageUrl"
-                  :title="item.tokenBrand"
+                  :src="item.token.tokenBrandImageUrl"
+                  :title="item.token.name"
                   onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
-                  @click="goPortfolio(item.tokenBrand)"
+                  @click="goToken(item.token.symbol)"
                 >
               </div>
             </div>
           </div>
           <div class="confirmation-tosection col-lg-4 col-md-4 col-sm-4">
             <div
-              :title="item.userTo"
+              :title="item.to.userName"
               class="confirmation-userFromTo"
-              @click="goPortfolio(item.userTo)"
-            >{{ item.userTo }}</div>
+              @click="goPortfolio(item.to.userName)"
+            >{{ item.to.userName }}</div>
             <div class="confirmation-usertoimage">
               <img
-                :src="item.userToImageUrl"
-                :title="item.userTo"
+                :src="item.to.imageUrl"
+                :title="item.to.userName"
                 onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
                 @click="goPortfolio(item.userTo)"
               >
@@ -101,51 +101,50 @@
         <div class="row">
           <div class="confirmation-tokenbrand">
             <div
-              v-if="item.ticker"
-              :title="item.ticker"
+              v-if="item.token.symbol"
+              :title="item.token.symbol"
               class="confirmation-tokenbrand-header"
-              @click="goPortfolio(item.tokenBrand)"
+              @click="goPortfolio(item.token.symbol)"
             >{{ item.ticker }}</div>
             <div
               v-else
-              :title="item.tokenBrand"
+              :title="item.token.symbol"
               class="confirmation-tokenbrand-header"
-              @click="goPortfolio(item.tokenBrand)"
-            >{{ item.tokenBrand }}</div>
-            <div class="confirmation-tokenbrand-text">Tokens</div>
+              @click="goPortfolio(item.token.symbol)"
+            >{{ item.token.symbol }}</div>
+            <div class="confirmation-tokenbrand-text">{{ item.token.symbol }}</div>
+            <div 
+              v-if="item.token.ercType == 721"
+              class="confirmation-tokenbrand-text">#{{ orgTokenId }}</div>
           </div>
         </div>
         <div class="row">
           <div class="confirmation-link col-lg-12 col-md-12 col-sm-12">
             <!--div
-              title="Link to Loom's Block Explorer"
+              title="Link to Block Explorer"
               class="confirmation-blockurl"
               @click="goBlock(item.blockexplorerUrl + item.txnHash)"
             -->
             <div
-              title="Transaction Hash" 
-            >{{ item.txnHash }}</div>
+              title="Transaction Hash - Click to See on Block Explorer" 
+              class="confirmation-blockurl"
+              @click="goBlock(item.id)"
+            >{{ item.id }}</div>
             <div class="d-flex">
               <img
                 v-if="showTweet"
                 title="Link to Tweet"
                 src="../assets/img/twitter.png"
-                @click="goTweet(item.linkToContent) "
+                @click="goTweet(item.from.userName,item.tweetId) "
               >
             </div>
           </div>
         </div>
-        <div class="row">
-          <!--div class="confirmation-bottom">
-            You + (Being Awesome) = (Token Value)
-            <sup>2</sup>
-          </div-->
-        </div>
+       
       </div>
     </div>
   </div>
 </template>
-
 
 <script>
 import axios from 'axios'
@@ -158,15 +157,18 @@ export default {
     SectionHeader,
     AnimatedArrow
   },
+  watch:{
+      $route (){
+        this.getTransaction(this.$route.query.txnId)
+      }
+  },
   data() {
     return {
       showTweet: true,
       txnId: '',
-      txnID: '',
-      tableRows: [],
       item: Object,
-      upHere: false,
-      showLoading: true
+      showLoading: true,
+      orgTokenId: null,
     }
   },
   created() {
@@ -175,79 +177,41 @@ export default {
   },
   methods: {
     async getTransaction(txnId) {
-      this.$router.push({
-        path: 'confirmationPage?txnId='+txnId
-      })
-
       await axios.post(
-          'http://127.0.0.1:8000/subgraphs/name/cryptoraves/cryptoraves-subgraph', {
-            query: '{ transfers(where: {id: "'+txnId+'"}){ id from to amount tokenId tweetId } }'
-          }
+        this.$store.state.subgraphUrl, {
+          query: '{ transfers( where: {id: "'+txnId+'"}){ id from { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address } to { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address } amount token {id cryptoravesTokenId isManagedToken ercType totalSupply name symbol decimals emoji tokenBrandImageUrl } tweetId fromTo } }'
+        }
         ).then(response => {
-          console.log(response.data.data.transfers[0])
-          this.item = {}
-          this.txnID = this.item.txnHash = this.item.txnID = response.data.data.transfers[0].id
-          
-          /* item.
-            amount: (...)
-            blockexplorerUrl: (...)
-            date: (...)
-            linkToContent: (...)
-            ticker: (...)
-            tokenBrand: (...)
-            tokenBrandImageUrl: (...)
-            transactionStatus: (...)
-            -txnHash: (...)
-            -txnId: (...)
-            userFrom: (...)
-            userFromImageUrl: (...)
-            userTo: (...)
-            userToImageUrl: (...)
-          */
+          this.item = response.data.data.transfers[0]
+         
+          //format original token id
+          let idArr = this.item.token.id.split(0)
+          this.orgTokenId = idArr[idArr.length-1]
+
+          this.showLoading = false
         }).catch(e => {
           console.log(e)
         })
-
-      if( !this.txnID ){
-        axios.get(
-          this.$store.state.WebsiteInterfaceUrl + '?pageType=confirmationPage&txnHash=' +
-            txnId
-        )
-        .then(response => {
-          // JSON responses are automatically parsed.
-          let res = response.data
-          this.tableRows = res.tableRows
-          console.log (this.tableRows)
-          this.txnID = this.tableRows[0].txnHash
-          this.item = this.tableRows[0]
-          this.showLoading = false
-          if (
-            this.item.userFrom == 'Import to Cryptoraves' ||
-            this.item.userTo == 'Export To Mainnet'
-          ) {
-            this.showTweet = false
-          }
-        })
-        .catch(e => {
-          console.log(e)
-        })
-      }
-
+        //handle import / exports
+        if (
+          this.item.from.userName == 'Import to Cryptoraves' ||
+          this.item.to.userName == 'Export To Mainnet'
+        ) {
+          this.showTweet = false
+        }
     },
     goPortfolio(user) {
       this.$root.$emit('changeUser', user)
       this.$router.push({ name: 'PortfolioPage', query: { user: user } })
     },
-    goBlock(link) {
-      window.open(link)
+    goBlock(txnHash) {
+      window.open(this.$store.state.blockExplorerUrl + txnHash)
     },
-    goTweet(link) {
+    goTweet(username, tweetId) {
+      let link = 'https://twitter.com/'+username+'/status/'+tweetId
       window.open(link)
     },
     goHistory(user) {
-      this.$root.$emit('changeUser', user)
-      // localStorage.setItem("transactionPageNum", 0);
-      // localStorage.setItem("transactionFlag", 0);
       this.$router.push({
         name: 'HistoryPage',
         query: {
