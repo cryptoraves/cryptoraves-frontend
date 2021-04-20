@@ -159,18 +159,22 @@
         <div class="row">
           <div class="history-pagination">
             <span
-              class="btn btnpagination [visiblePrev ? '' : 'disabledbtn']"
+              :class="[visiblePrev ? 'btn btnpagination' : 'btn disabledbtn']"
               @click="goPrev"
             >
-              <i class="fa fa-angle-left"/>
+              <i
+                v-if="visiblePrev"
+                class="fa fa-angle-left"/>
             </span>
             Page {{ currentPage }}
             <span
               href="#"
-              class="btn btnpagination [visibleNext ? '' : 'disabledbtn']"
+              :class="[visibleNext ? 'btn btnpagination' : 'btn disabledbtn']"
               @click="goNext"
             >
-              <i class="fa fa-angle-right"/>
+              <i
+                v-if="visibleNext"
+                class="fa fa-angle-right"/>
             </span>
           </div>
         </div>
@@ -208,8 +212,8 @@ export default {
       tokenBalance: '0',
       earliestDatetime: '',
       latestDatetime: '',
-      visibleNext: true,
-      visiblePrev: true,
+      visibleNext: false,
+      visiblePrev: false,
       platformHandle: '',
       platformId: '',
       cryptoravesAddress: '',
@@ -301,8 +305,6 @@ export default {
         } else {
           this.visibleNext = false
         }
-        console.log(this.tableRows)
-        console.log(this.tableRows[0].token.ercType)
 
         this.showLoading = false
 
