@@ -96,7 +96,7 @@
                     title="Link to Tweet"
                     src="../assets/img/twittersmall.png"
                     class="link"
-                    @click="goTweet(item.tweetId)"
+                    @click="goTweet(item.from.userName, item.tweetId)"
                   >
                 </td>
                 <td>
@@ -310,7 +310,6 @@ export default {
       }) 
 
       let paginationQueryStringSegment = 'first: '+(this.rowsPerPage+1)+', skip: '+((this.currentPage - 1) * this.rowsPerPage)
-      
 
       await axios.post(
         this.$store.state.subgraphUrl, {
@@ -329,21 +328,6 @@ export default {
         }
 
         this.showLoading = false
-
-
-                        /*amount: "18000"
-                        date: (...)
-                        inOut: (...)
-                        linkToContent: (...)
-                        ticker: (...)
-                        tokenBrand: (...)
-                        tokenBrandImageUrl: (...)
-                        txnHash: (...)
-                        txnId: (...)
-                        userFrom: "@steveharrington"
-                        userFromImageUrl: "https://sample-imgs.s3.amazonaws.com/steveHarrington.png"
-                        userTo: "@spock"
-                        userToImageUrl: "https://sample-imgs.s3.amazonaws.com/spock.png"*/
       }).catch(e => {
         console.log(e)
       }) 
@@ -360,23 +344,14 @@ export default {
         return true
       }
     },
-    goAnother(user) {
-      this.$root.$emit('changeUser', user)
-      this.$router.push({
-        name: 'History',
-        query: {
-          user: user
-        }
-      })
-    },
     goPortfolio(user) {
-      this.$root.$emit('changeUser', user)
       this.$router.push({ name: 'PortfolioPage', query: { user: user } })
     },
     goBlock(link) {
       window.open(link)
     },
-    goTweet(link) {
+    goTweet(username, tweetId) {
+      let link = 'https://twitter.com/'+username+'/status/'+tweetId
       window.open(link)
     },
     goTransaction(txnHash) {
