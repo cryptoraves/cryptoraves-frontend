@@ -229,13 +229,13 @@ export default {
       //1. Get end user data
       await axios.post(
          this.$store.state.subgraphUrl, {
-          query: '{ userDatas(first: 1, where: {userName: "'+this.user+'"}){ id twitterUserId userName cryptoravesAddress imageUrl } }'
+          query: '{ users(first: 1, where: {userName: "'+this.user+'"}){ id twitterUserId userName cryptoravesAddress imageUrl } }'
         }
       ).then(response => {
-        this.cryptoravesAddress = response.data.data.userDatas[0].cryptoravesAddress
-        this.userImageUrl = response.data.data.userDatas[0].imageUrl
-        this.platformId = response.data.data.userDatas[0].twitterUserId
-        this.platformHandle = response.data.data.userDatas[0].userName
+        this.cryptoravesAddress = response.data.data.users[0].cryptoravesAddress
+        this.userImageUrl = response.data.data.users[0].imageUrl
+        this.platformId = response.data.data.users[0].twitterUserId
+        this.platformHandle = response.data.data.users[0].userName
 
       }).catch(e => {
         console.log(e)
@@ -278,7 +278,6 @@ export default {
     goAnother(user) {
       if (this.user !== user) {
         this.showLoading = true
-        this.$root.$emit('changeUser', user)
         this.$router.push({
           name: 'PortfolioPage',
           query: {
