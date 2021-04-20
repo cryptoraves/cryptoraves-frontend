@@ -191,15 +191,12 @@
 
 <script>
 import axios from 'axios'
-//import _ from 'lodash'
 import SectionHeader from '../components/ui/SectionHeader'
-import AnimatedArrow from '../components/ui/AnimatedArrow'
 
 export default {
   name: 'HistoryPage',
   components: {
-    SectionHeader,
-    AnimatedArrow
+    SectionHeader
   },
   watch:{
       $route (){
@@ -238,14 +235,7 @@ export default {
     }
     this.getHistory(this.$route.query.user, this.currentPage)
   },
-  /*beforeRouteUpdate(to, from, next) {
-    // just use `this`
-    this.user = to.query.user
-    
-    next()
-  },*/
   methods: {
-
     goNext() {
       if (this.visibleNext) {
         this.currentPage++
@@ -256,7 +246,6 @@ export default {
             page: this.currentPage
           }
         })
-        
       }
     },
     goPrev() {
@@ -277,9 +266,7 @@ export default {
         this.currentPage = page
       }
       this.user = user
-      
-      this.$root.$emit('changeUser', page)
-      
+
       if (this.user.toLowerCase().startsWith('import')) {
         this.user = 'IMPORT'
       }
@@ -304,7 +291,6 @@ export default {
         this.platformId = response.data.data.userDatas[0].twitterUserId
         this.platformHandle = response.data.data.userDatas[0].userName
 
-
       }).catch(e => {
         console.log(e)
       }) 
@@ -316,7 +302,6 @@ export default {
           query: '{ transfers('+paginationQueryStringSegment+', where: {fromTo_contains: "'+this.cryptoravesAddress+'"}){ id from { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address } to { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address } amount token {id cryptoravesTokenId isManagedToken ercType totalSupply name symbol decimals emoji tokenBrandImageUrl } tweetId fromTo} }'
         }
       ).then(response => {
-        
         this.rowCount = response.data.data.transfers.length
         this.tableRows = response.data.data.transfers  //match graph schema to fit as best as possible the original format below?
 
@@ -347,16 +332,12 @@ export default {
     goPortfolio(user) {
       this.$router.push({ name: 'PortfolioPage', query: { user: user } })
     },
-    goBlock(link) {
-      window.open(link)
-    },
     goTweet(username, tweetId) {
       let link = 'https://twitter.com/'+username+'/status/'+tweetId
       window.open(link)
     },
     goTransaction(txnHash) {
       if (txnHash !== 'Error') {
-        this.$root.$emit('changeUser', txnHash)
         this.$router.push({
           name: 'ConfirmationPage',
           query: { txnId: txnHash }
