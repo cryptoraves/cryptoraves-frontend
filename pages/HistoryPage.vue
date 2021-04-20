@@ -118,10 +118,10 @@
                   >
                 </td>
                 <td>
-                  <div>{{ item.amount | comma }}</div>
+                  <div>{{ Math.round(item.amount / Math.pow(10, item.token.decimals)) | comma }}</div>
                 </td>
                 <td>
-                  <div>${{ Math.round(item.amount * .1 * Math.random()) | comma }}</div>
+                  <div>${{ Math.round(item.amount / Math.pow(10, item.token.decimals) * .1 * Math.random()) | comma }}</div>
                 </td>
                 <td>
                   <img
