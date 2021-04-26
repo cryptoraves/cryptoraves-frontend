@@ -5,7 +5,7 @@
         v-if="showLoading"
         class="portfolio-loading-img">
         <img
-          src="../assets/gif/loading.gif" 
+          src="../assets/gif/loading.gif"
           alt >
       </div>
       <div v-else>
@@ -27,7 +27,7 @@
             </div>
           </div>
           <div class="portfolio-user">
-            
+
             <div class="portfolio-userimg">
               <img
                 :src="userImageUrl"
@@ -38,7 +38,7 @@
             </div>
           </div>
            <div class="deposit-button">
-            <div 
+            <div
                 v-if="user == loggedInUser"
                 class="deposit-buttonimg">
               <img
@@ -64,40 +64,40 @@
               <tr
                 v-for="(item,index) in tableRows"
                 :index="index"
-                :key="item.txnId"
-                
+                :key="item.token.cryptoravesTokenId"
+
               >
                 <td width="50%">
                   <img
-                    v-if="item.ticker"
-                    :src="item.tokenBrandImageUrl"
-                    :title="item.ticker"
+                    v-if="item.token.symbol"
+                    :src="item.token.tokenBrandImageUrl"
+                    :title="item.token.symbol"
                     class="table-img"
                     onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
-                    @click="goAnother(item.tokenBrand)"
+                    @click="goToken(item.symbol)"
                   >
                   <img
                     v-else
-                    :src="item.tokenBrandImageUrl"
-                    :title="item.tokenBrand"          
+                    :src="item.token.tokenBrandImageUrl"
+                    :title="item.token.name"
                     class="table-img"
                     onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
-                    @click="goAnother(item.tokenBrand)"
+                    @click="goToken(item.token.symbol)"
                   >
                 </td>
                 <td
                   :class="[user === item.tokenBrand? 'td-position-relative':'']"
                   width="50%"
                 >
-                  <div>{{ item.balance | comma }}</div>
-                  
+                  <div>{{ Math.round(item.balance / Math.pow(10, item.token.decimals)) | comma }}</div>
+
                 </td>
                 <td>
-                  <div>${{ Math.round(item.balance * .1 * Math.random()) | comma }}</div>
+                  <div>${{ Math.round(item.balance / Math.pow(10, item.token.decimals) * .1 * Math.random()) | comma }}</div>
                 </td>
-                <td 
+                <td
                   v-if="user == loggedInUser"
-                  @click="goDepositWithdraw(item.tokenBrand, 'withdraw')"
+                  @click="goDepositWithdraw(item.token.symbol, 'withdraw')"
                   class="depositWithdrawLink"
                   title="Withdraw to your mainnet wallet"
                 >Withdraw</td>
@@ -160,6 +160,7 @@ export default {
       user: '',
       tableRows: [],
       rowCount: 0,
+      rowsPerPage: 20,
       tokenBalance: '0',
       totalReciprocated: 0,
       tokenBalancePercentage: 0,
@@ -239,9 +240,30 @@ export default {
 
       }).catch(e => {
         console.log(e)
-      }) 
+      })
 
+      let paginationQueryStringSegment = 'first: '+(this.rowsPerPage+1)+', skip: '+((this.currentPage - 1) * this.rowsPerPage)
 
+      await axios.post(
+        this.$store.state.subgraphUrl, {
+          query: '{ userBalances('+paginationQueryStringSegment+', where: {user: "'+this.cryptoravesAddress+'"}){ id, user { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address }, token {id cryptoravesTokenId isManagedToken ercType totalSupply name symbol decimals emoji tokenBrandImageUrl }, balance }}'
+        }
+      ).then(response => {
+        console.log(response)
+        this.rowCount = response.data.data.userBalances.length
+        this.tableRows = response.data.data.userBalances  //match graph schema to fit as best as possible the original format below?
+
+        if(this.rowCount > this.rowsPerPage){
+          this.visibleNext = true
+          this.tableRows.pop()
+        } else {
+          this.visibleNext = false
+        }
+
+        this.showLoading = false
+      }).catch(e => {
+        console.log(e)
+      })
 
       this.showLoading = false
       /*
@@ -274,7 +296,7 @@ export default {
           console.log(e)
         })*/
     },
-    
+
     goAnother(user) {
       if (this.user !== user) {
         this.showLoading = true
@@ -380,7 +402,7 @@ export default {
   height: 120px;
   border-radius: 50%;
   border: 1px solid lightgrey;
-  
+
   transition: all 0.5s ease-out;
   cursor: pointer;
 }
