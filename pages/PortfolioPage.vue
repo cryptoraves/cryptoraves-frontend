@@ -108,7 +108,7 @@
         <div class="row">
           <div class="portfolio-pagination">
             <span
-              class="btn btnpagination [visiblePrev ? '' : 'disabledbtn']"
+              :class="[visiblePrev ? 'btn btnpagination' : 'btn disabledbtn']"
               @click="goPrev"
             >
               <i class="fa fa-angle-left"/>
@@ -116,7 +116,7 @@
             Page {{ currentPage }}
             <span
               href="#"
-              class="btn btnpagination [visibleNext ? '' : 'disabledbtn']"
+              :class="[visibleNext ? 'btn btnpagination' : 'btn disabledbtn']"
               @click="goNext"
             >
               <i class="fa fa-angle-right"/>
@@ -175,10 +175,8 @@ export default {
   },
   created() {
     this.user = this.$route.query.user
-    if (this.$route.query.page) {
+    if (this.$route.query.page){
       this.currentPage = this.$route.query.page
-    } else {
-      this.currentPage = 1
     }
 
     this.getPortfolio(this.user, this.currentPage)
@@ -227,6 +225,11 @@ export default {
         user = 'EXPORT'
       }
 
+      if(this.currentPage > 1){
+        this.visiblePrev = true
+      } else {
+        this.visiblePrev = false
+      }
       //1. Get end user data
       await axios.post(
          this.$store.state.subgraphUrl, {
@@ -265,36 +268,7 @@ export default {
         console.log(e)
       })
 
-      this.showLoading = false
-      /*
-      axios
-        .get(
-          this.$store.state.WebsiteInterfaceUrl + '?pageType=portfolioPage&userName=' +
-            user +
-            '&page=' +
-            page
-        )
-        .then(response => {
-          // JSON responses are automatically parsed.
-          let res = response.data
-          this.user = res.platformHandle
-          this.tableRows = _.cloneDeep(res.tableRows)
-          this.ravity = res.ravity
-          this.rowCount = res.rowCount
-          this.tokenBalance = res.tokenBalance
-          this.totalDistributed = res.totalDistributed
-          this.totalReciprocated = res.totalReciprocated
-          this.tokenBalancePercentage = res.tokenBalancePercentage
-          this.totalHoldings = res.totalHoldings
-          this.currentPage = page
-          this.visiblePrev = res.prev ? true : false
-          this.visibleNext = res.next ? true : false
-          this.userImageUrl = res.userImageUrl
-          this.showLoading = false
-        })
-        .catch(e => {
-          console.log(e)
-        })*/
+
     },
 
     goAnother(user) {
