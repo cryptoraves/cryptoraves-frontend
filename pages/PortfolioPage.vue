@@ -150,7 +150,7 @@ export default {
           } else {
             this.currentPage = 1
           }
-          this.getHistory(this.$route.query.user,this.currentPage)
+          this.getPortfolio(this.$route.query.user,this.currentPage)
       }
   },
   data() {
@@ -203,6 +203,7 @@ export default {
     goPrev() {
       if (this.visiblePrev) {
         this.showLoading = true
+        this.currentPage--
         this.$router.push({
           name: 'PortfolioPage',
           query: {
@@ -263,11 +264,11 @@ export default {
           this.visibleNext = false
         }
 
-        this.showLoading = false
+
       }).catch(e => {
         console.log(e)
       })
-
+      this.showLoading = false
 
     },
 
