@@ -18,7 +18,7 @@
             v-else
           >{{ platformHandle }}'s Transaction History</SectionHeader>
           <div class="history-user">
-            
+
             <div class="history-userimg">
               <img
                 :src="userImageUrl"
@@ -30,7 +30,7 @@
           </div>
           <br><br>
           <div class="elastic-arrow">
-            <img 
+            <img
               src="../assets/gif/elasticrightarrow.gif"
               alt >
           </div>
@@ -58,7 +58,7 @@
                 :class="[platformHandle === item.from.userName? 'tr-orange-color' : 'tr-green-color']"
               >
                 <td>
-                  <div 
+                  <div
                     v-if="item.id=='Error'"
                     title="Pending">Pend...
                   </div>
@@ -72,17 +72,17 @@
                 <td>
                   <img
                     v-if="!item.from.userName.includes('Official Launch')"
-                    :title="item.from.userName"
-                    :src="item.from.imageUrl"
+                    :title="item.from.userName == '0x0' ? 'Import into Cryptoraves' : item.from.userName"
+                    :src="item.from.userName == '0x0' ? 'https://sample-imgs.s3.amazonaws.com/import.png' : item.from.imageUrl"
                     class="table-img"
                     onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
                     @click="item.from.userName != user ? $router.push({name: 'HistoryPage',query: {user: item.from.userName}}) : ''"
                   >
-                  <img 
+                  <img
                     v-else
                     :src="item.from.imageUrl"
                     title="LAUNCH"
-                    class="launch-img" 
+                    class="launch-img"
                     onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
                   >
                 </td>
@@ -125,18 +125,18 @@
                 </td>
                 <td>
                   <img
-                    v-if="!item.to.userName.includes('Export To Mainnet')"
-                    :title="item.to.userName"
-                    :src="item.to.imageUrl"
+                    v-if="!item.to.userName == '0x0'"
+                    :title="item.to.userName == '0x0' ? 'Export To Mainnet' : item.to.userName"
+                    :src="item.to.userName == '0x0' ? 'https://sample-imgs.s3.amazonaws.com/export.png' : item.to.imageUrl"
                     class="table-img"
                     onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
                     @click="item.to.userName != user ? $router.push({path: 'HistoryPage',query: {user: item.to.userName}}) : ''"
                   >
-                  <img 
+                  <img
                     v-else
                     :title="item.to.userName"
-                    :src="item.to.imageUrl" 
-                    class="launch-img" 
+                    :src="item.to.imageUrl"
+                    class="launch-img"
                     onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
                   >
                 </td>
@@ -263,18 +263,20 @@ export default {
       }
     },
     async getHistory(user, page) {
-      
+
       if(page){
         this.currentPage = page
       }
       this.user = user
 
-      if (this.user.toLowerCase().startsWith('import')) {
-        this.user = 'IMPORT'
+      if (this.user == '0x0') {
+        this.user = 'Imports & Exports'
+        this.cryptoravesAddress = '0x0000000000000000000000000000000000000000'
+        this.userImageUrl = 'https://sample-imgs.s3.amazonaws.com/import.png'
+        this.platformId = 0
+        this.platformHandle = 'Imports & Exports'
       }
-      if (this.user.toLowerCase().startsWith('export')) {
-        this.user = 'EXPORT'
-      }
+
       this.showLoading = true
 
       if(this.currentPage > 1){
@@ -295,7 +297,7 @@ export default {
 
       }).catch(e => {
         console.log(e)
-      }) 
+      })
 
       let paginationQueryStringSegment = 'first: '+(this.rowsPerPage+1)+', skip: '+((this.currentPage - 1) * this.rowsPerPage)
 
@@ -304,6 +306,7 @@ export default {
           query: '{ transfers('+paginationQueryStringSegment+', where: {fromTo_contains: "'+this.cryptoravesAddress+'"}){ id from { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address } to { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address } amount token {id cryptoravesTokenId isManagedToken ercType totalSupply name symbol decimals emoji tokenBrandImageUrl } tweetId fromTo} }'
         }
       ).then(response => {
+        console.log(response)
         this.rowCount = response.data.data.transfers.length
         this.tableRows = response.data.data.transfers  //match graph schema to fit as best as possible the original format below?
 
@@ -317,14 +320,12 @@ export default {
         this.showLoading = false
       }).catch(e => {
         console.log(e)
-      }) 
+      })
     },
     getShowTweet(userFrom, userTo) {
       if (
-        userFrom == 'Import to Cryptoraves' ||
-        userFrom == 'Export To Mainnet' ||
-        userTo == 'Import to Cryptoraves' ||
-        userTo == 'Export To Mainnet'
+        userFrom == '0x0' ||
+        userTo == '0x0'
       ) {
         return false
       } else {
