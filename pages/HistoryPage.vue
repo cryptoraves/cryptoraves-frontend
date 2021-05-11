@@ -118,7 +118,7 @@
                   >
                 </td>
                 <td>
-                  <div>{{ Math.round(item.amount / Math.pow(10, item.token.decimals)) | comma }}</div>
+                  <div>{{ item.token.ercType == 721 ? 1 : Math.round(item.amount / Math.pow(10, item.token.decimals)) | comma }}</div>
                 </td>
                 <td>
                   <div>${{ Math.round(item.amount / Math.pow(10, item.token.decimals) * .1 * Math.random()) | comma }}</div>
@@ -202,7 +202,6 @@ export default {
     date: function(str) {
       if (!str) { return '(n/a)' }
       str = new Date(parseInt(str) * 1000)
-      console.log(str.toLocaleTimeString())
       return str.getFullYear() + '-' + ((str.getMonth() < 9) ? '0' : '') + (str.getMonth() + 1) + '-' +
         ((str.getDate() < 10) ? '0' : '') + str.getDate() + ' ' + str.toLocaleTimeString()
     }
@@ -315,7 +314,6 @@ export default {
           query: '{ transfers('+paginationQueryStringSegment+', where: {fromTo_contains: "'+this.cryptoravesAddress+'"}){ id from { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address } to { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address } amount token {id cryptoravesTokenId isManagedToken ercType totalSupply name symbol decimals emoji tokenBrandImageUrl } tweetId fromTo modified} }'
         }
       ).then(response => {
-        console.log(response)
         this.rowCount = response.data.data.transfers.length
         this.tableRows = response.data.data.transfers  //match graph schema to fit as best as possible the original format below?
 
