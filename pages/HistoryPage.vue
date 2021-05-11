@@ -149,8 +149,8 @@
                     v-else
                     title="Link to Confirmation"
                     class="link"
-                    @click="goTransaction(item.txnHash)"
-                  ><!-- {{ item.date.substring(0,item.date.length-3) }} --></div>
+                    @click="goTransaction(item.id)"
+                  >{{ item.modified | date}}</div>
                 </td>
               </tr>
             </tbody>
@@ -197,6 +197,15 @@ export default {
   name: 'HistoryPage',
   components: {
     SectionHeader
+  },
+  filters: {
+    date: function(str) {
+      if (!str) { return '(n/a)' }
+      str = new Date(parseInt(str) * 1000)
+      console.log(str.toLocaleTimeString())
+      return str.getFullYear() + '-' + ((str.getMonth() < 9) ? '0' : '') + (str.getMonth() + 1) + '-' +
+        ((str.getDate() < 10) ? '0' : '') + str.getDate() + ' ' + str.toLocaleTimeString()
+    }
   },
   watch:{
       $route (){
@@ -303,7 +312,7 @@ export default {
 
       await axios.post(
         this.$store.state.subgraphUrl, {
-          query: '{ transfers('+paginationQueryStringSegment+', where: {fromTo_contains: "'+this.cryptoravesAddress+'"}){ id from { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address } to { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address } amount token {id cryptoravesTokenId isManagedToken ercType totalSupply name symbol decimals emoji tokenBrandImageUrl } tweetId fromTo} }'
+          query: '{ transfers('+paginationQueryStringSegment+', where: {fromTo_contains: "'+this.cryptoravesAddress+'"}){ id from { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address } to { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address } amount token {id cryptoravesTokenId isManagedToken ercType totalSupply name symbol decimals emoji tokenBrandImageUrl } tweetId fromTo modified} }'
         }
       ).then(response => {
         console.log(response)
