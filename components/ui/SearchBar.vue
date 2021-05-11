@@ -34,7 +34,7 @@
         :class="{ 'is-active': index === arrowCounter }"
         class="app-header-search-result-item"
         @click="setResult(filteredUser)"
-        
+
       >{{ filteredUser }}</div>
     </div>
   </div>
@@ -74,53 +74,58 @@ export default {
     document.removeEventListener('click', this.handleClickOutside)
   },
   methods: {
-    getUserList() {
-      axios
-        .get(
-          this.$store.state.WebsiteInterfaceUrl + '?pageType=userListLastUpdated'
+    async getUserList() {
+      await axios.post(
+        this.$store.state.subgraphUrl, {
+          query: '{ users(first: 1, orderBy: modified, orderDirection: desc){ modified } }'
+        }
+      ).then(response => {
+
+        // JSON responses are automatically parsed.
+        localStorage.setItem(
+          'lastUpdated',
+          JSON.stringify(response.data.data.users[0].modified)
         )
-        .then(response => {
+        this.update = true
+        if (localStorage.userListLastUpdated) {
+          if (localStorage.lastUpdated == localStorage.userListLastUpdated) {
+            this.update = false
+          }
+        }
+      }).catch(e => {
+        this.errors.push(e)
+      })
+
+      if (this.update == false) {
+        localStorage.setItem(
+          'userListLastUpdated',
+          localStorage.lastUpdated
+        )
+        await axios.post(
+            this.$store.state.subgraphUrl, {
+              query: '{ users(orderBy: userName, orderDirection: asc){ userName } }'
+            }
+        ).then(response => {
+          for (let i = 0; i < response.data.data.users.length; i++) {
+            this.userList.push(response.data.data.users[i].userName)
+          }
           // JSON responses are automatically parsed.
           localStorage.setItem(
-            'lastUpdated',
-            JSON.stringify(response.data.lastUpdated)
+            'userList',
+            JSON.stringify(this.userList)
           )
-          this.update = true
-          if (localStorage.userListLastUpdated) {
-            if (localStorage.lastUpdated == localStorage.userListLastUpdated) {
-              this.update = false
-            }
-          }
-          if (this.update) {
-            localStorage.setItem(
-              'userListLastUpdated',
-              localStorage.lastUpdated
-            )
-            axios
-              .get(
-                this.$store.state.WebsiteInterfaceUrl + '?pageType=searchBar'
-              )
-              .then(response => {
-                // JSON responses are automatically parsed.
-                localStorage.setItem(
-                  'userList',
-                  JSON.stringify(response.data.userList)
-                )
-                this.userList = Object.freeze(
-                  JSON.parse(localStorage.getItem('userList'))
-                )
-              })
-              .catch(e => {
-                this.errors.push(e)
-              })
-          } else
-            this.userList = Object.freeze(
-              JSON.parse(localStorage.getItem('userList'))
-            )
+          this.userList = Object.freeze(
+            JSON.parse(localStorage.getItem('userList'))
+          )
         })
         .catch(e => {
           this.errors.push(e)
         })
+      } else {
+        this.userList = Object.freeze(
+          JSON.parse(localStorage.getItem('userList'))
+        )
+      }
     },
     filteredList() {
       this.result = this.userList.filter(user => {
