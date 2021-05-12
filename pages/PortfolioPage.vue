@@ -14,7 +14,7 @@
           <div class="portfolio-subtitle">
             <div class="portfolio-subtitle-details">
               <div
-                title="The sum of jointly-held tokens between this user and others."
+                title="Estimated total value of tokens held."
               >Total Value: ${{ totalHoldings | comma }}</div>
             </div>
             <div

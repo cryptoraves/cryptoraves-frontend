@@ -4,8 +4,8 @@
       <div class="row app-footer-content">
         <div class="d-flex col-lg-2 col-sm-12">
           <a
-            class="ethereum-link" 
-            href="http://ethereum.org/beginners/" 
+            class="ethereum-link"
+            href="http://ethereum.org/beginners/"
             target="_blank"
           >
             <!-- <img src="../../assets/img/ethereum1.png" > -->
@@ -14,7 +14,7 @@
         <div class="col-lg-8 d-flex">
           <div class="d-flex social-group">
             <a
-              href="https://twitter.com/cryptoraves" 
+              href="https://twitter.com/cryptoraves"
               target="_blank"
             >
               <div class="d-flex tweet-gradient">
@@ -23,7 +23,7 @@
             </a>
 
             <a
-              href="https://www.reddit.com/user/cryptoraves"
+              href="https://www.reddit.com/r/cryptoraves"
               target="_blank"
             >
               <div class="d-flex reddit-gradient">
@@ -57,7 +57,7 @@
                 <i class="fa fa-github"/>
               </div>
             </a>
-            
+
             <a
               href="https://t.me/cryptoraves1"
               target="_blank"

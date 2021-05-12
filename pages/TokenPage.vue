@@ -12,16 +12,16 @@
       <div v-else>
         <div class="history-title">
           <SectionHeader
-            v-if="platformHandle.toUpperCase()=='EXPORT' || platformHandle.toUpperCase()=='IMPORT' || platformHandle.toUpperCase()=='LAUNCH'"
-          >{{ platformHandle.toLowerCase() }}s</SectionHeader>
+            v-if="tokenName.toUpperCase()=='EXPORT' || tokenName.toUpperCase()=='IMPORT' || tokenName.toUpperCase()=='LAUNCH'"
+          >{{ tokenName.toLowerCase() }}s</SectionHeader>
           <SectionHeader
             v-else
-          >{{ platformHandle }}'s Transaction History</SectionHeader>
+          >{{ token }}</SectionHeader>
           <div class="history-user">
 
             <div class="history-userimg">
               <img
-                :src="userImageUrl"
+                :src="tokenBrandImageUrl"
                 onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
                 title="Click to See Portfolio"
                 @click="goPortfolio(user)"
@@ -41,7 +41,6 @@
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">From</th>
-                <th scope="col">Sent/Received</th>
                 <th scope="col">Tweet</th>
                 <th scope="col">Token</th>
                 <th scope="col">Amount</th>
@@ -55,7 +54,7 @@
                 v-for="(item,index) in tableRows"
                 :index="index"
                 :key="item.id"
-                :class="[platformHandle === item.from.userName? 'tr-orange-color' : 'tr-green-color']"
+                :class="[tokenName === item.from.userName? 'tr-orange-color' : 'tr-green-color']"
               >
                 <td>
                   <div
@@ -85,10 +84,6 @@
                     class="launch-img"
                     onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
                   >
-                </td>
-                <td>
-                  <div v-if="platformHandle === item.from.userName">Sent</div>
-                  <div v-else>Received</div>
                 </td>
                 <td>
                   <img
@@ -178,12 +173,6 @@
             </span>
           </div>
         </div>
-        <div class="row">
-          <div
-            class="portfolio-link"
-            @click="goPortfolio(user)"
-          >Click to see {{ platformHandle }}'s Portfolio Page.</div>
-        </div>
       </div>
     </div>
   </div>
@@ -213,26 +202,23 @@ export default {
           } else {
             this.currentPage = 1
           }
-          this.getHistory(this.$route.query.user,this.currentPage)
+          this.getToken(this.$route.query.user,this.currentPage)
       }
   },
   data() {
     return {
       showTweet: true,
-      user: '',
+      token: '',
       currentPage: 1,
       tableRows: [],
       rowCount: 0,
       rowsPerPage: 20,
-      tokenBalance: '0',
-      earliestDatetime: '',
-      latestDatetime: '',
       visibleNext: false,
       visiblePrev: false,
-      platformHandle: '',
-      platformId: '',
+      tokenName: '',
+      cryptoravesTokenId: '',
       cryptoravesAddress: '',
-      userImageUrl: '',
+      tokenBrandImageUrl: '',
       blockexplorerUrl: '',
       showLoading: true
     }
@@ -241,7 +227,7 @@ export default {
     if (this.$route.query.page){
       this.currentPage = this.$route.query.page
     }
-    this.getHistory(this.$route.query.user, this.currentPage)
+    this.getToken(this.$route.query.token, this.currentPage)
   },
   methods: {
     goNext() {
@@ -251,7 +237,7 @@ export default {
         this.$router.push({
           name: 'HistoryPage',
           query: {
-            user: this.user,
+            token: this.token,
             page: this.currentPage
           }
         })
@@ -264,27 +250,18 @@ export default {
         this.$router.push({
           name: 'HistoryPage',
           query: {
-            user: this.user,
+            token: this.token,
             page: this.currentPage
           }
         })
       }
     },
-    async getHistory(user, page) {
+    async getToken(token, page) {
 
       if(page){
         this.currentPage = page
       }
-      this.user = user
-
-      if (this.user == '0x0') {
-        this.user = 'Imports & Exports'
-        this.cryptoravesAddress = '0x0000000000000000000000000000000000000000'
-        this.userImageUrl = 'https://sample-imgs.s3.amazonaws.com/import.png'
-        this.platformId = 0
-        this.platformHandle = 'Imports & Exports'
-      }
-
+      this.token = token
       this.showLoading = true
 
       if(this.currentPage > 1){
@@ -295,13 +272,14 @@ export default {
       //1. Get end user data
       await axios.post(
          this.$store.state.subgraphUrl, {
-          query: '{ users(first: 1, where: {userName: "'+this.user+'"}){ id twitterUserId userName cryptoravesAddress imageUrl } }'
+          query: '{ tokens(first: 1, where: {symbol: "'+this.token+'"}){ id cryptoravesTokenId isManagedToken ercType totalSupply name symbol decimals emoji, tokenBrandImageUrl } }'
         }
       ).then(response => {
-        this.cryptoravesAddress = response.data.data.users[0].cryptoravesAddress
-        this.userImageUrl = response.data.data.users[0].imageUrl
-        this.platformId = response.data.data.users[0].twitterUserId
-        this.platformHandle = response.data.data.users[0].userName
+        console.log(response)
+        this.ercType = response.data.data.tokens[0].ercType
+        this.tokenBrandImageUrl = response.data.data.tokens[0].tokenBrandImageUrl
+        this.cryptoravesTokenId = response.data.data.tokens[0].id
+        this.tokenName = response.data.data.tokens[0].name
 
       }).catch(e => {
         console.log(e)
@@ -311,7 +289,7 @@ export default {
 
       await axios.post(
         this.$store.state.subgraphUrl, {
-          query: '{ transfers('+paginationQueryStringSegment+', where: {fromTo_contains: "'+this.cryptoravesAddress+'"}, orderBy: modified, orderDirection: desc){ id from { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address } to { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address } amount token {id cryptoravesTokenId isManagedToken ercType totalSupply name symbol decimals emoji tokenBrandImageUrl } tweetId fromTo modified} }'
+          query: '{ transfers('+paginationQueryStringSegment+', where: {token: "'+this.cryptoravesTokenId+'"}, orderBy: modified, orderDirection: desc){ id from { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address } to { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address } amount token {id cryptoravesTokenId isManagedToken ercType totalSupply name symbol decimals emoji tokenBrandImageUrl } tweetId fromTo modified} }'
         }
       ).then(response => {
         this.rowCount = response.data.data.transfers.length
