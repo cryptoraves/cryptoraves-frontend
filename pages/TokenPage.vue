@@ -11,24 +11,26 @@
       </div>
       <div v-else>
         <div class="history-title">
-          <SectionHeader
-            v-if="tokenName.toUpperCase()=='EXPORT' || tokenName.toUpperCase()=='IMPORT' || tokenName.toUpperCase()=='LAUNCH'"
-          >{{ tokenName.toLowerCase() }}s</SectionHeader>
-          <SectionHeader
-            v-else
-          >{{ token }}</SectionHeader>
-          <div class="history-user">
 
-            <div class="history-userimg">
-              <img
-                :src="tokenBrandImageUrl"
-                onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
-                title="Click to See Portfolio"
-                @click="goPortfolio(user)"
-              >
+          <SectionHeader
+
+          >{{ token }}
+            <div class="history-token">
+            <br/>
+              <div class="history-tokenimg">
+                <img
+                  :src="tokenBrandImageUrl"
+                  onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
+                  :title="this.token"
+                >
+              </div>
             </div>
-          </div>
-          <br><br>
+            <br/>
+            {{ tokenName }}
+            <br>
+            <div class="" >{{ tokenDescription }}</div>
+
+          </SectionHeader>
           <div class="elastic-arrow">
             <img
               src="../assets/gif/elasticrightarrow.gif"
@@ -43,7 +45,14 @@
                 <th scope="col">From</th>
                 <th scope="col">Tweet</th>
                 <th scope="col">Token</th>
-                <th scope="col">Amount</th>
+                <th
+                  v-if="ercType == 721"
+                  scope="col"
+                >ID</th>
+                <th
+                  v-else
+                  scope="col"
+                >Amount</th>
                 <th scope="col">Value $</th>
                 <th scope="col">To</th>
                 <th scope="col">Date</th>
@@ -99,17 +108,17 @@
                     v-if="item.token.symbol"
                     :title="item.token.symbol"
                     :src="item.token.tokenBrandImageUrl"
-                    class="table-img"
+                    class="table-img-deactive"
                     onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
-                    @click="$router.push({name: 'TokenPage',query: {token: item.token.symbol}})"
+
                   >
                   <img
                     v-else
                     :title="item.token.name"
                     :src="item.token.name"
-                    class="table-img"
+                    class="table-img-deactive"
                     onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
-                    @click="$router.push({name: 'TokenPage',query: {token: item.token.symbol}})"
+
                   >
                 </td>
                 <td>
@@ -219,6 +228,7 @@ export default {
       cryptoravesTokenId: '',
       cryptoravesAddress: '',
       tokenBrandImageUrl: '',
+      tokenDescription:'',
       blockexplorerUrl: '',
       showLoading: true
     }
@@ -272,12 +282,13 @@ export default {
       //1. Get end user data
       await axios.post(
          this.$store.state.subgraphUrl, {
-          query: '{ tokens(first: 1, where: {symbol: "'+this.token+'"}){ id cryptoravesTokenId isManagedToken ercType totalSupply name symbol decimals emoji, tokenBrandImageUrl } }'
+          query: '{ tokens(first: 1, where: {symbol: "'+this.token+'"}){ id cryptoravesTokenId isManagedToken ercType totalSupply name symbol decimals emoji, tokenBrandImageUrl tokenDescription } }'
         }
       ).then(response => {
-        console.log(response)
+        console.log(response.data.data)
         this.ercType = response.data.data.tokens[0].ercType
         this.tokenBrandImageUrl = response.data.data.tokens[0].tokenBrandImageUrl
+        this.tokenDescription = response.data.data.tokens[0].tokenDescription
         this.cryptoravesTokenId = response.data.data.tokens[0].id
         this.tokenName = response.data.data.tokens[0].name
 
@@ -289,7 +300,7 @@ export default {
 
       await axios.post(
         this.$store.state.subgraphUrl, {
-          query: '{ transfers('+paginationQueryStringSegment+', where: {token: "'+this.cryptoravesTokenId+'"}, orderBy: modified, orderDirection: desc){ id from { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address } to { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address } amount token {id cryptoravesTokenId isManagedToken ercType totalSupply name symbol decimals emoji tokenBrandImageUrl } tweetId fromTo modified} }'
+          query: '{ transfers('+paginationQueryStringSegment+', where: {token: "'+this.cryptoravesTokenId+'"}, orderBy: modified, orderDirection: desc){ id from { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address } to { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address } amount token {id cryptoravesTokenId isManagedToken ercType totalSupply name symbol decimals emoji tokenBrandImageUrl tokenDescription } tweetId fromTo modified} }'
         }
       ).then(response => {
         this.rowCount = response.data.data.transfers.length
@@ -352,22 +363,21 @@ export default {
 .history-user {
   position: absolute;
   top: 70px;
-  left: 0;
   text-align: center;
 }
-.history-userlink {
+.history-tokenlink {
   margin: 10px auto 10px auto;
   font-family: 'Montserrat';
   font-size: 15px;
   color: royalblue;
   text-decoration: underline;
 }
-.history-userlink:hover {
+.history-tokenlink:hover {
   cursor: pointer;
   text-decoration: underline;
 }
 
-.history-userimg {
+.history-tokenimg {
   background: white;
   display: flex;
   margin: auto;
@@ -390,11 +400,11 @@ export default {
 }
 
 
-.history-userimg:active {
+.history-tokenimg:active {
   transform: translateY(0.5em);
 }
 
-.history-userimg img {
+.history-tokenimg img {
   width: 110px;
   height: 110px;
   border-radius: 50%;
@@ -484,6 +494,16 @@ tr:nth-child(even) {
   animation: avatar-from-effect 1s infinite;
 }
 
+.table-img-deactive {
+  border: 2px solid white;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  -webkit-box-shadow: 0px 0px 15px 5px rgba(8, 169, 255, 0.3);
+  -moz-box-shadow: 0px 0px 15px 5px rgba(8, 169, 255, 0.3);
+  box-shadow: 0px 0px 15px 5px rgba(8, 169, 255, 0.3);
+}
+
 .portfolio-link {
   font-size: 1.5em;
   font-family: 'Montserrat';
@@ -513,7 +533,7 @@ tr:nth-child(even) {
   table {
     min-width: 1000px;
   }
-  .history-user {
+  .history-token {
     position: relative;
     margin-bottom: -40px;
     z-index: 2;
@@ -523,11 +543,11 @@ tr:nth-child(even) {
   }
 }
 @media only screen and (max-width: 410px) {
-  .history-userimg {
+  .history-tokenimg {
     width: 80px;
     height: 80px;
   }
-  .history-userimg img {
+  .history-tokenimg img {
     width: 70px;
     height: 70px;
   }
@@ -542,6 +562,7 @@ tr:nth-child(even) {
   .history-pagination {
     font-size: 15px;
   }
+
   .table-img {
     height: 50px;
     width: 50px;

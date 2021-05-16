@@ -74,7 +74,7 @@
                     :title="item.token.symbol"
                     class="table-img"
                     onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
-                    @click="goToken(item.symbol)"
+                    @click="$router.push({name: 'TokenPage',query: {token: item.token.symbol}})"
                   >
                   <img
                     v-else
@@ -82,7 +82,7 @@
                     :title="item.token.name"
                     class="table-img"
                     onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
-                    @click="goToken(item.token.symbol)"
+                    @click="$router.push({name: 'TokenPage',query: {token: item.token.symbol}})"
                   >
                 </td>
                 <td
