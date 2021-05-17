@@ -71,7 +71,7 @@
                   <img
                     v-if="item.token.symbol"
                     :src="item.token.tokenBrandImageUrl"
-                    :title="item.token.symbol"
+                    :title="item.token.ercType == 20 ? item.token.symbol : 'NFT: '+item.token.symbol"
                     class="table-img"
                     onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
                     @click="$router.push({name: 'TokenPage',query: {token: item.token.symbol}})"
@@ -79,7 +79,7 @@
                   <img
                     v-else
                     :src="item.token.tokenBrandImageUrl"
-                    :title="item.token.name"
+                    :title="item.token.ercType == 20 ? item.token.name : 'NFT: '+item.token.name"
                     class="table-img"
                     onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
                     @click="$router.push({name: 'TokenPage',query: {token: item.token.symbol}})"

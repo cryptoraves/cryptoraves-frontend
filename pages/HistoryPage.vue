@@ -72,7 +72,7 @@
                 <td>
                   <img
                     v-if="!item.from.userName.includes('Official Launch')"
-                    :title="item.from.userName == '0x0' ? 'Import into Cryptoraves' : item.from.userName"
+                    :title="item.from.userName == '0x0' ? 'Deposit into Cryptoraves' : item.from.userName"
                     :src="item.from.userName == '0x0' ? 'https://sample-imgs.s3.amazonaws.com/import.png' : item.from.imageUrl"
                     class="table-img"
                     onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
@@ -98,11 +98,15 @@
                     class="link"
                     @click="goTweet(item.from.userName, item.tweetId)"
                   >
+                  <div
+                    v-else
+                    title="No Tweet associated with this transaction"
+                  >N/A</div>
                 </td>
                 <td>
                   <img
                     v-if="item.token.symbol"
-                    :title="item.token.symbol"
+                    :title="item.token.ercType == 20 ? item.token.symbol : 'NFT: '+item.token.symbol"
                     :src="item.token.tokenBrandImageUrl"
                     class="table-img"
                     onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
@@ -126,7 +130,7 @@
                 <td>
                   <img
                     v-if="!item.to.userName == '0x0'"
-                    :title="item.to.userName == '0x0' ? 'Export To Mainnet' : item.to.userName"
+                    :title="item.to.userName == '0x0' ? 'Withdraw To Mainnet' : item.to.userName"
                     :src="item.to.userName == '0x0' ? 'https://sample-imgs.s3.amazonaws.com/export.png' : item.to.imageUrl"
                     class="table-img"
                     onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
@@ -278,7 +282,7 @@ export default {
       this.user = user
 
       if (this.user == '0x0') {
-        this.user = 'Imports & Exports'
+        this.user = 'Deposits & Withdrawals'
         this.cryptoravesAddress = '0x0000000000000000000000000000000000000000'
         this.userImageUrl = 'https://sample-imgs.s3.amazonaws.com/import.png'
         this.platformId = 0

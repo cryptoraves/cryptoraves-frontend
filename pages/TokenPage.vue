@@ -21,13 +21,13 @@
                 <img
                   :src="tokenBrandImageUrl"
                   onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
-                  :title="this.token"
+                  :title="this.ercType == 20 ? this.token : 'NFT: '+this.token"
                 >
               </div>
             </div>
             <br/>
             <div class="" >
-              {{ tokenName }} (ticker {{ token }}) {{ tokenDescription }}
+              {{ tokenName }} (ticker {{ token }}):  {{ tokenDescription }}
             </div>
           </SectionHeader>
           <div class="elastic-arrow">
@@ -36,6 +36,8 @@
               alt >
           </div>
         </div>
+        <br /><br /><br />
+        <div class="table-heading">Recent Transactions:</div>
         <div class="table-section row">
           <table>
             <thead>
@@ -105,7 +107,7 @@
                 <td>
                   <img
                     v-if="item.token.symbol"
-                    :title="item.token.symbol"
+                    :title="item.token.ercType == 20 ? item.token.symbol : 'NFT: '+item.token.symbol"
                     :src="item.token.tokenBrandImageUrl"
                     class="table-img-deactive"
                     onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
@@ -281,7 +283,7 @@ export default {
       //1. Get end user data
       await axios.post(
          this.$store.state.subgraphUrl, {
-          query: '{ tokens(first: 1, where: {symbol: "'+this.token+'"}){ id cryptoravesTokenId isManagedToken ercType totalSupply name symbol decimals emoji, tokenBrandImageUrl tokenDescription } }'
+          query: '{ tokens(first: 1, where: {symbol: "'+this.token+'"}){ id cryptoravesTokenId isManagedToken ercType totalSupply name symbol decimals emoji tokenBrandImageUrl tokenDescription } }'
         }
       ).then(response => {
         this.ercType = response.data.data.tokens[0].ercType
@@ -289,7 +291,7 @@ export default {
         this.tokenDescription = response.data.data.tokens[0].tokenDescription
         this.cryptoravesTokenId = response.data.data.tokens[0].id
         this.tokenName = response.data.data.tokens[0].name
-
+console.log(response.data.data)
       }).catch(e => {
         console.log(e)
       })
@@ -363,6 +365,13 @@ export default {
   top: 70px;
   text-align: center;
 }
+.table-heading {
+  margin: 10px auto 10px auto;
+  font-weight: bold;
+  font-size: 20px;
+  color: rgb(0, 38, 101);
+  text-align: center;
+}
 .history-tokenlink {
   margin: 10px auto 10px auto;
   font-family: 'Montserrat';
@@ -417,7 +426,7 @@ export default {
   color: rgb(0, 38, 101);
 }
 .table-section {
-  margin: 100px auto 0px auto;
+  margin: 20px auto 0px auto;
   box-shadow: 0 0 1em 1px rgba(0, 0, 0, 0.25);
   border-radius: 6px;
   overflow: auto;
