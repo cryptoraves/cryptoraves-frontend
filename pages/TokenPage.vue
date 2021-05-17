@@ -392,6 +392,7 @@ console.log(response.data.data)
   height: 120px;
   border-radius: 50%;
   border: 1px solid lightgrey;
+  transition: all 0.5s ease-out;
 }
 
 @keyframes avatar-from-effect {
@@ -405,7 +406,7 @@ console.log(response.data.data)
 
 
 .history-tokenimg:active {
-  transform: translateY(0.5em);
+  transform: translateY(0.0em);
 }
 
 .history-tokenimg img {
