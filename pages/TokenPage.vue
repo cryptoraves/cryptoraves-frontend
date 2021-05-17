@@ -26,10 +26,9 @@
               </div>
             </div>
             <br/>
-            {{ tokenName }}
-            <br>
-            <div class="" >{{ tokenDescription }}</div>
-
+            <div class="" >
+              {{ tokenName }} (ticker {{ token }}) {{ tokenDescription }}
+            </div>
           </SectionHeader>
           <div class="elastic-arrow">
             <img
@@ -285,7 +284,6 @@ export default {
           query: '{ tokens(first: 1, where: {symbol: "'+this.token+'"}){ id cryptoravesTokenId isManagedToken ercType totalSupply name symbol decimals emoji, tokenBrandImageUrl tokenDescription } }'
         }
       ).then(response => {
-        console.log(response.data.data)
         this.ercType = response.data.data.tokens[0].ercType
         this.tokenBrandImageUrl = response.data.data.tokens[0].tokenBrandImageUrl
         this.tokenDescription = response.data.data.tokens[0].tokenDescription
