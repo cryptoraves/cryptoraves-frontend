@@ -179,12 +179,6 @@
             </span>
           </div>
         </div>
-        <div class="row">
-          <div
-            class="portfolio-link"
-            @click="goPortfolio(user)"
-          >Click to see {{ platformHandle }}'s Portfolio Page.</div>
-        </div>
       </div>
     </div>
   </div>

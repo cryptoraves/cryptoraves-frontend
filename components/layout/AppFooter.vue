@@ -2,15 +2,7 @@
   <div class="app-footer">
     <div class="container">
       <div class="row app-footer-content">
-        <div class="d-flex col-lg-2 col-sm-12">
-          <a
-            class="ethereum-link"
-            href="http://ethereum.org/beginners/"
-            target="_blank"
-          >
-            <!-- <img src="../../assets/img/ethereum1.png" > -->
-          </a>
-        </div>
+        <div class="d-flex col-lg-2 col-sm-12"></div>
         <div class="col-lg-8 d-flex">
           <div class="d-flex social-group">
             <a
@@ -18,7 +10,7 @@
               target="_blank"
             >
               <div class="d-flex tweet-gradient">
-                <i class="fa fa-twitter" />
+                <i class="fab fa-twitter" />
               </div>
             </a>
 
@@ -27,7 +19,7 @@
               target="_blank"
             >
               <div class="d-flex reddit-gradient">
-                <i class="fa fa-reddit-alien"/>
+                <i class="fab fa-reddit-alien"/>
               </div>
             </a>
 
@@ -36,7 +28,7 @@
               target="_blank"
             >
               <div class="d-flex facebook-gradient">
-                <i class="fa fa-facebook"/>
+                <i class="fab fa-facebook"/>
               </div>
             </a>
 
@@ -45,7 +37,7 @@
               target="_blank"
             >
               <div class="d-flex medium-gradient">
-                <i class="fa fa-medium"/>
+                <i class="fab fa-medium"/>
               </div>
             </a>
 
@@ -54,7 +46,7 @@
               target="_blank"
             >
               <div class="d-flex linkedin-gradient">
-                <i class="fa fa-github"/>
+                <i class="fab fa-github"/>
               </div>
             </a>
 
@@ -63,7 +55,15 @@
               target="_blank"
             >
               <div class="d-flex telegram-gradient">
-                <i class="fa fa-telegram"/>
+                <i class="fab fa-telegram"/>
+              </div>
+            </a>
+            <a
+              href="https://discord.com/channels/632252712196636691"
+              target="_blank"
+            >
+              <div class="d-flex discord-gradient">
+                <i class="fab fa-discord"/>
               </div>
             </a>
 
@@ -89,12 +89,11 @@
 </template>
 
 <script>
-import AppButton from '../ui/AppButton'
 
 export default {
   name: 'AppFooter',
   components: {
-    AppButton
+
   },
   methods: {
     goFaqTop: function() {
@@ -352,6 +351,40 @@ img {
   color: #9c47fc;
   display: block;
   background: -webkit-linear-gradient(#225dc9, #4b3ab4);
+  background-clip: border-box;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: auto;
+}
+.discord-gradient {
+  margin-left: 10px;
+  width: 50px;
+  height: 50px;
+  border: 3px solid transparent;
+  border-radius: 50px;
+  background-image: linear-gradient(rgb(7, 55, 99), rgb(7, 55, 99)),
+    linear-gradient(to right, #4b3ab4, #4b3ab4);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  transition: all 0.5s ease;
+}
+.discord-gradient:hover {
+  box-shadow: 0 0 20px #0088cc;
+  transition: all 0.5s ease;
+  transform: translateY(-0.25em);
+}
+.discord-gradient:active {
+  transform: translateY(0.25em);
+}
+.discord-gradient i:hover {
+  text-shadow: 0 0 20px #0088cc;
+  transition: all 0.5s ease;
+}
+.discord-gradient i {
+  font-size: 25px;
+  color: #9c47fc;
+  display: block;
+  background: -webkit-linear-gradient(#4b3ab4, #4b3ab4);
   background-clip: border-box;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

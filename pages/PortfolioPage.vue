@@ -123,12 +123,6 @@
             </span>
           </div>
         </div>
-        <div class="row">
-          <div
-            class="history-link"
-            @click="goHistory(user)"
-          >Click to see {{ user == loggedInUser ? "Your" : user+"'s"  }} Transaction History.</div>
-        </div>
       </div>
     </div>
   </div>
