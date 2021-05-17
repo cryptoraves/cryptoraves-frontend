@@ -392,9 +392,6 @@ console.log(response.data.data)
   height: 120px;
   border-radius: 50%;
   border: 1px solid lightgrey;
-  animation: avatar-from-effect 2s infinite;
-  transition: all 0.5s ease-out;
-  cursor: pointer;
 }
 
 @keyframes avatar-from-effect {
