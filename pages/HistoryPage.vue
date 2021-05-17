@@ -39,15 +39,15 @@
           <table>
             <thead>
               <tr>
-                <th scope="col">#</th>
+                <th scope="col"></th>
                 <th scope="col">From</th>
-                <th scope="col">Sent/Received</th>
-                <th scope="col">Tweet</th>
-                <th scope="col">Token</th>
-                <th scope="col">Amount</th>
-                <th scope="col">Value $</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
                 <th scope="col">To</th>
-                <th scope="col">Date</th>
+                <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
@@ -98,10 +98,7 @@
                     class="link"
                     @click="goTweet(item.from.userName, item.tweetId)"
                   >
-                  <div
-                    v-else
-                    title="No Tweet associated with this transaction"
-                  >N/A</div>
+
                 </td>
                 <td>
                   <img

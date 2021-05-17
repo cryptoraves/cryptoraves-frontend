@@ -20,34 +20,31 @@
           >
             <div class="confirmation-userfromimage">
               <img
-                v-if="!item.from.userName"
+                v-if="item.from.userName != '0x0'"
                 :src="item.from.imageUrl"
                 :title="item.from.userName"
                 onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
-                @click="goPortfolio(item.from.userName)"
+                @click="$router.push({ name: 'PortfolioPage', query: { user: item.from.userName } })"
               >
               <img
                 v-else
-                :src="item.from.imageUrl"
-                :title="item.from.userName"
-                onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
-                @click="goPortfolio(item.from.userName)"
+                src="https://sample-imgs.s3.amazonaws.com/import.png"
+                title="Deposit into Cryptoraves"
               >
             </div>
             <div
-              v-if="!item.from.userName"
+              v-if="item.from.userName != '0x0'"
               :title="item.from.userName"
               class="confirmation-userFromTo"
-              @click="goPortfolio(item.from.userName)"
+              @click="$router.push({ name: 'PortfolioPage', query: { user: item.from.userName } })"
             >{{ item.from.userName }}</div>
             <div
               v-else
-              :title="item.from.userName"
-              class="confirmation-userFromTo"
-              @click="goPortfolio(item.from.userName)"
-            >{{ item.from.userName }}</div>
+              class="confirmation-withdraw"
+              title="Deposit into Cryptoraves"
+            >Deposit</div>
           </div>
-          <div 
+          <div
             v-else
             class="confirmation-fromsection col-lg-4 col-md-4 col-sm-4">
             <div class="launch-userfromimage">
@@ -77,23 +74,37 @@
                   :src="item.token.tokenBrandImageUrl"
                   :title="item.token.name"
                   onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
-                  @click="goToken(item.token.symbol)"
+                  @click="$router.push({name: 'TokenPage',query: {token: item.token.symbol}})"
                 >
               </div>
             </div>
           </div>
           <div class="confirmation-tosection col-lg-4 col-md-4 col-sm-4">
             <div
+              v-if="item.to.userName != '0x0'"
               :title="item.to.userName"
               class="confirmation-userFromTo"
-              @click="goPortfolio(item.to.userName)"
+              @click="$router.push({ name: 'PortfolioPage', query: { user: item.to.userName } })"
             >{{ item.to.userName }}</div>
+            <div
+              v-else
+              title="Withdraw to Mainnet"
+              class="confirmation-withdraw"
+            >Withdraw</div>
             <div class="confirmation-usertoimage">
               <img
+                v-if="item.to.userName != '0x0'"
                 :src="item.to.imageUrl"
                 :title="item.to.userName"
                 onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
-                @click="goPortfolio(item.userTo)"
+                @click="$router.push({ name: 'PortfolioPage', query: { user: item.to.userName } })"
+              >
+              <img
+                v-else
+                class="confirmation-withdraw"
+                src="https://sample-imgs.s3.amazonaws.com/export.png"
+                title="Withdraw to Mainnet"
+                onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
               >
             </div>
           </div>
@@ -104,16 +115,16 @@
               v-if="item.token.symbol"
               :title="item.token.symbol"
               class="confirmation-tokenbrand-header"
-              @click="goPortfolio(item.token.symbol)"
+              @click="$router.push({ name: 'TokenPage', query: { user: item.token.symbol } })"
             >{{ item.ticker }}</div>
             <div
               v-else
               :title="item.token.symbol"
               class="confirmation-tokenbrand-header"
-              @click="goPortfolio(item.token.symbol)"
+              @click="$router.push({ name: 'TokenPage', query: { user: item.token.symbol } })"
             >{{ item.token.symbol }}</div>
             <div class="confirmation-tokenbrand-text">{{ item.token.symbol }}</div>
-            <div 
+            <div
               v-if="item.token.ercType == 721"
               class="confirmation-tokenbrand-text">#{{ orgTokenId }}</div>
           </div>
@@ -126,7 +137,7 @@
               @click="goBlock(item.blockexplorerUrl + item.txnHash)"
             -->
             <div
-              title="Transaction Hash - Click to See on Block Explorer" 
+              title="Transaction Hash - Click to See on Block Explorer"
               class="confirmation-blockurl"
               @click="goBlock(item.id)"
             >{{ item.id }}</div>
@@ -140,7 +151,7 @@
             </div>
           </div>
         </div>
-       
+
       </div>
     </div>
   </div>
@@ -183,7 +194,7 @@ export default {
         }
         ).then(response => {
           this.item = response.data.data.transfers[0]
-         
+
           //format original token id
           let idArr = this.item.token.id.split(0)
           this.orgTokenId = idArr[idArr.length-1]
@@ -194,15 +205,11 @@ export default {
         })
         //handle import / exports
         if (
-          this.item.from.userName == 'Import to Cryptoraves' ||
-          this.item.to.userName == 'Export To Mainnet'
+          this.item.from.userName == '0x0' ||
+          this.item.to.userName == '0x0'
         ) {
           this.showTweet = false
         }
-    },
-    goPortfolio(user) {
-      this.$root.$emit('changeUser', user)
-      this.$router.push({ name: 'PortfolioPage', query: { user: user } })
     },
     goBlock(txnHash) {
       window.open(this.$store.state.blockExplorerUrl + txnHash)
@@ -300,6 +307,15 @@ export default {
   text-align: center;
   color: #06a8ff;
   font-weight: 520;
+}
+.confirmation-withdraw {
+  margin: auto 0.5em auto 0.5em;
+  font-size: 2em;
+  font-family: 'Montserrat';
+  text-align: center;
+  color: #06a8ff;
+  font-weight: 520;
+  overflow-wrap: break-word;
 }
 .confirmation-userFromTo {
   margin: auto 0.5em auto 0.5em;

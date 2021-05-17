@@ -56,8 +56,8 @@
               <tr>
                 <th scope="col">Token</th>
                 <th scope="col">Balance</th>
-                <th scope="col">Value $</th>
-                <th v-if="user == loggedInUser" scope="col"></th>
+                <th scope="col">Value</th>
+                <th v-if="user == loggedInUser" scope="col">asd</th>
               </tr>
             </thead>
             <tbody>

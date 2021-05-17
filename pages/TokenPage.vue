@@ -42,10 +42,10 @@
           <table>
             <thead>
               <tr>
-                <th scope="col">#</th>
+                <th scope="col"></th>
                 <th scope="col">From</th>
-                <th scope="col">Tweet</th>
-                <th scope="col">Token</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
                 <th
                   v-if="ercType == 721"
                   scope="col"
@@ -54,9 +54,9 @@
                   v-else
                   scope="col"
                 >Amount</th>
-                <th scope="col">Value $</th>
+                <th scope="col"></th>
                 <th scope="col">To</th>
-                <th scope="col">Date</th>
+                <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
@@ -291,7 +291,7 @@ export default {
         this.tokenDescription = response.data.data.tokens[0].tokenDescription
         this.cryptoravesTokenId = response.data.data.tokens[0].id
         this.tokenName = response.data.data.tokens[0].name
-console.log(response.data.data)
+
       }).catch(e => {
         console.log(e)
       })
