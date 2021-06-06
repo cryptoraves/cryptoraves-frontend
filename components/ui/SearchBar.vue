@@ -96,7 +96,7 @@ export default {
         this.errors.push(e)
       })
 
-      if (this.update == false) {
+      if (this.update == true) {
         localStorage.setItem(
           'userListLastUpdated',
           localStorage.lastUpdated
@@ -127,23 +127,38 @@ export default {
         )
       }
     },
-    filteredList() {
+    async filteredList() {
+
+      await axios.post(
+          this.$store.state.subgraphUrl, {
+            query: '{ users(first: 5, where: {userName_contains: "'+this.user.toLowerCase()+'"}, orderBy: userName, orderDirection: asc){ userName }}'
+          }
+      ).then(response => {
+        for (let i = 0; i < response.data.data.users.length; i++) {
+          this.userList.push(response.data.data.users[i].userName)
+        }
+
+      })
+      .catch(e => {
+        this.errors.push(e)
+      })
       this.result = this.userList.filter(user => {
         return user.toLowerCase().indexOf(this.user.toLowerCase()) > -1
       })
       if (this.result.length == 0) {
-        this.result[0] = 'No Result!!!'
+        this.result[0] = 'No Result'
       }
     },
-    debounceSearch(event) {
+    async debounceSearch(event) {
       clearTimeout(this.debounce)
-      this.debounce = setTimeout(() => {
+      this.debounce = setTimeout(async () => {
         this.user = event.target.value
         if (this.user.length > 1) {
           this.$emit('input', this.search)
           this.openSearch = true
           this.arrowCounter = -1
-          this.filteredList()
+          console.log('asdsadsadsadsad')
+          await this.filteredList()
         } else {
           this.openSearch = false
         }

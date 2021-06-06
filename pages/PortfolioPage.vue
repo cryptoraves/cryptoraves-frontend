@@ -20,7 +20,7 @@
             <div
               class="portfolio-subtitle-holding"
               title="Total tokens from others held in this portfolio."
-            >
+            >{{ platformId }}
               <!--span>
                 <b>TOTAL Token Holdings: {{ totalHoldings | comma }}</b>
               </span-->
@@ -263,7 +263,6 @@ export default {
         console.log(e)
       })
       this.showLoading = false
-
     },
 
     goAnother(user) {
