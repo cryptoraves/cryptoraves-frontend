@@ -62,7 +62,6 @@ export default {
     }
   },
   created() {
-    this.getUserList()
     this.$root.$on('changeUser', () => {
       this.user = ''
     })
@@ -75,27 +74,6 @@ export default {
   },
   methods: {
     async getUserList() {
-      await axios.post(
-        this.$store.state.subgraphUrl, {
-          query: '{ users(first: 1, orderBy: modified, orderDirection: desc){ modified } }'
-        }
-      ).then(response => {
-
-        // JSON responses are automatically parsed.
-        localStorage.setItem(
-          'lastUpdated',
-          JSON.stringify(response.data.data.users[0].modified)
-        )
-        this.update = true
-        if (localStorage.userListLastUpdated) {
-          if (localStorage.lastUpdated == localStorage.userListLastUpdated) {
-            this.update = false
-          }
-        }
-      }).catch(e => {
-        this.errors.push(e)
-      })
-
       if (this.update == true) {
         localStorage.setItem(
           'userListLastUpdated',
@@ -137,10 +115,9 @@ export default {
         for (let i = 0; i < response.data.data.users.length; i++) {
           this.userList.push(response.data.data.users[i].userName)
         }
-
       })
       .catch(e => {
-        this.errors.push(e)
+        console.log(e)
       })
       this.result = this.userList.filter(user => {
         return user.toLowerCase().indexOf(this.user.toLowerCase()) > -1
@@ -157,7 +134,6 @@ export default {
           this.$emit('input', this.search)
           this.openSearch = true
           this.arrowCounter = -1
-          console.log('asdsadsadsadsad')
           await this.filteredList()
         } else {
           this.openSearch = false
