@@ -6,7 +6,7 @@
       class="d-flex"
     >
       <input
-        v-model="user"
+        v-model="searchTerm"
         :class="[ tokensearch ? 'token-header-input' : 'app-header-input']"
         placeholder="Lookup Twitter @username, $TICKER, or FAQ"
         type="text"
@@ -18,7 +18,7 @@
       >
       <div
         class="app-header-icon"
-        @click="goPortfolio(user)">
+        @click="goDestination(filteredsearchTerm)">
         <i class="fa fa-search"/>
       </div>
     </div>
@@ -29,13 +29,13 @@
       :class="[ tokensearch ? 'token-header-search-result' : 'app-header-search-result']"
     >
       <div
-        v-for="(filteredUser, index) in result"
+        v-for="(filteredsearchTerm, index) in result"
         :key="index"
         :class="{ 'is-active': index === arrowCounter }"
         class="app-header-search-result-item"
-        @click="setResult(filteredUser)"
+        @click="setResult(filteredsearchTerm)"
 
-      >{{ filteredUser }}</div>
+      >{{ filteredsearchTerm }}</div>
     </div>
   </div>
 </template>
@@ -54,8 +54,8 @@ export default {
   data() {
     return {
       openSearch: false,
-      user: '',
-      userList: [],
+      searchTerm: '',
+      searchObject: {},
       result: [],
       arrowCounter: 0,
       debounce: null
@@ -73,54 +73,33 @@ export default {
     document.removeEventListener('click', this.handleClickOutside)
   },
   methods: {
-    async getUserList() {
-      if (this.update == true) {
-        localStorage.setItem(
-          'userListLastUpdated',
-          localStorage.lastUpdated
-        )
-        await axios.post(
-            this.$store.state.subgraphUrl, {
-              query: '{ users(orderBy: userName, orderDirection: asc){ userName } }'
-            }
-        ).then(response => {
-          for (let i = 0; i < response.data.data.users.length; i++) {
-            this.userList.push(response.data.data.users[i].userName)
-          }
-          // JSON responses are automatically parsed.
-          localStorage.setItem(
-            'userList',
-            JSON.stringify(this.userList)
-          )
-          this.userList = Object.freeze(
-            JSON.parse(localStorage.getItem('userList'))
-          )
-        })
-        .catch(e => {
-          this.errors.push(e)
-        })
-      } else {
-        this.userList = Object.freeze(
-          JSON.parse(localStorage.getItem('userList'))
-        )
-      }
-    },
     async filteredList() {
-
+      //users
       await axios.post(
           this.$store.state.subgraphUrl, {
-            query: '{ users(first: 5, where: {userName_contains: "'+this.user.toLowerCase()+'"}, orderBy: userName, orderDirection: asc){ userName }}'
+            query: '{ users(first: 5, where: {userName_contains: "'+this.searchTerm.toLowerCase()+'"}, orderBy: userName, orderDirection: asc){ userName }}'
           }
       ).then(response => {
         for (let i = 0; i < response.data.data.users.length; i++) {
-          this.userList.push(response.data.data.users[i].userName)
+          this.searchObject[response.data.data.users[i].userName] = 'user'
+        }
+      })
+      //tickers
+      await axios.post(
+          this.$store.state.subgraphUrl, {
+            query: '{ tokens(first: 5, where: {symbol_contains: "'+this.searchTerm.toUpperCase()+'"}, orderBy: symbol, orderDirection: asc){ symbol }}'
+          }
+      ).then(response => {
+        console.log(response)
+        for (let i = 0; i < response.data.data.tokens.length; i++) {
+          this.searchObject[response.data.data.tokens[i].symbol] = 'token'
         }
       })
       .catch(e => {
         console.log(e)
       })
-      this.result = this.userList.filter(user => {
-        return user.toLowerCase().indexOf(this.user.toLowerCase()) > -1
+      this.result = Object.keys(this.searchObject).filter(list => {
+        return list.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1
       })
       if (this.result.length == 0) {
         this.result[0] = 'No Result'
@@ -129,8 +108,8 @@ export default {
     async debounceSearch(event) {
       clearTimeout(this.debounce)
       this.debounce = setTimeout(async () => {
-        this.user = event.target.value
-        if (this.user.length > 1) {
+        this.searchTerm = event.target.value
+        if (this.searchTerm.length > 1) {
           this.$emit('input', this.search)
           this.openSearch = true
           this.arrowCounter = -1
@@ -141,22 +120,22 @@ export default {
       }, 600)
     },
     inputFocused() {
-      if (this.user.length > 1) {
+      if (this.searchTerm.length > 1) {
         this.openSearch = true
         this.filteredList()
         this.arrowCounter = -1
       }
     },
     setResult(result) {
-      this.user = result
+      this.searchTerm = result
       this.arrowCounter = -1
       this.openSearch = false
-      this.goPortfolio()
+      this.goDestination(result)
     },
     onArrowDown() {
       if (this.arrowCounter < this.result.length - 1) {
         this.arrowCounter = this.arrowCounter + 1
-        this.user = this.result[this.arrowCounter]
+        this.searchTerm = this.result[this.arrowCounter]
         document.getElementById('searchResult').scrollTop =
           44 * this.arrowCounter
       }
@@ -164,7 +143,7 @@ export default {
     onArrowUp() {
       if (this.arrowCounter > 0) {
         this.arrowCounter = this.arrowCounter - 1
-        this.user = this.result[this.arrowCounter]
+        this.searchTerm = this.result[this.arrowCounter]
         document.getElementById('searchResult').scrollTop =
           44 * this.arrowCounter
       }
@@ -172,7 +151,7 @@ export default {
     onEnter() {
       this.openSearch = false
       this.arrowCounter = -1
-      this.goPortfolio()
+      this.goDestination(this.searchTerm)
     },
     handleClickOutside(evt) {
       if (!this.$el.contains(evt.target)) {
@@ -181,20 +160,32 @@ export default {
       }
     },
     goPortfolio: function() {
-      if (this.userList.includes(this.user)) {
-        this.$router.push({
-          name: 'PortfolioPage',
-          query: {
-            user: this.user
-          }
-        })
-        this.user = ''
-      } else {
-        if (this.user) {
-          this.user = ''
+      this.$router.push({
+        name: 'PortfolioPage',
+        query: {
+          user: this.searchTerm
         }
+      })
+    },
+    goToken: function() {
+      this.$router.push({
+        name: 'TokenPage',
+        query: {
+          token: this.searchTerm
+        }
+      })
+    },
+    goDestination(res){
+      console.log(this.searchObject)
+      console.log(res)
+      if(this.searchObject[res] == 'user'){
+        this.goPortfolio()
+      }
+      if(this.searchObject[res] == 'token'){
+        this.goToken()
       }
     }
+
   }
 }
 </script>

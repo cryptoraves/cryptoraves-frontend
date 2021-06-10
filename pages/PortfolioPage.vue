@@ -174,8 +174,9 @@ export default {
     }
 
     this.getPortfolio(this.user, this.currentPage)
-
-    this.userData = JSON.parse(localStorage.getItem('webData')).user
+    try{
+      this.userData = JSON.parse(localStorage.getItem('webData')).user
+    }catch(e){}
     if(this.userData){
       this.loggedInUser = this.userData.platformHandle
     }
