@@ -42,6 +42,7 @@
 
 <script>
 import axios from 'axios'
+import faqs from './faq.json'
 
 export default {
   name: 'SearchBar',
@@ -90,7 +91,6 @@ export default {
             query: '{ tokens(first: 5, where: {symbol_contains: "'+this.searchTerm.toUpperCase()+'"}, orderBy: symbol, orderDirection: asc){ symbol }}'
           }
       ).then(response => {
-        console.log(response)
         for (let i = 0; i < response.data.data.tokens.length; i++) {
           this.searchObject[response.data.data.tokens[i].symbol] = 'token'
         }
@@ -98,9 +98,12 @@ export default {
       .catch(e => {
         console.log(e)
       })
+
+      this.searchObject = Object.assign(faqs, this.searchObject)
       this.result = Object.keys(this.searchObject).filter(list => {
         return list.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1
       })
+
       if (this.result.length == 0) {
         this.result[0] = 'No Result'
       }
@@ -175,12 +178,23 @@ export default {
         }
       })
     },
+    goFaq: function() {
+      this.$router.push({
+        name: 'Faq',
+        query: {
+          top: true
+        }
+      })
+    },
     goDestination(res){
       if(this.searchObject[res] == 'user'){
         this.goPortfolio()
       }
-      if(this.searchObject[res] == 'token'){
+      else if(this.searchObject[res] == 'token'){
         this.goToken()
+      }
+      else{
+        this.goFaq()
       }
     }
 
