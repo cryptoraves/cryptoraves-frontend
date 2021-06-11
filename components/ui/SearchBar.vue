@@ -176,8 +176,6 @@ export default {
       })
     },
     goDestination(res){
-      console.log(this.searchObject)
-      console.log(res)
       if(this.searchObject[res] == 'user'){
         this.goPortfolio()
       }
