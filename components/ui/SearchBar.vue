@@ -192,7 +192,7 @@ export default {
       })
     },
     goDestination(res){
-      let latestSearch = {}
+      /*let latestSearch = {}
       latestSearch[res] = this.searchObject[res]
       console.log(latestSearch)
       if(localStorage.searches){
@@ -205,8 +205,7 @@ export default {
       } else {
         console.log(res)
         localStorage.searches = JSON.stringify()
-      }
-      localStorage.searches
+      }*/
       if(this.searchObject[res] == 'user'){
         this.goPortfolio()
       }
