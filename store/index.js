@@ -7,7 +7,8 @@ export const state = () => ({
   web3Login: false,
   subgraphUrl: 'http://127.0.0.1:8000/subgraphs/name/cryptoraves/cryptoraves-subgraph',
   blockExplorerUrl: 'https://etherscan.io/tx/',
-  user: {}
+  user: {},
+  searches: {}
 })
 export const mutations = {
   setWeb3Login(state, value) {

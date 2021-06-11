@@ -66,6 +66,8 @@ export default {
     this.$root.$on('changeUser', () => {
       this.user = ''
     })
+    console.log(localStorage)
+    //localStorage.removeItem('searches')
   },
   mounted() {
     document.addEventListener('click', this.handleClickOutside)
@@ -98,8 +100,11 @@ export default {
       .catch(e => {
         console.log(e)
       })
-
-      this.searchObject = Object.assign(faqs, this.searchObject)
+      let previousSearches = {}
+      if(localStorage.searches){
+        previousSearches = JSON.parse(localStorage.searches)
+      }
+      this.searchObject = Object.assign(faqs, this.searchObject, previousSearches)
       this.result = Object.keys(this.searchObject).filter(list => {
         return list.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1
       })
@@ -187,6 +192,21 @@ export default {
       })
     },
     goDestination(res){
+      let latestSearch = {}
+      latestSearch[res] = this.searchObject[res]
+      console.log(latestSearch)
+      if(localStorage.searches){
+        localStorage.searches = JSON.stringify(
+          Object.assign(
+            JSON.parse(localStorage.searches),
+            latestSearch
+          )
+        )
+      } else {
+        console.log(res)
+        localStorage.searches = JSON.stringify()
+      }
+      localStorage.searches
       if(this.searchObject[res] == 'user'){
         this.goPortfolio()
       }
