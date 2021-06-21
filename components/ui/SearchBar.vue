@@ -66,7 +66,7 @@ export default {
     this.$root.$on('changeUser', () => {
       this.user = ''
     })
-    console.log(localStorage)
+    //console.log(localStorage)
     //localStorage.removeItem('searches')
   },
   mounted() {
