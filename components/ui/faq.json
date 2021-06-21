@@ -1,0 +1,8 @@
+{
+
+	"what is this": "Cryptoraves is a Twitte-based crypto transfer application",
+	"how do I get my tokens": "You can go to the withdraw page and follow the instructions there",
+	"how do I send tokens": "Follow our Step-by-Step Instruction guide here",
+	"how do I check my balance":"Type your twitter handle in the search bar and press enter",
+	"how does this work":"Cryptoraves is built on a layer 2 sidechain, so no fees. It reads tweets and sends valid ones along to our smart contracts. The website reads that data directly from the blockchain"
+}
