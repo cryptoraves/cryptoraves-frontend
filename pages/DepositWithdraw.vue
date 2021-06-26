@@ -295,7 +295,6 @@ export default {
     try {
       if (this.$route.query.ticker) {
         this.ticker = this.$route.query.ticker
-        console.log(this.ticker)
         this.tickerSelect(this.ticker)
       }
     } catch (e) {}
@@ -363,24 +362,32 @@ export default {
       let layer2Balance = 0
       let tokenBrandImageUrl = null
       let tokenId = null
-
+      let ercType = null
       this.showLoading = true
       await axios.post(
         this.$store.state.subgraphUrl, {
-          query: '{ tokens(first: 1, where: {symbol: "'+this.ticker+'"}){ id }}'
+          query: '{ tokens(first: 1, where: {symbol: "'+this.ticker+'"}){ id ercType tokenBrandImageUrl}}'
         }
       ).then(response => {
         tokenId = response.data.data.tokens[0].id
+        tokenBrandImageUrl = response.data.data.tokens[0].tokenBrandImageUrl
+        console.log(response)
       }).catch(e => {
         console.log(e)
       })
       await axios.post(
         this.$store.state.subgraphUrl, {
-          query: '{ userBalances(first: 1, where: {user: "'+this.webData.cryptoravesAddress+'", token: "'+tokenId+'"}){ id, user { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address }, token {id cryptoravesTokenId isManagedToken ercType totalSupply name symbol decimals emoji tokenBrandImageUrl }, balance }}'
+          query: '{ userBalances(first: 1, where: {user: "'+this.webData.cryptoravesAddress+'", token: "'+tokenId+'"}){ id, user { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address }, token {id cryptoravesTokenId isManagedToken ercType totalSupply name symbol decimals emoji }, balance }}'
         }
       ).then(response => {
-        layer2Balance = parseFloat(this.ethers.utils.formatUnits(response.data.data.userBalances[0].balance.toString(), response.data.data.userBalances[0].token.decimals))
-        tokenBrandImageUrl = response.data.data.userBalances[0].token.tokenBrandImageUrl
+        console.log(response)
+        if(ercType == 20){
+          layer2Balance = parseFloat(this.ethers.utils.formatUnits(response.data.data.userBalances[0].balance.toString(), response.data.data.userBalances[0].token.decimals))
+        }else{
+          //check erc721 balance (ensure it exists in wallet)
+
+        }
+
       }).catch(e => {
         console.log(e)
       })
@@ -388,49 +395,6 @@ export default {
       this.TOKEN_IMAGE_URL = tokenBrandImageUrl
       this.layer2Balance = layer2Balance
       this.showLoading = false
-      /*
-      try {
-        this.tokenManagement = new this.ethers.Contract(
-          this.web3Data.contractAddresses[this.web3Data.l2NetworkType]['TokenManagementContractAddress'],
-          this.web3Data.tokenManagementABI,
-          await this.getProvider()
-        )
-
-      } catch (e) {
-        console.log(e)
-      }
-
-      try {
-        this.layer2Token = new ethers.Contract(
-          this.web3Data.contractAddresses[this.web3Data.l2NetworkType]['CryptoravesTokenContractAddress'],
-          this.web3Data.cryptoravesTokenABI,
-          await this.getProvider()
-        )
-      } catch (e) {
-        console.log(e)
-      }
-
-      if (this.tokenManagement && this.layer2Token ){
-        let tickerContractAddress = await this.tokenManagement.getAddressBySymbol('TSTX')
-        //console.log('Ticker contract address:',tickerContractAddress)
-
-        let tokenId = await this.tokenManagement.getManagedTokenIdByAddress(tickerContractAddress)
-
-        let balanceOf = await this.layer2Token.balanceOf(this.web3Data.ethereumAddress, tokenId)
-
-        this.layer2Balance = parseFloat(this.ethers.utils.formatUnits(balanceOf.toString(), 18))
-      }
-
-
-      if( this.layer2Token ){
-
-        let res = await this.layer2Token.getHeldTokenBalances(this.web3Data.ethereumAddress)
-        console.log(res)
-
-        res = await this.layer2Token.getHeldTokenIds(this.web3Data.ethereumAddress)
-        console.log(res)
-        //res.forEach(element => console.log(element))
-      }*/
 
     },
     async onConfirm() {
@@ -825,7 +789,7 @@ export default {
         })
     },
     async tickerSelect(option) {
-      console.log(option)
+      option
       /*try {
         event.stopPropagation()
       } catch (e) {}
