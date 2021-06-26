@@ -57,7 +57,7 @@
                 <th scope="col">Token</th>
                 <th scope="col">Balance</th>
                 <th scope="col">Value</th>
-                <th v-if="user == loggedInUser" scope="col">asd</th>
+                <th v-if="user == loggedInUser" scope="col"></th>
               </tr>
             </thead>
             <tbody>
@@ -175,10 +175,10 @@ export default {
 
     this.getPortfolio(this.user, this.currentPage)
     try{
-      this.userData = JSON.parse(localStorage.getItem('webData')).user
+      this.userData = JSON.parse(localStorage.getItem('webData'))
     }catch(e){}
     if(this.userData){
-      this.loggedInUser = this.userData.platformHandle
+      this.loggedInUser = this.userData.userName
     }
   },
   methods: {
@@ -248,7 +248,6 @@ export default {
           query: '{ userBalances('+paginationQueryStringSegment+', where: {user: "'+this.cryptoravesAddress+'"}){ id, user { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address }, token {id cryptoravesTokenId isManagedToken ercType totalSupply name symbol decimals emoji tokenBrandImageUrl }, balance }}'
         }
       ).then(response => {
-        console.log(response)
         this.rowCount = response.data.data.userBalances.length
         this.tableRows = response.data.data.userBalances  //match graph schema to fit as best as possible the original format below?
 

@@ -5,19 +5,19 @@
         <div class="modal-container">
 
           <div class="modal-custom-header">
-            Your address ##ADDRESS## is not registered yet. To register you must Tweet the following: 
-            <a 
-				href="https://ctt.ac/9FQa1" 
+            Your address is not registered yet. To register you must Tweet the following:
+            <a
+				href="https://ctt.ac/5RpCE"
 				title="Click here for working example"
 				target="_blank"
-            >@cryptoraves #HeresMyAddress</a><br>(click for example)<br>
+            >@cryptoraves #HeresMyAddress {{ethereumAddress}}<br>(click for example)<br></a>
             Once complete, you may return here to log in.
           </div>
-             
+
           <div class="modal-footer">
             <slot name="footer">
-              <button 
-                class="modal-custom-button" 
+              <button
+                class="modal-custom-button"
                 @click="$emit('confirm')">
                 OK
               </button>
@@ -31,8 +31,21 @@
 
 <script>
 export default {
+  data() {
+    return {
+      ethereumAddress: null
+    }
+  },
   name: 'ConfirmModal',
-  
+  created() {
+    try{
+      this.ethereumAddress = JSON.parse(
+        localStorage.getItem('web3Data')
+      )['ethereumAddress']
+    }catch(e){
+      console.log(e)
+    }
+  }
 }
 </script>
 

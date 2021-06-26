@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <AppHeader 
+    <AppHeader
       v-on:userLogin="handleUserLogin()"
       :goPortfolio="this.goPortfolio"
       :webData="webData"
@@ -11,7 +11,7 @@
       @confirm="onConfirm"
     />
     <nuxt />
-    <AppFooter/>  
+    <AppFooter/>
   </div>
 </template>
 <app-header  />
@@ -57,17 +57,21 @@ export default {
     userName: ''
   }),
   async mounted() {
-    
-   
-    
+
+
+
     this.web3Data = JSON.parse(localStorage.getItem('web3Data'))
-    this.webData = JSON.parse(localStorage.getItem('webData'))
+    try{
+      this.webData = JSON.parse(localStorage.getItem('webData'))
+    }catch(e){
+      console.log('Error retrieving webData',e)
+    }
 
     if(this.webData){
-      this.userName = this.webData.platformHandle
+      this.userName = this.webData.userName
     }
-    
-    
+
+
   },
   created() {
 
@@ -77,7 +81,7 @@ export default {
     window.removeEventListener('scroll', this.handleScroll)
   },
   methods: {
-    
+
     handleScroll(e) {
       // Any code to be executed when the window is scrolled
       if (this.currentScroll > e.srcElement.scrollingElement.scrollTop) {
@@ -94,14 +98,16 @@ export default {
       this.currentScroll = e.srcElement.scrollingElement.scrollTop
     },
     handleUserLogin(){
+
       this.webData = JSON.parse(localStorage.getItem('webData'))
+      console.log(this.webData)
       if(!this.userName){
         try {
-          this.userName = this.webData.user.platformHandle
+          this.userName = this.webData.userName
         }catch(e){}
-      } 
+      }
       if(this.userName) {
-        
+
         this.goPortfolio()
       } else {
         this.showRegisterAddressModal = true

@@ -18,24 +18,23 @@ export default {
   },
   methods: {
     async loadWebDataFromAddress( ethAddr) {
-      var response = null
+      let res = null
       try {
-        var webDataUrl =
-          this.$store.state.WebsiteInterfaceUrl +
-          '?pageType=getweb3PortalData&ethAddress=' +
-          ethAddr
-        response = await axios.get(webDataUrl)
-        
+
+        await axios.post(
+           this.$store.state.subgraphUrl, {
+            query: '{ users(first: 1, where: {layer1Address: "'+ethAddr+'"}){ id twitterUserId userName cryptoravesAddress imageUrl } }'
+          }
+        ).then(response => {
+          res = response.data.data['users'][0]
+
+        }).catch(e => {
+          console.log(e)
+        })
       } catch(e) {
         throw new Error(e)
       }
-
-      try {
-        return response.data
-      } catch(e) {
-        //console.log('No record for wallet address '+ethAddr)
-        return null
-      }
+      return res
     },
   }
 }

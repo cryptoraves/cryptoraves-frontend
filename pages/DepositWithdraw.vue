@@ -1,13 +1,13 @@
 <template lang="html">
   <div v-if="webData">
     <div class="container">
-    
+
       <div class="token-list-title">Token for Deposit/Withdrawal</div>
-      <div 
+      <div
         class="token-list"
-        @click="toggle"         
+        @click="toggle"
       >{{ ticker }}
-        <div 
+        <div
           v-show="isOpen"
           class="token-options"
         >
@@ -22,7 +22,7 @@
       <div class="row user-transaction-section">
         <div class="col-lg-4 col-md-12">
           <BalancePanel
-            :selected-ticker="ticker" 
+            :selected-ticker="ticker"
             :address="web3Data.ethereumAddress"
             :l1BlockExplorerUrl="web3Data.l1BlockExplorerUrl"
             :l2BlockExplorerUrl="web3Data.l2BlockExplorerUrl"
@@ -45,13 +45,13 @@
             class="btn btn-danger btn-arrow-right"
             @click="resumeWithdrawal">
             Retry
-          </button>                    
+          </button>
           <div class="portfolio-userimg">
             <img
               :src="TOKEN_IMAGE_URL"
               :title="ticker">
           </div>
-          <button 
+          <button
             v-if="!resumeWithdrawalNeeded && !withdrawParam"
             type="button"
             class="btn btn-success btn-arrow-left"
@@ -60,14 +60,14 @@
           </button>
         </div>
         <div class="col-lg-4 col-md-12">
-          <BalancePanel 
+          <BalancePanel
             :selected-ticker="ticker"
             :address="web3Data.ethereumAddress"
             :l1BlockExplorerUrl="web3Data.l1BlockExplorerUrl"
             :l2BlockExplorerUrl="web3Data.l2BlockExplorerUrl"
             :balance="ethereumBalance"
             :l1NetworkType="web3Data.l1NetworkType"
-            :l2NetworkType="web3Data.l2NetworkType"/>                        
+            :l2NetworkType="web3Data.l2NetworkType"/>
         </div>
       </div>
       <div class="link instruction-link"><nuxt-link to="/stepinstructions">Step-by-Step Instructions</nuxt-link></div>
@@ -76,13 +76,13 @@
       <div
         v-if="enableDiagnostics"
       >
-        <button 
+        <button
           type="button"
           class="btn-danger"
           @click="checkAccountMappingButton">
           Check Account Mapping
         </button>
-        <button 
+        <button
           type="button"
           class="btn-danger"
           @click="checkContractMapping">
@@ -90,8 +90,8 @@
         </button>
       </div>
     </div>
-    <DepositModal 
-      v-if="showDepoistModal" 
+    <DepositModal
+      v-if="showDepoistModal"
       :imageurl="TOKEN_IMAGE_URL"
       :imagetitle="ticker"
       :maxamount="ethereumBalance.toString()"
@@ -120,8 +120,8 @@
       :maxamount="layer2Balance"
       @withdraw="onWithdraw"
       @closeWithdraw="showWithdrawModal=false"/>
-    <TransferStatus 
-      v-if="showTransferStatus"    
+    <TransferStatus
+      v-if="showTransferStatus"
       :imageurl="TOKEN_IMAGE_URL"
       :imagetitle="ticker"
       :withdrawamount="amount"/>
@@ -139,7 +139,7 @@
       :stillbusy.sync="busy"
       @withdrawcomplete="onWithdrawComplete"/>
     <StuckModal
-      v-if="showStuckModal"          
+      v-if="showStuckModal"
       :imageurl="TOKEN_IMAGE_URL"
       :imagetitle="ticker"
       :withdrawamount="amount"
@@ -147,26 +147,26 @@
     <SignForeign
       v-if="showSignForeign"
       :username="userName"
-      :imageurl="webData.user.imgUrl"
-      @signforeign="onSignForeign"/>      
+      :imageurl="webData.imageUrl"
+      @signforeign="onSignForeign"/>
     <WaitMappingConfirm
       v-if="showWaitMappingConfirm"
       :username="userName"
-      :imageurl="webData.user.imgUrl"
+      :imageurl="webData.imageUrl"
       :stillbusy.sync="busy"
       @mappingconfirm="onMappingConfirm"/>
     <EnableMetaMask
       v-if="showEnableMetaMask"
       @metamask="showEnableMetaMask = false"/>
   </div>
-  <div 
+  <div
     v-else
     class="register-wallet">
     <RegisterWallet
       v-if="showRegisterWallet"
       :address="ethereumAddress"
       @registerwallet="onRegisterWallet"/>
-  </div> 
+  </div>
 
 </template>
 
@@ -211,7 +211,7 @@ export default {
     RegisterWallet,
     StuckModal,
   },
-  
+
   data() {
     return {
       I_WANT_TO: this.$route.query['iWantTo'],
@@ -271,16 +271,22 @@ export default {
         'function transfer(address to, uint256 value) external returns (bool) @30000',
         'event Transfer(address indexed from, address indexed to, uint256 value)'
       ]
-    } 
+    }
   },
   mixins: [MetamaskHandler],
-  created() {
+  watch:{
+      $route (){
+          if (this.$route.query.ticker){
+            this.ticker = this.$route.query.ticker
+          }
+      }
+  },
+  async created() {
+
     this.webData = JSON.parse(localStorage.getItem('webData'))
     if(this.webData){
-      this.userName = this.webData.platformHandle
+      this.userName = this.webData.userName
     }
-    this.web3Data = JSON.parse(localStorage.getItem('web3Data'))
-
     try {
       if (this.$route.query.resumeWithdrawalNeeded) {
         this.resumeWithdrawalNeeded = true
@@ -289,6 +295,7 @@ export default {
     try {
       if (this.$route.query.ticker) {
         this.ticker = this.$route.query.ticker
+        console.log(this.ticker)
         this.tickerSelect(this.ticker)
       }
     } catch (e) {}
@@ -313,11 +320,10 @@ export default {
       }
     } catch (e) {}
 
-    
     if (!this.user) {
       return 0
     }
-      
+
     if (!this.loomWalletAddr) {
       return 0
     }
@@ -327,10 +333,14 @@ export default {
     //await this.updateBalances()
     this.ready = true
 
-    
+
     //await this.checkContractMapping()
   },
   async mounted(){
+    if(!this.web3Data.ethereumAddress){
+      //this.web3Data = JSON.parse(localStorage.getItem('web3Data'))
+      this.web3Data = await this.initWeb3()
+    }
     await this.getBalances()
   },
   methods: {
@@ -347,15 +357,45 @@ export default {
         this.deposit()
       }
     },
-    
+
     async getBalances(){
-      this.ethers = this.getEthers()
+      this.ethers = await this.getEthers()
+      let layer2Balance = 0
+      let tokenBrandImageUrl = null
+      let tokenId = null
+
+      this.showLoading = true
+      await axios.post(
+        this.$store.state.subgraphUrl, {
+          query: '{ tokens(first: 1, where: {symbol: "'+this.ticker+'"}){ id }}'
+        }
+      ).then(response => {
+        tokenId = response.data.data.tokens[0].id
+      }).catch(e => {
+        console.log(e)
+      })
+      await axios.post(
+        this.$store.state.subgraphUrl, {
+          query: '{ userBalances(first: 1, where: {user: "'+this.webData.cryptoravesAddress+'", token: "'+tokenId+'"}){ id, user { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address }, token {id cryptoravesTokenId isManagedToken ercType totalSupply name symbol decimals emoji tokenBrandImageUrl }, balance }}'
+        }
+      ).then(response => {
+        layer2Balance = parseFloat(this.ethers.utils.formatUnits(response.data.data.userBalances[0].balance.toString(), response.data.data.userBalances[0].token.decimals))
+        tokenBrandImageUrl = response.data.data.userBalances[0].token.tokenBrandImageUrl
+      }).catch(e => {
+        console.log(e)
+      })
+
+      this.TOKEN_IMAGE_URL = tokenBrandImageUrl
+      this.layer2Balance = layer2Balance
+      this.showLoading = false
+      /*
       try {
         this.tokenManagement = new this.ethers.Contract(
           this.web3Data.contractAddresses[this.web3Data.l2NetworkType]['TokenManagementContractAddress'],
           this.web3Data.tokenManagementABI,
           await this.getProvider()
         )
+
       } catch (e) {
         console.log(e)
       }
@@ -377,11 +417,11 @@ export default {
         let tokenId = await this.tokenManagement.getManagedTokenIdByAddress(tickerContractAddress)
 
         let balanceOf = await this.layer2Token.balanceOf(this.web3Data.ethereumAddress, tokenId)
-        
+
         this.layer2Balance = parseFloat(this.ethers.utils.formatUnits(balanceOf.toString(), 18))
       }
 
-      /*
+
       if( this.layer2Token ){
 
         let res = await this.layer2Token.getHeldTokenBalances(this.web3Data.ethereumAddress)
@@ -391,7 +431,7 @@ export default {
         console.log(res)
         //res.forEach(element => console.log(element))
       }*/
-      
+
     },
     async onConfirm() {
       this.showConfirmModal = false
@@ -522,9 +562,9 @@ export default {
         sig
       axios
         .get(webDataUrl)
-        .then(response => {
+        .then(response  => {
+          console.log(response)
           this.showWaitMappingConfirm = true
-          console.log(response.data)
           this.confirmLocalMapping()
         })
         .catch(e => {
@@ -785,28 +825,31 @@ export default {
         })
     },
     async tickerSelect(option) {
-      try {
+      console.log(option)
+      /*try {
         event.stopPropagation()
       } catch (e) {}
       this.isOpen = false
       this.ticker = option
-      for (var i = 0; i < this.webData.tickers.length; i++) {
-        if (this.webData.balances[i].ticker == this.ticker) {
-          this.ETHEREUM_CONTRACT_ADDR = this.webData.balances[i].ethContractAddress
-          this.ETHEREUM_CONTRACT_OWNER_ADDR = this.webData.balances[
-            i
-          ].ethContractOwnerAddress
-          this.LOOM_CONTRACT_ADDR = this.webData.balances[i].loomContractAddress
-          this.NUM_DECIMALS = this.webData.balances[i].decimals
-          this.TOTAL_SUPPLY = this.webData.balances[i].totalSupply
-          this.TOKEN_IMAGE_URL = this.webData.balances[i].tokenImgUrl
-          this.coinMultiplier = new BN(10).pow(new BN(this.NUM_DECIMALS))
-          if (this.ready) {
-            await this.initContracts()
-            await this.updateBalances()
+      try{
+        for (var i = 0; i < this.webData.tickers.length; i++) {
+          if (this.webData.balances[i].ticker == this.ticker) {
+            this.ETHEREUM_CONTRACT_ADDR = this.webData.balances[i].ethContractAddress
+            this.ETHEREUM_CONTRACT_OWNER_ADDR = this.webData.balances[
+              i
+            ].ethContractOwnerAddress
+            this.LOOM_CONTRACT_ADDR = this.webData.balances[i].loomContractAddress
+            this.NUM_DECIMALS = this.webData.balances[i].decimals
+            this.TOTAL_SUPPLY = this.webData.balances[i].totalSupply
+            this.TOKEN_IMAGE_URL = this.webData.balances[i].tokenImgUrl
+            this.coinMultiplier = new BN(10).pow(new BN(this.NUM_DECIMALS))
+            if (this.ready) {
+              await this.initContracts()
+              await this.updateBalances()
+            }
           }
         }
-      }
+      }catch(e){}*/
     },
     async goBlockExplorer(link) {
       window.open(link)

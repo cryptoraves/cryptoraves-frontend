@@ -1,7 +1,7 @@
 <template>
   <div class="balancepanel">
-    <div 
-      v-if="type" 
+    <div
+      v-if="type"
       class="balancepanel-title">
       Your Balance on Cryptoraves ({{ l2NetworkType }})
     </div>
@@ -11,15 +11,15 @@
       title="Link to Layer 2 Block Explorer">
       Your Balance On {{ l1NetworkType }}
     </div>
-    <img 
+    <img
       v-if="type"
       class="balancepanel-image"
       src="../assets/cryptoraves_PNG-01.png">
-    <img 
+    <img
       v-else
       class="balancepanel-image"
       src="../assets/metamask.png">
-    <div 
+    <div
       v-if="type"
       title="Link to Layer 2 Block Explorer"
       class="address-link"
@@ -36,7 +36,7 @@
     <div class="balancepanel-balance">
       {{ balance }}
     </div>
-  </div>  
+  </div>
 </template>
 
 <script>

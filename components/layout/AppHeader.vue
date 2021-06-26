@@ -4,38 +4,38 @@
       <div class="row">
         <div class="d-flex col-sm-12 col-lg-2">
           <div class="app-header-logoarea">
-            
-              <img 
-                src="../../assets/img/cryptoraves_Horozontal Alignment_Full Color_JPG.png" 
+
+              <img
+                src="../../assets/img/cryptoraves_Horozontal Alignment_Full Color_JPG.png"
                 style="cursor: pointer"
-                alt 
+                alt
                 @click="goHome()"
               >
-            
+
           </div>
-         
+
         </div>
         <div class="d-flex d-flex-right col-lg-4 col-sm-12">
-          
+
         </div>
         <div class="col-lg-6 col-sm-12 text-right">
           <div class="d-flex d-flex-right form-group mt-3">
 
             <div v-if="userName" >
               <img
-                
+
                 class="table-img"
-                :src="webData.user.imgUrl"
+                :src="webData.imageUrl"
                 :title="'Welcome '+userName+' -- Click To See Your Portfolio'"
                 @click="goPortfolio(userName)"
 
               >
-              <a  
+              <a
                 class='avatar-space'
                 @click='logOut()'
               >Log Out</a>
             </div>
-            <div 
+            <div
               v-else
               @click="connectWallet()"
             >
@@ -44,15 +44,15 @@
                   class="table-img"
                   src="../../assets/metamask.png"
                   title="Connect Your Wallet To Login"
-                  
+
                 >
-                <!--a  
+                <!--a
                   class='avatar-space'
                 >Connect Your Wallet</a-->
-                
+
               </div>
             </div>
-            
+
           </div>
         </div>
       </div>
@@ -73,7 +73,7 @@ export default {
     userName: {type: String},
     webData: {type: Object},
     goPortfolio: {type: Function},
-  }, 
+  },
   mixins: [MetamaskHandler, NetworkData],
   methods: {
 
@@ -89,18 +89,19 @@ export default {
         JSON.stringify(res)
       )
 
+
       this.web3Data['contractAddresses'] = this.contractAddresses
       this.web3Data['cryptoravesTokenABI'] = this.cryptoravesTokenABI
       this.web3Data['tokenManagementABI'] = this.tokenManagementABI
-
+      
       localStorage.setItem(
         'web3Data',
         JSON.stringify(this.web3Data)
       )
       localStorage.setItem('ethereumAddress',this.web3Data.ethereumAddress)
       this.$emit('userLogin', res)
-      
-      
+
+
     },
     logOut(){
       localStorage.removeItem('ethereumAddress')

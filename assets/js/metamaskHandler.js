@@ -57,7 +57,7 @@ export default {
         )
         this.web3Data['ethereumAddress'] = (await this.ethereumProvider.listAccounts())[0]
 
-        
+
         window.ethereum.on('accountsChanged', function() {
           const sleep = milliseconds => {
             return new Promise(resolve => setTimeout(resolve, milliseconds))
@@ -81,13 +81,13 @@ export default {
 
       if (networkId==344435){
 
-        this.web3Data['l2NetworkType'] = 'SKALE Bob Testnet' //https://dev-testnet-v1-1.skalelabs.com 
+        this.web3Data['l2NetworkType'] = 'SKALE Bob Testnet' //https://dev-testnet-v1-1.skalelabs.com
         this.web3Data['l2BlockExplorerUrl'] = 'https://explorer.skale.network/'
         this.web3Data['l1BlockExplorerUrl'] = 'https://rinkeby.etherscan.io/'
         this.web3Data['l1NetworkType'] = 'rinkeby'
         this.web3Data['l2Provider'] = this.ethereumProvider
       } else if (networkId==54173){
-        this.web3Data['l2NetworkType'] = 'SKALE Testnet' //https://dev-testnet-v1-0.skalelabs.com 
+        this.web3Data['l2NetworkType'] = 'SKALE Testnet' //https://dev-testnet-v1-0.skalelabs.com
         this.web3Data['l2BlockExplorerUrl ']= 'https://explorer.skale.network/'
         this.web3Data['l1BlockExplorerUrl'] = 'https://rinkeby.etherscan.io/'
         this.web3Data['l2Provider'] = this.web3Data['ethereumProvider']
@@ -98,7 +98,7 @@ export default {
         this.web3Data['l1NetworkType'] = 'goerli'
         this.web3Data['l2Provider'] = this.ethereumProvider
       } else {
-        
+
         if(this.web3Data['l1NetworkType'] == 'main'){
           this.web3Data['l1BlockExplorerUrl'] = 'https://etherscan.io/'
           this.web3Data['l1Provider'] = this.ethereumProvider
@@ -106,7 +106,7 @@ export default {
         //tie georli to Matic testnet
         if(this.web3Data['l1NetworkType'] == 'goerli'){
 
-          
+
           this.web3Data['l1BlockExplorerUrl'] = 'https://goerli.etherscan.io/'
           this.web3Data['l2NetworkType'] = 'Matic Testnet'
           this.web3Data['l2BlockExplorerUrl'] = 'https://explorer.testnet2.matic.network/'
@@ -120,7 +120,7 @@ export default {
           this.web3Data['l1Provider'] = this.ethereumProvider
         }
       }
-      return this.web3Data 
+      return this.web3Data
     }
   }
 }
