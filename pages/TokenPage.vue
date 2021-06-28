@@ -15,8 +15,11 @@
           <SectionHeader
 
           >{{ token }}
-          <br/>
+          <div
+            v-if="ercType == 721"
+          >
           #{{ nftIndex }}
+          </div>
             <div class="history-token">
             <br/>
               <div class="history-tokenimg">
