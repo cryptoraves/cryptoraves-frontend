@@ -379,22 +379,28 @@ export default {
           query: queryString
         }
       ).then(response => {
+        console.log(response)
         tokenId = response.data.data.tokens[0].id
         tokenBrandImageUrl = response.data.data.tokens[0].tokenBrandImageUrl
         nftIndex = response.data.data.tokens[0].nftIndex
+        ercType = response.data.data.tokens[0].ercType
       }).catch(e => {
         console.log(e)
       })
       await axios.post(
         this.$store.state.subgraphUrl, {
-          query: '{ userBalances(first: 1, where: {user: "'+this.webData.cryptoravesAddress+'", token: "'+tokenId+'"}){ id, user { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address }, token {id cryptoravesTokenId isManagedToken ercType totalSupply name symbol decimals emoji }, balance }}'
+          query: '{ userBalances(first: 1, where: {user: "'+this.webData.cryptoravesAddress+'", token: "'+tokenId+'"}){ id, user { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address }, token {id cryptoravesTokenId isManagedToken ercType nftIndex totalSupply name symbol decimals emoji }, balance }}'
         }
       ).then(response => {
         if(ercType == 20){
-          layer2Balance = parseFloat(this.ethers.utils.formatUnits(response.data.data.userBalances[0].balance.toString(), response.data.data.userBalances[0].token.decimals))
+          layer2Balance = parseFloat(
+            this.ethers.utils.formatUnits(
+              response.data.data.userBalances[0].balance.toString(),
+              response.data.data.userBalances[0].token.decimals)
+            ).toLocaleString()
         }else{
           //check erc721 balance (ensure it exists in wallet)
-
+          layer2Balance = '#'+response.data.data.userBalances[0].token.nftIndex.toString()
         }
 
       }).catch(e => {
