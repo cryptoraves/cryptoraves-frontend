@@ -280,12 +280,20 @@ export default {
       } else {
         this.visiblePrev = false
       }
-      //1. Get end user data
+
+      let queryString = ''
+      if(this.$route.query.id){
+        queryString =  '{ tokens(first: 1, where: {id: "'+this.$route.query.id+'"}){ id cryptoravesTokenId isManagedToken ercType totalSupply name symbol decimals emoji tokenBrandImageUrl tokenDescription } }'
+      } else {
+        queryString = '{ tokens(first: 1, where: {symbol: "'+this.token+'"}){ id cryptoravesTokenId isManagedToken ercType totalSupply name symbol decimals emoji tokenBrandImageUrl tokenDescription } }'
+      }
+
       await axios.post(
          this.$store.state.subgraphUrl, {
-          query: '{ tokens(first: 1, where: {symbol: "'+this.token+'"}){ id cryptoravesTokenId isManagedToken ercType totalSupply name symbol decimals emoji tokenBrandImageUrl tokenDescription } }'
+          query: queryString
         }
       ).then(response => {
+        //console.log('TokenID: ',response.data.data.tokens[0].id)
         this.ercType = response.data.data.tokens[0].ercType
         this.tokenBrandImageUrl = response.data.data.tokens[0].tokenBrandImageUrl
         this.tokenDescription = response.data.data.tokens[0].tokenDescription

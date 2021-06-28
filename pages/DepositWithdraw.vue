@@ -364,14 +364,21 @@ export default {
       let tokenId = null
       let ercType = null
       this.showLoading = true
+
+      let queryString = ''
+      if(this.$route.query.id){
+        queryString =  '{ tokens(where: {id: "'+this.$route.query.id+'"}){ id ercType tokenBrandImageUrl}}'
+      } else {
+        queryString = '{ tokens(where: {symbol: "'+this.token+'"}){ id ercType tokenBrandImageUrl}}'
+      }
+
       await axios.post(
         this.$store.state.subgraphUrl, {
-          query: '{ tokens(first: 1, where: {symbol: "'+this.ticker+'"}){ id ercType tokenBrandImageUrl}}'
+          query: queryString
         }
       ).then(response => {
         tokenId = response.data.data.tokens[0].id
         tokenBrandImageUrl = response.data.data.tokens[0].tokenBrandImageUrl
-        console.log(response)
       }).catch(e => {
         console.log(e)
       })

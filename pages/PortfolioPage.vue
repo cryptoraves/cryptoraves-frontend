@@ -44,7 +44,7 @@
               <img
                 src=https://sample-imgs.s3.amazonaws.com/depositExample.png
                 title="Click to deposit crypto from your mainnet wallet"
-                @click="goDepositWithdraw('', 'deposit')"
+                @click="goDepositWithdraw('', 'deposit', '')"
               >
             </div>
           </div>
@@ -69,21 +69,13 @@
               >
                 <td width="50%">
                   <img
-                    v-if="item.token.symbol"
                     :src="item.token.tokenBrandImageUrl"
                     :title="item.token.ercType == 20 ? item.token.symbol : 'NFT: '+item.token.symbol"
                     class="table-img"
                     onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
-                    @click="$router.push({name: 'TokenPage',query: {token: item.token.symbol}})"
+                    @click="item.token.ercType == 20 ? $router.push({name: 'TokenPage',query: {token: item.token.symbol}}) : $router.push({name: 'TokenPage',query: {token: item.token.symbol, id: item.token.id}})"
                   >
-                  <img
-                    v-else
-                    :src="item.token.tokenBrandImageUrl"
-                    :title="item.token.ercType == 20 ? item.token.name : 'NFT: '+item.token.name"
-                    class="table-img"
-                    onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
-                    @click="$router.push({name: 'TokenPage',query: {token: item.token.symbol}})"
-                  >
+
                 </td>
                 <td
                   :class="[user === item.tokenBrand? 'td-position-relative':'']"
@@ -97,7 +89,7 @@
                 </td>
                 <td
                   v-if="user == loggedInUser"
-                  @click="goDepositWithdraw(item.token.symbol, 'withdraw')"
+                  @click="item.token.ercType == 20 ? goDepositWithdraw(item.token.symbol, 'withdraw', '') : goDepositWithdraw(item.token.symbol, 'withdraw', item.token.id) "
                   class="depositWithdrawLink"
                   title="Withdraw to your mainnet wallet"
                 >Withdraw</td>
@@ -242,10 +234,10 @@ export default {
       })
 
       let paginationQueryStringSegment = 'first: '+(this.rowsPerPage+1)+', skip: '+((this.currentPage - 1) * this.rowsPerPage)
-
+      console.log(paginationQueryStringSegment)
       await axios.post(
         this.$store.state.subgraphUrl, {
-          query: '{ userBalances('+paginationQueryStringSegment+', where: {user: "'+this.cryptoravesAddress+'"}){ id, user { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address }, token {id cryptoravesTokenId isManagedToken ercType totalSupply name symbol decimals emoji tokenBrandImageUrl }, balance }}'
+          query: '{ userBalances('+paginationQueryStringSegment+', where: {user: "'+this.cryptoravesAddress+'"}){ id, user { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address }, token {id cryptoravesTokenId isManagedToken ercType name symbol decimals emoji tokenBrandImageUrl }, balance }}'
         }
       ).then(response => {
         this.rowCount = response.data.data.userBalances.length
@@ -262,6 +254,7 @@ export default {
       }).catch(e => {
         console.log(e)
       })
+      console.log(this.tableRows)
       this.showLoading = false
     },
 
@@ -284,12 +277,13 @@ export default {
         }
       })
     },
-    goDepositWithdraw(ticker, depWdr){
+    goDepositWithdraw(ticker, depWdr, nftId){
       this.$router.push({
         name: 'DepositWithdraw',
         query: {
           ticker: ticker,
-          txnType: depWdr
+          txnType: depWdr,
+          id: nftId
         }
       })
     }
