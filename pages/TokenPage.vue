@@ -15,13 +15,15 @@
           <SectionHeader
 
           >{{ token }}
+          <br/>
+          #{{ nftIndex }}
             <div class="history-token">
             <br/>
               <div class="history-tokenimg">
                 <img
                   :src="tokenBrandImageUrl"
                   onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
-                  :title="this.ercType == 20 ? this.token : 'NFT: '+this.token"
+                  :title="this.ercType == 20 ? this.token : 'NFT: '+this.token+' #'+this.nftIndex"
                 >
               </div>
             </div>
@@ -107,7 +109,7 @@
                 <td>
                   <img
                     v-if="item.token.symbol"
-                    :title="item.token.ercType == 20 ? item.token.symbol : 'NFT: '+item.token.symbol"
+                    :title="item.token.ercType == 20 ? item.token.symbol : 'NFT: '+item.token.symbol+' #'+item.token.nftIndex"
                     :src="item.token.tokenBrandImageUrl"
                     class="table-img-deactive"
                     onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
@@ -283,9 +285,9 @@ export default {
 
       let queryString = ''
       if(this.$route.query.id){
-        queryString =  '{ tokens(first: 1, where: {id: "'+this.$route.query.id+'"}){ id cryptoravesTokenId isManagedToken ercType totalSupply name symbol decimals emoji tokenBrandImageUrl tokenDescription } }'
+        queryString =  '{ tokens(first: 1, where: {id: "'+this.$route.query.id+'"}){ id cryptoravesTokenId isManagedToken ercType nftIndex totalSupply name symbol decimals emoji tokenBrandImageUrl tokenDescription } }'
       } else {
-        queryString = '{ tokens(first: 1, where: {symbol: "'+this.token+'"}){ id cryptoravesTokenId isManagedToken ercType totalSupply name symbol decimals emoji tokenBrandImageUrl tokenDescription } }'
+        queryString = '{ tokens(first: 1, where: {symbol: "'+this.token+'"}){ id cryptoravesTokenId isManagedToken ercType nftIndex totalSupply name symbol decimals emoji tokenBrandImageUrl tokenDescription } }'
       }
 
       await axios.post(
@@ -295,6 +297,7 @@ export default {
       ).then(response => {
         //console.log('TokenID: ',response.data.data.tokens[0].id)
         this.ercType = response.data.data.tokens[0].ercType
+        this.nftIndex = response.data.data.tokens[0].nftIndex
         this.tokenBrandImageUrl = response.data.data.tokens[0].tokenBrandImageUrl
         this.tokenDescription = response.data.data.tokens[0].tokenDescription
         this.cryptoravesTokenId = response.data.data.tokens[0].id
@@ -308,7 +311,7 @@ export default {
 
       await axios.post(
         this.$store.state.subgraphUrl, {
-          query: '{ transfers('+paginationQueryStringSegment+', where: {token: "'+this.cryptoravesTokenId+'"}, orderBy: modified, orderDirection: desc){ id from { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address } to { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address } amount token {id cryptoravesTokenId isManagedToken ercType totalSupply name symbol decimals emoji tokenBrandImageUrl tokenDescription } tweetId fromTo modified} }'
+          query: '{ transfers('+paginationQueryStringSegment+', where: {token: "'+this.cryptoravesTokenId+'"}, orderBy: modified, orderDirection: desc){ id from { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address } to { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address } amount token {id cryptoravesTokenId isManagedToken ercType nftIndex totalSupply name symbol decimals emoji tokenBrandImageUrl tokenDescription } tweetId fromTo modified} }'
         }
       ).then(response => {
         this.rowCount = response.data.data.transfers.length

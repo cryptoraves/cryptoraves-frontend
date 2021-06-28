@@ -70,7 +70,7 @@
                 <td width="50%">
                   <img
                     :src="item.token.tokenBrandImageUrl"
-                    :title="item.token.ercType == 20 ? item.token.symbol : 'NFT: '+item.token.symbol"
+                    :title="item.token.ercType == 20 ? item.token.symbol : 'NFT: '+item.token.symbol+' #'+item.token.nftIndex"
                     class="table-img"
                     onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
                     @click="item.token.ercType == 20 ? $router.push({name: 'TokenPage',query: {token: item.token.symbol}}) : $router.push({name: 'TokenPage',query: {token: item.token.symbol, id: item.token.id}})"
@@ -237,7 +237,7 @@ export default {
       console.log(paginationQueryStringSegment)
       await axios.post(
         this.$store.state.subgraphUrl, {
-          query: '{ userBalances('+paginationQueryStringSegment+', where: {user: "'+this.cryptoravesAddress+'"}){ id, user { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address }, token {id cryptoravesTokenId isManagedToken ercType name symbol decimals emoji tokenBrandImageUrl }, balance }}'
+          query: '{ userBalances('+paginationQueryStringSegment+', where: {user: "'+this.cryptoravesAddress+'"}){ id, user { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address }, token {id cryptoravesTokenId isManagedToken ercType nftIndex name symbol decimals emoji tokenBrandImageUrl }, balance }}'
         }
       ).then(response => {
         this.rowCount = response.data.data.userBalances.length
@@ -278,13 +278,16 @@ export default {
       })
     },
     goDepositWithdraw(ticker, depWdr, nftId){
+      let q = {
+        ticker: ticker,
+        txnType: depWdr
+      }
+      if (nftId){
+        q['id']=nftId
+      }
       this.$router.push({
         name: 'DepositWithdraw',
-        query: {
-          ticker: ticker,
-          txnType: depWdr,
-          id: nftId
-        }
+        query: q
       })
     }
   }

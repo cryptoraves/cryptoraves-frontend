@@ -49,7 +49,7 @@
           <div class="portfolio-userimg">
             <img
               :src="TOKEN_IMAGE_URL"
-              :title="ticker">
+              :title="nftIndex ? ticker+' #'+nftIndex : ticker">
           </div>
           <button
             v-if="!resumeWithdrawalNeeded && !withdrawParam"
@@ -265,6 +265,7 @@ export default {
       forceLive: false,
       withdrawParam: false,
       depositParam: false,
+      nftIndex: null,
       ERC20ABI: [
         'function balanceOf(address who) external view returns (uint256)',
         'function approve(address spender, uint256 value) external returns (bool) @50000',
@@ -363,13 +364,14 @@ export default {
       let tokenBrandImageUrl = null
       let tokenId = null
       let ercType = null
+      let nftIndex = null
       this.showLoading = true
 
       let queryString = ''
       if(this.$route.query.id){
-        queryString =  '{ tokens(where: {id: "'+this.$route.query.id+'"}){ id ercType tokenBrandImageUrl}}'
+        queryString =  '{ tokens(where: {id: "'+this.$route.query.id+'"}){ id ercType nftIndex tokenBrandImageUrl}}'
       } else {
-        queryString = '{ tokens(where: {symbol: "'+this.token+'"}){ id ercType tokenBrandImageUrl}}'
+        queryString = '{ tokens(where: {symbol: "'+this.ticker+'"}){ id ercType nftIndex tokenBrandImageUrl}}'
       }
 
       await axios.post(
@@ -379,6 +381,7 @@ export default {
       ).then(response => {
         tokenId = response.data.data.tokens[0].id
         tokenBrandImageUrl = response.data.data.tokens[0].tokenBrandImageUrl
+        nftIndex = response.data.data.tokens[0].nftIndex
       }).catch(e => {
         console.log(e)
       })
@@ -387,7 +390,6 @@ export default {
           query: '{ userBalances(first: 1, where: {user: "'+this.webData.cryptoravesAddress+'", token: "'+tokenId+'"}){ id, user { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address }, token {id cryptoravesTokenId isManagedToken ercType totalSupply name symbol decimals emoji }, balance }}'
         }
       ).then(response => {
-        console.log(response)
         if(ercType == 20){
           layer2Balance = parseFloat(this.ethers.utils.formatUnits(response.data.data.userBalances[0].balance.toString(), response.data.data.userBalances[0].token.decimals))
         }else{
@@ -402,7 +404,7 @@ export default {
       this.TOKEN_IMAGE_URL = tokenBrandImageUrl
       this.layer2Balance = layer2Balance
       this.showLoading = false
-
+      this.nftIndex = nftIndex
     },
     async onConfirm() {
       this.showConfirmModal = false
@@ -534,7 +536,7 @@ export default {
       axios
         .get(webDataUrl)
         .then(response  => {
-          console.log(response)
+          response
           this.showWaitMappingConfirm = true
           this.confirmLocalMapping()
         })
