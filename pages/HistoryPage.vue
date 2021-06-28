@@ -103,11 +103,11 @@
                 <td>
                   <img
                     v-if="item.token.symbol"
-                    :title="item.token.ercType == 20 ? item.token.symbol : 'NFT: '+item.token.symbol"
+                    :title="item.token.ercType == 20 ? item.token.symbol : 'NFT: '+item.token.symbol+' #'+item.token.nftIndex"
                     :src="item.token.tokenBrandImageUrl"
                     class="table-img"
                     onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
-                    @click="$router.push({name: 'TokenPage',query: {token: item.token.symbol}})"
+                    @click="item.token.ercType == 20 ? $router.push({name: 'TokenPage',query: {token: item.token.symbol}}) : $router.push({name: 'TokenPage',query: {token: item.token.symbol, id: item.token.id }})"
                   >
                   <img
                     v-else
@@ -306,7 +306,7 @@ export default {
 
       await axios.post(
         this.$store.state.subgraphUrl, {
-          query: '{ transfers('+paginationQueryStringSegment+', where: {fromTo_contains: "'+this.cryptoravesAddress+'"}, orderBy: modified, orderDirection: desc){ id from { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address } to { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address } amount token {id cryptoravesTokenId isManagedToken ercType totalSupply name symbol decimals emoji tokenBrandImageUrl } tweetId fromTo modified} }'
+          query: '{ transfers('+paginationQueryStringSegment+', where: {fromTo_contains: "'+this.cryptoravesAddress+'"}, orderBy: modified, orderDirection: desc){ id from { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address } to { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address } amount token {id cryptoravesTokenId isManagedToken ercType nftIndex totalSupply name symbol decimals emoji tokenBrandImageUrl } tweetId fromTo modified} }'
         }
       ).then(response => {
         this.rowCount = response.data.data.transfers.length

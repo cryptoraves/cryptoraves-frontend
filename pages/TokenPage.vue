@@ -54,7 +54,7 @@
                 <th
                   v-if="ercType == 721"
                   scope="col"
-                >ID</th>
+                >NFT #</th>
                 <th
                   v-else
                   scope="col"
