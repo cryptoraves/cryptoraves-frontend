@@ -234,7 +234,7 @@ export default {
       })
 
       let paginationQueryStringSegment = 'first: '+(this.rowsPerPage+1)+', skip: '+((this.currentPage - 1) * this.rowsPerPage)
-      console.log(paginationQueryStringSegment)
+
       await axios.post(
         this.$store.state.subgraphUrl, {
           query: '{ userBalances('+paginationQueryStringSegment+', where: {user: "'+this.cryptoravesAddress+'"}){ id, user { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address }, token {id cryptoravesTokenId isManagedToken ercType nftIndex name symbol decimals emoji tokenBrandImageUrl }, balance }}'
@@ -254,7 +254,6 @@ export default {
       }).catch(e => {
         console.log(e)
       })
-      console.log(this.tableRows)
       this.showLoading = false
     },
 
