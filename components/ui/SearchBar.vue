@@ -104,7 +104,7 @@ export default {
       if(localStorage.searches){
         previousSearches = JSON.parse(localStorage.searches)
       }
-      this.searchObject = Object.assign(faqs, this.searchObject, previousSearches)
+      this.searchObject = Object.assign({}, faqs, this.searchObject, previousSearches)
       this.result = Object.keys(this.searchObject).filter(list => {
         return list.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1
       })
@@ -183,13 +183,8 @@ export default {
         }
       })
     },
-    goFaq: function() {
-      this.$router.push({
-        name: 'Faq',
-        query: {
-          top: true
-        }
-      })
+    goFaq: function(faqTerm) {
+      this.$router.push('Faq#'+faqTerm.replaceAll(' ','_'))
     },
     goDestination(res){
       /*let latestSearch = {}
@@ -213,7 +208,7 @@ export default {
         this.goToken()
       }
       else{
-        this.goFaq()
+        this.goFaq(res)
       }
     }
 
