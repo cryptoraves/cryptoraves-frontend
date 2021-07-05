@@ -14,7 +14,7 @@
               :id="question.replaceAll(' ','_')"
               slot="title">{{question}}?</div>
             <div slot="answer">
-              {{answer}}
+              {{answer.toString()}}
             </div>
         </FaqSection>
         <FaqSection>

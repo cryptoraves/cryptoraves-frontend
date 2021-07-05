@@ -1,6 +1,5 @@
 {
-
-	"What is this": "Cryptoraves is a Twitte-based crypto transfer application",
+	"What is this": "Cryptoraves is a Twitter-based crypto transfer application",
 	"How do I get my tokens": "You can go to the <a href=\"http://localhost:8081/DepositWithdraw\">withdraw page</a> and follow the instructions there",
 	"How do I send tokens": "Follow our Step-by-Step Instruction guide here",
 	"How do I check my balance":"Type your twitter handle in the search bar and press enter",
