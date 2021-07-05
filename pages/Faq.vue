@@ -8,13 +8,13 @@
 
         <FaqSection
         v-for="(answer,question) in faqs"
-        :index="question"
         :key="answer">
             <div
               :id="question.replaceAll(' ','_')"
               slot="title">{{question}}?</div>
-            <div slot="answer">
-              {{answer.toString()}}
+            <div
+              v-html="answer"
+              slot="answer">
             </div>
         </FaqSection>
         <FaqSection>
@@ -67,9 +67,7 @@ export default {
   },
   created() {
     // this.$ga.page('/')
-
     this.faqs = faqsData
-    console.log(this.faqs)
   },
   methods: {
     getOffsetLeft(elem) {
