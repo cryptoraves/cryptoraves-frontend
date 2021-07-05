@@ -16,7 +16,7 @@
           >{{ platformHandle.toLowerCase() }}s</SectionHeader>
           <SectionHeader
             v-else
-          >{{ platformHandle }}'s Transaction History</SectionHeader>
+          >{{ user == loggedInUser ? "Your" : user+"'s" }} Transaction History</SectionHeader>
           <div class="history-user">
 
             <div class="history-userimg">
@@ -235,6 +235,12 @@ export default {
   created() {
     if (this.$route.query.page){
       this.currentPage = this.$route.query.page
+    }
+    try{
+      this.userData = JSON.parse(localStorage.getItem('webData'))
+    }catch(e){}
+    if(this.userData){
+      this.loggedInUser = this.userData.userName
     }
     this.getHistory(this.$route.query.user, this.currentPage)
   },

@@ -5,7 +5,6 @@
     <div class="container temp">
       <div class="faq-page-template">
         <SectionHeader>FAQ</SectionHeader>
-
         <FaqSection
         v-for="(answer,question) in faqs"
         :key="answer">
@@ -17,18 +16,6 @@
               slot="answer">
             </div>
         </FaqSection>
-        <FaqSection>
-          <div slot="title">How do I create an account?</div>
-          <div slot="answer">
-            You don’t need to create an account. You heard that right!!! We’re
-            trying to make our platform as easy to use as possible. Just search
-            for your Twitter @username in the header search bar. You’ll see all
-            your tokens and transactions listed there. And since we have a
-            public database, you’ll be able to see other users’ transactions,
-            too.
-          </div>
-        </FaqSection>
-
       </div>
     </div>
   </transition>
@@ -37,7 +24,7 @@
 <script>
 import SectionHeader from '../components/ui/SectionHeader'
 import FaqSection from '../components/ui/FaqSection'
-import faqsData from '../components/ui/faq.json'
+import FaqsData from '../components/ui/faq.json'
 export default {
 
   name: 'Faq',
@@ -53,21 +40,11 @@ export default {
   mounted() {
     this.$nextTick(function() {
       if (this.$route.query.target == 'top') window.scrollTo(0, 0)
-      else if (this.$route.query.target == 'privacy')
-        window.scrollTo(
-          0,
-          this.getOffsetLeft(document.getElementById('privacy')) - 150
-        )
-      else if (this.$route.query.target == 'hodler')
-        window.scrollTo(
-          0,
-          this.getOffsetLeft(document.getElementById('hodler')) - 100
-        )
     })
   },
   created() {
     // this.$ga.page('/')
-    this.faqs = faqsData
+    this.faqs = FaqsData
   },
   methods: {
     getOffsetLeft(elem) {

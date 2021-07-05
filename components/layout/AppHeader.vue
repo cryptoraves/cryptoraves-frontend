@@ -71,7 +71,7 @@ export default {
   //props: ['user']
   props: {
     userName: {type: String},
-    webData: {type: Object},
+    webData: {},
     goPortfolio: {type: Function},
   },
   mixins: [MetamaskHandler, NetworkData],
@@ -81,19 +81,19 @@ export default {
       this.$router.push('/')
     },
     async connectWallet(){
-      this.web3Data = await this.initWeb3()
+      const data = await this.initWeb3()
 
-      let res = await this.loadWebDataFromAddress(this.web3Data.ethereumAddress)
+      let res = await this.loadWebDataFromAddress(data.ethereumAddress)
       localStorage.setItem(
         'webData',
         JSON.stringify(res)
       )
 
-
+      this.web3Data['ethereumAddress'] = data.ethereumAddress
       this.web3Data['contractAddresses'] = this.contractAddresses
       this.web3Data['cryptoravesTokenABI'] = this.cryptoravesTokenABI
       this.web3Data['tokenManagementABI'] = this.tokenManagementABI
-      
+
       localStorage.setItem(
         'web3Data',
         JSON.stringify(this.web3Data)

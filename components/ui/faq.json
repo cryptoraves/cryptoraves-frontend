@@ -4,5 +4,6 @@
 	"How do I send tokens": "Follow our Step-by-Step Instruction guide here",
 	"How do I check my balance":"Type your twitter handle in the search bar and press enter",
 	"How does this work":"Cryptoraves is built on a layer 2 sidechain, so no fees. It reads tweets and sends valid ones along to our smart contracts. The website reads that data directly from the blockchain",
-	"Where are my personal tokens":"The personal tokens feature is being rebuilt and will be re-introduced when complete"
+	"Where are my personal tokens":"The personal tokens feature is being rebuilt and will be re-introduced when complete",
+	"How do I create an account":"Accounts are automatically created upon recieving or depositing crypto.  To activate your account for deposits and withdrawals simply Tweet: @cryptoraves #HeresMyAddress 0xabc123.."
 }
