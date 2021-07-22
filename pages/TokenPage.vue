@@ -26,7 +26,7 @@
                 <img
                   :src="tokenBrandImageUrl"
                   onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
-                  :title="this.ercType == 20 ? this.token : 'NFT: '+this.token+' #'+this.nftIndex"
+                  :title="this.ercType == 20 || this.ercType == 1155 ? this.token : 'NFT: '+this.token+' #'+this.nftIndex"
                 >
               </div>
             </div>

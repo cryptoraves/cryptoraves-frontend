@@ -70,10 +70,10 @@
                 <td width="50%">
                   <img
                     :src="item.token.tokenBrandImageUrl"
-                    :title="item.token.ercType == 20 ? item.token.symbol : 'NFT: '+item.token.symbol+' #'+item.token.nftIndex"
+                    :title="item.token.ercType == 20 || item.token.ercType == 1155 ? item.token.symbol : 'NFT: '+item.token.symbol+' #'+item.token.nftIndex"
                     class="table-img"
                     onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
-                    @click="item.token.ercType == 20 ? $router.push({name: 'TokenPage',query: {token: item.token.symbol}}) : $router.push({name: 'TokenPage',query: {token: item.token.symbol, id: item.token.id}})"
+                    @click="item.token.ercType == 20 || item.token.ercType == 1155 ? $router.push({name: 'TokenPage',query: {token: item.token.symbol}}) : $router.push({name: 'TokenPage',query: {token: item.token.symbol, id: item.token.id}})"
                   >
 
                 </td>
