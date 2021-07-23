@@ -42,13 +42,13 @@
           </div>
         </div>
         <br /><br /><br />
-        <div class="table-heading">Recent Transactions:</div>
+        <div class="table-heading">Holders:</div>
         <div class="table-section row">
           <table>
             <thead>
               <tr>
                 <th scope="col"></th>
-                <th scope="col">From</th>
+                <th scope="col">Holder</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
                 <th
@@ -60,8 +60,6 @@
                   scope="col"
                 >Amount</th>
                 <th scope="col"></th>
-                <th scope="col">To</th>
-                <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
@@ -69,7 +67,7 @@
                 v-for="(item,index) in tableRows"
                 :index="index"
                 :key="item.id"
-                :class="[tokenName === item.from.userName? 'tr-orange-color' : 'tr-green-color']"
+                :class="[tokenName === item.user.userName? 'tr-orange-color' : 'tr-green-color']"
               >
                 <td>
                   <div
@@ -85,16 +83,16 @@
                 </td>
                 <td>
                   <img
-                    v-if="!item.from.userName.includes('Official Launch')"
-                    :title="item.from.userName == '0x0' ? 'Import into Cryptoraves' : item.from.userName"
-                    :src="item.from.userName == '0x0' ? 'https://sample-imgs.s3.amazonaws.com/import.png' : item.from.imageUrl"
+                    v-if="!item.user.userName.includes('Official Launch')"
+                    :title="item.user.userName == '0x0' ? 'Import into Cryptoraves' : item.user.userName"
+                    :src="item.user.userName == '0x0' ? 'https://sample-imgs.s3.amazonaws.com/import.png' : item.user.imageUrl"
                     class="table-img"
                     onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
-                    @click="item.from.userName != user ? $router.push({name: 'HistoryPage',query: {user: item.from.userName}}) : ''"
+                    @click="item.user.userName != user ? $router.push({name: 'HistoryPage',query: {user: item.user.userName}}) : ''"
                   >
                   <img
                     v-else
-                    :src="item.from.imageUrl"
+                    :src="item.user.imageUrl"
                     title="LAUNCH"
                     class="launch-img"
                     onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
@@ -102,17 +100,17 @@
                 </td>
                 <td>
                   <img
-                    v-if="getShowTweet(item.from.userName, item.to.userName)"
+                    v-if="getShowTweet(item.user.userName, item.user.userName)"
                     title="Link to Tweet"
                     src="../assets/img/twittersmall.png"
                     class="link"
-                    @click="goTweet(item.from.userName, item.tweetId)"
+                    @click="goTweet(item.user.userName, item.tweetId)"
                   >
                 </td>
                 <td>
                   <img
                     v-if="item.token.symbol"
-                    :title="item.token.ercType == 20 ? item.token.symbol : 'NFT: '+item.token.symbol+' #'+item.token.nftIndex"
+                    :title="item.token.ercType == 20 || item.token.ercType == 1155 ? item.token.symbol : 'NFT: '+item.token.symbol+' #'+item.token.nftIndex"
                     :src="item.token.tokenBrandImageUrl"
                     class="table-img-deactive"
                     onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
@@ -128,39 +126,10 @@
                   >
                 </td>
                 <td>
-                  <div>{{ item.token.ercType == 721 ? 1 : Math.round(item.amount / Math.pow(10, item.token.decimals)) | comma }}</div>
+                  <div>{{ item.token.ercType == 721 ? 1 : Math.round(item.balance / Math.pow(10, item.token.decimals)) | comma }}</div>
                 </td>
                 <td>
-                  <div>${{ Math.round(item.amount / Math.pow(10, item.token.decimals) * .1 * Math.random()) | comma }}</div>
-                </td>
-                <td>
-                  <img
-                    v-if="!item.to.userName == '0x0'"
-                    :title="item.to.userName == '0x0' ? 'Export To Mainnet' : item.to.userName"
-                    :src="item.to.userName == '0x0' ? 'https://sample-imgs.s3.amazonaws.com/export.png' : item.to.imageUrl"
-                    class="table-img"
-                    onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
-                    @click="item.to.userName != user ? $router.push({path: 'HistoryPage',query: {user: item.to.userName}}) : ''"
-                  >
-                  <img
-                    v-else
-                    :title="item.to.userName"
-                    :src="item.to.imageUrl"
-                    class="launch-img"
-                    onerror="this.onerror=null;this.src='https://sample-imgs.s3.amazonaws.com/generic-profil.png'"
-                  >
-                </td>
-                <td>
-                  <div
-                    v-if="item.txnHash=='Error'"
-                    title="Pending"
-                  ><!-- {{ item.date.substring(0,item.date.length-3) }} --> </div>
-                  <div
-                    v-else
-                    title="Link to Confirmation"
-                    class="link"
-                    @click="goTransaction(item.id)"
-                  >{{ item.modified | date}}</div>
+                  <div>${{ Math.round(item.balance / Math.pow(10, item.token.decimals) * .1 * Math.random()) | comma }}</div>
                 </td>
               </tr>
             </tbody>
@@ -251,7 +220,7 @@ export default {
         this.showLoading = true
         this.currentPage++
         this.$router.push({
-          name: 'HistoryPage',
+          name: 'TokenPage',
           query: {
             token: this.token,
             page: this.currentPage
@@ -264,7 +233,7 @@ export default {
         this.showLoading = true
         this.currentPage--
         this.$router.push({
-          name: 'HistoryPage',
+          name: 'TokenPage',
           query: {
             token: this.token,
             page: this.currentPage
@@ -314,11 +283,20 @@ export default {
 
       await axios.post(
         this.$store.state.subgraphUrl, {
-          query: '{ transfers('+paginationQueryStringSegment+', where: {token: "'+this.cryptoravesTokenId+'"}, orderBy: modified, orderDirection: desc){ id from { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address } to { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address } amount token {id cryptoravesTokenId isManagedToken ercType nftIndex totalSupply name symbol decimals emoji tokenBrandImageUrl tokenDescription } tweetId fromTo modified} }'
+          query: '{ userBalances('+paginationQueryStringSegment+', where: {token: "'+this.cryptoravesTokenId+'"}, orderBy: balance, orderDirection: desc) \
+            { id, \
+              user { id twitterUserId userName cryptoravesAddress imageUrl isManaged isUser dropped tokenId layer1Address }, \
+              token {id cryptoravesTokenId isManagedToken ercType totalSupply name symbol decimals emoji tokenBrandImageUrl }, \
+              balance  \
+            } \
+          }'
+
         }
+
       ).then(response => {
-        this.rowCount = response.data.data.transfers.length
-        this.tableRows = response.data.data.transfers  //match graph schema to fit as best as possible the original format below?
+        console.log(response)
+        this.rowCount = response.data.data.userBalances.length
+        this.tableRows = response.data.data.userBalances  //match graph schema to fit as best as possible the original format below?
 
         if(this.rowCount > this.rowsPerPage){
           this.visibleNext = true
