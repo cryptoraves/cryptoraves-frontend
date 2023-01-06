@@ -21,7 +21,7 @@
     "hsy-vue-dropdown": "^0.0.5",
     "human-standard-token-abi": "^2.0.0",
     "node-sass": "^4.13.1",
-    "nuxt": "^2.0.0",
+    "nuxt": "^2.15.8",
     "scss": "^0.2.4",
     "vue-scrollto": "^2.17.1",
     "vuetify": "^1.2.4",
